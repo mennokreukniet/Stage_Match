@@ -1,45 +1,52 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-// /**
-//  * First we will load all of this project's JavaScript dependencies which
-//  * includes Vue and other libraries. It is a great starting point when
-//  * building robust, powerful web applications using Vue and Laravel.
-//  */
+Vue.use(VueRouter);
 
-// require('./bootstrap');
-// import MainApp from './views/App.vue'
-// console.log(1)
-// window.Vue = require('vue');
+import MainApp from './views/App';
 
-// const app = new Vue({
-//     el: '#app',
-//     components: {
-//         MainApp
-//     }
-// });
+import Home from './views/Home';
 
-
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-
-import MainApp from './views/App'
-import Hello from './views/Hello'
-import Home from './views/Home'
+import Auth from './views/auth/Auth.vue';
+import Auth_login from './views/auth/Login.vue';
+import Auth_register from './views/auth/Register.vue';
+import Index from './views/index/Index.vue';
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: Home
+            component: Index,
+            beforeEnter: (to, from, next) => {
+                document.title = "Stage Match - Index";
+                if (localStorage.getItem("accessToken") === null) {
+                    return next('/auth/login');
+                }
+                next();
+            },
         },
         {
-            path: '/hello',
-            name: 'hello',
-            component: Hello,
-        },
+            path: '/auth',
+            component: Auth,
+            beforeEnter: (to, from, next) => {
+                document.title = "Stage Match - Auth";
+                if (localStorage.getItem("accessToken") !== null) {
+                    return next('/');
+                }
+                next();
+            },
+            children: [
+                {
+                    path: 'login',
+                    component: Auth_login
+                },
+                 {
+                     path: 'register',
+                     component: Auth_register
+                 }
+            ]
+        }
     ],
 });
 

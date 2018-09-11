@@ -538,10 +538,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue__);
+throw new Error("Cannot find module \"./views/setting/Settings.vue\"");
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
 
 
 
@@ -559,6 +561,16 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue___default.a,
         beforeEnter: function beforeEnter(to, from, next) {
             document.title = "Stage Match - Index";
+            if (localStorage.getItem("accessToken") === null) {
+                return next('/auth/login');
+            }
+            next();
+        }
+    }, {
+        path: '/settings',
+        component: __WEBPACK_IMPORTED_MODULE_8__views_setting_Settings_vue___default.a,
+        beforeEnter: function beforeEnter(to, from, next) {
+            document.title = "Stage Match - Settings";
             if (localStorage.getItem("accessToken") === null) {
                 return next('/auth/login');
             }

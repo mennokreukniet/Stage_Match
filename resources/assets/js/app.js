@@ -11,6 +11,7 @@ import Auth from './views/auth/Auth.vue';
 import Auth_login from './views/auth/Login.vue';
 import Auth_register from './views/auth/Register.vue';
 import Index from './views/index/Index.vue';
+import Settings from './views/setting/Settings.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -25,6 +26,17 @@ const router = new VueRouter({
                 }
                 next();
             },
+        },
+        {
+            path: '/settings',
+            component: Settings,
+            beforeEnter: (to, from, next) => {
+                document.title = "Stage Match - Settings";
+                if (localStorage.getItem("accessToken") === null) {
+                    return next('/auth/login');
+                }
+                next();
+            }
         },
         {
             path: '/auth',

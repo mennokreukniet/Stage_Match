@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueI18n from 'vue-i18n'
 
+Vue.use(VueI18n);
 Vue.use(VueRouter);
 
 import MainApp from './views/App';
@@ -11,7 +13,7 @@ import Auth from './views/auth/Auth.vue';
 import Auth_login from './views/auth/Login.vue';
 import Auth_register from './views/auth/Register.vue';
 import Index from './views/index/Index.vue';
-import Settings from './views/setting/Settings.vue';
+import Settings from './views/settings/Settings.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -62,8 +64,35 @@ const router = new VueRouter({
     ],
 });
 
+const messages = {
+    en: {
+        email: "Email",
+        password: "Password",
+        confirm_password: "Confirm password",
+        login: "Login",
+        name: "Name",
+        sign_up: "Sign up"
+        
+    },
+    nl: {
+        email: "Email",
+        password: "Wachtwoord",
+        confirm_password: "Bevestig wachtwoord",
+        login: "Inloggen",
+        name: "Naam",
+        sign_up: "Account aanmaken"
+    }
+  }
+
+const i18n = new VueI18n({
+    locale: 'nl', // set locale
+    fallbackLocale: 'en',
+    messages, // set locale messages
+  })
+
 const app = new Vue({
     el: '#app',
     components: { MainApp },
     router,
+    i18n
 });

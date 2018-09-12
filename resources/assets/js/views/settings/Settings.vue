@@ -1,6 +1,10 @@
 <template>
     <div id="main">
-        I am the Settings page
+        <div class="card">
+            <span class="title">{{ $t("message.settings.title") }}</span>
+
+            <input type="text">
+        </div>
     </div>    
 </template>
 
@@ -11,5 +15,16 @@ export default {
 </script>
 
 <style>
+    .card {
+        background: white;
+        border-radius: 20px;
+        padding: 20px 30px;
+    }
 
+    div.card > span.title {
+        letter-spacing: 2px;
+        display: block;
+        font-size: 23px;
+        margin-bottom: 40px;
+    }
 </style>

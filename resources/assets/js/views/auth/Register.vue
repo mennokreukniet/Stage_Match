@@ -1,10 +1,10 @@
 <template>
   <div id="register">
-    <input type="text" placeholder="Name">
-    <input type="text" placeholder="Email">
-    <input type="text" placeholder="Password (I've not secured it because lazy)">
-    <input type="text" placeholder="Confirm Password (I've not secured it because lazy)">
-    <button>Register</button>
+    <input type="text" v-bind:placeholder="$t('name')">
+    <input type="text" v-bind:placeholder="$t('email')">
+    <input type="text" v-bind:placeholder="$t('password')">
+    <input type="text" v-bind:placeholder="$t('confirm_password')">
+    <button>{{$t('sign_up')}}</button>
   </div>
   
 </template>

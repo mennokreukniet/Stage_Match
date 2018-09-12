@@ -23,7 +23,7 @@
 <style>
 
 html {
-  background: #fbfbfb;
+  background: #eeeeee;
   font-family: 'Roboto', sans-serif;
 }
 </style>

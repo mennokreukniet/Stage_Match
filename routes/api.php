@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+	Route::post('/skill', 'SkillsController@createSkill');
+	Route::delete('/skill/{id}', 'SkillsController@deleteSkill');
+	Route::get('/skill/{id}', 'SkillsController@getSkill');
+	Route::get('/skill', 'SkillsController@getAll');

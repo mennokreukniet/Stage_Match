@@ -7,13 +7,12 @@ Vue.use(VueRouter);
 
 import MainApp from './views/App';
 
-import Home from './views/Home';
-
 import Auth from './views/auth/Auth.vue';
 import Auth_login from './views/auth/Login.vue';
 import Auth_register from './views/auth/Register.vue';
 import Index from './views/index/Index.vue';
 import Settings from './views/settings/Settings.vue';
+import Admin from './views/admin/Admin.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -60,11 +59,23 @@ const router = new VueRouter({
                      component: Auth_register
                  }
             ]
-        }
+        },
+        {
+            path: '/admin',
+            component: Admin,
+            beforeEnter: (to, from, next) => {
+                document.title = "Stage Match - Admin";
+                if (localStorage.getItem("accessToken") === null) {
+                    return next('/auth/login');
+                } else {
+                    next();
+                }
+            },
+        },
     ],
 });
 
-const messages = {
+const translations = {
     en: {
         email: "Email",
         password: "Password",
@@ -87,7 +98,7 @@ const messages = {
 const i18n = new VueI18n({
     locale: 'nl', // set locale
     fallbackLocale: 'en',
-    messages, // set locale messages
+    translations, // set locale messages
   })
 
 const app = new Vue({

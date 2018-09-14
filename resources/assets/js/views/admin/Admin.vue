@@ -1,7 +1,7 @@
 <template>
     <div id="main">
         <div class="card">
-            <span class="title">Profile</span>
+            <span class="title">Admin </span>
 
             <input type="text">
         </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    name: "settings"
+    name: "admin"
 }
 </script>
 

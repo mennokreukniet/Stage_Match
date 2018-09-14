@@ -529,18 +529,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_i18n__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_App__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__views_App__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_Home__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_Home___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__views_Home__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_auth_Auth_vue__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_auth_Auth_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_auth_Auth_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_auth_Login_vue__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_auth_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_auth_Login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_auth_Register_vue__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_auth_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_auth_Register_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_index_Index_vue__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_index_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__views_index_Index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_settings_Settings_vue__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_settings_Settings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__views_settings_Settings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_auth_Auth_vue__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_auth_Auth_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__views_auth_Auth_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_auth_Login_vue__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_auth_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_auth_Login_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue__);
 
 
 
@@ -557,12 +557,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 
 
-
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
         path: '/',
-        component: __WEBPACK_IMPORTED_MODULE_8__views_index_Index_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue___default.a,
         beforeEnter: function beforeEnter(to, from, next) {
             document.title = "Stage Match - Index";
             if (localStorage.getItem("accessToken") === null) {
@@ -572,7 +571,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         }
     }, {
         path: '/settings',
-        component: __WEBPACK_IMPORTED_MODULE_9__views_settings_Settings_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue___default.a,
         beforeEnter: function beforeEnter(to, from, next) {
             document.title = "Stage Match - Settings";
             if (localStorage.getItem("accessToken") === null) {
@@ -582,7 +581,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         }
     }, {
         path: '/auth',
-        component: __WEBPACK_IMPORTED_MODULE_5__views_auth_Auth_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_4__views_auth_Auth_vue___default.a,
         beforeEnter: function beforeEnter(to, from, next) {
             document.title = "Stage Match - Auth";
             if (localStorage.getItem("accessToken") !== null) {
@@ -592,15 +591,26 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         },
         children: [{
             path: 'login',
-            component: __WEBPACK_IMPORTED_MODULE_6__views_auth_Login_vue___default.a
+            component: __WEBPACK_IMPORTED_MODULE_5__views_auth_Login_vue___default.a
         }, {
             path: 'register',
-            component: __WEBPACK_IMPORTED_MODULE_7__views_auth_Register_vue___default.a
+            component: __WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue___default.a
         }]
+    }, {
+        path: '/admin',
+        component: __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue___default.a,
+        beforeEnter: function beforeEnter(to, from, next) {
+            document.title = "Stage Match - Admin";
+            if (localStorage.getItem("accessToken") === null) {
+                return next('/auth/login');
+            } else {
+                next();
+            }
+        }
     }]
 });
 
-var messages = {
+var translations = {
     en: {
         email: "Email",
         password: "Password",
@@ -623,7 +633,7 @@ var messages = {
 var i18n = new __WEBPACK_IMPORTED_MODULE_2_vue_i18n__["a" /* default */]({
     locale: 'nl', // set locale
     fallbackLocale: 'en',
-    messages: messages // set locale messages
+    translations: translations // set locale messages
 });
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
@@ -14768,7 +14778,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\r\n", ""]);
+exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\ninput:focus, button:focus {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    outline: 0;\n}\nbutton.classic {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav {\r\n    position: fixed;\r\n    width: 100%;\r\n    bottom: 0;\n}\nnav > div.bg {\r\n    position: relative;\n}\nnav > div.bg > .circle {\r\n    background: white;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -50%);\r\n            transform: translate(-50%, -50%);\r\n    height: 60px;\r\n    width: 60px;\r\n    border-radius: 60px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > .circle2 {\r\n    background: white;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -30%);\r\n            transform: translate(-50%, -30%);\r\n    height: 60px;\r\n    width: 60px;\r\n    border-radius: 60px;\n}\nnav > div.bg > div.menu {\r\n    background: white;\r\n    width: 100%;\r\n    height: 40px;\r\n    border: solid 1px #bebebe;\n}\r\n\r\n/* nav > button.side {\r\n    flex: 1;\r\n}\r\n\r\nnav > button.home {\r\n    height: 60px;\r\n    border-radius: 60px;\r\n    width: 60px;\r\n} */\r\n\r\n/* div#menu {\r\n    width: 60px; \r\n    height: 60px;\r\n    position: fixed;\r\n    right: 20px;\r\n    bottom: 20px;\r\n} */\r\n", ""]);
 
 // exports
 
@@ -14842,6 +14852,115 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({ name: 'main-app' });
 
@@ -14854,10 +14973,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "container" }, [_c("router-view")], 1)
+    _c("div", { staticClass: "container" }, [_c("router-view")], 1),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", [
+      _c("div", { staticClass: "bg" }, [
+        _c("div", { staticClass: "circle" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "circle2" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "menu" })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -14868,73 +15004,8 @@ if (false) {
 }
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = __webpack_require__(18)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/views/Home.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6c0a33b2", Component.options)
-  } else {
-    hotAPI.reload("data-v-6c0a33b2", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("p", [_vm._v("This is the homepage")])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6c0a33b2", module.exports)
-  }
-}
-
-/***/ }),
+/* 17 */,
+/* 18 */,
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15021,7 +15092,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml, body { height: 100%;\n}\nbody {\r\n  overflow: hidden;\n}\n#login, #register {\r\n    width: 100vw;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-direction: column;\r\n            flex-direction: column;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center\n}\n.container {\r\n    width: 100%;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\ninput:focus, button:focus {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    outline: 0;\n}\nbutton {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\n#loading {\r\n    position: relative;\r\n    -webkit-animation: move_down 1s 1, move_up 1s 4s 1;\r\n            animation: move_down 1s 1, move_up 1s 4s 1;\r\n    display: none;\n}\n.dots {\r\n    position: absolute;\r\n    -webkit-transform: translate(-50%, 0);\r\n            transform: translate(-50%, 0);\r\n    left: 50%;\r\n    top: 30px;\r\n    z-index: 1000;\n}\n.dot {\r\n    top: 0;\r\n    display: inline-block;\r\n    margin-right: 15px;\r\n    left: 0;\r\n    width:15px;\r\n    height: 15px;\r\n    z-index: 999; \r\n    position: relative;\r\n    border-radius: 15px;\r\n    background: #018786;\n}\n.active {\r\n    z-index: 1000;\r\n    border-radius: 10px;\r\n    width: 15px;\r\n    position: absolute;\r\n    background: #03DAC6;\r\n    -webkit-animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\r\n            animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n}\n@-webkit-keyframes move_down {\n0% {\r\n        top: -190px;\n}\n100% {\r\n        top: 0px;\n}\n}\n@keyframes move_down {\n0% {\r\n        top: -190px;\n}\n100% {\r\n        top: 0px;\n}\n}\n@-webkit-keyframes move_up {\n0% {\r\n        top: 0px;\n}\n100% {\r\n        top: -190px;\n}\n}\n@keyframes move_up {\n0% {\r\n        top: 0px;\n}\n100% {\r\n        top: -190px;\n}\n}\n@-webkit-keyframes dot_size {\n0% {\r\n        width: 15px;\n}\n12.5% {\r\n        width: 50px;\n}\n25% {\r\n        width: 15px;\n}\n37.5% {\r\n        width: 50px;\n}\n50% {\r\n        width: 15px;\n}\n62.5% {\r\n        width: 50px;\n}\n75% {\r\n        width: 15px;\n}\n87.5% {\r\n        width: 117px;\n}\n100% {\r\n        width: 15px;\n}\n}\n@keyframes dot_size {\n0% {\r\n        width: 15px;\n}\n12.5% {\r\n        width: 50px;\n}\n25% {\r\n        width: 15px;\n}\n37.5% {\r\n        width: 50px;\n}\n50% {\r\n        width: 15px;\n}\n62.5% {\r\n        width: 50px;\n}\n75% {\r\n        width: 15px;\n}\n87.5% {\r\n        width: 117px;\n}\n100% {\r\n        width: 15px;\n}\n}\n@-webkit-keyframes dot_move {\n0% {\r\n        margin-left: 0px;\n}\n12.5% {\r\n        margin-left: 0px;\n}\n25% {\r\n        margin-left: 35px;\n}\n37.5% {\r\n        margin-left: 35px;\n}\n50% {\r\n        margin-left: 68px;\n}\n62.5% {\r\n        margin-left: 68px;\n}\n75% {\r\n        margin-left: 102px;\n}\n87.5% {\r\n        margin-left: 0px;\n}\n100% {\r\n        margin-left: 0px;\n}\n}\n@keyframes dot_move {\n0% {\r\n        margin-left: 0px;\n}\n12.5% {\r\n        margin-left: 0px;\n}\n25% {\r\n        margin-left: 35px;\n}\n37.5% {\r\n        margin-left: 35px;\n}\n50% {\r\n        margin-left: 68px;\n}\n62.5% {\r\n        margin-left: 68px;\n}\n75% {\r\n        margin-left: 102px;\n}\n87.5% {\r\n        margin-left: 0px;\n}\n100% {\r\n        margin-left: 0px;\n}\n}\n.dot:last-child {\r\n    margin-right: 0;\n}\n.ocean { \r\n  height: 30px;\r\n  width: 100%;\r\n  padding: 0 20px;\r\n  position:absolute;\r\n  top:-8px;\r\n  left:-8px;\r\n  background: #202124;\r\n  -webkit-transform: rotate(180deg);\r\n          transform: rotate(180deg);\n}\n.wave {\r\n  background: url(" + escape(__webpack_require__(23)) + ") repeat-x; \r\n  position: absolute;\r\n  top: -195px;\r\n  width: 6400px;\r\n  height: 198px;\r\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\r\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\r\n  -webkit-transform: translate3d(0, 0, 0);\r\n          transform: translate3d(0, 0, 0);\n}\n.wave:nth-of-type(2) {\r\n  top: -175px;\r\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\r\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\r\n  opacity: 1;\n}\n@-webkit-keyframes wave {\n0% {\r\n    margin-left: 0;\n}\n100% {\r\n    margin-left: -1600px;\n}\n}\n@keyframes wave {\n0% {\r\n    margin-left: 0;\n}\n100% {\r\n    margin-left: -1600px;\n}\n}\n@-webkit-keyframes swell {\n0%, 100% {\r\n    -webkit-transform: translate3d(0,-25px,0);\r\n            transform: translate3d(0,-25px,0);\n}\n50% {\r\n    -webkit-transform: translate3d(0,5px,0);\r\n            transform: translate3d(0,5px,0);\n}\n}\n@keyframes swell {\n0%, 100% {\r\n    -webkit-transform: translate3d(0,-25px,0);\r\n            transform: translate3d(0,-25px,0);\n}\n50% {\r\n    -webkit-transform: translate3d(0,5px,0);\r\n            transform: translate3d(0,5px,0);\n}\n}\r\n", ""]);
+exports.push([module.i, "\nhtml, body { height: 100%;\n}\nbody {\n  overflow: hidden;\n}\n#login, #register {\n    width: 100vw;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center\n}\n.container {\n    width: 100%;\n}\n#loading {\n    position: relative;\n    -webkit-animation: move_down 1s 1, move_up 1s 4s 1;\n            animation: move_down 1s 1, move_up 1s 4s 1;\n    display: none;\n}\n.dots {\n    position: absolute;\n    -webkit-transform: translate(-50%, 0);\n            transform: translate(-50%, 0);\n    left: 50%;\n    top: 30px;\n    z-index: 1000;\n}\n.dot {\n    top: 0;\n    display: inline-block;\n    margin-right: 15px;\n    left: 0;\n    width:15px;\n    height: 15px;\n    z-index: 999; \n    position: relative;\n    border-radius: 15px;\n    background: #018786;\n}\n.active {\n    z-index: 1000;\n    border-radius: 10px;\n    width: 15px;\n    position: absolute;\n    background: #03DAC6;\n    -webkit-animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n            animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n}\n@-webkit-keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@-webkit-keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@-webkit-keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@-webkit-keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n@keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n.dot:last-child {\n    margin-right: 0;\n}\n.ocean { \n  height: 30px;\n  width: 100%;\n  padding: 0 20px;\n  position:absolute;\n  top:-8px;\n  left:-8px;\n  background: #202124;\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg);\n}\n.wave {\n  background: url(" + escape(__webpack_require__(23)) + ") repeat-x; \n  position: absolute;\n  top: -195px;\n  width: 6400px;\n  height: 198px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n  -webkit-transform: translate3d(0, 0, 0);\n          transform: translate3d(0, 0, 0);\n}\n.wave:nth-of-type(2) {\n  top: -175px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n  opacity: 1;\n}\n@-webkit-keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@-webkit-keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n@keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n", ""]);
 
 // exports
 
@@ -15060,44 +15131,6 @@ module.exports = "/images/wave.svg?2b33716939eb71285297b34d20d2cb65";
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -15392,19 +15425,7 @@ var render = function() {
     _vm._v(" "),
     _c("input", { attrs: { type: "text", placeholder: _vm.$t("password") } }),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        on: {
-          click: function($event) {
-            _vm.$i18n.locale === "en"
-              ? (_vm.$i18n.locale = "nl")
-              : (_vm.$i18n.locale = "en")
-          }
-        }
-      },
-      [_vm._v(_vm._s(_vm.$t("login")))]
-    )
+    _c("button", { staticClass: "classic" }, [_vm._v(_vm._s(_vm.$t("login")))])
   ])
 }
 var staticRenderFns = [
@@ -15508,7 +15529,9 @@ var render = function() {
       attrs: { type: "text", placeholder: _vm.$t("confirm_password") }
     }),
     _vm._v(" "),
-    _c("button", [_vm._v(_vm._s(_vm.$t("sign_up")))])
+    _c("button", { staticClass: "classic" }, [
+      _vm._v(_vm._s(_vm.$t("sign_up")))
+    ])
   ])
 }
 var staticRenderFns = []
@@ -15771,17 +15794,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "main" } }, [
-    _c("div", { staticClass: "card" }, [
-      _c("span", { staticClass: "title" }, [
-        _vm._v(_vm._s(_vm.$t("message.settings.title")))
-      ]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text" } })
-    ])
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "main" } }, [
+      _c("div", { staticClass: "card" }, [
+        _c("span", { staticClass: "title" }, [_vm._v("Profile")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text" } })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -17391,6 +17419,151 @@ VueI18n.version = '8.1.0';
 
 /* harmony default export */ __webpack_exports__["a"] = (VueI18n);
 
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(46)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(48)
+/* template */
+var __vue_template__ = __webpack_require__(49)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/views/admin/Admin.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4e43638c", Component.options)
+  } else {
+    hotAPI.reload("data-v-4e43638c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(47);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("7695f356", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4e43638c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Admin.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4e43638c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Admin.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 20px;\n    padding: 20px 30px;\n}\ndiv.card > span.title {\n    letter-spacing: 2px;\n    display: block;\n    font-size: 23px;\n    margin-bottom: 40px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "admin"
+});
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "main" } }, [
+      _c("div", { staticClass: "card" }, [
+        _c("span", { staticClass: "title" }, [_vm._v("Admin ")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text" } })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4e43638c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

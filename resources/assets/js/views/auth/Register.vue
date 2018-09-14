@@ -4,7 +4,7 @@
     <input type="text" v-bind:placeholder="$t('email')">
     <input type="text" v-bind:placeholder="$t('password')">
     <input type="text" v-bind:placeholder="$t('confirm_password')">
-    <button>{{$t('sign_up')}}</button>
+    <button class="classic">{{$t('sign_up')}}</button>
   </div>
   
 </template>

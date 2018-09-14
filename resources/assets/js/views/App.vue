@@ -22,8 +22,17 @@
         <nav>
             <div class="bg">
                 <div class="circle"></div>
-                <div class="circle2"></div>
                 <div class="menu"></div>
+                <div class="menu2"></div>
+            </div>
+
+            <div class="buttons">
+                <div class="left">
+                    <button class="item"><i class="material-icons">settings</i></button>
+                </div>
+                <div class="right"></div>
+                <button class="circle"></button>
+                
             </div>
             
             <!-- <button class="side">test</button>
@@ -94,28 +103,62 @@ nav > div.bg > .circle {
     background: white;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -50%);
-    height: 60px;
-    width: 60px;
-    border-radius: 60px;
+    transform: translate(-50%, -34%);
+    height: 80px;
+    width: 80px;
+    border-radius: 80px;
     border: solid 1px #bebebe;
-}
-
-nav > div.bg > .circle2 {
-    background: white;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -30%);
-    height: 60px;
-    width: 60px;
-    border-radius: 60px;
 }
 
 nav > div.bg > div.menu {
     background: white;
     width: 100%;
-    height: 40px;
+    height: 50px;
     border: solid 1px #bebebe;
+}
+
+nav > div.bg > div.menu2 {
+    background: white;
+    width: 100%;
+    height: 50.5px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+nav > div.buttons {
+    position: relative;
+    width: 100%;
+}
+
+nav > div.buttons > button.circle {
+    width: 60px;
+    border: none;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    height: 60px;
+    background: #03DAC6;
+    border-radius: 60px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -114%);
+}
+
+nav > div.buttons > div.left {
+    display: flex;
+    background: red;
+    width: 100%;
+    position: relative;
+    top: 0px;
+    height: 50px;
+}
+
+
+nav > div.buttons > div.left > button {
+    border: none;
+    background: none;
+    position: absolute;
+    left: 0;
+    top:0;
 }
 
 /* nav > button.side {

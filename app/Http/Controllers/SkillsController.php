@@ -12,7 +12,13 @@ class SkillsController extends Controller
 
     	$skill->name = strtolower($request->name);
 
-    	$skill->save();
+		$created = $skill->save();
+		
+		if ($created) {
+			return response(['status' => 'success', 'result' => [$skill]], 200);
+		} else {
+			return response(['status' => 'error'], 400);
+		}
     }
 
     public function deleteSkill(Request $request){

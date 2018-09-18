@@ -10,7 +10,7 @@ class SkillsController extends Controller
     public function createSkill(Request $request){
     	$skill = new Skill;
 
-    	$skill->name = $request->name;
+    	$skill->name = strtolower($request->name);
 
     	$skill->save();
     }

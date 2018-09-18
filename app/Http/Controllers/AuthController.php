@@ -18,10 +18,13 @@ class AuthController extends Controller
 	    $user->name = $request->name;
 	    $user->password = bcrypt($request->password);
 	    $user->save();
+	    $login = $this->login($request);
+	    $token = json_decode($login->content());
 	    return response([
 	        'status' => 'success',
+	        'token' => $token->token,
 	       ], 200);
-	 }
+	}
 
 	public function login(Request $request)
 	{
@@ -34,8 +37,8 @@ class AuthController extends Controller
 	            ], 400);
 	    }
 	    return response([
-	            'status' => 'success'
-	        ])
-	        ->header('Authorization', $token);
+	            'status' => 'success',
+	            'token' => $token
+	        ]);
 	}
 }

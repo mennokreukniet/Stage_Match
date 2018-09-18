@@ -6,11 +6,16 @@
             <div class="skills">
                 <template v-for="(value, index) in this.skills" class="skill">
                     <div v-bind:key="value.id" class="skill">
-                        <button v-on:click="remove(value.id)">remove</button>    
+                        <button v-on:click="remove(value.id, index)">remove</button>    
                         <span>{{value.name}}</span>
                     </div>
                 </template>
             </div>
+    <br>
+            <span class="title">Create Skill</span>
+            <input v-model="new_skill" type="text">
+            <br>
+            <button v-on:click="create()">create skill</button>
         </div>
     </div>    
 </template>
@@ -24,18 +29,22 @@ export default {
     },
     data() {
         return {
-            skills: []
+            skills: [],
+            new_skill: ""
         }
     },
     methods: {
-        remove: (id, index) => {
+        remove (id, index)  {
             axios.delete(`http://localhost:8000/api/admin/skill/${id}`).then(res => {
-                skills.splice(index, 1);
+                this.skills.splice(index, 1);
             })
         },
 
-        create: (name) => {
-            
+        create () {
+            axios.post(`http://localhost:8000/api/admin/skill`, {"name": this.new_skill}).then(res => {
+                this.skills.push(res.data.result[0]);
+                this.new_skill = "";
+            })
         }
     }
 }
@@ -46,6 +55,9 @@ export default {
         background: white;
         border-radius: 20px;
         padding: 20px 30px;
+        margin: 15px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+
     }
 
     div.card > span.title {

@@ -10,7 +10,7 @@ class SkillsController extends Controller
     public function createSkill(Request $request){
     	$skill = new Skill;
 
-    	$skill->name = strtolower($request->name);
+    	$skill->name = $request->name;
 
 		$created = $skill->save();
 		
@@ -40,9 +40,9 @@ class SkillsController extends Controller
 
     public function getAll(Request $request){
 
-    	$skills = Skill::all();
-
-    	return json_encode($skills);
+		$skills = Skill::all();
+		
+    	return json_encode(array_reverse($skills->toArray()));
     }
 
 }

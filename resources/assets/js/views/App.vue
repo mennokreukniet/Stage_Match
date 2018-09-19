@@ -156,11 +156,9 @@ nav > div.buttons > button.circle:focus {
 
 nav > div.buttons > div.left {
     display: flex;
-    /* background: red; */
     width: 100%;
     position: relative;
     top: 0px;
-    /* height: 50px; */
 }
 
 

@@ -17058,7 +17058,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\ninput:focus, button:focus {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    outline: 0;\n}\nbutton.classic {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav {\r\n    position: fixed;\r\n    width: 100%;\r\n    bottom: 0;\n}\nnav > div.bg {\r\n    position: relative;\n}\nnav > div.bg > .circle {\r\n    background: white;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -34%);\r\n            transform: translate(-50%, -34%);\r\n    height: 80px;\r\n    width: 80px;\r\n    border-radius: 80px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu2 {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50.5px;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\n}\nnav > div.buttons {\r\n    position: relative;\r\n    width: 100%;\n}\nnav > div.buttons > button.circle {\r\n    width: 60px;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    height: 60px;\r\n    background: #03DAC6;\r\n    border-radius: 60px;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -114%);\r\n            transform: translate(-50%, -114%);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav > div.buttons > button.circle:hover {\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\n}\nnav > div.buttons > button.circle:focus {\r\n    background: #02c4b2;\n}\nnav > div.buttons > div.left {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    /* background: red; */\r\n    width: 100%;\r\n    position: relative;\r\n    top: 0px;\r\n    /* height: 50px; */\n}\nnav > div.buttons > div.left > button {\r\n    border: none;\r\n    background: none;\r\n    position: absolute;\r\n    left: 0;\r\n    top:0;\n}\r\n\r\n/* nav > button.side {\r\n    flex: 1;\r\n}\r\n\r\nnav > button.home {\r\n    height: 60px;\r\n    border-radius: 60px;\r\n    width: 60px;\r\n} */\r\n\r\n/* div#menu {\r\n    width: 60px; \r\n    height: 60px;\r\n    position: fixed;\r\n    right: 20px;\r\n    bottom: 20px;\r\n} */\r\n", ""]);
+exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\ninput:focus, button:focus {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    outline: 0;\n}\nbutton.classic {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav {\r\n    position: fixed;\r\n    width: 100%;\r\n    bottom: 0;\n}\nnav > div.bg {\r\n    position: relative;\n}\nnav > div.bg > .circle {\r\n    background: white;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -34%);\r\n            transform: translate(-50%, -34%);\r\n    height: 80px;\r\n    width: 80px;\r\n    border-radius: 80px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu2 {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50.5px;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\n}\nnav > div.buttons {\r\n    position: relative;\r\n    width: 100%;\n}\nnav > div.buttons > button.circle {\r\n    width: 60px;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    height: 60px;\r\n    background: #03DAC6;\r\n    border-radius: 60px;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -114%);\r\n            transform: translate(-50%, -114%);\n}\nnav > div.buttons > div.left {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: 100%;\r\n    position: relative;\r\n    top: 0px;\n}\nnav > div.buttons > div.left > button {\r\n    border: none;\r\n    background: none;\r\n    position: absolute;\r\n    left: 0;\r\n    top:0;\n}\r\n\r\n/* nav > button.side {\r\n    flex: 1;\r\n}\r\n\r\nnav > button.home {\r\n    height: 60px;\r\n    border-radius: 60px;\r\n    width: 60px;\r\n} */\r\n\r\n/* div#menu {\r\n    width: 60px; \r\n    height: 60px;\r\n    position: fixed;\r\n    right: 20px;\r\n    bottom: 20px;\r\n} */\r\n", ""]);
 
 // exports
 
@@ -17102,19 +17102,6 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -17436,7 +17423,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nhtml, body { height: 100%;\n}\nbody {\n  overflow: hidden;\n}\n#login, #register {\n    width: 100vw;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center\n}\n.container {\n    width: 100%;\n}\n#loading {\n    position: relative;\n    -webkit-animation: move_down 1s 1, move_up 1s 4s 1;\n            animation: move_down 1s 1, move_up 1s 4s 1;\n    display: none;\n}\n.dots {\n    position: absolute;\n    -webkit-transform: translate(-50%, 0);\n            transform: translate(-50%, 0);\n    left: 50%;\n    top: 30px;\n    z-index: 1000;\n}\n.dot {\n    top: 0;\n    display: inline-block;\n    margin-right: 15px;\n    left: 0;\n    width:15px;\n    height: 15px;\n    z-index: 999; \n    position: relative;\n    border-radius: 15px;\n    background: #018786;\n}\n.active {\n    z-index: 1000;\n    border-radius: 10px;\n    width: 15px;\n    position: absolute;\n    background: #03DAC6;\n    -webkit-animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n            animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n}\n@-webkit-keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@-webkit-keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@-webkit-keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@-webkit-keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n@keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n.dot:last-child {\n    margin-right: 0;\n}\n.ocean { \n  height: 30px;\n  width: 100%;\n  padding: 0 20px;\n  position:absolute;\n  top:-8px;\n  left:-8px;\n  background: #202124;\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg);\n}\n.wave {\n  background: url(" + escape(__webpack_require__(30)) + ") repeat-x; \n  position: absolute;\n  top: -195px;\n  width: 6400px;\n  height: 198px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n  -webkit-transform: translate3d(0, 0, 0);\n          transform: translate3d(0, 0, 0);\n}\n.wave:nth-of-type(2) {\n  top: -175px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n  opacity: 1;\n}\n@-webkit-keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@-webkit-keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n@keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n", ""]);
+exports.push([module.i, "\nhtml, body { height: 100%;\n}\nbody {\n  overflow: hidden;\n}\n#login, #register {\n    width: 100vw;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center\n}\n.container {\n    width: 100%;\n}\nspan.title {\n    letter-spacing: 2px;\n        display: block;\n        font-size: 23px;\n        margin-bottom: 40px;\n}\ninput {\n    -webkit-box-flex:1;\n        -ms-flex:1;\n            flex:1;\n    margin: 10px;\n    border-radius: 5px;\n    height: 20px;\n    font-size: 15px;\n    letter-spacing: 1.2px;\n    padding: 10px 15px;\n    border: solid 1px #eee;\n    -webkit-transition: 400ms;\n    transition: 400ms;\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\n#loading {\n    position: relative;\n    -webkit-animation: move_down 1s 1, move_up 1s 4s 1;\n            animation: move_down 1s 1, move_up 1s 4s 1;\n    display: none;\n}\n.dots {\n    position: absolute;\n    -webkit-transform: translate(-50%, 0);\n            transform: translate(-50%, 0);\n    left: 50%;\n    top: 30px;\n    z-index: 1000;\n}\n.dot {\n    top: 0;\n    display: inline-block;\n    margin-right: 15px;\n    left: 0;\n    width:15px;\n    height: 15px;\n    z-index: 999; \n    position: relative;\n    border-radius: 15px;\n    background: #018786;\n}\n.active {\n    z-index: 1000;\n    border-radius: 10px;\n    width: 15px;\n    position: absolute;\n    background: #03DAC6;\n    -webkit-animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n            animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n}\n@-webkit-keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@-webkit-keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@-webkit-keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@-webkit-keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n@keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n.dot:last-child {\n    margin-right: 0;\n}\n.ocean { \n  height: 30px;\n  width: 100%;\n  padding: 0 20px;\n  position:absolute;\n  top:-8px;\n  left:-8px;\n  background: #202124;\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg);\n}\n.wave {\n  background: url(" + escape(__webpack_require__(30)) + ") repeat-x; \n  position: absolute;\n  top: -195px;\n  width: 6400px;\n  height: 198px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n  -webkit-transform: translate3d(0, 0, 0);\n          transform: translate3d(0, 0, 0);\n}\n.wave:nth-of-type(2) {\n  top: -175px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n  opacity: 1;\n}\n@-webkit-keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@-webkit-keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n@keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n", ""]);
 
 // exports
 
@@ -17684,6 +17671,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({ name: 'auth' });
 
@@ -17714,7 +17720,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(34)
 /* template */
 var __vue_template__ = __webpack_require__(53)
 /* template functional */
@@ -17755,7 +17761,64 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 34 */,
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var axios = __webpack_require__(5);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+
+
+  methods: {
+    login: function login() {
+      var _this = this;
+
+      axios.post("http://localhost:8000/api/auth/login", { "email": this.email, "password": this.password }).then(function (res) {
+        localStorage.setItem("accessToken", res.data.token);
+        _this.$router.push('../');
+      });
+    },
+    register: function register() {
+      this.$router.push('register');
+    }
+  }
+});
+
+/***/ }),
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18648,11 +18711,60 @@ var render = function() {
   return _c("div", { attrs: { id: "login" } }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("input", { attrs: { type: "text", placeholder: _vm.$t("email") } }),
+    _c("span", { staticClass: "title" }, [_vm._v("Login")]),
     _vm._v(" "),
-    _c("input", { attrs: { type: "text", placeholder: _vm.$t("password") } }),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.email,
+          expression: "email"
+        }
+      ],
+      attrs: { type: "text", placeholder: "Email" },
+      domProps: { value: _vm.email },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.email = $event.target.value
+        }
+      }
+    }),
     _vm._v(" "),
-    _c("button", { staticClass: "classic" }, [_vm._v(_vm._s(_vm.$t("login")))])
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.password,
+          expression: "password"
+        }
+      ],
+      attrs: { type: "password", placeholder: "Password" },
+      domProps: { value: _vm.password },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.password = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("button", { staticClass: "classic", on: { click: _vm.login } }, [
+      _vm._v("Login")
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c("button", { staticClass: "classic", on: { click: _vm.register } }, [
+      _vm._v("Register")
+    ])
   ])
 }
 var staticRenderFns = [
@@ -18697,7 +18809,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(55)
 /* template */
 var __vue_template__ = __webpack_require__(56)
 /* template functional */
@@ -18738,7 +18850,70 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */,
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var axios = __webpack_require__(5);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+      confirm_password: "",
+      role: "1"
+    };
+  },
+
+
+  methods: {
+    register: function register() {
+      var _this = this;
+
+      console.log(1);
+      if (this.name === "" || this.email === "" || this.password === "" || this.confirm_password === "" || this.role === "") {
+        console.log(this.name, this.email, this.password, this.confirm_password, this.role);
+        return alert("Not all fields are filled in");
+      }
+
+      if (this.password !== this.confirm_password) {
+        return alert("Passwords are not the same!");
+      }
+      axios.post("http://localhost:8000/api/auth/register", { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(function (res) {
+        localStorage.setItem("accessToken", res.data.token);
+        _this.$router.push('../');
+      });
+    },
+    login: function login() {
+      this.$router.push('login');
+    }
+  }
+});
+
+/***/ }),
 /* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18747,18 +18922,137 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "register" } }, [
-    _c("input", { attrs: { type: "text", placeholder: _vm.$t("name") } }),
-    _vm._v(" "),
-    _c("input", { attrs: { type: "text", placeholder: _vm.$t("email") } }),
-    _vm._v(" "),
-    _c("input", { attrs: { type: "text", placeholder: _vm.$t("password") } }),
+    _c("span", { staticClass: "title" }, [_vm._v("Register")]),
     _vm._v(" "),
     _c("input", {
-      attrs: { type: "text", placeholder: _vm.$t("confirm_password") }
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.name,
+          expression: "name"
+        }
+      ],
+      attrs: { type: "text", placeholder: "Name" },
+      domProps: { value: _vm.name },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.name = $event.target.value
+        }
+      }
     }),
     _vm._v(" "),
-    _c("button", { staticClass: "classic" }, [
-      _vm._v(_vm._s(_vm.$t("sign_up")))
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.email,
+          expression: "email"
+        }
+      ],
+      attrs: { type: "text", placeholder: "Email" },
+      domProps: { value: _vm.email },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.email = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.password,
+          expression: "password"
+        }
+      ],
+      attrs: { type: "text", placeholder: "Password" },
+      domProps: { value: _vm.password },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.password = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.confirm_password,
+          expression: "confirm_password"
+        }
+      ],
+      attrs: { type: "text", placeholder: "Confirm Password" },
+      domProps: { value: _vm.confirm_password },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.confirm_password = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.role,
+            expression: "role"
+          }
+        ],
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.role = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+          }
+        }
+      },
+      [
+        _c("option", { attrs: { value: "1", selected: "true" } }, [
+          _vm._v("Student")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2" } }, [_vm._v("Company")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3" } }, [_vm._v("Admin")])
+      ]
+    ),
+    _vm._v(" "),
+    _c("button", { staticClass: "classic", on: { click: _vm.register } }, [
+      _vm._v("Register")
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c("button", { staticClass: "classic", on: { click: _vm.login } }, [
+      _vm._v("Login")
     ])
   ])
 }
@@ -18858,7 +19152,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -18875,9 +19169,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "index"
+    name: "index",
+    created: function created() {
+        this.claims = JSON.parse(atob(localStorage.getItem("accessToken").split(".")[1]));
+        if (this.claims.role === "1") this.role = "Student";else if (this.claims.role === "2") this.role = "Company";else this.role = "Admin";
+    },
+    data: function data() {
+        return {
+            claims: {},
+            role: ""
+        };
+    },
+
+    methods: {
+        admin: function admin() {
+            this.$router.push("admin");
+        },
+        logout: function logout() {
+            localStorage.clear();
+            this.$router.push("/admin");
+        }
+    }
 });
 
 /***/ }),
@@ -18889,7 +19210,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "main" } }, [
-    _vm._v("\n    I am the Index\n")
+    _vm._v("\n   This is the index "),
+    _c("br"),
+    _vm._v("Version: 0.01 (ÜBER ALPHA)\n\n   "),
+    this.claims.role === "3"
+      ? _c("button", { on: { click: _vm.admin } }, [_vm._v("Admin")])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("span", [_vm._v("Current user role: " + _vm._s(_vm.role) + " ")]),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.logout } }, [_vm._v("Log Out")])
   ])
 }
 var staticRenderFns = []
@@ -19133,7 +19468,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 20px;\n    padding: 20px 30px;\n    margin: 15px;\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ndiv.card > span.title {\n    letter-spacing: 2px;\n    display: block;\n    font-size: 23px;\n    margin-bottom: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 20px;\n    padding: 20px 30px;\n}\ndiv.card > span.title {\n    letter-spacing: 2px;\n    display: block;\n    font-size: 23px;\n    margin-bottom: 40px;\n}\n", ""]);
 
 // exports
 
@@ -19144,11 +19479,6 @@ exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 2
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -19179,27 +19509,18 @@ var axios = __webpack_require__(5);
     },
     data: function data() {
         return {
-            skills: [],
-            new_skill: ""
+            skills: []
         };
     },
 
     methods: {
         remove: function remove(id, index) {
-            var _this2 = this;
-
             axios.delete("http://localhost:8000/api/admin/skill/" + id).then(function (res) {
-                _this2.skills.splice(index, 1);
+                skills.splice(index, 1);
             });
         },
-        create: function create() {
-            var _this3 = this;
 
-            axios.post("http://localhost:8000/api/admin/skill", { "name": this.new_skill }).then(function (res) {
-                _this3.skills.push(res.data.result[0]);
-                _this3.new_skill = "";
-            });
-        }
+        create: function create(name) {}
     }
 });
 
@@ -19227,7 +19548,7 @@ var render = function() {
                   {
                     on: {
                       click: function($event) {
-                        _vm.remove(value.id, index)
+                        _vm.remove(value.id)
                       }
                     }
                   },
@@ -19240,45 +19561,6 @@ var render = function() {
           })
         ],
         2
-      ),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("span", { staticClass: "title" }, [_vm._v("Create Skill")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.new_skill,
-            expression: "new_skill"
-          }
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.new_skill },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.new_skill = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          on: {
-            click: function($event) {
-              _vm.create()
-            }
-          }
-        },
-        [_vm._v("create skill")]
       )
     ])
   ])

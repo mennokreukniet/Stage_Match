@@ -21,3 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	Route::delete('/admin/skill/{id}', 'SkillsController@deleteSkill');
 	Route::get('/admin/skill/{id}', 'SkillsController@getSkill');
 	Route::get('/admin/skill', 'SkillsController@getAll');
+
+Route::post('/auth/register', 'AuthController@register');
+
+Route::post('auth/login', 'AuthController@login');
+
+Route::group(['middleware' => 'jwt.auth'], function(){
+  Route::post('auth/logout', 'AuthController@logout');
+});

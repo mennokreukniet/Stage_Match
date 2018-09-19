@@ -17058,7 +17058,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\ninput:focus, button:focus {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    outline: 0;\n}\nbutton.classic {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav {\r\n    position: fixed;\r\n    width: 100%;\r\n    bottom: 0;\n}\nnav > div.bg {\r\n    position: relative;\n}\nnav > div.bg > .circle {\r\n    background: white;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -34%);\r\n            transform: translate(-50%, -34%);\r\n    height: 80px;\r\n    width: 80px;\r\n    border-radius: 80px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu2 {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50.5px;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\n}\nnav > div.buttons {\r\n    position: relative;\r\n    width: 100%;\n}\nnav > div.buttons > button.circle {\r\n    width: 60px;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    height: 60px;\r\n    background: #03DAC6;\r\n    border-radius: 60px;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -114%);\r\n            transform: translate(-50%, -114%);\n}\nnav > div.buttons > div.left {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: 100%;\r\n    position: relative;\r\n    top: 0px;\n}\nnav > div.buttons > div.left > button {\r\n    border: none;\r\n    background: none;\r\n    position: absolute;\r\n    left: 0;\r\n    top:0;\n}\r\n\r\n/* nav > button.side {\r\n    flex: 1;\r\n}\r\n\r\nnav > button.home {\r\n    height: 60px;\r\n    border-radius: 60px;\r\n    width: 60px;\r\n} */\r\n\r\n/* div#menu {\r\n    width: 60px; \r\n    height: 60px;\r\n    position: fixed;\r\n    right: 20px;\r\n    bottom: 20px;\r\n} */\r\n", ""]);
+exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\ninput:focus, button:focus {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    outline: 0;\n}\nbutton.classic {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav {\r\n    position: fixed;\r\n    width: 100%;\r\n    bottom: 0;\n}\nnav > div.bg {\r\n    position: relative;\n}\nnav > div.bg > .circle {\r\n    background: white;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -34%);\r\n            transform: translate(-50%, -34%);\r\n    height: 80px;\r\n    width: 80px;\r\n    border-radius: 80px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu2 {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50.5px;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\n}\nnav > div.buttons {\r\n    position: relative;\r\n    width: 100%;\n}\nnav > div.buttons > button.circle {\r\n    width: 60px;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    height: 60px;\r\n    background: #03DAC6;\r\n    border-radius: 60px;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -114%);\r\n            transform: translate(-50%, -114%);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav > div.buttons > button.circle:hover {\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\n}\nnav > div.buttons > button.circle:focus {\r\n    background: #02c4b2;\n}\nnav > div.buttons > div.left {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: 100%;\r\n    position: relative;\r\n    top: 0px;\n}\nnav > div.buttons > div.left > button {\r\n    border: none;\r\n    background: none;\r\n    position: absolute;\r\n    left: 0;\r\n    top:0;\n}\r\n\r\n/* nav > button.side {\r\n    flex: 1;\r\n}\r\n\r\nnav > button.home {\r\n    height: 60px;\r\n    border-radius: 60px;\r\n    width: 60px;\r\n} */\r\n\r\n/* div#menu {\r\n    width: 60px; \r\n    height: 60px;\r\n    position: fixed;\r\n    right: 20px;\r\n    bottom: 20px;\r\n} */\r\n", ""]);
 
 // exports
 
@@ -17102,6 +17102,17 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -19468,7 +19479,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 20px;\n    padding: 20px 30px;\n}\ndiv.card > span.title {\n    letter-spacing: 2px;\n    display: block;\n    font-size: 23px;\n    margin-bottom: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 20px;\n    padding: 20px 30px;\n    margin: 15px;\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ndiv.card > span.title {\n    letter-spacing: 2px;\n    display: block;\n    font-size: 23px;\n    margin-bottom: 40px;\n}\n", ""]);
 
 // exports
 
@@ -19479,6 +19490,11 @@ exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 2
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -19509,18 +19525,27 @@ var axios = __webpack_require__(5);
     },
     data: function data() {
         return {
-            skills: []
+            skills: [],
+            new_skill: ""
         };
     },
 
     methods: {
         remove: function remove(id, index) {
+            var _this2 = this;
+
             axios.delete("http://localhost:8000/api/admin/skill/" + id).then(function (res) {
-                skills.splice(index, 1);
+                _this2.skills.splice(index, 1);
             });
         },
+        create: function create() {
+            var _this3 = this;
 
-        create: function create(name) {}
+            axios.post("http://localhost:8000/api/admin/skill", { "name": this.new_skill }).then(function (res) {
+                _this3.skills.push(res.data.result[0]);
+                _this3.new_skill = "";
+            });
+        }
     }
 });
 
@@ -19548,7 +19573,7 @@ var render = function() {
                   {
                     on: {
                       click: function($event) {
-                        _vm.remove(value.id)
+                        _vm.remove(value.id, index)
                       }
                     }
                   },
@@ -19561,6 +19586,45 @@ var render = function() {
           })
         ],
         2
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Create Skill")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.new_skill,
+            expression: "new_skill"
+          }
+        ],
+        attrs: { type: "text" },
+        domProps: { value: _vm.new_skill },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.new_skill = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              _vm.create()
+            }
+          }
+        },
+        [_vm._v("create skill")]
       )
     ])
   ])

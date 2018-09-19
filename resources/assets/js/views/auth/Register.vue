@@ -42,7 +42,7 @@ export default {
       if (this.password !== this.confirm_password) {
         return alert("Passwords are not the same!");
       }
-      axios.post(`http://localhost:8000/api/auth/register`, { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(res => {
+      axios.post(`http://159.65.199.115/api/auth/register`, { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(res => {
         localStorage.setItem("accessToken", res.data.token);
         this.$router.push('../') 
       })

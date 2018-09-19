@@ -17818,7 +17818,7 @@ var axios = __webpack_require__(5);
     login: function login() {
       var _this = this;
 
-      axios.post("http://localhost:8000/api/auth/login", { "email": this.email, "password": this.password }).then(function (res) {
+      axios.post("http://159.65.199.115/api/auth/login", { "email": this.email, "password": this.password }).then(function (res) {
         localStorage.setItem("accessToken", res.data.token);
         _this.$router.push('../');
       });
@@ -18913,7 +18913,7 @@ var axios = __webpack_require__(5);
       if (this.password !== this.confirm_password) {
         return alert("Passwords are not the same!");
       }
-      axios.post("http://localhost:8000/api/auth/register", { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(function (res) {
+      axios.post("http://159.65.199.115/api/auth/register", { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(function (res) {
         localStorage.setItem("accessToken", res.data.token);
         _this.$router.push('../');
       });
@@ -19519,7 +19519,7 @@ var axios = __webpack_require__(5);
     created: function created() {
         var _this = this;
 
-        axios.get("http://localhost:8000/api/admin/skill").then(function (res) {
+        axios.get("http://159.65.199.115/api/admin/skill").then(function (res) {
             _this.skills = res.data;
         });
     },
@@ -19534,14 +19534,14 @@ var axios = __webpack_require__(5);
         remove: function remove(id, index) {
             var _this2 = this;
 
-            axios.delete("http://localhost:8000/api/admin/skill/" + id).then(function (res) {
+            axios.delete("http://159.65.199.115/api/admin/skill/" + id).then(function (res) {
                 _this2.skills.splice(index, 1);
             });
         },
         create: function create() {
             var _this3 = this;
 
-            axios.post("http://localhost:8000/api/admin/skill", { "name": this.new_skill }).then(function (res) {
+            axios.post("http://159.65.199.115/api/admin/skill", { "name": this.new_skill }).then(function (res) {
                 _this3.skills.push(res.data.result[0]);
                 _this3.new_skill = "";
             });

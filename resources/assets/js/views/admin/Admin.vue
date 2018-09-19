@@ -25,7 +25,7 @@ const axios = require("axios");
 export default {
     name: "admin",
     created () {
-        axios.get("http://localhost:8000/api/admin/skill").then(res => {this.skills = res.data})
+        axios.get("http://159.65.199.115/api/admin/skill").then(res => {this.skills = res.data})
     },
     data() {
         return {
@@ -35,13 +35,13 @@ export default {
     },
     methods: {
         remove (id, index)  {
-            axios.delete(`http://localhost:8000/api/admin/skill/${id}`).then(res => {
+            axios.delete(`http://159.65.199.115/api/admin/skill/${id}`).then(res => {
                 this.skills.splice(index, 1);
             })
         },
 
         create () {
-            axios.post(`http://localhost:8000/api/admin/skill`, {"name": this.new_skill}).then(res => {
+            axios.post(`http://159.65.199.115/api/admin/skill`, {"name": this.new_skill}).then(res => {
                 this.skills.push(res.data.result[0]);
                 this.new_skill = "";
             })

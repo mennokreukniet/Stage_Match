@@ -36,7 +36,7 @@ export default {
 
   methods: {
     login() {
-      axios.post(`http://localhost:8000/api/auth/login`, { "email": this.email, "password": this.password }).then(res => {
+      axios.post(`http://159.65.199.115/api/auth/login`, { "email": this.email, "password": this.password }).then(res => {
         localStorage.setItem("accessToken", res.data.token);
         this.$router.push('../') 
       })

@@ -16,10 +16,10 @@
       <span class="title">Login</span>
       <input v-model="email" type="text" placeholder="Email">
       <input v-model="password" type="password" placeholder="Password">
-      <button v-on:click="login">Login</button>
+      <button class="classic" v-on:click="login">Login</button>
 
       <br><br>
-      <button v-on:click="register">Register</button>
+      <button class="classic" v-on:click="register">Register</button>
   </div>
 </template>
 

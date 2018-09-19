@@ -10,9 +10,9 @@
       <option value="2">Company</option>
       <option value="3">Admin</option>
     </select>
-    <button v-on:click="register">Register</button>
+    <button class="classic" v-on:click="register">Register</button>
   <br><br>
-    <button v-on:click="login">Login</button>
+    <button class="classic" v-on:click="login">Login</button>
   </div>
   
 </template>

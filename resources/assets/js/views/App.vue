@@ -141,15 +141,26 @@ nav > div.buttons > button.circle {
     position: absolute;
     left: 50%;
     transform: translate(-50%, -114%);
+    transition: 400ms;
+}
+
+
+nav > div.buttons > button.circle:hover {
+    transition: 400ms;
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+nav > div.buttons > button.circle:focus {
+    background: #02c4b2;
 }
 
 nav > div.buttons > div.left {
     display: flex;
-    background: red;
+    /* background: red; */
     width: 100%;
     position: relative;
     top: 0px;
-    height: 50px;
+    /* height: 50px; */
 }
 
 

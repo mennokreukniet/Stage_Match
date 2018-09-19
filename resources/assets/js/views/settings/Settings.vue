@@ -19,6 +19,7 @@ export default {
         background: white;
         border-radius: 20px;
         padding: 20px 30px;
+        
     }
 
     div.card > span.title {

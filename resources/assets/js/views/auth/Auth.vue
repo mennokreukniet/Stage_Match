@@ -23,6 +23,13 @@ body {
     width: 100%;
 }
 
+span.title {
+    letter-spacing: 2px;
+        display: block;
+        font-size: 23px;
+        margin-bottom: 40px;
+}
+
 input {
     flex:1;
     margin: 10px;

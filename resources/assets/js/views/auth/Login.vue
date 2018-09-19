@@ -13,9 +13,38 @@
             <div class="wave"></div>  
         </div>
     </div>
-      <input type="text" placeholder="Email">
-      <input type="text" placeholder="Password (I've not secured it because lazy)">
-      <button>Login</button>
-    
+      <span class="title">Login</span>
+      <input v-model="email" type="text" placeholder="Email">
+      <input v-model="password" type="password" placeholder="Password">
+      <button v-on:click="login">Login</button>
+
+      <br><br>
+      <button v-on:click="register">Register</button>
   </div>
 </template>
+
+<script>
+const axios = require("axios");
+
+export default {
+  data () {
+    return {
+      email: "",
+      password: ""
+    }
+  },
+
+  methods: {
+    login() {
+      axios.post(`http://localhost:8000/api/auth/login`, { "email": this.email, "password": this.password }).then(res => {
+        localStorage.setItem("accessToken", res.data.token);
+        this.$router.push('../') 
+      })
+    },
+
+    register() {
+      this.$router.push('register') 
+    }
+  }
+}
+</script>

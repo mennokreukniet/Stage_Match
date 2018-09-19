@@ -3,9 +3,6 @@
 </template>
 
 <style>
-* {
-margin: 0; padding: 0;
-}
     html, body { height: 100%;
      }
 body {
@@ -23,42 +20,7 @@ body {
     width: 100%;
 }
 
-input {
-    flex:1;
-    margin: 10px;
-    border-radius: 5px;
-    height: 20px;
-    font-size: 15px;
-    letter-spacing: 1.2px;
-    padding: 10px 15px;
-    border: solid 1px #eee;
-    transition: 400ms;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-}
 
-input:hover, button:hover {
-    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
-    transition: 400ms;
-}
-
-input:focus, button:focus {
-    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
-    outline: 0;
-}
-
-button {
-    border-radius: 5px;
-    height: 40px;
-    margin: 10px;
-    flex: 1;
-    font-size: 17px;
-    color: white;
-    letter-spacing: 2px;
-    background: #23a6d5;
-    border: none;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-    transition: 400ms;
-}
 
 #loading {
     position: relative;

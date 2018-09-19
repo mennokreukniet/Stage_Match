@@ -13,9 +13,9 @@
             <div class="wave"></div>  
         </div>
     </div>
-      <input type="text" placeholder="Email">
-      <input type="text" placeholder="Password (I've not secured it because lazy)">
-      <button>Login</button>
+      <input type="text" v-bind:placeholder="$t('email')">
+      <input type="text" v-bind:placeholder="$t('password')">
+      <button class="classic">{{$t('login')}}</button>
     
   </div>
 </template>

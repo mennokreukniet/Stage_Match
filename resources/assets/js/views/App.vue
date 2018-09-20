@@ -19,7 +19,7 @@
         </div>
 
         <!-- <button id="menu">lol</button> -->
-        <nav>
+        <nav v-if="$route.name !== 'auth'">
             <div class="bg">
                 <div class="circle"></div>
                 <div class="menu"></div>
@@ -28,10 +28,15 @@
 
             <div class="buttons">
                 <div class="left">
-                    <button class="item"><i class="material-icons">settings</i></button>
+                    <button class="item"><i class="material-icons">menu</i></button>
                 </div>
-                <div class="right"></div>
-                <button class="circle"></button>
+                <router-link to="/">
+                    <button class="circle"><i class="material-icons">filter_none</i></button>
+                </router-link>
+                <div class="right">
+                    <router-link to="/settings"><button v-on:click="alert('Please implement me')" class="item"><i class="material-icons">settings</i></button></router-link>
+                </div>
+                
                 
             </div>
             
@@ -131,7 +136,7 @@ nav > div.buttons {
     width: 100%;
 }
 
-nav > div.buttons > button.circle {
+nav > div.buttons button.circle {
     width: 60px;
     border: none;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
@@ -140,6 +145,8 @@ nav > div.buttons > button.circle {
     border-radius: 60px;
     position: absolute;
     left: 50%;
+    color:white;
+    padding-top: 5px;
     transform: translate(-50%, -114%);
     transition: 400ms;
 }
@@ -156,18 +163,36 @@ nav > div.buttons > button.circle:focus {
 
 nav > div.buttons > div.left {
     display: flex;
-    width: 100%;
-    position: relative;
-    top: 0px;
+    width: calc(50% - 40px);
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    height: 50px;
+    display: flex;
+}
+
+nav > div.buttons > div.right {
+    display: flex;
+    width: calc(50% - 40px);
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    height: 50px;
+    display: flex;
 }
 
 
-nav > div.buttons > div.left > button {
+nav > div.buttons > div.left button, 
+nav > div.buttons > div.right button {
     border: none;
     background: none;
     position: absolute;
     left: 0;
     top:0;
+    color: #03DAC6;
+    width: 100%;
+    height: 100%;
+    flex: 1;
 }
 
 /* nav > button.side {

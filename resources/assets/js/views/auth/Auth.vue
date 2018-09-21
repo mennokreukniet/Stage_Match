@@ -20,6 +20,25 @@ body {
     width: 100%;
 }
 
+span.title {
+    letter-spacing: 2px;
+        display: block;
+        font-size: 23px;
+        margin-bottom: 40px;
+}
+
+input {
+    flex:1;
+    margin: 10px;
+    border-radius: 5px;
+    height: 20px;
+    font-size: 15px;
+    letter-spacing: 1.2px;
+    padding: 10px 15px;
+    border: solid 1px #eee;
+    transition: 400ms;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
 
 
 #loading {

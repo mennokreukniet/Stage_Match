@@ -19794,14 +19794,14 @@ var axios = __webpack_require__(5);
         remove: function remove(id, index) {
             var _this2 = this;
 
-            axios.delete(window.location.origin + "/api/admin/skill/" + id, { headers: { Authorization: localStorage.getItem("accessToken") } }).then(function (res) {
+            axios.delete(window.location.origin + "/api/admin/skill/" + id, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
                 _this2.skills.splice(index, 1);
             });
         },
         create: function create() {
             var _this3 = this;
 
-            axios.post(window.location.origin + "/api/admin/skill", { "name": this.new_skill }, { headers: { Authorization: localStorage.getItem("accessToken") } }).then(function (res) {
+            axios.post(window.location.origin + "/api/admin/skill", { "name": this.new_skill }, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
                 _this3.skills.push(res.data.result[0]);
                 _this3.new_skill = "";
             });

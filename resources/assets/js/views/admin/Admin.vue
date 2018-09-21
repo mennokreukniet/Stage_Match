@@ -36,13 +36,13 @@ export default {
     },
     methods: {
         remove (id, index)  {
-            axios.delete(`${window.location.origin}/api/admin/skill/${id}`, { headers: { Authorization: localStorage.getItem("accessToken") } }).then(res => {
+            axios.delete(`${window.location.origin}/api/admin/skill/${id}`, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(res => {
                 this.skills.splice(index, 1);
             })
         },
 
         create () {
-            axios.post(`${window.location.origin}/api/admin/skill`, {"name": this.new_skill}, { headers: { Authorization: localStorage.getItem("accessToken") } }).then(res => {
+            axios.post(`${window.location.origin}/api/admin/skill`, {"name": this.new_skill}, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(res => {
                 this.skills.push(res.data.result[0]);
                 this.new_skill = "";
             })

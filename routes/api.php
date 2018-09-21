@@ -26,6 +26,7 @@ Route::post('auth/login', 'AuthController@login');
 Route::group(['middleware' => 'jwt.auth'], function(){
   Route::post('auth/logout', 'AuthController@logout');
   Route::post('user/edit', 'UserController@editUser');
+  Route::get('user', 'UserController@getUser');
 });
 
 Route::group(['middleware' => 'admin'], function(){

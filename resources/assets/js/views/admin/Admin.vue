@@ -26,7 +26,7 @@ const axios = require("axios");
 export default {
     name: "admin",
     created () {
-        axios.get(`${window.location.origin}/api/admin/skill`).then(res => {this.skills = res.data})
+        axios.get(`${window.location.origin}/api/admin/skill`, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(res => {this.skills = res.data})
     },
     data() {
         return {
@@ -36,13 +36,13 @@ export default {
     },
     methods: {
         remove (id, index)  {
-            axios.delete(`${window.location.origin}/api/admin/skill/${id}`).then(res => {
+            axios.delete(`${window.location.origin}/api/admin/skill/${id}`, { headers: { Authorization: localStorage.getItem("accessToken") } }).then(res => {
                 this.skills.splice(index, 1);
             })
         },
 
         create () {
-            axios.post(`${window.location.origin}/api/admin/skill`, {"name": this.new_skill}).then(res => {
+            axios.post(`${window.location.origin}/api/admin/skill`, {"name": this.new_skill}, { headers: { Authorization: localStorage.getItem("accessToken") } }).then(res => {
                 this.skills.push(res.data.result[0]);
                 this.new_skill = "";
             })

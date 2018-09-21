@@ -1,5 +1,18 @@
 <template>
   <div id="register">
+    <div v-if="loading" id="loading">
+          <div class="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        <div class="ocean">
+            <div class="wave"></div>
+            <div class="wave"></div>  
+        </div>
+    </div>
     <span class="title">Register</span>
     <input @keyup.enter="register" v-model="name" type="text" placeholder="Name">
     <input @keyup.enter="register" v-model="email" type="text" placeholder="Email">

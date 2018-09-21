@@ -18985,6 +18985,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var axios = __webpack_require__(5);
 
@@ -19034,6 +19047,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "register" } }, [
+    _vm.loading
+      ? _c("div", { attrs: { id: "loading" } }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("span", { staticClass: "title" }, [_vm._v("Register")]),
     _vm._v(" "),
     _c("input", {
@@ -19204,7 +19225,34 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dots" }, [
+      _c("div", { staticClass: "dot active" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "dot" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "dot" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "dot" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "dot" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ocean" }, [
+      _c("div", { staticClass: "wave" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "wave" })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -19504,9 +19552,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
+var axios = __webpack_require__(5);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "settings"
+    name: "settings",
+    created: function created() {
+        var _this = this;
+
+        axios.get(window.location.origin + "/api/user", { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
+            _this.name = res.data.name;
+            _this.email = res.data.email;
+        });
+    },
+    data: function data() {
+        return {
+            name: "",
+            email: ""
+        };
+    },
+
+    methods: {
+        edit: function edit() {
+            if (this.name === "" || this.email === "") alert("Fields cannot be empty!");
+            axios.post(window.location.origin + "/api/user/edit", { "name": this.name, "email": this.email }, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
+                alert("Edited!");
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -19517,22 +19592,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "main" } }, [
-      _c("div", { staticClass: "card" }, [
-        _c("span", { staticClass: "title" }, [_vm._v("Account Settings")]),
-        _vm._v(" "),
-        _c("span", [_vm._v("There are currently no settings available.")])
-      ])
+  return _c("div", { attrs: { id: "main" } }, [
+    _c("div", { staticClass: "card" }, [
+      _c("span", { staticClass: "title" }, [_vm._v("Account Settings")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.name,
+            expression: "name"
+          }
+        ],
+        attrs: { type: "text", placeholder: "Name" },
+        domProps: { value: _vm.name },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.name = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.email,
+            expression: "email"
+          }
+        ],
+        attrs: { type: "text", placeholder: "E-Mail" },
+        domProps: { value: _vm.email },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.email = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.edit } }, [_vm._v("Edit profile")])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -19669,7 +19779,7 @@ var axios = __webpack_require__(5);
     created: function created() {
         var _this = this;
 
-        axios.get(window.location.origin + "/api/admin/skill").then(function (res) {
+        axios.get(window.location.origin + "/api/admin/skill", { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
             _this.skills = res.data;
         });
     },
@@ -19684,14 +19794,14 @@ var axios = __webpack_require__(5);
         remove: function remove(id, index) {
             var _this2 = this;
 
-            axios.delete(window.location.origin + "/api/admin/skill/" + id).then(function (res) {
+            axios.delete(window.location.origin + "/api/admin/skill/" + id, { headers: { Authorization: localStorage.getItem("accessToken") } }).then(function (res) {
                 _this2.skills.splice(index, 1);
             });
         },
         create: function create() {
             var _this3 = this;
 
-            axios.post(window.location.origin + "/api/admin/skill", { "name": this.new_skill }).then(function (res) {
+            axios.post(window.location.origin + "/api/admin/skill", { "name": this.new_skill }, { headers: { Authorization: localStorage.getItem("accessToken") } }).then(function (res) {
                 _this3.skills.push(res.data.result[0]);
                 _this3.new_skill = "";
             });

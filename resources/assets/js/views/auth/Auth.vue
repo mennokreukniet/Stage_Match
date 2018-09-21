@@ -43,8 +43,6 @@ input {
 
 #loading {
     position: relative;
-    animation: move_down 1s 1, move_up 1s 4s 1;
-    display: none;
 }
 
 .dots {
@@ -227,5 +225,5 @@ input {
 
 
 <script>
-    export default { name: 'auth' }
+    export default { name: 'auth', created() {console.log(this.$route)} }
 </script>

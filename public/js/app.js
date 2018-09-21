@@ -1459,6 +1459,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         }
     }, {
         path: '/auth',
+        name: 'auth',
         component: __WEBPACK_IMPORTED_MODULE_4__views_auth_Auth_vue___default.a,
         beforeEnter: function beforeEnter(to, from, next) {
             document.title = "Stage Match - Auth";
@@ -1468,9 +1469,11 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
             next();
         },
         children: [{
+            name: 'auth',
             path: 'login',
             component: __WEBPACK_IMPORTED_MODULE_5__views_auth_Login_vue___default.a
         }, {
+            name: 'auth',
             path: 'register',
             component: __WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue___default.a
         }]
@@ -17058,7 +17061,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\ninput:focus, button:focus {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    outline: 0;\n}\nbutton.classic {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav {\r\n    position: fixed;\r\n    width: 100%;\r\n    bottom: 0;\n}\nnav > div.bg {\r\n    position: relative;\n}\nnav > div.bg > .circle {\r\n    background: white;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -34%);\r\n            transform: translate(-50%, -34%);\r\n    height: 80px;\r\n    width: 80px;\r\n    border-radius: 80px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu2 {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50.5px;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\n}\nnav > div.buttons {\r\n    position: relative;\r\n    width: 100%;\n}\nnav > div.buttons > button.circle {\r\n    width: 60px;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    height: 60px;\r\n    background: #03DAC6;\r\n    border-radius: 60px;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -114%);\r\n            transform: translate(-50%, -114%);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav > div.buttons > button.circle:hover {\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\n}\nnav > div.buttons > button.circle:focus {\r\n    background: #02c4b2;\n}\nnav > div.buttons > div.left {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: 100%;\r\n    position: relative;\r\n    top: 0px;\n}\nnav > div.buttons > div.left > button {\r\n    border: none;\r\n    background: none;\r\n    position: absolute;\r\n    left: 0;\r\n    top:0;\n}\r\n\r\n/* nav > button.side {\r\n    flex: 1;\r\n}\r\n\r\nnav > button.home {\r\n    height: 60px;\r\n    border-radius: 60px;\r\n    width: 60px;\r\n} */\r\n\r\n/* div#menu {\r\n    width: 60px; \r\n    height: 60px;\r\n    position: fixed;\r\n    right: 20px;\r\n    bottom: 20px;\r\n} */\r\n", ""]);
+exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\ninput:focus, button:focus {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    outline: 0;\n}\nbutton.classic {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav {\r\n    position: fixed;\r\n    width: 100%;\r\n    bottom: 0;\n}\nnav > div.bg {\r\n    position: relative;\n}\nnav > div.bg > .circle {\r\n    background: white;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -34%);\r\n            transform: translate(-50%, -34%);\r\n    height: 80px;\r\n    width: 80px;\r\n    border-radius: 80px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu2 {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50.5px;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\n}\nnav > div.buttons {\r\n    position: relative;\r\n    width: 100%;\n}\nnav > div.buttons button.circle {\r\n    width: 60px;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    height: 60px;\r\n    background: #03DAC6;\r\n    border-radius: 60px;\r\n    position: absolute;\r\n    left: 50%;\r\n    color:white;\r\n    padding-top: 5px;\r\n    -webkit-transform: translate(-50%, -114%);\r\n            transform: translate(-50%, -114%);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav > div.buttons > button.circle:hover {\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\n}\nnav > div.buttons > button.circle:focus {\r\n    background: #02c4b2;\n}\nnav > div.buttons > div.left {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: calc(50% - 40px);\r\n    position: absolute;\r\n    bottom: 0px;\r\n    left: 0;\r\n    height: 50px;\r\n    display: flex;\n}\nnav > div.buttons > div.right {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: calc(50% - 40px);\r\n    position: absolute;\r\n    bottom: 0px;\r\n    right: 0;\r\n    height: 50px;\r\n    display: flex;\n}\nnav > div.buttons > div.left button, \r\nnav > div.buttons > div.right button {\r\n    border: none;\r\n    background: none;\r\n    position: absolute;\r\n    left: 0;\r\n    top:0;\r\n    color: #03DAC6;\r\n    width: 100%;\r\n    height: 100%;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\n}\r\n\r\n/* nav > button.side {\r\n    flex: 1;\r\n}\r\n\r\nnav > button.home {\r\n    height: 60px;\r\n    border-radius: 60px;\r\n    width: 60px;\r\n} */\r\n\r\n/* div#menu {\r\n    width: 60px; \r\n    height: 60px;\r\n    position: fixed;\r\n    right: 20px;\r\n    bottom: 20px;\r\n} */\r\n", ""]);
 
 // exports
 
@@ -17293,6 +17296,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({ name: 'main-app' });
 
@@ -17307,7 +17335,54 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "container" }, [_c("router-view")], 1),
     _vm._v(" "),
-    _vm._m(0)
+    _vm.$route.name !== "auth"
+      ? _c("nav", [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "buttons" },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("router-link", { attrs: { to: "/" } }, [
+                _c("button", { staticClass: "circle" }, [
+                  _c("i", { staticClass: "material-icons" }, [
+                    _vm._v("filter_none")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "right" },
+                [
+                  _c("router-link", { attrs: { to: "/settings" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "item",
+                        on: {
+                          click: function($event) {
+                            _vm.alert("Please implement me")
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "material-icons" }, [
+                          _vm._v("settings")
+                        ])
+                      ]
+                    )
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -17315,25 +17390,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", [
-      _c("div", { staticClass: "bg" }, [
-        _c("div", { staticClass: "circle" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "menu" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "menu2" })
-      ]),
+    return _c("div", { staticClass: "bg" }, [
+      _c("div", { staticClass: "circle" }),
       _vm._v(" "),
-      _c("div", { staticClass: "buttons" }, [
-        _c("div", { staticClass: "left" }, [
-          _c("button", { staticClass: "item" }, [
-            _c("i", { staticClass: "material-icons" }, [_vm._v("settings")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "right" }),
-        _vm._v(" "),
-        _c("button", { staticClass: "circle" })
+      _c("div", { staticClass: "menu" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "menu2" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "left" }, [
+      _c("button", { staticClass: "item" }, [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("menu")])
       ])
     ])
   }
@@ -17434,7 +17505,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nhtml, body { height: 100%;\n}\nbody {\n  overflow: hidden;\n}\n#login, #register {\n    width: 100vw;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center\n}\n.container {\n    width: 100%;\n}\nspan.title {\n    letter-spacing: 2px;\n        display: block;\n        font-size: 23px;\n        margin-bottom: 40px;\n}\ninput {\n    -webkit-box-flex:1;\n        -ms-flex:1;\n            flex:1;\n    margin: 10px;\n    border-radius: 5px;\n    height: 20px;\n    font-size: 15px;\n    letter-spacing: 1.2px;\n    padding: 10px 15px;\n    border: solid 1px #eee;\n    -webkit-transition: 400ms;\n    transition: 400ms;\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\n#loading {\n    position: relative;\n    -webkit-animation: move_down 1s 1, move_up 1s 4s 1;\n            animation: move_down 1s 1, move_up 1s 4s 1;\n    display: none;\n}\n.dots {\n    position: absolute;\n    -webkit-transform: translate(-50%, 0);\n            transform: translate(-50%, 0);\n    left: 50%;\n    top: 30px;\n    z-index: 1000;\n}\n.dot {\n    top: 0;\n    display: inline-block;\n    margin-right: 15px;\n    left: 0;\n    width:15px;\n    height: 15px;\n    z-index: 999; \n    position: relative;\n    border-radius: 15px;\n    background: #018786;\n}\n.active {\n    z-index: 1000;\n    border-radius: 10px;\n    width: 15px;\n    position: absolute;\n    background: #03DAC6;\n    -webkit-animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n            animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n}\n@-webkit-keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@-webkit-keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@-webkit-keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@-webkit-keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n@keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n.dot:last-child {\n    margin-right: 0;\n}\n.ocean { \n  height: 30px;\n  width: 100%;\n  padding: 0 20px;\n  position:absolute;\n  top:-8px;\n  left:-8px;\n  background: #202124;\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg);\n}\n.wave {\n  background: url(" + escape(__webpack_require__(30)) + ") repeat-x; \n  position: absolute;\n  top: -195px;\n  width: 6400px;\n  height: 198px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n  -webkit-transform: translate3d(0, 0, 0);\n          transform: translate3d(0, 0, 0);\n}\n.wave:nth-of-type(2) {\n  top: -175px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n  opacity: 1;\n}\n@-webkit-keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@-webkit-keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n@keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n", ""]);
+exports.push([module.i, "\nhtml, body { height: 100%;\n}\nbody {\n  overflow: hidden;\n}\n#login, #register {\n    width: 100vw;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center\n}\n.container {\n    width: 100%;\n}\nspan.title {\n    letter-spacing: 2px;\n        display: block;\n        font-size: 23px;\n        margin-bottom: 40px;\n}\ninput {\n    -webkit-box-flex:1;\n        -ms-flex:1;\n            flex:1;\n    margin: 10px;\n    border-radius: 5px;\n    height: 20px;\n    font-size: 15px;\n    letter-spacing: 1.2px;\n    padding: 10px 15px;\n    border: solid 1px #eee;\n    -webkit-transition: 400ms;\n    transition: 400ms;\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\n#loading {\n    position: relative;\n}\n.dots {\n    position: absolute;\n    -webkit-transform: translate(-50%, 0);\n            transform: translate(-50%, 0);\n    left: 50%;\n    top: 30px;\n    z-index: 1000;\n}\n.dot {\n    top: 0;\n    display: inline-block;\n    margin-right: 15px;\n    left: 0;\n    width:15px;\n    height: 15px;\n    z-index: 999; \n    position: relative;\n    border-radius: 15px;\n    background: #018786;\n}\n.active {\n    z-index: 1000;\n    border-radius: 10px;\n    width: 15px;\n    position: absolute;\n    background: #03DAC6;\n    -webkit-animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n            animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n}\n@-webkit-keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@-webkit-keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@-webkit-keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@-webkit-keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n@keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n.dot:last-child {\n    margin-right: 0;\n}\n.ocean { \n  height: 30px;\n  width: 100%;\n  padding: 0 20px;\n  position:absolute;\n  top:-8px;\n  left:-8px;\n  background: #202124;\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg);\n}\n.wave {\n  background: url(" + escape(__webpack_require__(30)) + ") repeat-x; \n  position: absolute;\n  top: -195px;\n  width: 6400px;\n  height: 198px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n  -webkit-transform: translate3d(0, 0, 0);\n          transform: translate3d(0, 0, 0);\n}\n.wave:nth-of-type(2) {\n  top: -175px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n  opacity: 1;\n}\n@-webkit-keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@-webkit-keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n@keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n", ""]);
 
 // exports
 
@@ -17699,10 +17770,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
-/* harmony default export */ __webpack_exports__["default"] = ({ name: 'auth' });
+/* harmony default export */ __webpack_exports__["default"] = ({ name: 'auth', created: function created() {
+    console.log(this.$route);
+  }
+});
 
 /***/ }),
 /* 32 */
@@ -17809,7 +17881,8 @@ var axios = __webpack_require__(5);
   data: function data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      loading: false
     };
   },
 
@@ -17818,7 +17891,8 @@ var axios = __webpack_require__(5);
     login: function login() {
       var _this = this;
 
-      axios.post("http://159.65.199.115/api/auth/login", { "email": this.email, "password": this.password }).then(function (res) {
+      this.loading = true;
+      axios.post(window.location.origin + "/api/auth/login", { "email": this.email, "password": this.password }).then(function (res) {
         localStorage.setItem("accessToken", res.data.token);
         _this.$router.push('../');
       });
@@ -18720,7 +18794,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "login" } }, [
-    _vm._m(0),
+    _vm.loading
+      ? _c("div", { attrs: { id: "loading" } }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("span", { staticClass: "title" }, [_vm._v("Login")]),
     _vm._v(" "),
@@ -18736,6 +18816,15 @@ var render = function() {
       attrs: { type: "text", placeholder: "Email" },
       domProps: { value: _vm.email },
       on: {
+        keyup: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.login($event)
+        },
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -18757,6 +18846,15 @@ var render = function() {
       attrs: { type: "password", placeholder: "Password" },
       domProps: { value: _vm.password },
       on: {
+        keyup: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.login($event)
+        },
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -18783,24 +18881,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "loading" } }, [
-      _c("div", { staticClass: "dots" }, [
-        _c("div", { staticClass: "dot active" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dot" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dot" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dot" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dot" })
-      ]),
+    return _c("div", { staticClass: "dots" }, [
+      _c("div", { staticClass: "dot active" }),
       _vm._v(" "),
-      _c("div", { staticClass: "ocean" }, [
-        _c("div", { staticClass: "wave" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "wave" })
-      ])
+      _c("div", { staticClass: "dot" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "dot" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "dot" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "dot" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ocean" }, [
+      _c("div", { staticClass: "wave" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "wave" })
     ])
   }
 ]
@@ -18895,7 +18995,8 @@ var axios = __webpack_require__(5);
       email: "",
       password: "",
       confirm_password: "",
-      role: "1"
+      role: "1",
+      loading: false
     };
   },
 
@@ -18904,7 +19005,6 @@ var axios = __webpack_require__(5);
     register: function register() {
       var _this = this;
 
-      console.log(1);
       if (this.name === "" || this.email === "" || this.password === "" || this.confirm_password === "" || this.role === "") {
         console.log(this.name, this.email, this.password, this.confirm_password, this.role);
         return alert("Not all fields are filled in");
@@ -18913,7 +19013,8 @@ var axios = __webpack_require__(5);
       if (this.password !== this.confirm_password) {
         return alert("Passwords are not the same!");
       }
-      axios.post("http://159.65.199.115/api/auth/register", { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(function (res) {
+      this.loading = true;
+      axios.post(window.location.origin + "/api/auth/register", { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(function (res) {
         localStorage.setItem("accessToken", res.data.token);
         _this.$router.push('../');
       });
@@ -18947,6 +19048,15 @@ var render = function() {
       attrs: { type: "text", placeholder: "Name" },
       domProps: { value: _vm.name },
       on: {
+        keyup: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.register($event)
+        },
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -18968,6 +19078,15 @@ var render = function() {
       attrs: { type: "text", placeholder: "Email" },
       domProps: { value: _vm.email },
       on: {
+        keyup: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.register($event)
+        },
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -18986,9 +19105,18 @@ var render = function() {
           expression: "password"
         }
       ],
-      attrs: { type: "text", placeholder: "Password" },
+      attrs: { type: "password", placeholder: "Password" },
       domProps: { value: _vm.password },
       on: {
+        keyup: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.register($event)
+        },
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -19007,9 +19135,18 @@ var render = function() {
           expression: "confirm_password"
         }
       ],
-      attrs: { type: "text", placeholder: "Confirm Password" },
+      attrs: { type: "password", placeholder: "Confirm Password" },
       domProps: { value: _vm.confirm_password },
       on: {
+        keyup: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.register($event)
+        },
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -19163,7 +19300,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.card {\r\n        background: white;\r\n        border-radius: 20px;\r\n        padding: 20px 30px;\r\n        margin: 10px;\n}\ndiv.card > span.title {\r\n        letter-spacing: 2px;\r\n        display: block;\r\n        font-size: 23px;\r\n        margin-bottom: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -19187,15 +19324,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "index",
     created: function created() {
+        //Read claims
         this.claims = JSON.parse(atob(localStorage.getItem("accessToken").split(".")[1]));
+
+        //Set role in property
         if (this.claims.role === "1") this.role = "Student";else if (this.claims.role === "2") this.role = "Company";else this.role = "Admin";
     },
     data: function data() {
         return {
+            //Binding models
             claims: {},
             role: ""
         };
@@ -19221,21 +19364,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "main" } }, [
-    _vm._v("\n   This is the index "),
-    _c("br"),
-    _vm._v("Version: 0.01 (ÜBER ALPHA)\n\n   "),
-    this.claims.role === "3"
-      ? _c("button", { on: { click: _vm.admin } }, [_vm._v("Admin")])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("span", [_vm._v("Current user role: " + _vm._s(_vm.role) + " ")]),
-    _vm._v(" "),
-    _c("br"),
-    _c("br"),
-    _vm._v(" "),
-    _c("button", { on: { click: _vm.logout } }, [_vm._v("Log Out")])
+    _c("div", { staticClass: "card" }, [
+      _c("span", { staticClass: "title" }, [_vm._v("Index")]),
+      _vm._v(" "),
+      _c("strong", [_vm._v("Version:")]),
+      _vm._v(" 0.01 (ÜBER ALPHA)\n\n        "),
+      this.claims.role === "3"
+        ? _c("button", { on: { click: _vm.admin } }, [_vm._v("Admin")])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", [
+        _c("strong", [_vm._v("Current user role:")]),
+        _vm._v(" " + _vm._s(_vm.role) + " ")
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _c("br"),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.logout } }, [_vm._v("Log Out")])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -19334,7 +19483,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 20px;\n    padding: 20px 30px;\n}\ndiv.card > span.title {\n    letter-spacing: 2px;\n    display: block;\n    font-size: 23px;\n    margin-bottom: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 20px;\n    padding: 20px 30px;\n    margin: 10px;\n}\ndiv.card > span.title {\n    letter-spacing: 2px;\n    display: block;\n    font-size: 23px;\n    margin-bottom: 40px;\n}\n", ""]);
 
 // exports
 
@@ -19377,9 +19526,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "main" } }, [
       _c("div", { staticClass: "card" }, [
-        _c("span", { staticClass: "title" }, [_vm._v("Profile")]),
+        _c("span", { staticClass: "title" }, [_vm._v("Account Settings")]),
         _vm._v(" "),
-        _c("input", { attrs: { type: "text" } })
+        _c("span", [_vm._v("There are currently no settings available.")])
       ])
     ])
   }
@@ -19512,6 +19661,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 var axios = __webpack_require__(5);
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -19519,7 +19669,7 @@ var axios = __webpack_require__(5);
     created: function created() {
         var _this = this;
 
-        axios.get("http://159.65.199.115/api/admin/skill").then(function (res) {
+        axios.get(window.location.origin + "/api/admin/skill").then(function (res) {
             _this.skills = res.data;
         });
     },
@@ -19534,14 +19684,14 @@ var axios = __webpack_require__(5);
         remove: function remove(id, index) {
             var _this2 = this;
 
-            axios.delete("http://159.65.199.115/api/admin/skill/" + id).then(function (res) {
+            axios.delete(window.location.origin + "/api/admin/skill/" + id).then(function (res) {
                 _this2.skills.splice(index, 1);
             });
         },
         create: function create() {
             var _this3 = this;
 
-            axios.post("http://159.65.199.115/api/admin/skill", { "name": this.new_skill }).then(function (res) {
+            axios.post(window.location.origin + "/api/admin/skill", { "name": this.new_skill }).then(function (res) {
                 _this3.skills.push(res.data.result[0]);
                 _this3.new_skill = "";
             });
@@ -19561,10 +19711,16 @@ var render = function() {
     _c("div", { staticClass: "card" }, [
       _c("span", { staticClass: "title" }, [_vm._v("Admin ")]),
       _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Skills")]),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "skills" },
         [
+          this.skills.length === 0
+            ? _c("span", [_vm._v("There are no skills, add one!")])
+            : _vm._e(),
+          _vm._v(" "),
           _vm._l(this.skills, function(value, index) {
             return [
               _c("div", { key: value.id, staticClass: "skill" }, [
@@ -19588,6 +19744,7 @@ var render = function() {
         2
       ),
       _vm._v(" "),
+      _c("br"),
       _c("br"),
       _vm._v(" "),
       _c("span", { staticClass: "title" }, [_vm._v("Create Skill")]),

@@ -41,6 +41,7 @@ const router = new VueRouter({
         },
         {
             path: '/auth',
+            name: 'auth',
             component: Auth,
             beforeEnter: (to, from, next) => {
                 document.title = "Stage Match - Auth";
@@ -51,10 +52,12 @@ const router = new VueRouter({
             },
             children: [
                 {
+                    name: 'auth',
                     path: 'login',
                     component: Auth_login
                 },
                  {
+                    name: 'auth',
                      path: 'register',
                      component: Auth_register
                  }

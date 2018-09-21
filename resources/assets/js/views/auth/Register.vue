@@ -1,10 +1,10 @@
 <template>
   <div id="register">
     <span class="title">Register</span>
-    <input v-model="name" type="text" placeholder="Name">
-    <input v-model="email" type="text" placeholder="Email">
-    <input v-model="password" type="text" placeholder="Password">
-    <input v-model="confirm_password" type="text" placeholder="Confirm Password">
+    <input @keyup.enter="register" v-model="name" type="text" placeholder="Name">
+    <input @keyup.enter="register" v-model="email" type="text" placeholder="Email">
+    <input @keyup.enter="register" v-model="password" type="password" placeholder="Password">
+    <input @keyup.enter="register" v-model="confirm_password" type="password" placeholder="Confirm Password">
     <select v-model="role">
       <option value="1" selected="true">Student</option>
       <option value="2">Company</option>
@@ -27,13 +27,13 @@ export default {
       email: "",
       password: "",
       confirm_password: "",
-      role: "1"
+      role: "1",
+      loading: false
     }
   },
 
   methods: {
     register() {
-      console.log(1)
       if (this.name === "" || this.email === "" || this.password === "" || this.confirm_password === "" || this.role === "") {
         console.log(this.name, this.email, this.password, this.confirm_password, this.role)
         return alert("Not all fields are filled in");
@@ -42,7 +42,8 @@ export default {
       if (this.password !== this.confirm_password) {
         return alert("Passwords are not the same!");
       }
-      axios.post(`http://159.65.199.115/api/auth/register`, { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(res => {
+      this.loading = true;
+      axios.post(`${window.location.origin}/api/auth/register`, { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(res => {
         localStorage.setItem("accessToken", res.data.token);
         this.$router.push('../') 
       })

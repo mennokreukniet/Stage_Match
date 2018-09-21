@@ -1,9 +1,9 @@
 <template>
     <div id="main">
         <div class="card">
-            <span class="title">Profile</span>
+            <span class="title">Account Settings</span>
 
-            <input type="text">
+            <span>There are currently no settings available.</span>
         </div>
     </div>    
 </template>
@@ -19,7 +19,7 @@ export default {
         background: white;
         border-radius: 20px;
         padding: 20px 30px;
-        
+        margin: 10px;
     }
 
     div.card > span.title {

@@ -1,24 +1,8 @@
 <template>
     <div>
-        <!-- <h1>Vue Router Demo App</h1>
-
-        <p>
-            <router-link :to="{ name: 'home' }">Home</router-link> |
-            <router-link :to="{ name: 'hello' }">Hello World</router-link>
-        </p> -->
-
         <div class="container">
             <router-view></router-view>
-
-            <!-- <div class='box'>
-                <div class='wave -one'></div>
-                <div class='wave -two'></div>
-                <div class='wave -three'></div>
-
-            </div> -->
         </div>
-
-        <!-- <button id="menu">lol</button> -->
         <nav v-if="$route.name !== 'auth'">
             <div class="bg">
                 <div class="circle"></div>
@@ -36,13 +20,7 @@
                 <div class="right">
                     <router-link to="/settings"><button v-on:click="alert('Please implement me')" class="item"><i class="material-icons">settings</i></button></router-link>
                 </div>
-                
-                
             </div>
-            
-            <!-- <button class="side">test</button>
-            <button class="home">create</button>
-            <button class="side">lol</button> -->
         </nav>
     </div>
 </template>

@@ -794,6 +794,12 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(35);
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 var g;
@@ -818,12 +824,6 @@ try {
 
 module.exports = g;
 
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(35);
 
 /***/ }),
 /* 6 */
@@ -1439,6 +1439,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
         path: '/',
+        alias: '/index',
         component: __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue___default.a,
         beforeEnter: function beforeEnter(to, from, next) {
             document.title = "Stage Match - Index";
@@ -1482,7 +1483,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue___default.a,
         beforeEnter: function beforeEnter(to, from, next) {
             document.title = "Stage Match - Admin";
-            if (localStorage.getItem("accessToken") === null) {
+            var token = localStorage.getItem("accessToken");
+            console.log();
+            if (token === null || JSON.parse(atob(token.split(".")[1])).role !== "3") {
+
                 return next('/auth/login');
             } else {
                 next();
@@ -12488,7 +12492,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(16).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(16).setImmediate))
 
 /***/ }),
 /* 16 */
@@ -12558,7 +12562,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
 /* 17 */
@@ -12751,7 +12755,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(7)))
 
 /***/ }),
 /* 18 */
@@ -17875,7 +17879,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(5);
+var axios = __webpack_require__(4);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -17891,10 +17895,17 @@ var axios = __webpack_require__(5);
     login: function login() {
       var _this = this;
 
+      if (this.email === "" || this.password === "") {
+        return alert("Fields cannot be empty");
+      }
+
       this.loading = true;
       axios.post(window.location.origin + "/api/auth/login", { "email": this.email, "password": this.password }).then(function (res) {
         localStorage.setItem("accessToken", res.data.token);
         _this.$router.push('../');
+      }).catch(function (err) {
+        console.log(err);
+        _this.loading = false;
       });
     },
     register: function register() {
@@ -18999,7 +19010,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(5);
+var axios = __webpack_require__(4);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -19030,6 +19041,9 @@ var axios = __webpack_require__(5);
       axios.post(window.location.origin + "/api/auth/register", { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(function (res) {
         localStorage.setItem("accessToken", res.data.token);
         _this.$router.push('../');
+      }).catch(function (err) {
+        console.log(err);
+        _this.loading = false;
       });
     },
     login: function login() {
@@ -19555,7 +19569,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(5);
+var axios = __webpack_require__(4);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "settings",
@@ -19773,7 +19787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(5);
+var axios = __webpack_require__(4);
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "admin",
     created: function created() {

@@ -37,10 +37,17 @@ export default {
 
   methods: {
     login() {
+      if (this.email === "" || this.password === "") {
+        return alert("Fields cannot be empty");
+      }
+
       this.loading = true;
       axios.post(`${window.location.origin}/api/auth/login`, { "email": this.email, "password": this.password }).then(res => {
         localStorage.setItem("accessToken", res.data.token);
         this.$router.push('../') 
+      }).catch(err => {
+        console.log(err);
+        this.loading = false;
       })
     },
 

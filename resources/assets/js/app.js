@@ -19,6 +19,7 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
+            alias: '/index',
             component: Index,
             beforeEnter: (to, from, next) => {
                 document.title = "Stage Match - Index";
@@ -65,7 +66,10 @@ const router = new VueRouter({
             component: Admin,
             beforeEnter: (to, from, next) => {
                 document.title = "Stage Match - Admin";
-                if (localStorage.getItem("accessToken") === null) {
+                const token = localStorage.getItem("accessToken");
+                console.log()
+                if (token === null || JSON.parse(atob(token.split(".")[1])).role !== "3") {
+                    
                     return next('/auth/login');
                 } else {
                     next();

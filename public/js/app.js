@@ -1439,6 +1439,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
         path: '/',
+        alias: '/index',
         component: __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue___default.a,
         beforeEnter: function beforeEnter(to, from, next) {
             document.title = "Stage Match - Index";
@@ -1479,7 +1480,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue___default.a,
         beforeEnter: function beforeEnter(to, from, next) {
             document.title = "Stage Match - Admin";
-            if (localStorage.getItem("accessToken") === null) {
+            var token = localStorage.getItem("accessToken");
+            console.log();
+            if (token === null || JSON.parse(atob(token.split(".")[1])).role !== "3") {
+
                 return next('/auth/login');
             } else {
                 next();
@@ -17807,9 +17811,21 @@ var axios = __webpack_require__(5);
     login: function login() {
       var _this = this;
 
+<<<<<<< Updated upstream
       axios.post("http://localhost:8000/api/auth/login", { "email": this.email, "password": this.password }).then(function (res) {
+=======
+      if (this.email === "" || this.password === "") {
+        return alert("Fields cannot be empty");
+      }
+
+      this.loading = true;
+      axios.post(window.location.origin + "/api/auth/login", { "email": this.email, "password": this.password }).then(function (res) {
+>>>>>>> Stashed changes
         localStorage.setItem("accessToken", res.data.token);
         _this.$router.push('../');
+      }).catch(function (err) {
+        console.log(err);
+        _this.loading = false;
       });
     },
     register: function register() {
@@ -18905,6 +18921,9 @@ var axios = __webpack_require__(5);
       axios.post("http://localhost:8000/api/auth/register", { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(function (res) {
         localStorage.setItem("accessToken", res.data.token);
         _this.$router.push('../');
+      }).catch(function (err) {
+        console.log(err);
+        _this.loading = false;
       });
     },
     login: function login() {

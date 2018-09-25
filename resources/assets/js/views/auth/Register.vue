@@ -45,6 +45,9 @@ export default {
       axios.post(`http://localhost:8000/api/auth/register`, { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(res => {
         localStorage.setItem("accessToken", res.data.token);
         this.$router.push('../') 
+      }).catch(err => {
+        console.log(err);
+        this.loading = false;
       })
     },
 

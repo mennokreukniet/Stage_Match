@@ -36,16 +36,12 @@ export default {
 
   methods: {
     login() {
-<<<<<<< Updated upstream
-      axios.post(`http://localhost:8000/api/auth/login`, { "email": this.email, "password": this.password }).then(res => {
-=======
       if (this.email === "" || this.password === "") {
         return alert("Fields cannot be empty");
       }
 
       this.loading = true;
       axios.post(`${window.location.origin}/api/auth/login`, { "email": this.email, "password": this.password }).then(res => {
->>>>>>> Stashed changes
         localStorage.setItem("accessToken", res.data.token);
         this.$router.push('../') 
       }).catch(err => {

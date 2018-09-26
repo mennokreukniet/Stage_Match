@@ -7,6 +7,10 @@ use App\Skill;
 
 class SkillsController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function createSkill(Request $request){
     	$skill = new Skill;
 
@@ -21,9 +25,13 @@ class SkillsController extends Controller
 		}
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function editSkill(Request $request){
-        $skill = Skill::find($request->name);
-        dd($skill);
+        $skill = Skill::find($request->id);
+
         $skill->name = $request->name;
 
         $edited = $skill->save();
@@ -35,6 +43,10 @@ class SkillsController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function deleteSkill(Request $request){
     	$destroyed = Skill::destroy($request->id);
 
@@ -45,6 +57,10 @@ class SkillsController extends Controller
     	}
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function getSkill(Request $request){
 
     	$skill = Skill::find($request->id);
@@ -56,6 +72,10 @@ class SkillsController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function getAll(Request $request){
 
 		$skills = Skill::all();

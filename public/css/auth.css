@@ -1,0 +1,104 @@
+html {
+  overflow: auto;
+}
+
+div.product-card {
+  background: url(/images/stockphoto_students.png?68d1548bfdfb16d680d9130a216d6e29);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  min-width: 100vh;
+  text-align: center;
+}
+
+div.product-card div.overlay {
+  background: #0079bf;
+  height: 100%;
+  width: 100%;
+  opacity: 0.7;
+}
+
+div.product-card div.content {
+  position: absolute;
+  top: 0;
+  padding: 70px 0;
+  height: 500px;
+  width: 100%;
+}
+
+div.product-card div.content span.appname {
+  display: block;
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+  font-size: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+  letter-spacing: 1.5px;
+}
+
+div.product-card div.content span.title {
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+  font-size: 30px;
+  display: block;
+  width: 100%;
+  margin-bottom: 80px;
+  letter-spacing: 1.5px;
+}
+
+div.product-card div.content span.register {
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+  font-size: 20px;
+  width: 100%;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 30px;
+}
+
+div.product-card div.content span.login {
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+  font-size: 15px;
+  width: 100%;
+  letter-spacing: 1.5px;
+  display: block;
+  font-weight: thin;
+  margin-top: 120px;
+}
+
+div.product-card div.content span.login a {
+  text-decoration: underline;
+  cursor: pointer;
+  color: white;
+}
+
+div.product-card div.content button.register {
+  padding: 10px 30px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  height: 40px;
+  letter-spacing: 1.5px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  background: #3ed98d;
+  border-radius: 50px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+
+.card1 {
+  /* background:linear-gradient(to bottom right, #131433, #1C1E4C); */
+  background: #0079bf;
+  height: 500px;
+  width: 100%;
+  margin-bottom: -5px;
+}
+

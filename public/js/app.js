@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,8 +70,8 @@
 "use strict";
 
 
-var bind = __webpack_require__(8);
-var isBuffer = __webpack_require__(36);
+var bind = __webpack_require__(9);
+var isBuffer = __webpack_require__(39);
 
 /*global toString:true*/
 
@@ -584,7 +584,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(23)
+var listToStyles = __webpack_require__(24)
 
 /*
 type StyleObject = {
@@ -796,7 +796,7 @@ function applyToTag (styleElement, obj) {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(35);
+module.exports = __webpack_require__(38);
 
 /***/ }),
 /* 5 */
@@ -826,14 +826,15 @@ module.exports = g;
 
 
 /***/ }),
-/* 6 */
+/* 6 */,
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(38);
+var normalizeHeaderName = __webpack_require__(41);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -849,10 +850,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   }
   return adapter;
 }
@@ -927,10 +928,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1120,7 +1121,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1138,19 +1139,19 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(39);
-var buildURL = __webpack_require__(41);
-var parseHeaders = __webpack_require__(42);
-var isURLSameOrigin = __webpack_require__(43);
-var createError = __webpack_require__(10);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(44);
+var settle = __webpack_require__(42);
+var buildURL = __webpack_require__(44);
+var parseHeaders = __webpack_require__(45);
+var isURLSameOrigin = __webpack_require__(46);
+var createError = __webpack_require__(11);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(47);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -1247,7 +1248,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(45);
+      var cookies = __webpack_require__(48);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -1325,13 +1326,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(40);
+var enhanceError = __webpack_require__(43);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -1350,7 +1351,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1362,7 +1363,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1388,36 +1389,37 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(14);
-module.exports = __webpack_require__(72);
+__webpack_require__(15);
+__webpack_require__(75);
+module.exports = __webpack_require__(76);
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_i18n__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_App__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_i18n__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_App__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__views_App__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_auth_Auth_vue__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_auth_Auth_vue__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_auth_Auth_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__views_auth_Auth_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_auth_Login_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_auth_Login_vue__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_auth_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_auth_Login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_auth_Register_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_index_Index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue__);
 
 
@@ -1447,6 +1449,12 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
                 return next('/auth/login');
             }
             next();
+        }
+    }, {
+        path: '/logout',
+        beforeEnter: function beforeEnter(to, from, next) {
+            localStorage.removeItem("accessToken");
+            next('/auth/login');
         }
     }, {
         path: '/settings',
@@ -1497,28 +1505,41 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 
 var translations = {
     en: {
-        email: "Email",
-        password: "Password",
-        confirm_password: "Confirm password",
-        login: "Login",
-        name: "Name",
-        sign_up: "Sign up"
+        app: {
+            name: "StageMatch"
+        },
+        auth: {
+            product: {
+                title: "Finding an internship was never this easy",
+                register_message: "Why are you waiting? It is free!",
+                register_button: "Create an account"
+            },
 
+            already_using: "Already a member?",
+            sign_in: "Log in"
+        }
     },
     nl: {
-        email: "Email",
-        password: "Wachtwoord",
-        confirm_password: "Bevestig wachtwoord",
-        login: "Inloggen",
-        name: "Naam",
-        sign_up: "Account aanmaken"
+        app: {
+            name: "StageMatch"
+        },
+        auth: {
+            product: {
+                title: "Een stage vinden was nooit zo simpel",
+                register_message: "Dus, waar wacht je op? Het is gratis!",
+                register_button: "Creeer een account"
+            },
+
+            already_using: "Ben je al lid?",
+            sign_in: "Log in"
+        }
     }
 };
 
 var i18n = new __WEBPACK_IMPORTED_MODULE_2_vue_i18n__["a" /* default */]({
-    locale: 'nl', // set locale
+    locale: 'en', // set locale
     fallbackLocale: 'en',
-    translations: translations // set locale messages
+    messages: translations // set locale messages
 });
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
@@ -1529,7 +1550,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 });
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12492,10 +12513,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(16).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(17).setImmediate))
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -12551,7 +12572,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(17);
+__webpack_require__(18);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -12565,7 +12586,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -12755,10 +12776,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(8)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15388,7 +15409,7 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16980,19 +17001,19 @@ VueI18n.version = '8.1.0';
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(21)
+  __webpack_require__(22)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(24)
+var __vue_script__ = __webpack_require__(25)
 /* template */
-var __vue_template__ = __webpack_require__(25)
+var __vue_template__ = __webpack_require__(26)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17031,13 +17052,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(22);
+var content = __webpack_require__(23);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17057,7 +17078,7 @@ if(false) {
 }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -17065,13 +17086,13 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\ninput:focus, button:focus {\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n    outline: 0;\n}\nbutton.classic {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav {\r\n    position: fixed;\r\n    width: 100%;\r\n    bottom: 0;\n}\nnav > div.bg {\r\n    position: relative;\n}\nnav > div.bg > .circle {\r\n    background: white;\r\n    position: absolute;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, -34%);\r\n            transform: translate(-50%, -34%);\r\n    height: 80px;\r\n    width: 80px;\r\n    border-radius: 80px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50px;\r\n    border: solid 1px #bebebe;\n}\nnav > div.bg > div.menu2 {\r\n    background: white;\r\n    width: 100%;\r\n    height: 50.5px;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\n}\nnav > div.buttons {\r\n    position: relative;\r\n    width: 100%;\n}\nnav > div.buttons button.circle {\r\n    width: 60px;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    height: 60px;\r\n    background: #03DAC6;\r\n    border-radius: 60px;\r\n    position: absolute;\r\n    left: 50%;\r\n    color:white;\r\n    padding-top: 5px;\r\n    -webkit-transform: translate(-50%, -114%);\r\n            transform: translate(-50%, -114%);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav > div.buttons > button.circle:hover {\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\r\n    -webkit-box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);\n}\nnav > div.buttons > button.circle:focus {\r\n    background: #02c4b2;\n}\nnav > div.buttons > div.left {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: calc(50% - 40px);\r\n    position: absolute;\r\n    bottom: 0px;\r\n    left: 0;\r\n    height: 50px;\r\n    display: flex;\n}\nnav > div.buttons > div.right {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: calc(50% - 40px);\r\n    position: absolute;\r\n    bottom: 0px;\r\n    right: 0;\r\n    height: 50px;\r\n    display: flex;\n}\nnav > div.buttons > div.left button, \r\nnav > div.buttons > div.right button {\r\n    border: none;\r\n    background: none;\r\n    position: absolute;\r\n    left: 0;\r\n    top:0;\r\n    color: #03DAC6;\r\n    width: 100%;\r\n    height: 100%;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\n}\r\n\r\n/* nav > button.side {\r\n    flex: 1;\r\n}\r\n\r\nnav > button.home {\r\n    height: 60px;\r\n    border-radius: 60px;\r\n    width: 60px;\r\n} */\r\n\r\n/* div#menu {\r\n    width: 60px; \r\n    height: 60px;\r\n    position: fixed;\r\n    right: 20px;\r\n    bottom: 20px;\r\n} */\r\n", ""]);
+exports.push([module.i, "\n* {\r\nmargin: 0; padding: 0;\n}\nhtml {\r\n  background: #eeeeee;\r\n  font-family: 'Roboto', sans-serif;\n}\ninput {\r\n    -webkit-box-flex:1;\r\n        -ms-flex:1;\r\n            flex:1;\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    height: 20px;\r\n    font-size: 15px;\r\n    letter-spacing: 1.2px;\r\n    padding: 10px 15px;\r\n    border: solid 1px #eee;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\ninput:hover, button:hover {\r\n    /* box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08); */\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\ninput:focus, button:focus {\r\n    /* box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08); */\r\n    outline: 0;\n}\nbutton.classic {\r\n    border-radius: 5px;\r\n    height: 40px;\r\n    margin: 10px;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    font-size: 17px;\r\n    color: white;\r\n    letter-spacing: 2px;\r\n    background: #23a6d5;\r\n    border: none;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    -webkit-transition: 400ms;\r\n    transition: 400ms;\n}\nnav {\r\n    position: fixed;\r\n    width: 100%;\r\n    bottom: 0;\r\n    height: 50px;\r\n    background: white;\n}\nnav > div.center {\r\n    -webkit-transform: translate(-50%, -33%);\r\n            transform: translate(-50%, -33%);\r\n    position: absolute;\r\n    left: 50%;\n}\nnav > div.center button {\r\n    background: #03DAC6;\r\n    border: none;\r\n    width: 60px;\r\n    height: 60px;\r\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\r\n    border-radius: 60px;\r\n    padding-top: 5px;\r\n    color:white;\n}\nnav > div.left {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: calc(50% - 40px);\r\n    position: absolute;\r\n    bottom: 0px;\r\n    left: 0;\r\n    height: 50px;\n}\nnav > div.right {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: calc(50% - 40px);\r\n    position: absolute;\r\n    bottom: 0px;\r\n    right: 0;\r\n    height: 50px;\n}\nnav > div.left button.primary, \r\nnav > div.right button.primary {\r\n    display: unset\n}\nnav > div.left button, \r\nnav > div.right button {\r\n    border: none;\r\n    background: none;\r\n    position: absolute;\r\n    left: 0;\r\n    top:0;\r\n    display: none;\r\n    width: 100%;\r\n    height: 100%;\r\n    color: #03DAC6;\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\nnav > div.left button:hover, \r\nnav > div.right button:hover {\r\n    background: #f4f4f4;\r\n    -webkit-transition: 200ms;\r\n    transition: 200ms;\n}\nnav > div.left button.router-link-active, \r\nnav > div.right button.router-link-active {\r\n    background: #eeeeee;\n}\nnav > div.left button.router-link-active > i, \r\nnav > div.right button.router-link-active > i {\r\n    color: #03DAC6;\n}\n@media only screen and (min-width: 600px) {\nnav {\r\n        position: fixed;\r\n        width: 80px;\r\n        overflow: hidden;\r\n        top: 0;\r\n        left: 0;\r\n        height: 100%;\r\n        background: white;\r\n        display: block;\r\n        /* background: #043145; */\n}\nnav > div.left,\r\n    nav > div.right {\r\n        width: 50px;\r\n        position: relative;\r\n        top: 10px;\r\n        left: 20px;\r\n        height: 50px;\n}\nnav > div.right {\r\n        height: 100%;\r\n        margin-top: 20px;\r\n        display: inline-block;\n}\nnav > div.center {\r\n        -webkit-box-ordinal-group: 3;\r\n            -ms-flex-order: 2;\r\n                order: 2;\r\n        -webkit-transform: translate(0,0);\r\n                transform: translate(0,0);\r\n        position: relative;\r\n        height: 50px;\r\n        width: 50px;\r\n        left: 15px;\r\n        top: 0px;\r\n        margin-top: 20px;\n}\nnav > div.center button {\r\n        width: 50px;\r\n        height: 50px;\n}\nnav > div.center button i {\r\n        font-size: 20px;\n}\nnav > div.left button, \r\n    nav > div.right button {\r\n        border: none;\r\n        background: none;\r\n        color: #018786;\r\n        max-width: 40px;\r\n        position: relative;\r\n        height: 40px;\r\n        display: unset;\r\n        padding-top: 3px;\r\n        margin-bottom: 15px;\r\n        border-radius: 40px;\n}\nnav > div.left button > i, \r\n    nav > div.right button > i { \r\n        font-size: 20px;\n}\n}\r\n\r\n/* nav > button.side {\r\n    flex: 1;\r\n}\r\n\r\nnav > button.home {\r\n    height: 60px;\r\n    border-radius: 60px;\r\n    width: 60px;\r\n} */\r\n\r\n/* div#menu {\r\n    width: 60px; \r\n    height: 60px;\r\n    position: fixed;\r\n    right: 20px;\r\n    bottom: 20px;\r\n} */\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 /**
@@ -17104,11 +17125,52 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -17307,7 +17369,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({ name: 'main-app' });
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -17323,43 +17385,45 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "buttons" },
+            { staticClass: "center" },
             [
-              _vm._m(1),
-              _vm._v(" "),
               _c("router-link", { attrs: { to: "/" } }, [
                 _c("button", { staticClass: "circle" }, [
                   _c("i", { staticClass: "material-icons" }, [
                     _vm._v("filter_none")
                   ])
                 ])
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "right" },
+            [
+              _c("router-link", { attrs: { tag: "button", to: "/foo" } }, [
+                _c("i", { staticClass: "material-icons" }, [_vm._v("star")])
               ]),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "right" },
+                "router-link",
+                {
+                  staticClass: "primary",
+                  attrs: { tag: "button", to: "/settings" }
+                },
                 [
-                  _c("router-link", { attrs: { to: "/settings" } }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "item",
-                        on: {
-                          click: function($event) {
-                            _vm.alert("Please implement me")
-                          }
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "material-icons" }, [
-                          _vm._v("settings")
-                        ])
-                      ]
-                    )
+                  _c("i", { staticClass: "material-icons" }, [
+                    _vm._v("settings")
                   ])
-                ],
-                1
-              )
+                ]
+              ),
+              _vm._v(" "),
+              _c("router-link", { attrs: { tag: "button", to: "/logout" } }, [
+                _c("i", { staticClass: "material-icons" }, [
+                  _vm._v("power_settings_new")
+                ])
+              ])
             ],
             1
           )
@@ -17372,20 +17436,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bg" }, [
-      _c("div", { staticClass: "circle" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "menu" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "menu2" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "left" }, [
-      _c("button", { staticClass: "item" }, [
+      _c("button", { staticClass: "primary" }, [
         _c("i", { staticClass: "material-icons" }, [_vm._v("menu")])
       ])
     ])
@@ -17401,19 +17453,19 @@ if (false) {
 }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(27)
+  __webpack_require__(28)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(31)
+var __vue_script__ = __webpack_require__(30)
 /* template */
-var __vue_template__ = __webpack_require__(32)
+var __vue_template__ = __webpack_require__(35)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17452,13 +17504,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(28);
+var content = __webpack_require__(29);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17478,50 +17530,21 @@ if(false) {
 }
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(29);
 exports = module.exports = __webpack_require__(2)(false);
 // imports
-
+exports.push([module.i, "@import url(/css/auth.css);", ""]);
 
 // module
-exports.push([module.i, "\nhtml, body { height: 100%;\n}\nbody {\n  overflow: hidden;\n}\n#login, #register {\n    width: 100vw;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center\n}\n.container {\n    width: 100%;\n}\nspan.title {\n    letter-spacing: 2px;\n        display: block;\n        font-size: 23px;\n        margin-bottom: 40px;\n}\ninput {\n    -webkit-box-flex:1;\n        -ms-flex:1;\n            flex:1;\n    margin: 10px;\n    border-radius: 5px;\n    height: 20px;\n    font-size: 15px;\n    letter-spacing: 1.2px;\n    padding: 10px 15px;\n    border: solid 1px #eee;\n    -webkit-transition: 400ms;\n    transition: 400ms;\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);\n}\n#loading {\n    position: relative;\n}\n.dots {\n    position: absolute;\n    -webkit-transform: translate(-50%, 0);\n            transform: translate(-50%, 0);\n    left: 50%;\n    top: 30px;\n    z-index: 1000;\n}\n.dot {\n    top: 0;\n    display: inline-block;\n    margin-right: 15px;\n    left: 0;\n    width:15px;\n    height: 15px;\n    z-index: 999; \n    position: relative;\n    border-radius: 15px;\n    background: #018786;\n}\n.active {\n    z-index: 1000;\n    border-radius: 10px;\n    width: 15px;\n    position: absolute;\n    background: #03DAC6;\n    -webkit-animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n            animation: dot_size 3.5s infinite, dot_move 3.5s infinite;\n}\n@-webkit-keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@keyframes move_down {\n0% {\n        top: -190px;\n}\n100% {\n        top: 0px;\n}\n}\n@-webkit-keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@keyframes move_up {\n0% {\n        top: 0px;\n}\n100% {\n        top: -190px;\n}\n}\n@-webkit-keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@keyframes dot_size {\n0% {\n        width: 15px;\n}\n12.5% {\n        width: 50px;\n}\n25% {\n        width: 15px;\n}\n37.5% {\n        width: 50px;\n}\n50% {\n        width: 15px;\n}\n62.5% {\n        width: 50px;\n}\n75% {\n        width: 15px;\n}\n87.5% {\n        width: 117px;\n}\n100% {\n        width: 15px;\n}\n}\n@-webkit-keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n@keyframes dot_move {\n0% {\n        margin-left: 0px;\n}\n12.5% {\n        margin-left: 0px;\n}\n25% {\n        margin-left: 35px;\n}\n37.5% {\n        margin-left: 35px;\n}\n50% {\n        margin-left: 68px;\n}\n62.5% {\n        margin-left: 68px;\n}\n75% {\n        margin-left: 102px;\n}\n87.5% {\n        margin-left: 0px;\n}\n100% {\n        margin-left: 0px;\n}\n}\n.dot:last-child {\n    margin-right: 0;\n}\n.ocean { \n  height: 30px;\n  width: 100%;\n  padding: 0 20px;\n  position:absolute;\n  top:-8px;\n  left:-8px;\n  background: #202124;\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg);\n}\n.wave {\n  background: url(" + escape(__webpack_require__(30)) + ") repeat-x; \n  position: absolute;\n  top: -195px;\n  width: 6400px;\n  height: 198px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;\n  -webkit-transform: translate3d(0, 0, 0);\n          transform: translate3d(0, 0, 0);\n}\n.wave:nth-of-type(2) {\n  top: -175px;\n  -webkit-animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n          animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;\n  opacity: 1;\n}\n@-webkit-keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@keyframes wave {\n0% {\n    margin-left: 0;\n}\n100% {\n    margin-left: -1600px;\n}\n}\n@-webkit-keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n@keyframes swell {\n0%, 100% {\n    -webkit-transform: translate3d(0,-25px,0);\n            transform: translate3d(0,-25px,0);\n}\n50% {\n    -webkit-transform: translate3d(0,5px,0);\n            transform: translate3d(0,5px,0);\n}\n}\n", ""]);
+exports.push([module.i, "\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 29 */
-/***/ (function(module, exports) {
-
-module.exports = function escape(url) {
-    if (typeof url !== 'string') {
-        return url
-    }
-    // If url is already wrapped in quotes, remove them
-    if (/^['"].*['"]$/.test(url)) {
-        url = url.slice(1, -1);
-    }
-    // Should url be wrapped?
-    // See https://drafts.csswg.org/css-values-3/#urls
-    if (/["'() \t\n]/.test(url)) {
-        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
-    }
-
-    return url
-}
-
-
-/***/ }),
 /* 30 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/wave.svg?2b33716939eb71285297b34d20d2cb65";
-
-/***/ }),
-/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17551,222 +17574,75 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
-/* harmony default export */ __webpack_exports__["default"] = ({ name: 'auth', created: function created() {
-    console.log(this.$route);
-  }
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'auth',
+    created: function created() {
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    }
 });
 
 /***/ }),
-/* 32 */
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("router-view")
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "product-card" }, [
+      _c("div", { staticClass: "overlay" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "content" },
+        [
+          _c("span", { staticClass: "appname" }, [
+            _vm._v(_vm._s(_vm.$t("app.name")) + ".")
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "title" }, [
+            _vm._v(_vm._s(_vm.$t("auth.product.title")) + ".")
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "register" }, [
+            _vm._v(_vm._s(_vm.$t("auth.product.register_message")))
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "register",
+              attrs: { tag: "button", to: "/auth/register" }
+            },
+            [_vm._v(_vm._s(_vm.$t("auth.product.register_button")))]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            { staticClass: "login" },
+            [
+              _vm._v(_vm._s(_vm.$t("auth.already_using")) + " "),
+              _c("router-link", { attrs: { to: "/auth/login" } }, [
+                _vm._v(_vm._s(_vm.$t("auth.sign_in")) + ".")
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card1" })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -17779,15 +17655,15 @@ if (false) {
 }
 
 /***/ }),
-/* 33 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(34)
+var __vue_script__ = __webpack_require__(37)
 /* template */
-var __vue_template__ = __webpack_require__(53)
+var __vue_template__ = __webpack_require__(56)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17826,7 +17702,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 34 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17893,16 +17769,16 @@ var axios = __webpack_require__(4);
 });
 
 /***/ }),
-/* 35 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(8);
-var Axios = __webpack_require__(37);
-var defaults = __webpack_require__(6);
+var bind = __webpack_require__(9);
+var Axios = __webpack_require__(40);
+var defaults = __webpack_require__(7);
 
 /**
  * Create an instance of Axios
@@ -17935,15 +17811,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(12);
-axios.CancelToken = __webpack_require__(51);
-axios.isCancel = __webpack_require__(11);
+axios.Cancel = __webpack_require__(13);
+axios.CancelToken = __webpack_require__(54);
+axios.isCancel = __webpack_require__(12);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(52);
+axios.spread = __webpack_require__(55);
 
 module.exports = axios;
 
@@ -17952,7 +17828,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports) {
 
 /*!
@@ -17979,16 +17855,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(46);
-var dispatchRequest = __webpack_require__(47);
+var InterceptorManager = __webpack_require__(49);
+var dispatchRequest = __webpack_require__(50);
 
 /**
  * Create a new instance of Axios
@@ -18065,7 +17941,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18084,13 +17960,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(11);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -18117,7 +17993,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18145,7 +18021,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18218,7 +18094,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18278,7 +18154,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18353,7 +18229,7 @@ module.exports = (
 
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18396,7 +18272,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18456,7 +18332,7 @@ module.exports = (
 
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18515,18 +18391,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(48);
-var isCancel = __webpack_require__(11);
-var defaults = __webpack_require__(6);
-var isAbsoluteURL = __webpack_require__(49);
-var combineURLs = __webpack_require__(50);
+var transformData = __webpack_require__(51);
+var isCancel = __webpack_require__(12);
+var defaults = __webpack_require__(7);
+var isAbsoluteURL = __webpack_require__(52);
+var combineURLs = __webpack_require__(53);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -18608,7 +18484,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18635,7 +18511,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18656,7 +18532,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 50 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18677,13 +18553,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(12);
+var Cancel = __webpack_require__(13);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -18741,7 +18617,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18775,7 +18651,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -18903,15 +18779,15 @@ if (false) {
 }
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(55)
+var __vue_script__ = __webpack_require__(58)
 /* template */
-var __vue_template__ = __webpack_require__(56)
+var __vue_template__ = __webpack_require__(59)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -18950,7 +18826,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19031,7 +18907,7 @@ var axios = __webpack_require__(4);
 });
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -19255,19 +19131,19 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(58)
+  __webpack_require__(61)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(60)
+var __vue_script__ = __webpack_require__(63)
 /* template */
-var __vue_template__ = __webpack_require__(61)
+var __vue_template__ = __webpack_require__(64)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19306,13 +19182,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(59);
+var content = __webpack_require__(62);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -19332,7 +19208,7 @@ if(false) {
 }
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -19346,7 +19222,7 @@ exports.push([module.i, "\n.card {\r\n        background: white;\r\n        bord
 
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19396,7 +19272,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -19438,19 +19314,19 @@ if (false) {
 }
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(63)
+  __webpack_require__(66)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(65)
+var __vue_script__ = __webpack_require__(68)
 /* template */
-var __vue_template__ = __webpack_require__(66)
+var __vue_template__ = __webpack_require__(69)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19489,13 +19365,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(64);
+var content = __webpack_require__(67);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -19515,7 +19391,7 @@ if(false) {
 }
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -19529,7 +19405,7 @@ exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 2
 
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19577,7 +19453,7 @@ var axios = __webpack_require__(4);
 });
 
 /***/ }),
-/* 66 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -19645,19 +19521,19 @@ if (false) {
 }
 
 /***/ }),
-/* 67 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(68)
+  __webpack_require__(71)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(70)
+var __vue_script__ = __webpack_require__(73)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(74)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19696,13 +19572,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 68 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(69);
+var content = __webpack_require__(72);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -19722,7 +19598,7 @@ if(false) {
 }
 
 /***/ }),
-/* 69 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -19736,7 +19612,7 @@ exports.push([module.i, "\n.card {\n    background: white;\n    border-radius: 2
 
 
 /***/ }),
-/* 70 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19802,7 +19678,7 @@ var axios = __webpack_require__(4);
 });
 
 /***/ }),
-/* 71 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -19899,7 +19775,13 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 75 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 76 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

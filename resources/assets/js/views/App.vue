@@ -4,22 +4,17 @@
             <router-view></router-view>
         </div>
         <nav v-if="$route.name !== 'auth'">
-            <div class="bg">
-                <div class="circle"></div>
-                <div class="menu"></div>
-                <div class="menu2"></div>
+            <div class="left">
+                <button class="primary"><i class="material-icons">menu</i></button>
             </div>
+            <div class="center">
+                <router-link to="/"><button class="circle"><i class="material-icons">filter_none</i></button></router-link>
+            </div>
+            <div class="right">
+                <router-link tag="button" to="/foo"><i class="material-icons">star</i></router-link>
 
-            <div class="buttons">
-                <div class="left">
-                    <button class="item"><i class="material-icons">menu</i></button>
-                </div>
-                <router-link to="/">
-                    <button class="circle"><i class="material-icons">filter_none</i></button>
-                </router-link>
-                <div class="right">
-                    <router-link to="/settings"><button v-on:click="alert('Please implement me')" class="item"><i class="material-icons">settings</i></button></router-link>
-                </div>
+                <router-link class="primary" tag="button" to="/settings"><i class="material-icons">settings</i></router-link>
+                <router-link tag="button" to="/logout"><i class="material-icons">power_settings_new</i></router-link>
             </div>
         </nav>
     </div>
@@ -49,12 +44,12 @@ input {
 }
 
 input:hover, button:hover {
-    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+    /* box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08); */
     transition: 200ms;
 }
 
 input:focus, button:focus {
-    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+    /* box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08); */
     outline: 0;
 }
 
@@ -76,101 +71,147 @@ nav {
     position: fixed;
     width: 100%;
     bottom: 0;
-}
-
-nav > div.bg {
-    position: relative;
-}
-
-nav > div.bg > .circle {
-    background: white;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -34%);
-    height: 80px;
-    width: 80px;
-    border-radius: 80px;
-    border: solid 1px #bebebe;
-}
-
-nav > div.bg > div.menu {
-    background: white;
-    width: 100%;
     height: 50px;
-    border: solid 1px #bebebe;
-}
-
-nav > div.bg > div.menu2 {
     background: white;
-    width: 100%;
-    height: 50.5px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
 }
 
-nav > div.buttons {
-    position: relative;
-    width: 100%;
-}
-
-nav > div.buttons button.circle {
-    width: 60px;
-    border: none;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-    height: 60px;
-    background: #03DAC6;
-    border-radius: 60px;
+nav > div.center {
+    transform: translate(-50%, -33%);
     position: absolute;
     left: 50%;
-    color:white;
+}
+
+nav > div.center button {
+    background: #03DAC6;
+    border: none;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border-radius: 60px;
     padding-top: 5px;
-    transform: translate(-50%, -114%);
-    transition: 400ms;
+    color:white;
 }
 
-
-nav > div.buttons > button.circle:hover {
-    transition: 400ms;
-    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
-}
-
-nav > div.buttons > button.circle:focus {
-    background: #02c4b2;
-}
-
-nav > div.buttons > div.left {
+nav > div.left {
     display: flex;
     width: calc(50% - 40px);
     position: absolute;
     bottom: 0px;
     left: 0;
     height: 50px;
-    display: flex;
 }
 
-nav > div.buttons > div.right {
+nav > div.right {
     display: flex;
     width: calc(50% - 40px);
     position: absolute;
     bottom: 0px;
     right: 0;
     height: 50px;
-    display: flex;
 }
 
+nav > div.left button.primary, 
+nav > div.right button.primary {
+    display: unset
+}
 
-nav > div.buttons > div.left button, 
-nav > div.buttons > div.right button {
+nav > div.left button, 
+nav > div.right button {
     border: none;
     background: none;
     position: absolute;
     left: 0;
     top:0;
-    color: #03DAC6;
+    display: none;
     width: 100%;
     height: 100%;
+    color: #03DAC6;
     flex: 1;
+    transition: 200ms;
+}
+
+nav > div.left button:hover, 
+nav > div.right button:hover {
+    background: #f4f4f4;
+    transition: 200ms;
+}
+
+nav > div.left button.router-link-active, 
+nav > div.right button.router-link-active {
+    background: #eeeeee;
+}
+
+nav > div.left button.router-link-active > i, 
+nav > div.right button.router-link-active > i {
+    color: #03DAC6;
+}
+
+@media only screen and (min-width: 600px) {
+    nav {
+        position: fixed;
+        width: 80px;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: white;
+        display: block;
+        /* background: #043145; */
+    }
+
+    nav > div.left,
+    nav > div.right {
+        width: 50px;
+        position: relative;
+        top: 10px;
+        left: 20px;
+        height: 50px;
+    }
+
+    nav > div.right {
+        height: 100%;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+    nav > div.center {
+        order: 2;
+        transform: translate(0,0);
+        position: relative;
+        height: 50px;
+        width: 50px;
+        left: 15px;
+        top: 0px;
+        margin-top: 20px;
+    }
+
+    nav > div.center button {
+        width: 50px;
+        height: 50px;
+    }
+
+    nav > div.center button i {
+        font-size: 20px;
+    }
+
+    nav > div.left button, 
+    nav > div.right button {
+        border: none;
+        background: none;
+        color: #018786;
+        max-width: 40px;
+        position: relative;
+        height: 40px;
+        display: unset;
+        padding-top: 3px;
+        margin-bottom: 15px;
+        border-radius: 40px;
+    }
+
+    nav > div.left button > i, 
+    nav > div.right button > i { 
+        font-size: 20px;
+    }
 }
 
 /* nav > button.side {

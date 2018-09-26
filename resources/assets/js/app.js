@@ -30,6 +30,13 @@ const router = new VueRouter({
             },
         },
         {
+            path: '/logout',
+            beforeEnter: (to, from, next) => {
+                localStorage.removeItem("accessToken");
+                next('/auth/login');
+            },
+        },
+        {
             path: '/settings',
             component: Settings,
             beforeEnter: (to, from, next) => {
@@ -84,28 +91,41 @@ const router = new VueRouter({
 
 const translations = {
     en: {
-        email: "Email",
-        password: "Password",
-        confirm_password: "Confirm password",
-        login: "Login",
-        name: "Name",
-        sign_up: "Sign up"
-        
+        app: {
+            name: "StageMatch"
+        },
+        auth: {
+            product: {
+                title: "Finding an internship was never this easy",
+                register_message: "Why are you waiting? It is free!",
+                register_button: "Create an account",
+            },
+
+            already_using: "Already a member?",
+            sign_in: "Log in"
+        }
     },
     nl: {
-        email: "Email",
-        password: "Wachtwoord",
-        confirm_password: "Bevestig wachtwoord",
-        login: "Inloggen",
-        name: "Naam",
-        sign_up: "Account aanmaken"
+        app: {
+            name: "StageMatch"
+        },
+        auth: {
+            product: {
+                title: "Een stage vinden was nooit zo simpel",
+                register_message: "Dus, waar wacht je op? Het is gratis!",
+                register_button: "Creeer een account",
+            },
+
+            already_using: "Ben je al lid?",
+            sign_in: "Log in"
+        }
     }
   }
 
 const i18n = new VueI18n({
-    locale: 'nl', // set locale
+    locale: 'en', // set locale
     fallbackLocale: 'en',
-    translations, // set locale messages
+    messages: translations, // set locale messages
   })
 
 const app = new Vue({

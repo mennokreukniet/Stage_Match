@@ -101,6 +101,10 @@ const translations = {
                 register_button: "Create an account",
             },
 
+            footer: {
+                waiting: "What are you waiting for?"
+            },
+
             already_using: "Already a member?",
             sign_in: "Log in"
         }
@@ -115,7 +119,9 @@ const translations = {
                 register_message: "Dus, waar wacht je op? Het is gratis!",
                 register_button: "Creeer een account",
             },
-
+            footer: {
+                waiting: "Waar wacht je op?"
+            },
             already_using: "Ben je al lid?",
             sign_in: "Log in"
         }

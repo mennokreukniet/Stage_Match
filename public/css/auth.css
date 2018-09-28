@@ -75,7 +75,7 @@ div.product-card div.content span.login a {
   color: white;
 }
 
-div.product-card div.content button.register {
+button.register {
   padding: 10px 30px;
   cursor: pointer;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
@@ -94,11 +94,151 @@ div.product-card div.content button.register {
           transform: translate(-50%, 0);
 }
 
-.card1 {
-  /* background:linear-gradient(to bottom right, #131433, #1C1E4C); */
-  background: #0079bf;
-  height: 500px;
+.card1,
+.card2,
+.card3,
+.card4 {
+  height: 600px;
+  overflow: hidden;
   width: 100%;
-  margin-bottom: -5px;
+  position: relative;
+  text-align: center;
+  padding-top: 60px;
+}
+
+.card1 > .screenshot,
+.card2 > .screenshot,
+.card3 > .screenshot,
+.card4 > .screenshot {
+  background: url(/images/ss_m.png?5245f7ad7fa0fb612ac070c5117e3ae8);
+  background-size: cover;
+  width: 350px;
+  height: 450px;
+  position: absolute;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+  left: 50%;
+  margin-top: 150px;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+
+.card1 > .screenshot1,
+.card2 > .screenshot1,
+.card3 > .screenshot1,
+.card4 > .screenshot1 {
+  background: url(/images/ss_m.png?5245f7ad7fa0fb612ac070c5117e3ae8);
+  background-size: cover;
+  width: 350px;
+  height: 450px;
+  position: absolute;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+  left: 50%;
+  margin-top: 150px;
+}
+
+.card1 > .overlay,
+.card2 > .overlay,
+.card3 > .overlay,
+.card4 > .overlay {
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.card1 .title,
+.card2 .title,
+.card3 .title,
+.card4 .title {
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+  font-size: 30px;
+  width: 100%;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 30px;
+}
+
+.card1 .description,
+.card2 .description,
+.card3 .description,
+.card4 .description {
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+  font-size: 20px;
+  width: 100%;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 30px;
+}
+
+@media only screen and (min-width: 1000px) {
+  .card1,
+  .card2,
+  .card3,
+  .card4 {
+    height: 750px;
+  }
+
+  .card1 > .screenshot,
+  .card2 > .screenshot,
+  .card3 > .screenshot,
+  .card4 > .screenshot {
+    margin-top: 50px;
+    background: url(/images/ss_d.png?99da89a97435b61411a0334a7a6d6ebc);
+    width: 900px;
+    height: 600px;
+    background-size: cover;
+  }
+
+  .card1 > .screenshot1,
+  .card2 > .screenshot1,
+  .card3 > .screenshot1,
+  .card4 > .screenshot1 {
+    margin-top: 100px;
+    background: url(/images/ss_d.png?99da89a97435b61411a0334a7a6d6ebc);
+    width: 900px;
+    height: 600px;
+    background-size: cover;
+  }
+
+  .card1 > .overlay,
+  .card2 > .overlay,
+  .card3 > .overlay,
+  .card4 > .overlay {
+    height: 100px;
+    padding-top: 60px;
+  }
+}
+
+.card1 {
+  background: #315989;
+}
+
+.card1 > .overlay {
+  background: rgba(37, 66, 109, 0.9);
+}
+
+.card2 > .overlay {
+  background: rgba(150, 57, 44, 0.9);
+}
+
+.card2 {
+  background: #bc4838;
+}
+
+.card3 {
+  height: 500px;
+  background: #42548e;
+}
+
+.card4 {
+  height: 150px;
+  background: #bf4b26;
 }
 

@@ -87,4 +87,15 @@ class SkillsController extends Controller
         }
     }
 
+    public function searchSkill(Request $request){
+
+        $skill = Skill::where('name', 'like', '%' . $request->keyword . '%')->get();
+
+        if (isset($skill[0])){
+            return response(['status' => 'success', 'result' => [$skill]], 200);
+        } else {
+            return response(['status' => 'error'], 400);
+        }
+    }
+
 }

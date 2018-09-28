@@ -68,7 +68,7 @@ class SkillsController extends Controller
         if ($skill != null) {
             return response(['status' => 'success', 'result' => [$skill]], 200);
         } else {
-            return response(['status' => 'error'], 400);
+            return response(['status' => 'error'], 404);
         }
     }
 
@@ -80,22 +80,14 @@ class SkillsController extends Controller
 
 		$skills = Skill::all();
 
-        if ($skills != null) {
-            return response(['status' => 'success', 'result' => [array_reverse($skills->toArray())]], 200);
-        } else {
-            return response(['status' => 'error'], 400);
-        }
+        return response(['status' => 'success', 'result' => [array_reverse($skills->toArray())]], 200);
     }
 
     public function searchSkill(Request $request){
 
         $skill = Skill::where('name', 'like', '%' . $request->keyword . '%')->get();
 
-        if (isset($skill[0])){
-            return response(['status' => 'success', 'result' => [$skill]], 200);
-        } else {
-            return response(['status' => 'error'], 400);
-        }
+        return response(['status' => 'success', 'result' => [$skill]], 200);
     }
 
 }

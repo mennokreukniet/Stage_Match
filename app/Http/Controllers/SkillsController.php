@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Skill;
+use App\User;
 
 class SkillsController extends Controller
 {
@@ -48,6 +49,7 @@ class SkillsController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function deleteSkill(Request $request){
+
     	$destroyed = Skill::destroy($request->id);
 
     	if ($destroyed == true){
@@ -83,6 +85,10 @@ class SkillsController extends Controller
         return response(['status' => 'success', 'result' => [array_reverse($skills->toArray())]], 200);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function searchSkill(Request $request){
 
         $skill = Skill::where('name', 'like', '%' . $request->keyword . '%')->get();

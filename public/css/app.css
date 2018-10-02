@@ -895,11 +895,8 @@ nav div.right {
   }
 }
 
-.container {
-  padding-top: 20px;
-}
-
 .card {
+  margin-top: 20px;
   background: white;
   border-radius: 3px;
   max-width: 750px;

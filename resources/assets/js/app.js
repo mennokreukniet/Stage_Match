@@ -7,87 +7,82 @@ Vue.use(VueRouter);
 
 import MainApp from './views/App';
 
-import Auth from './views/auth/Auth.vue';
 import Auth_login from './views/auth/Login.vue';
 import Auth_register from './views/auth/Register.vue';
 import Index from './views/index/Index.vue';
+import Main from './views/main/Main.vue';
 import Settings from './views/settings/Settings.vue';
 import Admin from './views/admin/Admin.vue';
+import Reviews from './views/reviews/Reviews.vue';
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '/',
-            alias: '/index',
+            path: '/index',
             component: Index,
-            beforeEnter: (to, from, next) => {
-                document.title = "Stage Match - Index";
-                if (localStorage.getItem("accessToken") === null) {
-                    return next('/auth/login');
-                }
-                next();
-            },
+            name: "index"
+        },
+        {
+            path: '/login',
+            component: Auth_login,
+            name: "login"
+        },
+        {
+            path: '/register',
+            component: Auth_register,
+            name: "register"
         },
         {
             path: '/logout',
             beforeEnter: (to, from, next) => {
                 localStorage.removeItem("accessToken");
-                next('/auth/login');
+                next({ name: "index" });
             },
+        },
+        {
+            path: '/main',
+            alias: '/',
+            component: Main,
+            name: "main"
+        },
+        {
+            path: '/reviews',
+            alias: '/',
+            component: Reviews,
+            name: "review"
         },
         {
             path: '/settings',
             component: Settings,
-            beforeEnter: (to, from, next) => {
-                document.title = "Stage Match - Settings";
-                if (localStorage.getItem("accessToken") === null) {
-                    return next('/auth/login');
-                }
-                next();
-            }
-        },
-        {
-            path: '/auth',
-            name: 'auth',
-            component: Auth,
-            beforeEnter: (to, from, next) => {
-                document.title = "Stage Match - Auth";
-                if (localStorage.getItem("accessToken") !== null) {
-                    return next('/');
-                }
-                next();
-            },
-            children: [
-                {
-                    name: 'auth',
-                    path: 'login',
-                    component: Auth_login
-                },
-                 {
-                    name: 'auth',
-                     path: 'register',
-                     component: Auth_register
-                 }
-            ]
+            name: "settings"
         },
         {
             path: '/admin',
             component: Admin,
-            beforeEnter: (to, from, next) => {
-                document.title = "Stage Match - Admin";
-                const token = localStorage.getItem("accessToken");
-                console.log()
-                if (token === null || JSON.parse(atob(token.split(".")[1])).role !== "3") {
-                    
-                    return next('/auth/login');
-                } else {
-                    next();
-                }
-            },
+            name: "admin"
         },
     ],
 });
+
+router.beforeEach((to, from, next) => {
+    document.title = `StageMatch - ${to.name}`;
+    console.log(to.name);
+    const token = localStorage.getItem("accessToken");
+    if (["login", "register", "index"].includes(to.name)) {
+        if (token !== null) {
+            return next({ name: "main" });
+        }
+    } else if (to.name === "admin") {
+        if (token === null || JSON.parse(atob(token.split(".")[1])).role !== "3") {
+            return next({ name: "login" });
+        }
+    } else if (token === null) {
+        return next({ name: "index" });
+    }
+
+    next();
+})
 
 const translations = {
     en: {
@@ -117,7 +112,7 @@ const translations = {
             product: {
                 title: "Een stage vinden was nooit zo simpel",
                 register_message: "Dus, waar wacht je op? Het is gratis!",
-                register_button: "Creeer een account",
+                register_button: "Creëer een account",
             },
             footer: {
                 waiting: "Waar wacht je op?"
@@ -129,7 +124,7 @@ const translations = {
   }
 
 const i18n = new VueI18n({
-    locale: 'en', // set locale
+    locale: 'nl', // set locale
     fallbackLocale: 'en',
     messages: translations, // set locale messages
   })

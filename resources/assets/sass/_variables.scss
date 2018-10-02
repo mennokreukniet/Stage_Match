@@ -14,13 +14,26 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
-
+$primary: #0079bf;
+$secondary: #42548e;
 // $main_theme: #lol;
 
 
 
 // Auth
 
-    // Greetingscard
 $cover_overlay: #0079bf;
 $students_coverphoto: url(../img/stockphoto_students.png);
+
+$register_button: rgba(62, 217, 141, 1);
+$desktop_screenshot: url(../img/ss_d.png);
+$mobile_screenshot: url(../img/ss_m.png);
+
+$card1_bg: #315989;
+$card1_overlay: rgba(37,66,109,0.9);
+
+$card2_bg: #bc4838;
+$card2_overlay: rgba(150,57,44,0.9);
+
+$card3_bg: #42548e;
+$card4_bg: #bf4b26;

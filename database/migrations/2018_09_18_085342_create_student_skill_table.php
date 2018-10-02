@@ -15,11 +15,12 @@ class CreateStudentSkillTable extends Migration
     {
         Schema::create('student_skill', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
             $table->unsignedInteger('student_id');
             $table->foreign('student_id')->references('id')->on('student')->onDelete('cascade');
             $table->unsignedInteger('skill_id');
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
+            $table->unsignedInteger('level_id');
+            $table->foreign('level_id')->references('id')->on('level')->onDelete('cascade');
         });
     }
 

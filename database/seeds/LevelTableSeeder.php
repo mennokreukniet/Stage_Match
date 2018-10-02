@@ -12,11 +12,11 @@ class LevelTableSeeder extends Seeder
     public function run()
     {
         DB::table('level')->insert([
-            'level' => 'Gemiddeld',
+            'level' => 'Average',
         ]);
 
         DB::table('level')->insert([
-            'level' => 'Goed',
+            'level' => 'Good',
         ]);
 
         DB::table('level')->insert([

@@ -1,0 +1,148 @@
+html {
+    background: #eee;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+button:focus {
+    outline: 0;
+}
+
+%side_bar {
+    display: flex;
+    width: calc(50% - 40px);
+    position: absolute;
+    bottom: 0px;
+    height: 50px;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    height: 50px;
+    background: red;
+
+    div.center {
+        transform: translate(-50%, -33%);
+        position: absolute;
+        left: 50%;
+
+        button {
+            background: #03DAC6;
+            border: none;
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+            border-radius: 60px;
+            padding-top: 5px;
+            color:white;
+        }
+    }
+
+    %side_bar button.primary {
+        display: unset
+    }
+
+    %side_bar button {
+        border: none;
+        background: none;
+        position: absolute;
+        left: 0;
+        top:0;
+        display: none;
+        width: 100%;
+        height: 100%;
+        color: #03DAC6;
+        flex: 1;
+        transition: 200ms;
+    }
+
+    %side_bar button:hover{
+        background: #f4f4f4;
+        transition: 200ms;
+    }
+
+    %side_bar button.router-link-active {
+        background: #eeeeee;
+
+        i {
+            color: #03DAC6; 
+        }
+    }
+
+    div.left {
+        @extend %side_bar;
+        left: 0;
+    }
+
+    div.right {
+        @extend %side_bar;
+        right: 0;
+    }
+
+    @media only screen and (min-width: 600px) {
+        position: fixed;
+        width: 80px;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: white;
+        display: block;
+
+        %side_bar {
+            width: 50px;
+            position: relative;
+            top: 10px;
+            left: 20px;
+            height: 50px;
+
+            button {
+                border: none;
+                background: none;
+                color: #018786;
+                max-width: 40px;
+                position: relative;
+                height: 40px;
+                display: unset;
+                padding-top: 3px;
+                margin-bottom: 15px;
+                border-radius: 40px;
+
+                i {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        div.right {
+            height: 100%;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        div.center {
+            order: 2;
+            transform: translate(0,0);
+            position: relative;
+            height: 50px;
+            width: 50px;
+            left: 15px;
+            top: 0px;
+            margin-top: 20px;
+
+            button {
+                width: 50px;
+                height: 50px;
+
+                i {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}

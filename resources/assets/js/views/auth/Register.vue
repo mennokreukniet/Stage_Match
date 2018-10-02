@@ -34,6 +34,7 @@
 const axios = require("axios");
 
 export default {
+  name: "register",
   data () {
     return {
       name: "",
@@ -58,7 +59,7 @@ export default {
       this.loading = true;
       axios.post(`${window.location.origin}/api/auth/register`, { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(res => {
         localStorage.setItem("accessToken", res.data.token);
-        this.$router.push('../') 
+        this.$router.push({ name: "main" }) 
       }).catch(err => {
         console.log(err);
         this.loading = false;
@@ -66,7 +67,7 @@ export default {
     },
 
     login() {
-      this.$router.push('login') 
+      this.$router.push({ name: "login" }) 
     }
   }
 }

@@ -3,9 +3,17 @@
         <div class="card">
             <span class="title">Account Settings</span>
 
-            <input v-model="name" type="text" placeholder="Name">
-            <input v-model="email" type="text" placeholder="E-Mail">
-            <button v-on:click="edit">Edit profile</button>
+            <div class="error" v-if="error.show">{{error.message}}</div>
+            <div class="success" v-if="success.show">{{success.message}}</div>
+
+            <div class="form">
+                <span class="label">Name</span>
+                <input v-model="name" class="classic" type="text" placeholder="Name">
+                <span class="label">Email</span>
+                <input id="email" v-model="email" class="classic" type="text" placeholder="E-Mail">
+                
+                <button class="submit" v-on:click="edit">Edit profile</button>
+            </div>
         </div>
     </div>    
 </template>
@@ -24,32 +32,70 @@ export default {
     data() {
         return {
             name: "",
-            email: ""
+            email: "",
+            error: {
+                    show: false,
+                    message: ""
+                },
+                success: {
+                    show: false,
+                    message: ""
+                } 
+        }
+    },
+    watch: {
+        // whenever question changes, this function will run
+        email: function (new_email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(this.email.toLowerCase())) {
+                document.getElementById("email").classList.remove("valid");
+                document.getElementById("email").classList.add("invalid");
+            } else {
+                document.getElementById("email").classList.remove("invalid");
+                document.getElementById("email").classList.add("valid");
+            }
         }
     },
     methods: {
         edit() {
-            if (this.name === "" || this.email === "") alert("Fields cannot be empty!");
-            axios.post(`${window.location.origin}/api/user/edit`, { "name": this.name, "email": this.email }, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(res => {
-                alert("Edited!");
-            })
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (this.name === "" || this.email === "") { 
+                this.success.show = false;
+                this.error = {
+                    show: true,
+                    message: "Inputs can't be empty!"
+                }
+
+                return;
+            }
+
+            if (!re.test(this.email.toLowerCase())) {
+                this.success.show = false;
+                this.error = {
+                    show: true,
+                    message: "Email invalid!"
+                }
+
+                return;
+            }
+
+            axios.post(`${window.location.origin}/api/user/edit`, { "name": this.name, "email": this.email }, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } })
+            .then(res => {
+                this.error.show = false;
+
+                this.success = {
+                    show: true,
+                    message: "Data saved!"
+                }
+            }).catch(err => {
+                this.success.show = false;
+                
+                this.error = {
+                    show: true,
+                    message: "Something went wrong!"
+                }
+            });
         }
     }
 }
 </script>
-
-<style>
-    .card {
-        background: white;
-        border-radius: 20px;
-        padding: 20px 30px;
-        margin: 10px;
-    }
-
-    div.card > span.title {
-        letter-spacing: 2px;
-        display: block;
-        font-size: 23px;
-        margin-bottom: 40px;
-    }
-</style>

@@ -50,21 +50,3 @@ export default {
     }
 }
 </script>
-
-<style>
-    .card {
-        background: white;
-        border-radius: 20px;
-        padding: 20px 30px;
-        margin: 15px;
-        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-
-    }
-
-    div.card > span.title {
-        letter-spacing: 2px;
-        display: block;
-        font-size: 23px;
-        margin-bottom: 40px;
-    }
-</style>

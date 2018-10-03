@@ -19,6 +19,10 @@
                 </router-link>
             </div>
             <div class="right">
+                <router-link v-if="role === '2'" tag="button" to="/internship/create">
+                    <i class="material-icons">add</i>
+                    <span>Create internship</span>
+                </router-link>
                 <router-link tag="button" to="/reviews">
                     <i class="material-icons">star</i>
                     <span>My reviews</span>

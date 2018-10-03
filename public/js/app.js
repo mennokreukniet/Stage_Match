@@ -1181,7 +1181,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(61);
+module.exports = __webpack_require__(67);
 
 
 /***/ }),
@@ -1210,9 +1210,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__views_reviews_Reviews_vue__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__views_reviews_Reviews_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__views_reviews_Reviews_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__views_internship_Internship_vue__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__views_internship_Internship_vue__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__views_internship_Internship_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__views_internship_Internship_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__views_internship_Create_vue__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__views_internship_Create_vue__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__views_internship_Create_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__views_internship_Create_vue__);
 
 
@@ -18068,7 +18068,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "login" } }, [
+  return _c("div", { staticClass: "auth", attrs: { id: "login" } }, [
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "form" }, [
         _c("span", { staticClass: "title" }, [_vm._v("Login")]),
@@ -18323,6 +18323,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return;
       }
 
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (!re.test(this.user.email.toLowerCase())) {
+        this.error = {
+          show: true,
+          message: "Enter a valid Email address"
+        };
+        return;
+      }
+
       if (this.user.password.length < 6) {
         this.error = {
           show: true,
@@ -18365,7 +18375,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "register" } }, [
+  return _c("div", { staticClass: "auth", attrs: { id: "register" } }, [
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "form" }, [
         _c("span", { staticClass: "title" }, [_vm._v("Register")]),
@@ -19417,6 +19427,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.error.show = this.success.show = false;
             var name = prompt("How should this skill be named?");
 
+            if (name === "") {
+                this.error = {
+                    show: true,
+                    message: "Please enter a name"
+                };
+
+                return;
+            }
+
             new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().put("admin/skill/" + id, { name: name }).then(function (res) {
                 for (var i = 0; i < _this3.skills.length; i++) {
                     if (_this3.skills[i].id === id) {
@@ -19439,6 +19458,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this4 = this;
 
             this.error.show = this.success.show = false;
+            if (name === "") {
+                this.error = {
+                    show: true,
+                    message: "Please enter a name"
+                };
+
+                return;
+            }
+
             new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().post("admin/skill", { name: this.new_skill }).then(function (res) {
                 _this4.skills.push(res.data.result[0]);
                 _this4.new_skill = "";
@@ -19678,28 +19706,14 @@ if (false) {
 
 /***/ }),
 /* 61 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(71)
+var __vue_script__ = __webpack_require__(62)
 /* template */
-var __vue_template__ = __webpack_require__(72)
+var __vue_template__ = __webpack_require__(63)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19738,7 +19752,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 71 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19753,7 +19767,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 72 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -19773,15 +19787,15 @@ if (false) {
 }
 
 /***/ }),
-/* 73 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(74)
+var __vue_script__ = __webpack_require__(65)
 /* template */
-var __vue_template__ = __webpack_require__(75)
+var __vue_template__ = __webpack_require__(66)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19820,7 +19834,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 74 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19886,7 +19900,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 75 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -19998,6 +20012,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-2998125a", module.exports)
   }
 }
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

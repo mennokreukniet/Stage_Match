@@ -1,5 +1,5 @@
 <template>
-  <div id="register">
+  <div id="register" class="auth">
     <div class="card">
       <div class="form">
         <span class="title">Register</span>
@@ -85,6 +85,16 @@ export default {
           message: "Passwords dont match"
         }
 
+        return;
+      }
+
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (!re.test(this.user.email.toLowerCase())) {
+        this.error = {
+          show: true,
+          message: "Enter a valid Email address"
+        }
         return;
       }
 

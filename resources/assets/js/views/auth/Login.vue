@@ -1,5 +1,5 @@
 <template>
-  <div id="login">
+  <div id="login" class="auth">
     <div class="card">
       <div class="form">
         <span class="title">Login</span>

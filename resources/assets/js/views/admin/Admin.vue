@@ -64,6 +64,15 @@ export default {
         edit (id) {
             this.error.show = this.success.show = false;
             const name = prompt("How should this skill be named?");
+            
+            if (name === "") {
+                this.error = {
+                    show: true,
+                    message: `Please enter a name`
+                }
+
+                return;
+            } 
 
             new Http().put(`admin/skill/${id}`, { name: name }).then(res => {
                 for (let i = 0; i < this.skills.length; i++) {
@@ -86,6 +95,15 @@ export default {
 
         create () {
             this.error.show = this.success.show = false;
+            if (name === "") {
+                this.error = {
+                    show: true,
+                    message: `Please enter a name`
+                }
+
+                return;
+            } 
+
             new Http().post(`admin/skill`, { name: this.new_skill }).then(res => {
                 this.skills.push(res.data.result[0]);
                 this.new_skill = "";

@@ -1082,9 +1082,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-__webpack_require__(62);
-__webpack_require__(63);
-module.exports = __webpack_require__(64);
+module.exports = __webpack_require__(60);
 
 
 /***/ }),
@@ -1111,7 +1109,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__views_settings_Settings_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__views_admin_Admin_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__views_reviews_Reviews_vue__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__views_reviews_Reviews_vue__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__views_reviews_Reviews_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__views_reviews_Reviews_vue__);
 
 
@@ -16785,8 +16783,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({ name: 'main-app' });
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'main-app',
+    data: function data() {
+        return {
+            role: ""
+        };
+    },
+    created: function created() {
+        var token = localStorage.getItem("accessToken");
+        if (token !== null) this.role = JSON.parse(atob(token.split(".")[1])).role;
+    }
+});
 
 /***/ }),
 /* 20 */
@@ -16844,6 +16859,20 @@ var render = function() {
                   _c("span", [_vm._v("Settings")])
                 ]
               ),
+              _vm._v(" "),
+              _vm.role === "3"
+                ? _c(
+                    "router-link",
+                    { attrs: { tag: "button", to: "/admin" } },
+                    [
+                      _c("i", { staticClass: "material-icons" }, [
+                        _vm._v("security")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Admin")])
+                    ]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c("router-link", { attrs: { tag: "button", to: "/logout" } }, [
                 _c("i", { staticClass: "material-icons" }, [
@@ -16935,11 +16964,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_http__ = __webpack_require__(69);
 //
 //
 //
@@ -16961,34 +16986,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "login",
   data: function data() {
     return {
-      email: "",
-      password: "",
-      loading: false
+      credentials: {
+        email: "",
+        password: ""
+      },
+      error: {
+        show: false,
+        message: ""
+      }
     };
   },
-
 
   methods: {
     login: function login() {
       var _this = this;
 
-      if (this.email === "" || this.password === "") {
-        return alert("Fields cannot be empty");
+      if (this.credentials.email === "" || this.credentials.password === "") {
+        this.error = {
+          show: true,
+          message: "Fields can not be empty"
+        };
+        return;
       }
 
-      this.loading = true;
-      axios.post(window.location.origin + "/api/auth/login", { "email": this.email, "password": this.password }).then(function (res) {
+      this.error.show = false;
+
+      new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().post("auth/login", this.credentials).then(function (res) {
+
         localStorage.setItem("accessToken", res.data.token);
+
         _this.$router.push({ name: "main" });
       }).catch(function (err) {
-        console.log(err);
-        _this.loading = false;
+
+        _this.error = {
+          show: true,
+          message: "Invalid credentials"
+        };
       });
     },
     register: function register() {
@@ -17888,116 +17927,103 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "login" } }, [
-    _vm.loading
-      ? _c("div", { attrs: { id: "loading" } }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1)
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("span", { staticClass: "title" }, [_vm._v("Login")]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.email,
-          expression: "email"
-        }
-      ],
-      attrs: { type: "text", placeholder: "Email" },
-      domProps: { value: _vm.email },
-      on: {
-        keyup: function($event) {
-          if (
-            !("button" in $event) &&
-            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-          ) {
-            return null
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "form" }, [
+        _c("span", { staticClass: "title" }, [_vm._v("Login")]),
+        _vm._v(" "),
+        _vm.error.show
+          ? _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.error.message))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.credentials.email,
+              expression: "credentials.email"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { id: "email", type: "text", placeholder: "Email" },
+          domProps: { value: _vm.credentials.email },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.login($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.credentials, "email", $event.target.value)
+            }
           }
-          return _vm.login($event)
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("Password")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.credentials.password,
+              expression: "credentials.password"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { type: "password", placeholder: "Password" },
+          domProps: { value: _vm.credentials.password },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.login($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.credentials, "password", $event.target.value)
+            }
           }
-          _vm.email = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.password,
-          expression: "password"
-        }
-      ],
-      attrs: { type: "password", placeholder: "Password" },
-      domProps: { value: _vm.password },
-      on: {
-        keyup: function($event) {
-          if (
-            !("button" in $event) &&
-            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-          ) {
-            return null
-          }
-          return _vm.login($event)
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.password = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("button", { staticClass: "classic", on: { click: _vm.login } }, [
-      _vm._v("Login")
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _c("br"),
-    _vm._v(" "),
-    _c("button", { staticClass: "classic", on: { click: _vm.register } }, [
-      _vm._v("Register")
+        }),
+        _vm._v(" "),
+        _c("button", { staticClass: "submit", on: { click: _vm.login } }, [
+          _vm._v("Login")
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "submit",
+            staticStyle: { background: "#207c7e" },
+            on: { click: _vm.register }
+          },
+          [_vm._v("Register")]
+        )
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dots" }, [
-      _c("div", { staticClass: "dot active" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "dot" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "dot" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "dot" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "dot" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ocean" }, [
-      _c("div", { staticClass: "wave" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "wave" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -18060,7 +18086,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_http__ = __webpack_require__(69);
 //
 //
 //
@@ -18093,41 +18119,94 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "register",
   data: function data() {
     return {
-      name: "",
-      email: "",
-      password: "",
-      confirm_password: "",
-      role: "1",
-      loading: false
+      user: {
+        name: "",
+        email: "",
+        password: "",
+        confirm_password: "",
+        role: "1"
+      },
+      error: {
+        show: false,
+        message: ""
+      }
     };
   },
 
 
+  watch: {
+    user: {
+      handler: function handler(val) {
+        if (val.email) {
+          var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (!re.test(val.email.toLowerCase())) {
+            document.getElementById("email").classList.remove("valid");
+            document.getElementById("email").classList.add("invalid");
+          } else {
+            document.getElementById("email").classList.remove("invalid");
+            document.getElementById("email").classList.add("valid");
+          }
+        }
+      },
+
+      deep: true
+    }
+  },
   methods: {
     register: function register() {
       var _this = this;
 
-      if (this.name === "" || this.email === "" || this.password === "" || this.confirm_password === "" || this.role === "") {
-        console.log(this.name, this.email, this.password, this.confirm_password, this.role);
-        return alert("Not all fields are filled in");
+      this.error.show = false;
+      if (this.user.name === "" || this.user.email === "" || this.user.password === "" || this.user.confirm_password === "") {
+        this.error = {
+          show: true,
+          message: "Fields can not be empty"
+        };
+
+        return;
       }
 
-      if (this.password !== this.confirm_password) {
-        return alert("Passwords are not the same!");
+      if (this.user.password !== this.user.confirm_password) {
+        this.error = {
+          show: true,
+          message: "Passwords dont match"
+        };
+
+        return;
       }
-      this.loading = true;
-      axios.post(window.location.origin + "/api/auth/register", { "name": this.name, "email": this.email, "password": this.password, "role": this.role }).then(function (res) {
+
+      if (this.user.password.length < 6) {
+        this.error = {
+          show: true,
+          message: "Password cant be shorter than 6 chars"
+        };
+
+        return;
+      }
+
+      new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().post("auth/register", this.user).then(function (res) {
         localStorage.setItem("accessToken", res.data.token);
         _this.$router.push({ name: "main" });
       }).catch(function (err) {
-        console.log(err);
-        _this.loading = false;
+        if (err.response.data.errors.email = "The email has already been taken.") {
+          _this.error = {
+            show: true,
+            message: err.response.data.errors.email
+          };
+        } else {
+          _this.error = {
+            show: true,
+            message: "Broken errorlogging, can't differenciate errors for now (:"
+          };
+        }
+
+        return;
       });
     },
     login: function login() {
@@ -18145,212 +18224,212 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "register" } }, [
-    _vm.loading
-      ? _c("div", { attrs: { id: "loading" } }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1)
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("span", { staticClass: "title" }, [_vm._v("Register")]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.name,
-          expression: "name"
-        }
-      ],
-      attrs: { type: "text", placeholder: "Name" },
-      domProps: { value: _vm.name },
-      on: {
-        keyup: function($event) {
-          if (
-            !("button" in $event) &&
-            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-          ) {
-            return null
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "form" }, [
+        _c("span", { staticClass: "title" }, [_vm._v("Register")]),
+        _vm._v(" "),
+        _vm.error.show
+          ? _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.error.message))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user.name,
+              expression: "user.name"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { type: "text", placeholder: "Name" },
+          domProps: { value: _vm.user.name },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.register($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.user, "name", $event.target.value)
+            }
           }
-          return _vm.register($event)
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user.email,
+              expression: "user.email"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { id: "email", type: "text", placeholder: "Email" },
+          domProps: { value: _vm.user.email },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.register($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.user, "email", $event.target.value)
+            }
           }
-          _vm.name = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.email,
-          expression: "email"
-        }
-      ],
-      attrs: { type: "text", placeholder: "Email" },
-      domProps: { value: _vm.email },
-      on: {
-        keyup: function($event) {
-          if (
-            !("button" in $event) &&
-            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-          ) {
-            return null
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("Password")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user.password,
+              expression: "user.password"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { type: "password", placeholder: "Password" },
+          domProps: { value: _vm.user.password },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.register($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.user, "password", $event.target.value)
+            }
           }
-          return _vm.register($event)
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("Confirm Password")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user.confirm_password,
+              expression: "user.confirm_password"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { type: "password", placeholder: "Confirm Password" },
+          domProps: { value: _vm.user.confirm_password },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.register($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.user, "confirm_password", $event.target.value)
+            }
           }
-          _vm.email = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.password,
-          expression: "password"
-        }
-      ],
-      attrs: { type: "password", placeholder: "Password" },
-      domProps: { value: _vm.password },
-      on: {
-        keyup: function($event) {
-          if (
-            !("button" in $event) &&
-            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-          ) {
-            return null
-          }
-          return _vm.register($event)
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.password = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.confirm_password,
-          expression: "confirm_password"
-        }
-      ],
-      attrs: { type: "password", placeholder: "Confirm Password" },
-      domProps: { value: _vm.confirm_password },
-      on: {
-        keyup: function($event) {
-          if (
-            !("button" in $event) &&
-            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-          ) {
-            return null
-          }
-          return _vm.register($event)
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.confirm_password = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c(
-      "select",
-      {
-        directives: [
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("Role")]),
+        _vm._v(" "),
+        _c(
+          "select",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.role,
-            expression: "role"
-          }
-        ],
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.role = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-          }
-        }
-      },
-      [
-        _c("option", { attrs: { value: "1", selected: "true" } }, [
-          _vm._v("Student")
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.user.role,
+                expression: "user.role"
+              }
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.user,
+                  "role",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "1", selected: "true" } }, [
+              _vm._v("Student")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "2" } }, [_vm._v("Company")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "3" } }, [_vm._v("Admin")])
+          ]
+        ),
+        _c("br"),
+        _vm._v(" "),
+        _c("button", { staticClass: "submit", on: { click: _vm.register } }, [
+          _vm._v("Register")
         ]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "2" } }, [_vm._v("Company")]),
+        _c("br"),
+        _c("br"),
         _vm._v(" "),
-        _c("option", { attrs: { value: "3" } }, [_vm._v("Admin")])
-      ]
-    ),
-    _vm._v(" "),
-    _c("button", { staticClass: "classic", on: { click: _vm.register } }, [
-      _vm._v("Register")
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _c("br"),
-    _vm._v(" "),
-    _c("button", { staticClass: "classic", on: { click: _vm.login } }, [
-      _vm._v("Login")
+        _c(
+          "button",
+          {
+            staticClass: "submit",
+            staticStyle: { background: "#207c7e" },
+            on: { click: _vm.login }
+          },
+          [_vm._v("Login")]
+        )
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dots" }, [
-      _c("div", { staticClass: "dot active" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "dot" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "dot" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "dot" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "dot" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ocean" }, [
-      _c("div", { staticClass: "wave" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "wave" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -18463,6 +18542,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'index',
     created: function created() {
+        /** 
+         * Makes sure the browser doesn't remember the old scroll position
+         */
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
@@ -18670,7 +18752,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({ name: 'index' });
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'main_index',
+    data: function data() {
+        return {
+            role: "dfdf"
+        };
+    },
+    created: function created() {
+        switch (JSON.parse(atob(localStorage.getItem("accessToken").split(".")[1])).role) {
+            case "1":
+                this.role = "Student";
+                break;
+            case "2":
+                this.role = "Company";
+                break;
+            case "3":
+                this.role = "Admin";
+                break;
+        }
+    }
+});
 
 /***/ }),
 /* 50 */
@@ -18680,25 +18782,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "card" }, [
-        _c("strong", [_vm._v("Version:")]),
-        _c("span", [_vm._v("V0.0.2 (STILL ROCKING ÜBER ALPHA)")]),
-        _c("br"),
-        _vm._v(" "),
-        _c("strong", [_vm._v("Role:")]),
-        _c("span", [_vm._v("lol")])
-      ])
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("strong", [_vm._v("Version: ")]),
+      _c("span", [_vm._v("V0.0.2 (STILL ROCKING ÜBER ALPHA)")]),
+      _c("br"),
+      _vm._v(" "),
+      _c("strong", [_vm._v("Role: ")]),
+      _c("span", [_vm._v(_vm._s(this.role))])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -18761,6 +18856,15 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_http__ = __webpack_require__(69);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -18782,14 +18886,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "settings",
     created: function created() {
         var _this = this;
 
-        axios.get(window.location.origin + "/api/user", { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
+        new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().get("user").then(function (res) {
             _this.name = res.data.name;
             _this.email = res.data.email;
         });
@@ -18798,6 +18902,11 @@ var axios = __webpack_require__(2);
         return {
             name: "",
             email: "",
+            skill: "",
+            skills: {
+                show: false,
+                list: []
+            },
             error: {
                 show: false,
                 message: ""
@@ -18810,22 +18919,35 @@ var axios = __webpack_require__(2);
     },
 
     watch: {
-        // whenever question changes, this function will run
-        email: function email(new_email) {
+        email: function email(_email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (!re.test(this.email.toLowerCase())) {
+            if (!re.test(_email.toLowerCase())) {
                 document.getElementById("email").classList.remove("valid");
                 document.getElementById("email").classList.add("invalid");
             } else {
                 document.getElementById("email").classList.remove("invalid");
                 document.getElementById("email").classList.add("valid");
             }
+        },
+        skill: function skill(skillname) {
+            var _this2 = this;
+
+            if (skillname === "") return this.skills.show = false;
+
+            new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().get("user/skill/" + skillname).then(function (res) {
+                _this2.skills = {
+                    show: true,
+                    list: res.data.result
+                };
+            });
         }
     },
     methods: {
         edit: function edit() {
-            var _this2 = this;
+            var _this3 = this;
 
+            this.success.show = false;
+            this.error.show = false;
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (this.name === "" || this.email === "") {
                 this.success.show = false;
@@ -18847,21 +18969,31 @@ var axios = __webpack_require__(2);
                 return;
             }
 
-            axios.post(window.location.origin + "/api/user/edit", { "name": this.name, "email": this.email }, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
-                _this2.error.show = false;
+            new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().post("user/edit", { "name": this.name, "email": this.email }).then(function (res) {
+                _this3.error.show = false;
 
-                _this2.success = {
+                _this3.success = {
                     show: true,
                     message: "Data saved!"
                 };
             }).catch(function (err) {
-                _this2.success.show = false;
+                _this3.success.show = false;
 
-                _this2.error = {
+                _this3.error = {
                     show: true,
                     message: "Something went wrong!"
                 };
             });
+        },
+        add_skill: function add_skill(id) {
+            this.error = {
+                show: true,
+                message: "Adding skills is not implemented :(!"
+                // new Http().post("user").then(res => {
+                //     this.name = res.data.name;
+                //     this.email = res.data.email;
+                // })
+            };
         }
     }
 });
@@ -18939,6 +19071,64 @@ var render = function() {
           }
         }),
         _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("Skills")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.skill,
+              expression: "skill"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { type: "text", placeholder: "Skillname" },
+          domProps: { value: _vm.skill },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.skill = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm.skills.show
+          ? _c(
+              "div",
+              {
+                staticStyle: {
+                  background: "green",
+                  width: "calc(100% - 40px)",
+                  "border-radius": "2px",
+                  padding: "15px 20px"
+                }
+              },
+              [
+                _vm._l(this.skills.list, function(value) {
+                  return [
+                    _c("div", { key: value.id, staticClass: "skill" }, [
+                      _c(
+                        "button",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.add_skill(value.id)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(value.name))]
+                      )
+                    ])
+                  ]
+                })
+              ],
+              2
+            )
+          : _vm._e(),
+        _vm._v(" "),
         _c("button", { staticClass: "submit", on: { click: _vm.edit } }, [
           _vm._v("Edit profile")
         ])
@@ -18963,9 +19153,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(60)
+var __vue_script__ = __webpack_require__(55)
 /* template */
-var __vue_template__ = __webpack_require__(61)
+var __vue_template__ = __webpack_require__(56)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19004,16 +19194,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_http__ = __webpack_require__(69);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -19038,20 +19229,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "admin",
     created: function created() {
         var _this = this;
 
-        axios.get(window.location.origin + "/api/admin/skill", { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
-            _this.skills = res.data;
+        new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().get("admin/skill").then(function (res) {
+            _this.skills = res.data.result;
         });
     },
     data: function data() {
         return {
             skills: [],
-            new_skill: ""
+            new_skill: "",
+            error: {
+                show: false,
+                message: ""
+            },
+            success: {
+                show: false,
+                message: ""
+            }
         };
     },
 
@@ -19059,23 +19259,63 @@ var axios = __webpack_require__(2);
         remove: function remove(id, index) {
             var _this2 = this;
 
-            axios.delete(window.location.origin + "/api/admin/skill/" + id, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
+            this.error.show = this.success.show = false;
+            if (!confirm("This action deletes all skill entries which might exist on a user")) return;
+            new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().delete("admin/skill/" + id).then(function (res) {
                 _this2.skills.splice(index, 1);
+                _this2.success = {
+                    show: true,
+                    message: "Removed skill"
+                };
+            });
+        },
+        edit: function edit(id) {
+            var _this3 = this;
+
+            this.error.show = this.success.show = false;
+            var name = prompt("How should this skill be named?");
+
+            new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().put("admin/skill/" + id, { name: name }).then(function (res) {
+                for (var i = 0; i < _this3.skills.length; i++) {
+                    if (_this3.skills[i].id === id) {
+                        _this3.success = {
+                            show: true,
+                            message: "Skill \"" + _this3.skills[i].name + "\" edited to \"" + name + "\""
+                        };
+                        _this3.skills[i].name = name;
+                        break;
+                    }
+                }
+            }).catch(function (err) {
+                _this3.error = {
+                    show: true,
+                    message: "There is already a skill with this name"
+                };
             });
         },
         create: function create() {
-            var _this3 = this;
+            var _this4 = this;
 
-            axios.post(window.location.origin + "/api/admin/skill", { "name": this.new_skill }, { headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } }).then(function (res) {
-                _this3.skills.push(res.data.result[0]);
-                _this3.new_skill = "";
+            this.error.show = this.success.show = false;
+            new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().post("admin/skill", { name: this.new_skill }).then(function (res) {
+                _this4.skills.push(res.data.result[0]);
+                _this4.new_skill = "";
+                _this4.success = {
+                    show: true,
+                    message: "Skill created"
+                };
+            }).catch(function (err) {
+                _this4.error = {
+                    show: true,
+                    message: "There is already a skill with this name"
+                };
             });
         }
     }
 });
 
 /***/ }),
-/* 61 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -19085,6 +19325,18 @@ var render = function() {
   return _c("div", { attrs: { id: "main" } }, [
     _c("div", { staticClass: "card" }, [
       _c("span", { staticClass: "title" }, [_vm._v("Admin ")]),
+      _vm._v(" "),
+      _vm.error.show
+        ? _c("div", { staticClass: "error" }, [
+            _vm._v(_vm._s(_vm.error.message))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.success.show
+        ? _c("div", { staticClass: "success" }, [
+            _vm._v(_vm._s(_vm.success.message))
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("span", { staticClass: "title" }, [_vm._v("Skills")]),
       _vm._v(" "),
@@ -19109,6 +19361,18 @@ var render = function() {
                     }
                   },
                   [_vm._v("remove")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.edit(value.id)
+                      }
+                    }
+                  },
+                  [_vm._v("edit")]
                 ),
                 _vm._v(" "),
                 _c("span", [_vm._v(_vm._s(value.name))])
@@ -19156,7 +19420,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("create skill")]
+        [_vm._v("Create skill")]
       )
     ])
   ])
@@ -19172,45 +19436,15 @@ if (false) {
 }
 
 /***/ }),
-/* 62 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(78)
+var __vue_script__ = __webpack_require__(58)
 /* template */
-var __vue_template__ = __webpack_require__(79)
+var __vue_template__ = __webpack_require__(59)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19249,7 +19483,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 78 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19268,7 +19502,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 79 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -19299,6 +19533,125 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-1ca3daa4", module.exports)
   }
 }
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var api_url = window.location.origin + "/api/";
+
+var Http = function () {
+    function Http() {
+        _classCallCheck(this, Http);
+
+        this.config = {};
+    }
+
+    /**
+     * Makes a get request to the API endpoint
+     * @param {string} endpoint - API endpoint
+     * @param {object} [config={}] - Request header config
+     */
+
+
+    _createClass(Http, [{
+        key: "get",
+        value: function get(endpoint, config) {
+            this.http_headers(config);
+
+            return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(api_url + endpoint, this.config);
+        }
+
+        /**
+         * Makes a post request to the API endpoint
+         * @param {string} endpoint - API endpoint
+         * @param {object} data - Post data
+         * @param {object} [config={}] - Request header config
+         */
+
+    }, {
+        key: "post",
+        value: function post(endpoint, data, config) {
+            this.http_headers(config);
+
+            return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(api_url + endpoint, data, this.config);
+        }
+
+        /**
+         * Makes a put request to the API endpoint
+         * @param {string} endpoint - API endpoint
+         * @param {object} data - Put data
+         * @param {object} [config={}] - Request header config
+         */
+
+    }, {
+        key: "put",
+        value: function put(endpoint, data, config) {
+            this.http_headers(config);
+
+            return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put(api_url + endpoint, data, this.config);
+        }
+
+        /**
+         * Makes a delete request to the API endpoint
+         * @param {string} endpoint
+         * @param {object} [config={}]
+         */
+
+    }, {
+        key: "delete",
+        value: function _delete(endpoint, config) {
+            this.http_headers(config);
+
+            return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(api_url + endpoint, this.config);
+        }
+
+        // Set basic headers in case they aren't set
+
+    }, {
+        key: "http_headers",
+        value: function http_headers() {
+            var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+            //Checking if header object is created, if not create it
+            //Note: Without this check, this script will fail if you try to access a property within the headers obj.
+            if (config.headers === undefined) config.headers = {};
+
+            //Authorization header check and placing if empty
+            //Note: Needed for user authentification on server side
+            if (config.headers.Authorization === undefined) config.headers.Authorization = "Bearer " + localStorage.getItem("accessToken");
+
+            this.config = config;
+        }
+    }]);
+
+    return Http;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Http);
 
 /***/ })
 /******/ ]);

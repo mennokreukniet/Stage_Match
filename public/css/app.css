@@ -936,8 +936,7 @@ div.form button.submit:focus {
 
 div.error,
 div.success {
-  border: solid 2px #eee;
-  padding: 10px 20px;
+  padding: 15px 20px;
   border-radius: 5px;
   margin-bottom: 25px;
 }

@@ -35,5 +35,5 @@ Route::group(['middleware' => 'admin'], function(){
 	Route::delete('/admin/skill/{id}', 'SkillsController@deleteSkill');
 	Route::get('/admin/skill/{id}', 'SkillsController@getSkill');
 	Route::get('/admin/skill', 'SkillsController@getAll');
-	Route::post('/admin/skill', 'SkillsController@editSkill');
+	Route::put('/admin/skill/{id}', 'SkillsController@editSkill');
 });

@@ -82,7 +82,7 @@ class SkillsController extends Controller
 
 		$skills = Skill::all();
 
-        return response(['status' => 'success', 'result' => [array_reverse($skills->toArray())]], 200);
+        return response(['status' => 'success', 'result' => array_reverse($skills->toArray())], 200);
     }
 
     /**
@@ -93,7 +93,7 @@ class SkillsController extends Controller
 
         $skill = Skill::where('name', 'like', '%' . $request->keyword . '%')->get();
 
-        return response(['status' => 'success', 'result' => [$skill]], 200);
+        return response(['status' => 'success', 'result' => $skill], 200);
     }
 
 }

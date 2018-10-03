@@ -28,6 +28,7 @@ Route::group(['middleware' => 'jwt.auth'], function(){
   Route::post('user/edit', 'UserController@editUser');
   Route::get('user', 'UserController@getUser');
   Route::get('user/skill/{keyword}', 'SkillsController@searchSkill');
+  Route::apiResource('internship', 'InternshipController');
 });
 
 Route::group(['middleware' => 'admin'], function(){

@@ -12,27 +12,17 @@ class StudentTableSeeder extends Seeder
     public function run()
     {
         DB::table('student')->insert([
-            'name' => 'Menno',
-            'last_name' => 'Kreukniet',
-            'age' => '19',
+            'user_id' => '1',
+            'school' => 'Da Vinci College',
+            'date_of_birth' => '1999-08-10',
             'gender' => 'male',
-            'phone_number' => '0687063340',
-            'email' => 'menno.kreukniet@hotmail.com',
-            'current_education' => 'applicatieontwikkeling',
-            'education_level' => 'mbo4',
-            'finished_education' => 'insula college mavo',
         ]);
 
         DB::table('student')->insert([
-            'name' => 'Dylan',
-            'last_name' => 'de Leeuw',
-            'age' => '18',
+            'user_id' => '2',
+            'school' => 'Da Vinci College',
+            'date_of_birth' => '1999-10-07',
             'gender' => 'male',
-            'phone_number' => '064432853',
-            'email' => 'dylandeleeuw@isgay.com',
-            'current_education' => 'applicatieontwikkeling',
-            'education_level' => 'mbo4',
-            'finished_education' => 'insula college mavo',
         ]);
     }
 }

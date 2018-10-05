@@ -1,0 +1,176 @@
+html {
+  background: #eee;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+button:focus {
+  outline: 0;
+}
+
+nav div.left,
+nav div.right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: calc(50% - 40px);
+  position: absolute;
+  bottom: 0px;
+  height: 50px;
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 50px;
+  background: red;
+}
+
+nav div.center {
+  -webkit-transform: translate(-50%, -33%);
+          transform: translate(-50%, -33%);
+  position: absolute;
+  left: 50%;
+}
+
+nav div.center button {
+  background: #03DAC6;
+  border: none;
+  width: 60px;
+  height: 60px;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  border-radius: 60px;
+  padding-top: 5px;
+  color: white;
+}
+
+nav div.left button.primary,
+nav div.right button.primary {
+  display: unset;
+}
+
+nav div.left button,
+nav div.right button {
+  border: none;
+  background: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  color: #03DAC6;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+}
+
+nav div.left button:hover,
+nav div.right button:hover {
+  background: #f4f4f4;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+}
+
+nav div.left button.router-link-active,
+nav div.right button.router-link-active {
+  background: #eeeeee;
+}
+
+nav div.left button.router-link-active i,
+nav div.right button.router-link-active i {
+  color: #03DAC6;
+}
+
+nav div.left {
+  left: 0;
+}
+
+nav div.right {
+  right: 0;
+}
+
+@media only screen and (min-width: 600px) {
+  nav {
+    position: fixed;
+    width: 80px;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: white;
+    display: block;
+  }
+
+  nav div.left,
+  nav div.right {
+    width: 50px;
+    position: relative;
+    top: 10px;
+    left: 20px;
+    height: 50px;
+  }
+
+  nav div.left button,
+  nav div.right button {
+    border: none;
+    background: none;
+    color: #018786;
+    max-width: 40px;
+    position: relative;
+    height: 40px;
+    display: unset;
+    padding-top: 3px;
+    margin-bottom: 15px;
+    border-radius: 40px;
+  }
+
+  nav div.left button i,
+  nav div.right button i {
+    font-size: 20px;
+  }
+
+  nav div.right {
+    height: 100%;
+    margin-top: 20px;
+    display: inline-block;
+  }
+
+  nav div.center {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+    position: relative;
+    height: 50px;
+    width: 50px;
+    left: 15px;
+    top: 0px;
+    margin-top: 20px;
+  }
+
+  nav div.center button {
+    width: 50px;
+    height: 50px;
+  }
+
+  nav div.center button i {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  div.container {
+    width: calc(100% - 80px);
+    margin-left: 80px;
+  }
+}
+

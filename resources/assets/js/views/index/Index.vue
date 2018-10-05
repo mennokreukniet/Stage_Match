@@ -1,46 +1,59 @@
 <template>
-    <div id="main">
-       This is the index <br>Version: 0.01 (ÜBER ALPHA)
+    <div class="auth">
+        <div class="product-card">
+            <div class="overlay"></div>
+            <div class="content">
+                <span class="appname">{{$t("app.name")}}.</span>
+                <span class="title">{{$t("auth.product.title")}}.</span>
 
-       <button v-if="this.claims.role === '3'" v-on:click="admin">Admin</button>
-       <br>
-       <span>Current user role: {{role}} </span>
+                <span class="register">{{$t("auth.product.register_message")}}</span>
+                <router-link tag="button" class="register" to="register">{{$t("auth.product.register_button")}}</router-link>
 
-       <br><br>
-       <button v-on:click="logout">Log Out</button>
-    </div>    
+                <span class="login">{{$t("auth.already_using")}} <router-link to="login">{{$t("auth.sign_in")}}.</router-link></span>
+            </div>
+        </div>
+        <div class="card1">
+            <span class="title">Placeholder feature 1</span>
+            <span class="description">Placeholder feature 1</span>
+            <div class="screenshot"></div>
+            <div class="overlay">
+                <span class="title">Placeholder feature 1</span>
+            </div>
+        </div>
+
+        <div class="card2">
+            <span class="title">Placeholder feature 2</span>
+            <span class="description">Placeholder feature 3</span>
+            <div class="screenshot"></div>
+            <div class="overlay">
+                <span class="title">Placeholder feature 2</span>
+            </div>
+        </div>
+        <div class="card3">
+            <span class="title">Placeholder feature 3</span>
+            <span class="description">Placeholder feature 3</span>
+            <div class="screenshot1"></div>
+        </div>
+
+        <div class="card4">
+            <span class="title">{{$t("auth.footer.waiting")}}</span>
+            <router-link tag="button" class="register" to="register">{{$t("auth.product.register_button")}}</router-link>
+
+        </div>
+    </div>
 </template>
 
+
 <script>
-export default {
-    name: "index",
-    created() {
-        this.claims = JSON.parse(atob(localStorage.getItem("accessToken").split(".")[1]));
-        if (this.claims.role === "1") 
-            this.role = "Student"
-        else if (this.claims.role === "2")
-            this.role = "Company"
-        else 
-            this.role = "Admin"
-    },
-    data() {
-        return {
-            claims: {},
-            role: ""
-        }
-    },
-    methods: {
-        admin() {
-            this.$router.push("admin")
-        },
-        logout () {
-            localStorage.clear();
-            this.$router.push("/admin")
+    export default { 
+        name: 'index', 
+        created() {
+            /** 
+             * Makes sure the browser doesn't remember the old scroll position
+             */
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
         }
     }
-}
 </script>
-
-<style>
-
-</style>

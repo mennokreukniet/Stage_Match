@@ -12,7 +12,7 @@ class InternshipTableSeeder extends Seeder
     public function run()
     {
         DB::table('internship')->insert([
-            'company_id' => '1',
+            'company' => 'Acme',
             'mentor' => 'Dhr. Visser',
             'period' => '16 sept - 38 dec',
         ]);

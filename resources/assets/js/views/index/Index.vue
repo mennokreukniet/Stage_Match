@@ -1,62 +1,59 @@
 <template>
-    <div id="main">
-       <div class="card">
-           <span class="title">Index</span>
-            <strong>Version:</strong> 0.01 (ÜBER ALPHA)
+    <div class="auth">
+        <div class="product-card">
+            <div class="overlay"></div>
+            <div class="content">
+                <span class="appname">{{$t("app.name")}}.</span>
+                <span class="title">{{$t("auth.product.title")}}.</span>
 
-            <button v-if="this.claims.role === '3'" v-on:click="admin">Admin</button>
-            <br>
-            <span><strong>Current user role:</strong> {{role}} </span>
-            <br><br>
-            <button v-on:click="logout">Log Out</button>
-       </div>
-    </div>    
+                <span class="register">{{$t("auth.product.register_message")}}</span>
+                <router-link tag="button" class="register" to="register">{{$t("auth.product.register_button")}}</router-link>
+
+                <span class="login">{{$t("auth.already_using")}} <router-link to="login">{{$t("auth.sign_in")}}.</router-link></span>
+            </div>
+        </div>
+        <div class="card1">
+            <span class="title">Placeholder feature 1</span>
+            <span class="description">Placeholder feature 1</span>
+            <div class="screenshot"></div>
+            <div class="overlay">
+                <span class="title">Placeholder feature 1</span>
+            </div>
+        </div>
+
+        <div class="card2">
+            <span class="title">Placeholder feature 2</span>
+            <span class="description">Placeholder feature 3</span>
+            <div class="screenshot"></div>
+            <div class="overlay">
+                <span class="title">Placeholder feature 2</span>
+            </div>
+        </div>
+        <div class="card3">
+            <span class="title">Placeholder feature 3</span>
+            <span class="description">Placeholder feature 3</span>
+            <div class="screenshot1"></div>
+        </div>
+
+        <div class="card4">
+            <span class="title">{{$t("auth.footer.waiting")}}</span>
+            <router-link tag="button" class="register" to="register">{{$t("auth.product.register_button")}}</router-link>
+
+        </div>
+    </div>
 </template>
 
-<script>
-export default {
-    name: "index",
-    created() {
-        //Read claims
-        this.claims = JSON.parse(atob(localStorage.getItem("accessToken").split(".")[1]));
-        
-        //Set role in property
-        if (this.claims.role === "1") 
-            this.role = "Student"
-        else if (this.claims.role === "2")
-            this.role = "Company"
-        else 
-            this.role = "Admin"
-    },
-    data() {
-        return {
-            //Binding models
-            claims: {},
-            role: ""
-        }
-    },
-    methods: {
-        admin() {
-            this.$router.push("admin")
-        },
-        logout () {
-            localStorage.clear();
-            this.$router.push("/admin")
-        }
-    }
-}
-</script>
 
-<style>
-.card {
-        background: white;
-        border-radius: 20px;
-        padding: 20px 30px;
-        margin: 10px;
-    }div.card > span.title {
-        letter-spacing: 2px;
-        display: block;
-        font-size: 23px;
-        margin-bottom: 40px;
+<script>
+    export default { 
+        name: 'index', 
+        created() {
+            /** 
+             * Makes sure the browser doesn't remember the old scroll position
+             */
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+        }
     }
-</style>
+</script>

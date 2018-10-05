@@ -1,51 +1,70 @@
 <template>
-  <div id="login">
-      <div v-if="loading" id="loading">
-          <div class="dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        <div class="ocean">
-            <div class="wave"></div>
-            <div class="wave"></div>  
-        </div>
-    </div>
-      <span class="title">Login</span>
-      <input @keyup.enter="login" v-model="email" type="text" placeholder="Email">
-      <input @keyup.enter="login" v-model="password" type="password" placeholder="Password">
-      <button class="classic" v-on:click="login">Login</button>
+  <div id="login" class="auth">
+    <div class="card">
+      <div class="form">
+        <span class="title">Login</span>
 
-      <br><br>
-      <button class="classic" v-on:click="register">Register</button>
+        <div class="error" v-if="error.show">{{error.message}}</div>
+
+        <span class="label">Email</span>
+        <input @keyup.enter="login" v-model="credentials.email" id="email" class="classic" type="text" placeholder="Email">
+        <span class="label">Password</span>
+        <input @keyup.enter="login" v-model="credentials.password"  class="classic" type="password" placeholder="Password">
+        <button class="submit" v-on:click="login">Login</button>
+        <br><br>
+        <button style="background: #207c7e" class="submit" v-on:click="register">Register</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-const axios = require("axios");
+import Http from '../../core/http';
 
 export default {
+  name: "login",
   data () {
     return {
-      email: "",
-      password: "",
-      loading: false
+      credentials: {
+        email: "",
+        password: ""
+      },
+      error: {
+          show: false,
+          message: ""
+      },
     }
   },
-
   methods: {
     login() {
-      this.loading = true;
-      axios.post(`${window.location.origin}/api/auth/login`, { "email": this.email, "password": this.password }).then(res => {
+      if (this.credentials.email === "" || this.credentials.password === "") {
+        this.error = {
+          show: true,
+          message: "Fields can not be empty"
+        }
+        return
+      }
+
+      this.error.show = false;
+
+      new Http().post(`auth/login`, this.credentials)
+      .then(res => {
+
         localStorage.setItem("accessToken", res.data.token);
-        this.$router.push('../') 
+
+        this.$router.push({ name: "main" });
+      })
+      .catch(err => {
+
+        this.error = {
+          show: true,
+          message: "Invalid credentials"
+        }
       })
     },
 
     register() {
-      this.$router.push('register') 
+      this.$router.push({ name: "register" })  
     }
   }
 }

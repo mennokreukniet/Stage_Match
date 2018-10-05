@@ -19,6 +19,10 @@
                 </router-link>
             </div>
             <div class="right">
+                <router-link v-if="role === '2'" tag="button" to="/internship/create">
+                    <i class="material-icons">add</i>
+                    <span>Create internship</span>
+                </router-link>
                 <router-link tag="button" to="/reviews">
                     <i class="material-icons">star</i>
                     <span>My reviews</span>
@@ -28,6 +32,12 @@
                     <i class="material-icons">settings</i>
                     <span>Settings</span>
                 </router-link>
+
+                <router-link v-if="role === '3'" tag="button" to="/admin">
+                    <i class="material-icons">security</i>
+                    <span>Admin</span>
+                </router-link>
+
                 <router-link tag="button" to="/logout">
                     <i class="material-icons">power_settings_new</i>
                     <span>Log out</span>
@@ -38,5 +48,16 @@
 </template>
 
 <script>
-    export default { name: 'main-app' }
+    export default { 
+        name: 'main-app',
+        data() {
+            return {
+                role: ""
+            }
+        },
+        created() {
+            const token = localStorage.getItem("accessToken");
+            if (token !== null) this.role = JSON.parse(atob(token.split(".")[1])).role;
+        }
+     }
 </script>

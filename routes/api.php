@@ -28,6 +28,7 @@ Route::group(['middleware' => 'jwt.auth'], function(){
   Route::post('user/edit', 'UserController@editUser');
   Route::get('user', 'UserController@getUser');
   Route::get('user/skill/{keyword}', 'SkillsController@searchSkill');
+  Route::apiResource('internship', 'InternshipController');
 });
 
 Route::group(['middleware' => 'admin'], function(){
@@ -35,5 +36,5 @@ Route::group(['middleware' => 'admin'], function(){
 	Route::delete('/admin/skill/{id}', 'SkillsController@deleteSkill');
 	Route::get('/admin/skill/{id}', 'SkillsController@getSkill');
 	Route::get('/admin/skill', 'SkillsController@getAll');
-	Route::post('/admin/skill', 'SkillsController@editSkill');
+	Route::put('/admin/skill/{id}', 'SkillsController@editSkill');
 });

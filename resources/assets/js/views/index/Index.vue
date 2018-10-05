@@ -48,10 +48,12 @@
     export default { 
         name: 'index', 
         created() {
+            /** 
+             * Makes sure the browser doesn't remember the old scroll position
+             */
             if ('scrollRestoration' in history) {
                 history.scrollRestoration = 'manual';
             }
-            
         }
     }
 </script>

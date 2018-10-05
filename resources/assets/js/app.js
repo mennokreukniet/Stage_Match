@@ -14,6 +14,8 @@ import Main from './views/main/Main.vue';
 import Settings from './views/settings/Settings.vue';
 import Admin from './views/admin/Admin.vue';
 import Reviews from './views/reviews/Reviews.vue';
+import Internship from './views/internship/Internship.vue';
+import Internship_create from './views/internship/Create.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -52,10 +54,23 @@ const router = new VueRouter({
             component: Reviews,
             name: "review"
         },
+
         {
             path: '/settings',
             component: Settings,
             name: "settings"
+        },
+        {
+            path: '/internship',
+            component: Internship,
+            name: "internship",
+            children: [
+                {
+                  path: 'create',
+                  component: Internship_create,
+                  name: "internship_create"
+                },
+            ]
         },
         {
             path: '/admin',
@@ -76,6 +91,10 @@ router.beforeEach((to, from, next) => {
     } else if (to.name === "admin") {
         if (token === null || JSON.parse(atob(token.split(".")[1])).role !== "3") {
             return next({ name: "login" });
+        }
+    } else if (to.name === "internship_create") {
+        if (token === null || JSON.parse(atob(token.split(".")[1])).role !== "2") {
+            return next({ name: "main" });
         }
     } else if (token === null) {
         return next({ name: "index" });

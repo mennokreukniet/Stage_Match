@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);@import url(https://fonts.googleapis.com/css?family=Ubuntu);@import url(https://fonts.googleapis.com/icon?family=Material+Icons);body {
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);@import url(https://fonts.googleapis.com/css?family=Ubuntu);@import url(https://fonts.googleapis.com/icon?family=Material+Icons);@import url(https://cdn.jsdelivr.net/npm/animate.css@3.5.1);body {
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
 }
@@ -895,6 +895,34 @@ nav div.right {
   }
 }
 
+.back,
+.create {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+}
+
+.back i,
+.create i {
+  color: #42548e !important;
+}
+
+.back:hover,
+.create:hover {
+  background: #bebebe !important;
+}
+
+.back i,
+.create i {
+  position: relative;
+  top: 2px;
+  font-size: 20px;
+}
+
+.back > i {
+  left: 4px;
+}
+
 .card {
   margin-top: 20px;
   background: white;
@@ -916,29 +944,67 @@ nav div.right {
   font-size: 27px;
 }
 
-input.classic {
+.back,
+.create,
+button.classic,
+div.form button.submit,
+div.skills div.skill button {
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.back:focus,
+.create:focus,
+button.classic:focus,
+div.form button.submit:focus,
+div.skills div.skill button:focus {
+  outline: 0;
+}
+
+input.classic,
+select.classic {
   border: solid 2px #eee;
-  width: 100%;
+  width: calc(100% - 14px);
   height: 35px;
   font-size: 15px;
   padding-left: 10px;
   border-radius: 5px;
 }
 
-div.form button.submit {
-  border: none;
-  background: none;
+button.classic {
+  padding: 10px 20px;
+  background: #0079bf;
+  color: white;
+  border-radius: 50px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-family: "Ubuntu";
 }
 
-div.form button.submit:focus {
+.margin-top {
+  margin-top: 20px;
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+button.classic:hover {
+  background: #42548e;
+}
+
+input.classic:focus,
+select.classic:focus {
   outline: 0;
 }
 
 div.error,
-div.success {
+div.success,
+div.neutral {
   padding: 15px 20px;
   border-radius: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
 div.error {
@@ -948,6 +1014,11 @@ div.error {
 
 div.success {
   background: #38c172;
+  color: white;
+}
+
+div.neutral {
+  background: #3490dc;
   color: white;
 }
 
@@ -992,5 +1063,58 @@ div.form button.submit:hover {
     width: calc(100% - 80px);
     margin-left: 80px;
   }
+}
+
+div.skills {
+  width: 100%;
+}
+
+div.skills div.skill {
+  display: grid;
+  grid-template-columns: auto 50px 35px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+  border-bottom: solid 1px #eee;
+}
+
+div.skills div.skill span {
+  grid-column-start: 1;
+  padding-top: 8px;
+  font-family: "ubuntu";
+}
+
+div.skills div.skill button {
+  grid-column-start: 2;
+  height: 35px;
+  width: 35px;
+  border-radius: 40px;
+  background: #0079bf;
+  color: white;
+}
+
+div.skills div.skill button i {
+  font-size: 20px;
+}
+
+div.skills div.skill button:hover {
+  background: #42548e;
+}
+
+div.skills div.skill button.edit {
+  grid-column-start: 2;
+}
+
+div.skills div.skill button.remove {
+  grid-column-start: 3;
+}
+
+div.modal-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 998;
 }
 

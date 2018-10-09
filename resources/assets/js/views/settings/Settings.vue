@@ -11,6 +11,16 @@
                 <input v-model="name" class="classic" type="text" placeholder="Name">
                 <span class="label">Email</span>
                 <input id="email" v-model="email" class="classic" type="text" placeholder="E-Mail">
+                <span class="label">Email</span>
+                <input id="email" v-model="email" class="classic" type="text" placeholder="E-Mail">
+                <span class="label">Email</span>
+                <input id="email" v-model="email" class="classic" type="text" placeholder="E-Mail">
+                <span class="label">Email</span>
+                <input id="email" v-model="email" class="classic" type="text" placeholder="E-Mail">
+                <span class="label">Email</span>
+                <input id="email" v-model="email" class="classic" type="text" placeholder="E-Mail">
+                <span class="label">Email</span>
+                <input id="email" v-model="email" class="classic" type="text" placeholder="E-Mail">
                 <span class="label">Skills</span>
                 <input v-model="skill" class="classic" type="text" placeholder="Skillname">
                 <div  style="background: green; width: calc(100% - 40px);border-radius: 2px;padding: 15px 20px" v-if="skills.show">

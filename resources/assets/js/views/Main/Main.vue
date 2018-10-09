@@ -12,10 +12,11 @@
         name: 'main_index', 
         data() {
             return {
-                role: "dfdf"
+                role: ""
             }
         },
         created() {
+            console.log(this);
             switch(JSON.parse(atob(localStorage.getItem("accessToken").split(".")[1])).role) {
                 case "1":
                     this.role = "Student";

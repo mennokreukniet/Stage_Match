@@ -1,27 +1,45 @@
 <template>
-    <div id="main">
-        <div class="card">
-            <span class="title">Admin </span>
-            <div class="error" v-if="error.show">{{error.message}}</div>
-            <div class="success" v-if="success.show">{{success.message}}</div>
-            <span class="title">Skills</span>
 
+    <div id="main">
+
+        <prompt v-show="prompt.edit.render" v-bind:title="prompt.edit.title" @value="edit"/>
+
+        <div class="card">
+            <span class="title">Admin</span>
+        </div>
+
+        <div class="card">
+            <span class="title">Create Skill</span>
+
+            <status v-show="status.create.render" v-bind:status="status.create"/>
+
+            <input class="classic margin-bottom" placeholder="New skill name" v-model="new_skill" type="text">
+            <button class="classic" v-on:click="create()">Create skill</button>
+        </div>
+
+
+        <div class="card">
+            <span class="title">Skills ({{this.skills.length}})</span>
+
+            <status v-show="status.skills.render" v-bind:status="status.create"/>
 
             <div class="skills">
-                <span v-if="this.skills.length === 0">There are no skills, add one!</span>
-                <template v-for="(value, index) in this.skills" class="skill">
+                <input class="classic" v-model="search" type="text" placeholder="Zoeken naar vaardigheden">
+                   
+                <div v-if="this.skills.length === 0" class="neutral margin-top">There are no skills, add one!</div>
+                
+                <template v-for="(value, index) in this.skills">
                     <div v-bind:key="value.id" class="skill">
-                        <button v-on:click="remove(value.id, index)">remove</button>    
-                        <button v-on:click="edit(value.id)">edit</button>    
                         <span>{{value.name}}</span>
+                        <button class="edit" @click="isModalVisible = true">
+                            <i class="material-icons">edit</i>
+                        </button>    
+                        <button class="remove" v-on:click="remove(value.id, index)">
+                            <i class="material-icons">delete</i>
+                        </button>    
                     </div>
                 </template>
             </div>
-    <br><br>
-            <span class="title">Create Skill</span>
-            <input v-model="new_skill" type="text">
-            <br>
-            <button v-on:click="create()">Create skill</button>
         </div>
     </div>    
 </template>
@@ -29,40 +47,70 @@
 <script>
 import Http from '../../core/http';
 
+import Prompt from '../../components/Prompt.vue';
+import Status from '../../components/Status.vue';
+
 export default {
     name: "admin",
+    components: {
+      Prompt,
+      Status
+    },
     created () {
-        new Http().get(`admin/skill`).then(res => {this.skills = res.data.result})
+        this.get_all_skills();  
     },
     data() {
         return {
             skills: [],
             new_skill: "",
-            error: {
-                show: false,
-                message: ""
+            search: "",
+            prompt: {
+                edit: {
+                    render: true,
+                    title: "Hey"
+                }
             },
-            success: {
-                show: false,
-                message: ""
+            status: {
+                create: {
+                    render: false,
+                    message: "Hey",
+                    type: "success"
+                },
+                skills: {
+                    render: false,
+                    message: "Hey",
+                    type: "success"
+                }
             },
         }
     },
+    watch: {
+        search (value) {
+            console.log(value)
+            if (value === "") {
+                this.get_all_skills();
+            }
+
+            new Http().get(`user/skill/${value}`).then(res => {
+                this.skills = res.data.result;
+            });
+        }
+    },
     methods: {
+        get_all_skills () {
+            new Http().get(`admin/skill`).then(res => {this.skills = res.data.result})
+        },
         remove (id, index)  {
-            this.error.show = this.success.show = false;
             if (!confirm("This action deletes all skill entries which might exist on a user")) return;
             new Http().delete(`admin/skill/${id}`).then(res => {
                 this.skills.splice(index, 1);
-                this.success = {
-                    show: true,
-                    message: `Removed skill`
-                }
+                
             })
         },
-
         edit (id) {
-            this.error.show = this.success.show = false;
+            console.log(id);
+            return;
+            
             const name = prompt("How should this skill be named?");
             
             if (name === "") {
@@ -77,29 +125,20 @@ export default {
             new Http().put(`admin/skill/${id}`, { name: name }).then(res => {
                 for (let i = 0; i < this.skills.length; i++) {
                     if(this.skills[i].id === id) {
-                        this.success = {
-                            show: true,
-                            message: `Skill "${this.skills[i].name}" edited to "${name}"`
-                        }
+                        
                         this.skills[i].name = name;
                         break;
                     }
                 }
             }).catch(err => {
-                this.error = {
-                    show: true,
-                    message: "There is already a skill with this name"
-                }
+                
             })
         },
 
         create () {
-            this.error.show = this.success.show = false;
-            if (name === "") {
-                this.error = {
-                    show: true,
-                    message: `Please enter a name`
-                }
+
+            if (this.new_skill === "") {
+                
 
                 return;
             } 
@@ -107,15 +146,9 @@ export default {
             new Http().post(`admin/skill`, { name: this.new_skill }).then(res => {
                 this.skills.push(res.data.result[0]);
                 this.new_skill = "";
-                this.success = {
-                    show: true,
-                    message: "Skill created"
-                }
+               
             }).catch(err => {
-                this.error = {
-                    show: true,
-                    message: "There is already a skill with this name"
-                }
+                
             })
         }
     }

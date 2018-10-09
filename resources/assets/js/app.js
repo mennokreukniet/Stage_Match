@@ -16,6 +16,7 @@ import Admin from './views/admin/Admin.vue';
 import Reviews from './views/reviews/Reviews.vue';
 import Internship from './views/internship/Internship.vue';
 import Internship_create from './views/internship/Create.vue';
+import Internship_show from './views/internship/List.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -65,6 +66,11 @@ const router = new VueRouter({
             component: Internship,
             name: "internship",
             children: [
+                {
+                    path: '',
+                    component: Internship_show,
+                    name: "internship_show"
+                  },
                 {
                   path: 'create',
                   component: Internship_create,

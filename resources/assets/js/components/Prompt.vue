@@ -1,10 +1,11 @@
 <template>
   <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-    <div class="modal-layer">
+    <div class="modal">
         <div class="card">
-            {{title}}
-            <input class="classic" v-model="value" type="text"/> 
-            <button type="button" class="btn-close" @click="send" aria-label="Close modal" >x</button>
+            <span class="title">{{prompt.title}}</span>
+            <input class="classic margin-bottom" v-model="value" type="text"/> 
+            <button class="classic" type="button" @click="send">Edit</button>
+            <button class="classic cancel" type="button" @click="close">Cancel</button>
         </div>
     </div>
   </transition>
@@ -13,7 +14,7 @@
 <script>
   export default {
     name: 'prompt',
-    props: ['title'],
+    props: ['prompt'],
     data () {
       return {
         value: ""
@@ -24,7 +25,8 @@
         this.$emit('close');
       },
       send() {
-        this.$emit('value', this.value);
+        this.$emit('value', { value: this.value, properties: this.prompt.properties });
+        this.$emit('close');
       }
     },
   };

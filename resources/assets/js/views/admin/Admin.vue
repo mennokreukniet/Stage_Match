@@ -2,7 +2,7 @@
 
     <div id="main">
 
-        <prompt v-show="prompt.edit.render" v-bind:title="prompt.edit.title" @value="edit"/>
+        <prompt v-show="prompt_list.edit.render" v-bind:prompt="prompt_list.edit" @close="prompt_list.edit.render = false" @value="edit"/>
 
         <div class="card">
             <span class="title">Admin</span>
@@ -11,7 +11,7 @@
         <div class="card">
             <span class="title">Create Skill</span>
 
-            <status v-show="status.create.render" v-bind:status="status.create"/>
+            <status v-show="status_list.create.render" v-bind:status="status_list.create"/>
 
             <input class="classic margin-bottom" placeholder="New skill name" v-model="new_skill" type="text">
             <button class="classic" v-on:click="create()">Create skill</button>
@@ -21,9 +21,9 @@
         <div class="card">
             <span class="title">Skills ({{this.skills.length}})</span>
 
-            <status v-show="status.skills.render" v-bind:status="status.create"/>
+            <status v-show="status_list.skills.render" v-bind:status="status_list.skills"/>
 
-            <div class="skills">
+            <div class="skills margin-top">
                 <input class="classic" v-model="search" type="text" placeholder="Zoeken naar vaardigheden">
                    
                 <div v-if="this.skills.length === 0" class="neutral margin-top">There are no skills, add one!</div>
@@ -31,7 +31,7 @@
                 <template v-for="(value, index) in this.skills">
                     <div v-bind:key="value.id" class="skill">
                         <span>{{value.name}}</span>
-                        <button class="edit" @click="isModalVisible = true">
+                        <button class="edit" v-on:click="prompt('edit', `New name for ${value.name}`, {id: value.id, name: value.name})">
                             <i class="material-icons">edit</i>
                         </button>    
                         <button class="remove" v-on:click="remove(value.id, index)">
@@ -64,22 +64,23 @@ export default {
             skills: [],
             new_skill: "",
             search: "",
-            prompt: {
+            prompt_list: {
                 edit: {
-                    render: true,
-                    title: "Hey"
+                    render: false,
+                    title: "",
+                    properties: {}
                 }
             },
-            status: {
+            status_list: {
                 create: {
                     render: false,
-                    message: "Hey",
-                    type: "success"
+                    message: "",
+                    type: ""
                 },
                 skills: {
                     render: false,
-                    message: "Hey",
-                    type: "success"
+                    message: "",
+                    type: ""
                 }
             },
         }
@@ -97,9 +98,18 @@ export default {
         }
     },
     methods: {
+        prompt(type, title, properties = {}) {
+            this.prompt_list[type] = {
+                render: true,
+                title: title,
+                properties: properties
+            }
+        },
+
         get_all_skills () {
             new Http().get(`admin/skill`).then(res => {this.skills = res.data.result})
         },
+
         remove (id, index)  {
             if (!confirm("This action deletes all skill entries which might exist on a user")) return;
             new Http().delete(`admin/skill/${id}`).then(res => {
@@ -107,31 +117,40 @@ export default {
                 
             })
         },
-        edit (id) {
-            console.log(id);
-            return;
-            
-            const name = prompt("How should this skill be named?");
-            
-            if (name === "") {
-                this.error = {
-                    show: true,
-                    message: `Please enter a name`
-                }
 
-                return;
+        edit (edit) {
+            this.status_list.skills.render = false;
+
+            const id = edit.properties.id;
+            const name = edit.value;
+
+            if (name === "") {
+                return this.status_list.skills = {
+                    render: true,
+                    message: "Name can not be empty",
+                    type: "error"
+                }
             } 
 
             new Http().put(`admin/skill/${id}`, { name: name }).then(res => {
                 for (let i = 0; i < this.skills.length; i++) {
                     if(this.skills[i].id === id) {
+                        this.status_list.skills = {
+                            render: true,
+                            message: `${edit.properties.name} renamed to ${name}`,
+                            type: "success"
+                        }
                         
                         this.skills[i].name = name;
                         break;
                     }
                 }
             }).catch(err => {
-                
+                this.status_list.skills = {
+                    render: true,
+                    message: `There already is a skill named ${name}`,
+                    type: "error"
+                }
             })
         },
 

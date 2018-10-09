@@ -1108,13 +1108,22 @@ div.skills div.skill button.remove {
   grid-column-start: 3;
 }
 
-div.modal-layer {
+div.modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: black;
+  background: rgba(190, 190, 190, 0.5);
   z-index: 998;
+}
+
+div.modal div.card {
+  z-index: 999;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 

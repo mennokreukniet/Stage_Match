@@ -15,7 +15,7 @@ class CreateStudentSkillTable extends Migration
     {
         Schema::create('student_skill', function (Blueprint $table) {
             $table->unsignedInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('student')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->unsignedInteger('skill_id');
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
             $table->unsignedInteger('level_id');

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash as Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -11,35 +12,36 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@admin.admin',
-            'role' => '3',
-            'password' => 'welkom01',
-            'city' => 'Dordrecht',
-            'street' => 'Marienbornstraat',
-            'house_number' => '58',
-        ]);
+        $defaultUsers = [
+            [
+                'email' => 'student@student.student',
+                'name' => 'student',
+                'role' => '1',
+                'password' => Hash::make('welkom01')
+            ],
+            [
+                'email' => 'company@company.company',
+                'name' => 'company',
+                'role' => '2',
+                'password' => Hash::make('welkom01')
+            ],
+            [
+                'email' => 'admin@admin.admin',
+                'name' => 'admin',
+                'role' => '3',
+                'password' => Hash::make('welkom01')
+            ]
+        ];
+        foreach ($defaultUsers as $user) {
+            App\User::firstOrCreate($user); //should insert only if it isn't already in db. doesn't work:(
+        };
 
-        DB::table('users')->insert([
-            'name' => 'student',
-            'email' => 'student@student.student',
-            'role' => '1',
-            'password' => 'welkom01',
-            'city' => 'Dordrecht',
-            'street' => 'Marienbornstraat',
-            'house_number' => '58',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'company',
-            'email' => 'company@company.company',
-            'role' => '2',
-            'password' => 'welkom01',
-            'city' => 'Dordrecht',
-            'street' => 'Marienbornstraat',
-            'house_number' => '58',
-        ]);
+        factory(App\User::class, 20)->create()->each(function ($user) {
+            $user->company()->save(factory(App\Company::class)->make());
+        });
+        factory(App\User::class, 40)->create()->each(function ($user) {
+            $user->student()->save(factory(App\Student::class)->make());
+        });
 
     }
 }

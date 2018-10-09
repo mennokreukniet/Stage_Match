@@ -10,6 +10,13 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
+    public function student() {
+        return $this->hasOne('App\Student');
+    }
+
+    public function company() {
+        return $this->hasOne('App\Company');
+    }
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -35,7 +42,6 @@ class User extends Authenticatable implements JWTSubject
                 'house_number' => $this->house_number,
                 ];
     }
-
 
 
     /**

@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
+    public function user() {
+        return $this->hasOne('App\User');
+    }
+
     public function getJWTIdentifier() {
         return $this->getKey(); // Eloquent Model method
     }
@@ -22,4 +26,6 @@ class Student extends Model
             'gender' => $this->gender,
         ];
     }
+
+    public $timestamps = false;
 }

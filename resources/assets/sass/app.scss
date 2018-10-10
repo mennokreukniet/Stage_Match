@@ -12,6 +12,9 @@
 // Variables
 @import 'variables';
 
+//Import animations
+@import url('https://cdn.jsdelivr.net/npm/animate.css@3.5.1');
+
 body {
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
@@ -640,6 +643,34 @@ nav {
     // }
 }
 
+%out_nav_button {
+    @extend %button;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    i {
+        color: $secondary !important;
+    }
+}
+
+%out_nav_button:hover {
+    background: #bebebe !important;
+}
+
+.back, .create {
+    @extend %out_nav_button;
+    i {
+        position: relative;
+    top: 2px;
+        font-size: 20px;
+    }
+}
+
+.back > i {
+    
+    left: 4px;
+}
+
 %card {
     margin-top: 20px;
     background: white;
@@ -663,17 +694,9 @@ nav {
     }
 }
 
-input.classic {
-    border: solid 2px #eee;
-    width: 100%;
-    height: 35px;
-    font-size: 15px;
-    padding-left: 10px;
-    border-radius: 5px;
-}
-
 %button {
     border: none;
+    cursor: pointer;
     background: none;
 }
 
@@ -681,10 +704,47 @@ input.classic {
     outline: 0;
 }
 
+input.classic, select.classic {
+    border: solid 2px #eee;
+    width: calc(100% - 14px);
+    height: 35px;
+    font-size: 15px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+button.classic {
+    @extend %button;
+    padding: 10px 20px;
+    background: $primary;
+    color: white;
+    border-radius: 50px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    font-family: "Ubuntu"
+}
+
+.margin-top {
+    margin-top: 20px;
+}
+
+.margin-bottom {
+    margin-bottom: 20px;
+}
+
+button.classic:hover {
+    background: $secondary;
+}
+
+input.classic:focus, select.classic:focus {
+    outline: 0;
+}
+
+
 %message {
     padding: 15px 20px;
     border-radius: 5px;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
 }
 
 div.error {
@@ -696,6 +756,12 @@ div.error {
 div.success {
     @extend %message;
     background: $green;
+    color: white;
+}
+
+div.neutral {
+    @extend %message;
+    background: $blue;
     color: white;
 }
 
@@ -742,5 +808,68 @@ div.form {
     div.container > div:not(.auth) {
         width: calc(100% - 80px);
         margin-left: 80px;
+    }
+}
+
+div.skills {
+    width: 100%;
+
+    div.skill {
+        display: grid;
+        grid-template-columns: auto 50px 35px;
+        padding-bottom: 5px;
+        margin-top: 5px;
+        border-bottom: solid 1px #eee;
+
+        span {
+            grid-column-start: 1;
+            padding-top: 8px;
+            font-family: "ubuntu";
+        }
+
+        button {
+            grid-column-start: 2;
+            @extend %button;
+            height: 35px;
+            width: 35px;
+            border-radius: 40px;
+            background: $primary;
+            color: white;
+
+            i {
+                font-size: 20px;
+            }
+        }
+
+        button:hover {
+            background: $secondary;
+        }
+
+        button.edit {
+            grid-column-start: 2;
+        }
+
+        button.remove {
+            grid-column-start: 3;
+        }
+
+    }
+}
+
+div.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(190,190,190, 0.5);
+    z-index: 998;
+    
+    div.card {
+        z-index: 999;
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translate(-50%, -50%);
     }
 }

@@ -17,7 +17,7 @@ class CreateSkillCategoryTable extends Migration
             $table->unsignedInteger('skill_id');
             $table->foreign('skill_id')->references('id')->on('skills');
             $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

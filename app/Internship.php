@@ -11,7 +11,6 @@ class Internship extends Model
         return $this->hasOne('App\Company');
     }
 
-    protected $table = 'internship';
     public $timestamps = false;
 
 }

@@ -51,7 +51,7 @@ export default {
       .then(res => {
 
         localStorage.setItem("accessToken", res.data.token);
-
+        this.$parent.set_role();
         this.$router.push({ name: "main" });
       })
       .catch(err => {

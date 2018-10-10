@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInternshipTable extends Migration
+class CreateInternshipsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateInternshipTable extends Migration
      */
     public function up()
     {
-        Schema::create('internship', function (Blueprint $table) {
+        Schema::create('internships', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('company');
+            $table->unsignedInteger('company_id');
+            $table->foreign('company_id')
+                ->references('id')->on('companies')
+                ->onDelete('cascade');
             $table->string('mentor');
-            $table->string('period');
+            $table->date('start');
+            $table->date('end');
         });
     }
 
@@ -28,6 +32,6 @@ class CreateInternshipTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('internship');
+        Schema::dropIfExists('internships');
     }
 }

@@ -15,7 +15,7 @@
         <span class="label">Confirm Password</span>
         <input @keyup.enter="register" class="classic" v-model="user.confirm_password" type="password" placeholder="Confirm Password">
         <span class="label">Role</span>
-        <select v-model="user.role">
+        <select class="classic" v-model="user.role">
           <option value="1" selected="true">Student</option>
           <option value="2">Company</option>
           <option value="3">Admin</option>
@@ -110,6 +110,7 @@ export default {
       new Http().post(`auth/register`, this.user)
       .then(res => {
         localStorage.setItem("accessToken", res.data.token);
+        this.$parent.set_role();
         this.$router.push({ name: "main" }) 
       }).catch(err => {
         if (err.response.data.errors.email = "The email has already been taken.") {

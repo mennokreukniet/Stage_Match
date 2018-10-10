@@ -15,17 +15,8 @@ use Lcobucci\JWT\Signer\Hmac\Sha256;
 class UserController extends Controller
 {
     public function editUser(Request $request){
-    	//dd($request);
-    	$token = explode(' ', $request->header('Authorization'))[1];
-
-    	//dd($token);
-        
-        $token = (new Parser())->parse($token); // Parses from a string
-        $data = new ValidationData();
-
-       $id = $token->getClaim("id");
-       $role = $token->getClaim("role");
-//dd($request->school);
+       $id = $request->auth["id"];
+       $role = $request->auth["role"];
 
         User::where('id', $id)
     		->update(['email' => $request->email,
@@ -53,12 +44,7 @@ class UserController extends Controller
     }
 
     public function getUser(Request $request){
-    	$token = explode(' ', $request->header('Authorization'))[1];
-        
-        $token = (new Parser())->parse($token); // Parses from a string
-        $data = new ValidationData();
-
-       $id = $token->getClaim("id");
+       $id = $request->auth["id"];
 
        $user = User::where('id', $id)
        		->get();

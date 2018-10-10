@@ -19,8 +19,9 @@ class CreateStudentsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->string('first_name');
             $table->string('last_name');
+            $table->date('date_of_birth');
+            $table->string('gender');
             $table->string('school');
 
         });

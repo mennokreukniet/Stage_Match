@@ -32,8 +32,9 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('123456')
             ]
         ];
+        #where(['email' => $user['email']])){
         foreach ($defaultUsers as $user) {
-            if(!App\User::where(['email' => $user['email']])){
+            if (App\User::find(4) == null) {
                 App\User::create($user); // ::createOrFirst should insert only if it isn't already in db. doesn't work:(
             }
         };

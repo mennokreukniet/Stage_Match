@@ -11,10 +11,6 @@ class InternshipTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('internship')->insert([
-            'company' => 'Acme',
-            'mentor' => 'Dhr. Visser',
-            'period' => '16 sept - 38 dec',
-        ]);
+        factory(App\Internship::class, 20)->create();
     }
 }

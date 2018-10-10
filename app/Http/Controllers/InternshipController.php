@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Internship;
-use App\User;
 use Illuminate\Http\Request;
-use Lcobucci\JWT\Parser;
 
 class InternshipController extends Controller
 {
@@ -29,7 +27,7 @@ class InternshipController extends Controller
     public function store(Request $request)
     {
         $internship = new Internship();
-
+        #$internship->fill($request);
         $internship->company = $request->company;
         $internship->mentor = $request->mentor;
         $internship->period = $request->period;
@@ -37,7 +35,7 @@ class InternshipController extends Controller
         $created = $internship->save();
 
         if ($created) {
-            return response(['status' => 'success', 'result' => [$internship]], 200);
+            return response(['status' => 'success', 'result' => $internship], 200);
         }
         return response(['status' => 'error'], 400);
     }

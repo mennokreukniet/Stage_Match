@@ -1,3 +1,4 @@
+
 <template>
     <div>
         <div class="container">
@@ -19,9 +20,9 @@
                 </router-link>
             </div>
             <div class="right">
-                <router-link v-if="role === '2'" tag="button" to="/internship/create">
-                    <i class="material-icons">add</i>
-                    <span>Create internship</span>
+                <router-link v-if="role === '2'" tag="button" to="/internship">
+                    <i class="material-icons">assignment_ind</i>
+                    <span>Internship</span>
                 </router-link>
                 <router-link tag="button" to="/reviews">
                     <i class="material-icons">star</i>
@@ -56,8 +57,13 @@
             }
         },
         created() {
-            const token = localStorage.getItem("accessToken");
-            if (token !== null) this.role = JSON.parse(atob(token.split(".")[1])).role;
+            this.set_role();
+        },
+        methods: {
+            set_role() {
+                const token = localStorage.getItem("accessToken");
+                if (token !== null) this.role = JSON.parse(atob(token.split(".")[1])).role;
+            }
         }
      }
 </script>

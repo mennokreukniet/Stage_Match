@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\CreateToken;
 use Illuminate\Http\Request;
 use App\User;
+use App\Student;
+use App\Company;
 use Lcobucci\JWT\ValidationData;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Builder;
@@ -21,21 +24,27 @@ class UserController extends Controller
         $data = new ValidationData();
 
        $id = $token->getClaim("id");
+       $role = $token->getClaim("role");
+//dd($request->school);
 
-    	User::where('id', $id)
+        User::where('id', $id)
     		->update(['email' => $request->email,
                     'name' => $request->name,
-                    'theme' => $request->theme]);
+                    'theme' => $request->theme,
+                    'city' => $request->city,
+                    'street' => $request->street,
+                    'house_number' => $request->house_number]);
 
-        $signer = new Sha256();
-        $token = (new Builder())->setExpiration(time() + 3600) // Configures the expiration time of the token (exp claim)
-                                ->set('id', $id)
-                                ->set('name', $request->name)
-                                ->set('role', $token->getClaim('role'))
-                                ->set('email', $request->email)
-                                ->set('theme', $request->theme)
-                                ->sign($signer, 'your-256-bit-secret') // DIE SIGNATURE MOET JE NOG VERANDEREN PIK
-                                ->getToken(); // Retrieves the generated token
+        if ($role == 1){
+            Student::where('user_id', $id)
+                ->update(['school' => $request->school,
+                    'date_of_birth' => $request->date_of_birth,
+                    'gender' => $request->gender]);
+        } elseif ($role == 2){
+            Company::where('user_id', $id)
+                ->update(['description' => $request->description]);
+        };
+        $token = CreateToken::createToken($request->email);
 
         return response([
             'status' => 'success',

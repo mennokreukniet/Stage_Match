@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-use Illuminate\Support\Facades\Hash as Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +13,12 @@ use Illuminate\Support\Facades\Hash as Hash;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Student::class, function (Faker $faker) {
+    $schools = [ 'ROC Da Vinci College', 'Zadkine', 'Albeda' ];
     return [
-        'name' => $faker->unique()->userName,
-        'email' => $faker->unique()->safeEmail,
-        'role' => 1,
-        'password' => Hash::make('welkom01'),//'$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'school' => $schools[array_rand($schools)]#ucfirst($faker->domainWord) . " University",
     ];
 });
+

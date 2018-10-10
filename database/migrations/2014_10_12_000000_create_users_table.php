@@ -20,6 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('role')->default('1');
             $table->string('theme')->default('1');
             $table->string('password');
+            $table->string('phone_number');
+            $table->string('gender');
+            $table->string('city');
+            $table->string('street');
+            $table->string('house_number');
+            $table->date('date_of_birth');
             $table->rememberToken();
             $table->timestamps();
         });

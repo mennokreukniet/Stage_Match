@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Internship;
-use App\User;
 use Illuminate\Http\Request;
-use Lcobucci\JWT\Parser;
 
 class InternshipController extends Controller
 {

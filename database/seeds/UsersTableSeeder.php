@@ -17,23 +17,25 @@ class UsersTableSeeder extends Seeder
                 'email' => 'student@student.student',
                 'name' => 'student',
                 'role' => '1',
-                'password' => Hash::make('welkom01')
+                'password' => Hash::make('123456')
             ],
             [
                 'email' => 'company@company.company',
                 'name' => 'company',
                 'role' => '2',
-                'password' => Hash::make('welkom01')
+                'password' => Hash::make('123456')
             ],
             [
                 'email' => 'admin@admin.admin',
                 'name' => 'admin',
                 'role' => '3',
-                'password' => Hash::make('welkom01')
+                'password' => Hash::make('123456')
             ]
         ];
         foreach ($defaultUsers as $user) {
-            App\User::firstOrCreate($user); //should insert only if it isn't already in db. doesn't work:(
+            if(!App\User::where(['email' => $user['email']])){
+                App\User::create($user); // ::createOrFirst should insert only if it isn't already in db. doesn't work:(
+            }
         };
 
         factory(App\User::class, 20)->create()->each(function ($user) {

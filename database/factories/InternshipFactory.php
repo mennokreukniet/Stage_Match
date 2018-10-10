@@ -14,7 +14,7 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Internship::class, function (Faker $faker) {
-    $offset = rand(1,6);
+    $offset = rand(2,8);
     return [
         'company_id' => App\Company::inRandomOrder()->first()->id,
         'mentor' => $faker->name,

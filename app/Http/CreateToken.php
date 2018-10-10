@@ -10,6 +10,13 @@ use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 class CreateToken
 {
+    /**
+     *
+     * checks the user role to determine what token to create
+     *
+     * @param $email
+     * @return string
+     */
     public static function createToken($email){
         $signer = new Sha256();
         $user = User::where('email', $email)

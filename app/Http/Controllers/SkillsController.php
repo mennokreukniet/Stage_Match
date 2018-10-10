@@ -9,6 +9,10 @@ use App\User;
 class SkillsController extends Controller
 {
     /**
+     * Creates a new skill.
+     *
+     * Adds a new skill to the database.
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -27,6 +31,11 @@ class SkillsController extends Controller
     }
 
     /**
+     * Edit an existing skill.
+     *
+     * Finds the skill you want to edit by id, then changes it to the string the user
+     * types into the form
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -45,6 +54,10 @@ class SkillsController extends Controller
     }
 
     /**
+     * Delete a skill.
+     *
+     * Removes a skill from the database by id.
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -60,6 +73,10 @@ class SkillsController extends Controller
     }
 
     /**
+     * Get a single skill.
+     *
+     * Gets a single skill from the database by id.
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -75,6 +92,8 @@ class SkillsController extends Controller
     }
 
     /**
+     * Get all skills.
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -86,6 +105,11 @@ class SkillsController extends Controller
     }
 
     /**
+     * Search a skill by name.
+     *
+     * Runs a 'where like' query to compare your search input to all skills in the
+     * database, then returns all similar named skills.
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */

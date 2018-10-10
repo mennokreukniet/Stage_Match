@@ -23,8 +23,7 @@ class Auth
         $data = new ValidationData();
 
         if($token->validate($data)) {
-            $request["auth"] = $token.getClaims();
-            dd($request);
+            $request["auth"] = $token->getClaims();
             return $next($request);
         } else {
             return response([

@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Student;
 use App\Company;
-use Lcobucci\JWT\ValidationData;
-use Lcobucci\JWT\Parser;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 class UserController extends Controller
 {

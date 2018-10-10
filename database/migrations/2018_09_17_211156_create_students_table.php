@@ -22,15 +22,6 @@ class CreateStudentsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('school');
-            /* te veel bullshit
-            $table->string('phone_number');
-            $table->string('gender');
-            $table->string('city');
-            $table->string('street');
-            $table->string('house_number');
-            $table->date('date_of_birth');
-            $table->timestamps(); //nodig?
-            */
 
         });
     }

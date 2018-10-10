@@ -18260,111 +18260,144 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "register",
-  data: function data() {
-    return {
-      user: {
-        name: "",
-        email: "",
-        password: "",
-        confirm_password: "",
-        role: "1"
-      },
-      error: {
-        show: false,
-        message: ""
-      }
-    };
-  },
-
-
-  watch: {
-    user: {
-      handler: function handler(val) {
-        if (val.email) {
-          var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          if (!re.test(val.email.toLowerCase())) {
-            document.getElementById("email").classList.remove("valid");
-            document.getElementById("email").classList.add("invalid");
-          } else {
-            document.getElementById("email").classList.remove("invalid");
-            document.getElementById("email").classList.add("valid");
-          }
-        }
-      },
-
-      deep: true
-    }
-  },
-  methods: {
-    register: function register() {
-      var _this = this;
-
-      this.error.show = false;
-      if (this.user.name === "" || this.user.email === "" || this.user.password === "" || this.user.confirm_password === "") {
-        this.error = {
-          show: true,
-          message: "Fields can not be empty"
+    name: "register",
+    data: function data() {
+        return {
+            user: {
+                name: "",
+                email: "",
+                password: "",
+                confirm_password: "",
+                city: "",
+                street: "",
+                house_number: "",
+                school: "",
+                date_of_birth: "",
+                gender: "",
+                description: "",
+                role: "1"
+            },
+            error: {
+                show: false,
+                message: ""
+            }
         };
-
-        return;
-      }
-
-      if (this.user.password !== this.user.confirm_password) {
-        this.error = {
-          show: true,
-          message: "Passwords dont match"
-        };
-
-        return;
-      }
-
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-      if (!re.test(this.user.email.toLowerCase())) {
-        this.error = {
-          show: true,
-          message: "Enter a valid Email address"
-        };
-        return;
-      }
-
-      if (this.user.password.length < 6) {
-        this.error = {
-          show: true,
-          message: "Password cant be shorter than 6 chars"
-        };
-
-        return;
-      }
-
-      new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().post("auth/register", this.user).then(function (res) {
-        localStorage.setItem("accessToken", res.data.token);
-        _this.$router.push({ name: "main" });
-      }).catch(function (err) {
-        if (err.response.data.errors.email = "The email has already been taken.") {
-          _this.error = {
-            show: true,
-            message: err.response.data.errors.email
-          };
-        } else {
-          _this.error = {
-            show: true,
-            message: "Broken errorlogging, can't differenciate errors for now (:"
-          };
-        }
-
-        return;
-      });
     },
-    login: function login() {
-      this.$router.push({ name: "login" });
+
+
+    watch: {
+        user: {
+            handler: function handler(val) {
+                if (val.email) {
+                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    if (!re.test(val.email.toLowerCase())) {
+                        document.getElementById("email").classList.remove("valid");
+                        document.getElementById("email").classList.add("invalid");
+                    } else {
+                        document.getElementById("email").classList.remove("invalid");
+                        document.getElementById("email").classList.add("valid");
+                    }
+                }
+            },
+
+            deep: true
+        }
+    },
+    methods: {
+        register: function register() {
+            var _this = this;
+
+            this.error.show = false;
+            if (this.user.name === "" || this.user.email === "" || this.user.password === "" || this.user.confirm_password === "") {
+                this.error = {
+                    show: true,
+                    message: "Fields can not be empty"
+                };
+
+                return;
+            }
+
+            if (this.user.password !== this.user.confirm_password) {
+                this.error = {
+                    show: true,
+                    message: "Passwords dont match"
+                };
+
+                return;
+            }
+
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            if (!re.test(this.user.email.toLowerCase())) {
+                this.error = {
+                    show: true,
+                    message: "Enter a valid Email address"
+                };
+                return;
+            }
+
+            if (this.user.password.length < 6) {
+                this.error = {
+                    show: true,
+                    message: "Password cant be shorter than 6 chars"
+                };
+
+                return;
+            }
+
+            new __WEBPACK_IMPORTED_MODULE_0__core_http__["a" /* default */]().post("auth/register", this.user).then(function (res) {
+                localStorage.setItem("accessToken", res.data.token);
+                _this.$parent.set_role();
+                _this.$router.push({ name: "main" });
+            }).catch(function (err) {
+                if (err.response.data.errors.email = "The email has already been taken.") {
+                    _this.error = {
+                        show: true,
+                        message: err.response.data.errors.email
+                    };
+                } else {
+                    _this.error = {
+                        show: true,
+                        message: "Broken errorlogging, can't differenciate errors for now (:"
+                    };
+                }
+
+                return;
+            });
+        },
+        login: function login() {
+            this.$router.push({ name: "login" });
+        }
     }
-  }
 });
 
 /***/ }),
@@ -18518,6 +18551,253 @@ var render = function() {
           }
         }),
         _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("City")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user.city,
+              expression: "user.city"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { type: "text", placeholder: "City" },
+          domProps: { value: _vm.user.city },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.register($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.user, "city", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("Street")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user.street,
+              expression: "user.street"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { type: "text", placeholder: "Street" },
+          domProps: { value: _vm.user.street },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.register($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.user, "street", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "label" }, [_vm._v("House number")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user.house_number,
+              expression: "user.house_number"
+            }
+          ],
+          staticClass: "classic",
+          attrs: { type: "text", placeholder: "House number" },
+          domProps: { value: _vm.user.house_number },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.register($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.user, "house_number", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm.user.role === "1"
+          ? _c("span", { staticClass: "label" }, [_vm._v("School")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.role === "1"
+          ? _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.school,
+                  expression: "user.school"
+                }
+              ],
+              staticClass: "classic",
+              attrs: { type: "text", placeholder: "School" },
+              domProps: { value: _vm.user.school },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.register($event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "school", $event.target.value)
+                }
+              }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.role === "1"
+          ? _c("span", { staticClass: "label" }, [_vm._v("Date of birth")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.role === "1"
+          ? _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.date_of_birth,
+                  expression: "user.date_of_birth"
+                }
+              ],
+              staticClass: "classic",
+              attrs: { type: "text", placeholder: "Date of birth" },
+              domProps: { value: _vm.user.date_of_birth },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.register($event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "date_of_birth", $event.target.value)
+                }
+              }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.role === "1"
+          ? _c("span", { staticClass: "label" }, [_vm._v("Gender")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.role === "1"
+          ? _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.gender,
+                  expression: "user.gender"
+                }
+              ],
+              staticClass: "classic",
+              attrs: { type: "text", placeholder: "Gender" },
+              domProps: { value: _vm.user.gender },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.register($event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "gender", $event.target.value)
+                }
+              }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.role === "2"
+          ? _c("span", { staticClass: "label" }, [_vm._v("Description")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.role === "2"
+          ? _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.description,
+                  expression: "user.description"
+                }
+              ],
+              staticClass: "classic",
+              attrs: { type: "text", placeholder: "Description" },
+              domProps: { value: _vm.user.description },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.register($event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "description", $event.target.value)
+                }
+              }
+            })
+          : _vm._e(),
+        _vm._v(" "),
         _c("span", { staticClass: "label" }, [_vm._v("Role")]),
         _vm._v(" "),
         _c(
@@ -18531,6 +18811,7 @@ var render = function() {
                 expression: "user.role"
               }
             ],
+            staticClass: "classic",
             on: {
               change: function($event) {
                 var $$selectedVal = Array.prototype.filter

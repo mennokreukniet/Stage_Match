@@ -11,24 +11,6 @@ class SkillsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('skills')->insert([
-            'name' => 'php',
-        ]);
-
-        DB::table('skills')->insert([
-            'name' => 'lua',
-        ]);
-
-        DB::table('skills')->insert([
-            'name' => 'mysql',
-        ]);
-
-        DB::table('skills')->insert([
-            'name' => 'javascript',
-        ]);
-
-        DB::table('skills')->insert([
-            'name' => 'laravel',
-        ]);
+        factory(App\Skill::class, 50)->create();
     }
 }

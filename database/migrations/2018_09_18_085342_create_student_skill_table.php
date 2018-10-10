@@ -19,7 +19,7 @@ class CreateStudentSkillTable extends Migration
             $table->unsignedInteger('skill_id');
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
             $table->unsignedInteger('level_id');
-            $table->foreign('level_id')->references('id')->on('level')->onDelete('cascade');
+            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
         });
     }
 

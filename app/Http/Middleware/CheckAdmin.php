@@ -27,8 +27,8 @@ class CheckAdmin
         
         if($token->validate($data)) {
             if ($token->getClaim("role") ==="3") {
+                $request["auth"] = $token->getClaims();
                 return $next($request);
-
             } else {
                 return response([
                 'status' => 'error',
@@ -40,8 +40,6 @@ class CheckAdmin
                 'status' => 'error',
                 'error' => ['msg' => 'token invallid']
             ]);
-            }
-
-        
+        }
     }    
 }

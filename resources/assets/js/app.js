@@ -6,7 +6,6 @@ Vue.use(VueI18n);
 Vue.use(VueRouter);
 
 import MainApp from './views/App';
-
 import Auth_login from './views/auth/Login.vue';
 import Auth_register from './views/auth/Register.vue';
 import Index from './views/index/Index.vue';
@@ -86,10 +85,16 @@ const router = new VueRouter({
     ],
 });
 
+
+/**
+ * @description Router middleware
+ */
 router.beforeEach((to, from, next) => {
+
     document.title = `StageMatch - ${to.name}`;
-    console.log(to.name);
+
     const token = localStorage.getItem("accessToken");
+
     if (["login", "register", "index"].includes(to.name)) {
         if (token !== null) {
             return next({ name: "main" });
@@ -149,9 +154,9 @@ const translations = {
   }
 
 const i18n = new VueI18n({
-    locale: 'nl', // set locale
+    locale: 'nl',
     fallbackLocale: 'en',
-    messages: translations, // set locale messages
+    messages: translations,
   })
 
 const app = new Vue({

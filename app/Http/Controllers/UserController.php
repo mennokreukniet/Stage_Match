@@ -47,23 +47,23 @@ class UserController extends Controller
         $id = $request->auth["id"];
         $role = $request->auth["role"];
 
-        $user = User::where('id', $id)
-       		->get();
-        $data[] = $user;
-
         if ($role == '1'){
-           $student = Student::where('user_id', $id)
+           $user = Student::where('user_id', $id)
+               ->join('users', 'students.user_id', '=', 'users.id')
                ->get();
-           $data[] = $student;
-       } elseif ($role == '2'){
-           $company = Company::where('user_id', $id)
-               ->get();
-           $data[] = $company;
-       };
+
+        } elseif ($role == '2'){
+            $user = Company::where('user_id', $id)
+                ->join('users', 'companies.user_id', '=', 'users.id')
+                ->get();
+        } else {
+            $user = User::where('id', $id)
+                ->get();
+        };
 
         return response([
             'status' => 'success',
-            'data' => $data,
+            'data' => $user,
         ], 200);
     }
 }

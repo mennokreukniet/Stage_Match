@@ -4,8 +4,6 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use App\Traits\RestTrait;
-use App\Traits\RestExceptionHandlerTrait;
 
 class Handler extends ExceptionHandler
 {
@@ -48,10 +46,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if(!$this->isApiCall($request)) {
-            return parent::render($request, $e);
+        if (App::environment('local')) {
+            return parent::render($request, $exception);
         } else {
-            return $this->getJsonResponseForException($request, $e);
+            response([
+                "status" => 500,
+                "error" => [
+                    "readable_error" => "Internal Server Error",
+                    "error_code" => "ISE",
+                    "description" => "Something went wrong on our side! Please try again, if this error stays occurring, contact the administrator."
+            ]], 500);
         }
     }
 }

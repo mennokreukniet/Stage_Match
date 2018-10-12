@@ -22,7 +22,7 @@ class UserController extends Controller
                     'street' => $request->street,
                     'house_number' => $request->house_number]);
 
-        if ($role == 1){
+        if ($role == '1'){
             Student::where('user_id', $id)
                 ->update(['school' => $request->school,
                     'date_of_birth' => $request->date_of_birth,
@@ -50,20 +50,23 @@ class UserController extends Controller
         if ($role == '1'){
            $user = Student::where('user_id', $id)
                ->join('users', 'students.user_id', '=', 'users.id')
+               ->select('users.role', 'users.id', 'users.name', 'users.email', 'users.theme', 'users.city', 'users.street', 'users.house_number', 'students.school', 'students.date_of_birth', 'students.gender')
                ->get();
 
         } elseif ($role == '2'){
             $user = Company::where('user_id', $id)
                 ->join('users', 'companies.user_id', '=', 'users.id')
+                ->select('users.role', 'users.id', 'users.name', 'users.email', 'users.theme', 'users.city', 'users.street', 'users.house_number', 'companies.description')
                 ->get();
         } else {
             $user = User::where('id', $id)
+                ->select('users.role', 'users.id', 'users.name', 'users.email', 'users.theme', 'users.city', 'users.street', 'users.house_number')
                 ->get();
         };
 
         return response([
             'status' => 'success',
-            'data' => $user,
+            'user' => $user[0],
         ], 200);
     }
 }

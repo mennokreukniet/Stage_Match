@@ -54,7 +54,7 @@ export default {
     name: "settings",
     created() {
         new Http().get("user").then(res => {
-            this.user = res.data;
+            this.user = res.data.user;
         })
     },
     data() {

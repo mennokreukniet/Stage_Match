@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\CreateToken;
+use App\Http\Token;
 use Illuminate\Http\Request;
 use App\User;
 use App\Student;
@@ -31,7 +31,10 @@ class UserController extends Controller
             Company::where('user_id', $id)
                 ->update(['description' => $request->description]);
         };
-        $token = CreateToken::createToken($request->email);
+
+        $user = User::where('email', $request->email)->get();
+
+        $token = Token::create($user[0]);
 
         return response([
             'status' => 'success',

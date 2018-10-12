@@ -20,9 +20,9 @@ class CheckAdmin
         $token = explode(' ', $request->header('Authorization'))[1];
 
         $token = Token::verify($token);
-
+        
         if($token["is_valid"]) {
-            if ($token->getClaim("role") ==="3") {
+            if ($token["claims"]["role"] == "3") {
                 $request["auth"] = $token["claims"];
                 return $next($request);
             } else {

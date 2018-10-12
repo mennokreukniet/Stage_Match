@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\CreateToken;
+use App\Http\Token;
 use Illuminate\Http\Request;
 use App\User;
 use App\Student;
@@ -31,7 +31,10 @@ class UserController extends Controller
             Company::where('user_id', $id)
                 ->update(['description' => $request->description]);
         };
-        $token = CreateToken::createToken($request->email);
+
+        $user = User::where('email', $request->email)->get();
+
+        $token = Token::create($user[0]);
 
         return response([
             'status' => 'success',
@@ -40,11 +43,30 @@ class UserController extends Controller
     }
 
     public function getUser(Request $request){
-       $id = $request->auth["id"];
+       // dd(User::all());
+        $id = $request->auth["id"];
+        $role = $request->auth["role"];
 
-       $user = User::where('id', $id)
+        $user = User::where('id', $id)
        		->get();
 
-       	return json_encode($user[0]);
+        $student = Student::where('user_id', $id)
+            ->get();
+       // dd($user);
+
+
+
+        if ($role == '1'){
+           $student = Student::where('user_id', $id)
+               ->get();
+       } elseif ($role == '2'){
+           $company = Company::where('user_id', $id)
+               ->get();
+       };
+
+        return response([
+            'status' => 'success',
+            'user' => $user,
+        ], 200);
     }
 }

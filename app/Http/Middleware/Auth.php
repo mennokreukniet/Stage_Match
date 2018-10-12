@@ -2,9 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Token;
 use Closure;
-use Lcobucci\JWT\Parser;
-use Lcobucci\JWT\ValidationData;
 
 class Auth
 {
@@ -19,11 +18,11 @@ class Auth
     {
         $token = explode(' ', $request->header('Authorization'))[1];
 
-        $token = (new Parser())->parse($token); // Parses from a string
-        $data = new ValidationData();
+        $token = Token::verify($token);
+       // dd($token);
 
-        if($token->validate($data)) {
-            $request["auth"] = $token->getClaims();
+        if($token["is_valid"]) {
+            $request["auth"] = $token["claims"];
             return $next($request);
         } else {
             return response([

@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function(){
   Route::post('auth/logout', 'AuthController@logout');
   Route::post('user/edit', 'UserController@editUser');
   Route::get('user', 'UserController@getUser');
+  Route::get('student', 'StudentController@getStudent');
+  Route::get('company', 'CompanyController@getCompany');
   Route::get('user/skill/{keyword}', 'SkillsController@searchSkill');
   Route::apiResource('internship', 'InternshipController');
 });

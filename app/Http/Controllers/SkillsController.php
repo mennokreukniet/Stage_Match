@@ -17,7 +17,7 @@ class SkillsController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function createSkill(Request $request){
-    	$skill = new Skill;
+    	$skill = new Skill();
 
     	$skill->name = $request->name;
 

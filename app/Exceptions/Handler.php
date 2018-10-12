@@ -46,10 +46,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (App::environment('local')) {
+        if (env("APP_ENV") === "local") {
             return parent::render($request, $exception);
         } else {
-            response([
+            return response([
                 "status" => 500,
                 "error" => [
                     "readable_error" => "Internal Server Error",

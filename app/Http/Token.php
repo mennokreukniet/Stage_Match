@@ -5,6 +5,7 @@ namespace App\Http;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\ValidationData;
 
 class Token
 {
@@ -23,7 +24,7 @@ class Token
             ->set('name', $user->name)
             ->set('role', $user->role)
             ->set('theme', $user->theme)
-            ->sign($signer, 'your-256-bit-secret')
+            ->sign($signer, env("JWT_SECRET") )
             ->getToken();
 
         return (string)$token;

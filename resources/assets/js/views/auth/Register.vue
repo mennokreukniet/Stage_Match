@@ -34,7 +34,10 @@
         <input v-if="user.role === '1'" @keyup.enter="register" class="classic" v-model="user.date_of_birth" type="text" placeholder="Date of birth">
 
         <span v-if="user.role === '1'" class="label">Gender</span>
-        <input v-if="user.role === '1'" @keyup.enter="register" class="classic" v-model="user.gender" type="text" placeholder="Gender">
+        <select v-if="user.role === '1'" class="classic margin-bottom" v-model="user.gender">
+          <option value="male" selected="true">Male</option>
+          <option value="female">Female</option>
+        </select>
 
         <span v-if="user.role === '2'" class="label">Description</span>
         <input v-if="user.role === '2'" @keyup.enter="register" class="classic" v-model="user.description" type="text" placeholder="Description">
@@ -71,7 +74,7 @@
                     house_number: "",
                     school: "",
                     date_of_birth: "",
-                    gender: "",
+                    gender: "male",
                     description: "",
                     role: "1",
                 },

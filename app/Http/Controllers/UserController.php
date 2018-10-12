@@ -2,30 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\CreateToken;
+use App\Http\Token;
 use Illuminate\Http\Request;
 use App\User;
 use App\Student;
 use App\Company;
-use Lcobucci\JWT\ValidationData;
-use Lcobucci\JWT\Parser;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 class UserController extends Controller
 {
     public function editUser(Request $request){
-    	//dd($request);
-    	$token = explode(' ', $request->header('Authorization'))[1];
-
-    	//dd($token);
-        
-        $token = (new Parser())->parse($token); // Parses from a string
-        $data = new ValidationData();
-
-       $id = $token->getClaim("id");
-       $role = $token->getClaim("role");
-//dd($request->school);
+       $id = $request->auth["id"];
+       $role = $request->auth["role"];
 
         User::where('id', $id)
     		->update(['email' => $request->email,
@@ -40,11 +27,14 @@ class UserController extends Controller
                 ->update(['school' => $request->school,
                     'date_of_birth' => $request->date_of_birth,
                     'gender' => $request->gender]);
-        } elseif ($role == 2){
+        } elseif ($role === "2"){
             Company::where('user_id', $id)
                 ->update(['description' => $request->description]);
         };
-        $token = CreateToken::createToken($request->email);
+
+        $user = User::where('email', $request->email)->get();
+
+        $token = Token::create($user[0]);
 
         return response([
             'status' => 'success',
@@ -53,16 +43,30 @@ class UserController extends Controller
     }
 
     public function getUser(Request $request){
-    	$token = explode(' ', $request->header('Authorization'))[1];
-        
-        $token = (new Parser())->parse($token); // Parses from a string
-        $data = new ValidationData();
+       // dd(User::all());
+        $id = $request->auth["id"];
+        $role = $request->auth["role"];
 
-       $id = $token->getClaim("id");
-
-       $user = User::where('id', $id)
+        $user = User::where('id', $id)
        		->get();
 
-       	return json_encode($user[0]);
+        $student = Student::where('user_id', $id)
+            ->get();
+       // dd($user);
+
+
+
+        if ($role == '1'){
+           $student = Student::where('user_id', $id)
+               ->get();
+       } elseif ($role == '2'){
+           $company = Company::where('user_id', $id)
+               ->get();
+       };
+
+        return response([
+            'status' => 'success',
+            'user' => $user,
+        ], 200);
     }
 }

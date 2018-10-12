@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterFormRequest;
+use App\Http\Token;
 use App\User;
 use App\Student;
 use App\Company;
-use App\Http\CreateToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -58,7 +58,11 @@ class AuthController extends Controller
 	                'msg' => 'Invalid Credentials.'
 	            ], 400);
 	    }
-	    $token = CreateToken::createToken($request->email);
+
+        $user = User::where('email', $request->email)->get();
+
+	    $token = Token::create($user[0]);
+
 	    return response([
 	            'status' => 'success',
 	            'token' => $token

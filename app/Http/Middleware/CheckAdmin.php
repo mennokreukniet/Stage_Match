@@ -2,9 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Token;
 use Closure;
-use Lcobucci\JWT\ValidationData;
-use Lcobucci\JWT\Parser;
 
 
 class CheckAdmin 
@@ -18,17 +17,14 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-       // dd($request->header('Authorization'));
-        //Bearer TOKEN
         $token = explode(' ', $request->header('Authorization'))[1];
         
-        $token = (new Parser())->parse($token); // Parses from a string
-        $data = new ValidationData();
+        $token = Token::verify($token);
         
-        if($token->validate($data)) {
+        if($token->is_valid) {
             if ($token->getClaim("role") ==="3") {
+                $request["auth"] = $token->claims;
                 return $next($request);
-
             } else {
                 return response([
                 'status' => 'error',
@@ -40,8 +36,6 @@ class CheckAdmin
                 'status' => 'error',
                 'error' => ['msg' => 'token invallid']
             ]);
-            }
-
-        
+        }
     }    
 }

@@ -19,7 +19,6 @@ class Auth
         $token = explode(' ', $request->header('Authorization'))[1];
 
         $token = Token::verify($token);
-       // dd($token);
 
         if($token["is_valid"]) {
             $request["auth"] = $token["claims"];

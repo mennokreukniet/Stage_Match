@@ -18,12 +18,12 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         $token = explode(' ', $request->header('Authorization'))[1];
-        
+
         $token = Token::verify($token);
-        
-        if($token->is_valid) {
+
+        if($token["is_valid"]) {
             if ($token->getClaim("role") ==="3") {
-                $request["auth"] = $token->claims;
+                $request["auth"] = $token["claims"];
                 return $next($request);
             } else {
                 return response([
@@ -34,7 +34,7 @@ class CheckAdmin
         } else {
                 return response([
                 'status' => 'error',
-                'error' => ['msg' => 'token invallid']
+                'error' => ['msg' => 'token invalid']
             ]);
         }
     }    

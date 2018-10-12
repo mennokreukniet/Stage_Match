@@ -31,7 +31,7 @@ class UserController extends Controller
                 ->update(['school' => $request->school,
                     'date_of_birth' => $request->date_of_birth,
                     'gender' => $request->gender]);
-        } elseif ($role == 2){
+        } elseif ($role === "2"){
             Company::where('user_id', $id)
                 ->update(['description' => $request->description]);
         };

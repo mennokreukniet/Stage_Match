@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\Traits\RestTrait;
+use App\Traits\RestExceptionHandlerTrait;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +48,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        if(!$this->isApiCall($request)) {
+            return parent::render($request, $e);
+        } else {
+            return $this->getJsonResponseForException($request, $e);
+        }
     }
 }

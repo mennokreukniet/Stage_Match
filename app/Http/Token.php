@@ -2,8 +2,8 @@
 
 namespace App\Http;
 
-use App\User;
 use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 class Token
@@ -12,7 +12,7 @@ class Token
      *
      * checks the user role to determine what token to create
      *
-     * @param $email
+     * @param $user
      * @return string
      */
     public static function create($user){
@@ -27,5 +27,31 @@ class Token
             ->getToken();
 
         return (string)$token;
+    }
+
+
+    /**
+     *
+     * Verify's token and returns headers and claims
+     *
+     * @param $token
+     * @return array
+     */
+
+    public static function verify($token) {
+        $token = (new Parser())->parse($token);
+        $data = new ValidationData();
+
+        if ($token->validate($data)) {
+            return [
+                "is_valid" => true,
+                "headers" => $token->getHeaders(),
+                "claims" => $token->getClaims()
+            ];
+        }
+
+        return [
+            "is_valid" => false
+        ];
     }
 }

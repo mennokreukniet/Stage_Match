@@ -3,6 +3,7 @@
     <div id="main">
 
         <prompt v-show="prompt_list.edit.render" v-bind:prompt="prompt_list.edit" @close="prompt_list.edit.render = false" @value="edit"/>
+        <confirm v-show="confirm.remove.render" v-bind:confirm="confirm.remove" @close="confirm.remove.render = false" @trigger="remove"/>
 
         <div class="card">
             <span class="title">Admin</span>
@@ -34,7 +35,7 @@
                         <button class="edit" v-on:click="prompt('edit', `New name for ${value.name}`, {id: value.id, name: value.name})">
                             <i class="material-icons">edit</i>
                         </button>    
-                        <button class="remove" v-on:click="remove(value.id, index)">
+                        <button class="remove" v-on:click="confirm_box('remove', 'This action deletes all skill entries which might exist on a user', { id: value.id, index: index })">
                             <i class="material-icons">delete</i>
                         </button>    
                     </div>
@@ -49,12 +50,14 @@ import Http from '../../core/http';
 
 import Prompt from '../../components/Prompt.vue';
 import Status from '../../components/Status.vue';
+import Confirm from '../../components/Confirm.vue';
 
 export default {
     name: "admin",
     components: {
       Prompt,
-      Status
+      Status,
+      Confirm
     },
     created () {
         this.get_all_skills();  
@@ -83,6 +86,13 @@ export default {
                     type: ""
                 }
             },
+            confirm: {
+                remove: {
+                    render: false,
+                    title: "",
+                    properties: {}
+                }
+            }
         }
     },
     watch: {
@@ -105,17 +115,29 @@ export default {
                 properties: properties
             }
         },
+        confirm_box(type, title, properties = {}) {
+            this.confirm[type] = {
+                render: true,
+                title: title,
+                properties: properties
+            }
+        },
 
         get_all_skills () {
             new Http().get(`admin/skill`).then(res => {this.skills = res.data.result})
         },
 
-        remove (id, index)  {
-            if (!confirm("This action deletes all skill entries which might exist on a user")) return;
-            new Http().delete(`admin/skill/${id}`).then(res => {
-                this.skills.splice(index, 1);
-                
-            })
+        remove (remove)  {
+            this.status_list.skills.render = false;
+            const name = this.skills[remove.properties.index].name;
+            new Http().delete(`admin/skill/${remove.properties.id}`).then(res => {
+                this.skills.splice(remove.properties.index, 1);
+                this.status_list.skills = {
+                            render: true,
+                            message: `${name} removed`,
+                            type: "success"
+                        }
+                })
         },
 
         edit (edit) {
@@ -130,7 +152,15 @@ export default {
                     message: "Name can not be empty",
                     type: "error"
                 }
-            } 
+            }
+
+            if (edit.properties.name === name) {
+                return this.status_list.skills = {
+                    render: true,
+                    message: `This skill is already called ${name}`,
+                    type: "error"
+                }
+            }
 
             new Http().put(`admin/skill/${id}`, { name: name }).then(res => {
                 for (let i = 0; i < this.skills.length; i++) {

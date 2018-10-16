@@ -9,20 +9,33 @@
             <div class="form">
                 <span class="label">Name</span>
                 <input v-model="user.name" class="classic" type="text" placeholder="Name">
+
                 <span class="label">Email</span>
                 <input id="email" v-model="user.email" class="classic" type="text" placeholder="E-Mail">
+
                 <span class="label">City</span>
-                <input id="email" v-model="user.city" class="classic" type="text" placeholder="City">
+                <input v-model="user.city" class="classic" type="text" placeholder="City">
+
                 <span class="label">House number</span>
-                <input id="email" v-model="user.house_number" class="classic" type="text" placeholder="House number">
+                <input v-model="user.house_number" class="classic" type="text" placeholder="House number">
+
                 <span class="label">Street</span>
-                <input id="email" v-model="user.street" class="classic" type="text" placeholder="Street">
+                <input v-model="user.street" class="classic" type="text" placeholder="Street">
+
+                <span v-if="user.role === '1'" class="label">School</span>
+                <input v-if="user.role === '1'" v-model="user.school" class="classic" type="text" placeholder="School">
+
+                <span v-if="user.role === '2'" class="label">Description</span>
+                <input v-if="user.role === '2'" v-model="user.description" class="classic" type="text" placeholder="Description">
+
                 <span class="label">Theme</span>
                 <select class="classic margin-bottom" v-model="user.theme">
                     <option value="1" selected="true">Light</option>
                     <option value="2">Dark</option>
                 </select>
-                <div  style="background: green; width: calc(100% - 40px);border-radius: 2px;padding: 15px 20px" v-if="skills.show">
+
+                <div  style="background: green; width: calc(100% - 40px);border-radius: 2px;padding: 15px 20px" v-if="user.role === '1'">
+                    <input class="classic" type="text" v-model="skill">
                     <template v-for="value in this.skills.list" class="skill">
                         <div v-bind:key="value.id" class="skill">
                             <button v-on:click="add_skill(value.id)">{{value.name}}</button>
@@ -42,7 +55,7 @@ export default {
     name: "settings",
     created() {
         new Http().get("user").then(res => {
-            this.user = res.data;
+            this.user = res.data.user;
         })
     },
     data() {
@@ -135,14 +148,15 @@ export default {
             });
         },
         add_skill(id) {
-            this.error = {
-                show: true,
-                message: "Adding skills is not implemented :(!"
-            }
-            // new Http().post("user").then(res => {
-            //     this.name = res.data.name;
-            //     this.email = res.data.email;
-            // })
+            new Http().post("user/skill", { id: id }).then(res => {
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+                // this.error = {  
+                //     show: true,
+                //     message: "Adding skills is not implemented :(!"
+                // }
+            });
         }
     }
 }

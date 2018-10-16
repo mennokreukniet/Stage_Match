@@ -1,5 +1,5 @@
 <template>
-    <div id="main">
+    <div>
         <div class="card">
             <span class="title">Create internship</span>
 

@@ -1,8 +1,12 @@
 <template>
-    <div>
-        <div class="card">
-            <strong>Version: </strong><span>V0.0.2 (STILL ROCKING ÜBER ALPHA)</span><br>
-            <strong>Role: </strong><span>{{this.role}}</span>
+    <div class="container">
+        <div class="main">
+            <div class="card">
+                <input type="hidden" v-model="token">
+                <strong>Version: </strong><span>V0.0.3 (LESS ALPHA-ISH)</span><br>
+                <strong>Role: </strong><span>{{this.role}}</span><br><br>
+                <button class="classic" v-on:click="get_token">Copy token</button>
+            </div>
         </div>
     </div>
 </template>
@@ -12,12 +16,13 @@
         name: 'main_index', 
         data() {
             return {
-                role: ""
+                token: ""
             }
         },
         created() {
-            console.log(this);
-            switch(JSON.parse(atob(localStorage.getItem("accessToken").split(".")[1])).role) {
+            this.token = localStorage.getItem("accessToken");
+
+            switch(this.$parent.auth.role) {
                 case "1":
                     this.role = "Student";
                     break;
@@ -29,6 +34,16 @@
                     break;
             }
 
-        } 
+        },
+        methods: {
+            get_token() {
+                navigator.permissions.query({name: "clipboard-write"}).then(result => {
+                    if (result.state == "granted" || result.state == "prompt") {
+                    navigator.clipboard.writeText(this.token).then(clipText =>
+                        console.log(clipText));
+                    }
+                });
+            }
+        }
     }
 </script>

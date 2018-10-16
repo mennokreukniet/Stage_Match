@@ -1,50 +1,69 @@
 <template>
-    <div id="main">
-        <div class="card">
-            <span class="title">Account Settings</span>
+    <div class="container">
+        <div class="main">
+            <div class="title">
+                <i class="material-icons">settings</i>
+                <span class="title">Account Settings</span>
+            </div>
 
             <div class="error" v-if="error.show">{{error.message}}</div>
             <div class="success" v-if="success.show">{{success.message}}</div>
 
-            <div class="form">
-                <span class="label">Name</span>
-                <input v-model="user.name" class="classic" type="text" placeholder="Name">
 
-                <span class="label">Email</span>
-                <input id="email" v-model="user.email" class="classic" type="text" placeholder="E-Mail">
+            <div class="card">
 
-                <span class="label">City</span>
-                <input v-model="user.city" class="classic" type="text" placeholder="City">
+                <span class="title">General Settings</span>
 
-                <span class="label">House number</span>
-                <input v-model="user.house_number" class="classic" type="text" placeholder="House number">
+                <div class="form">
+                    <span class="label">Name</span>
+                    <input v-model="user.name" class="classic" type="text" placeholder="Name">
 
-                <span class="label">Street</span>
-                <input v-model="user.street" class="classic" type="text" placeholder="Street">
+                    <span class="label">Email</span>
+                    <input id="email" v-model="user.email" class="classic" type="text" placeholder="E-Mail">
 
-                <span v-if="user.role === '1'" class="label">School</span>
-                <input v-if="user.role === '1'" v-model="user.school" class="classic" type="text" placeholder="School">
+                    <span class="label">City</span>
+                    <input v-model="user.city" class="classic" type="text" placeholder="City">
 
-                <span v-if="user.role === '2'" class="label">Description</span>
-                <input v-if="user.role === '2'" v-model="user.description" class="classic" type="text" placeholder="Description">
+                    <span class="label">House number</span>
+                    <input v-model="user.house_number" class="classic" type="text" placeholder="House number">
 
-                <span class="label">Theme</span>
-                <select class="classic margin-bottom" v-model="user.theme">
-                    <option value="1" selected="true">Light</option>
-                    <option value="2">Dark</option>
-                </select>
+                    <span class="label">Street</span>
+                    <input v-model="user.street" class="classic" type="text" placeholder="Street">
 
-                <div  style="background: green; width: calc(100% - 40px);border-radius: 2px;padding: 15px 20px" v-if="user.role === '1'">
+                    <span v-if="this.$parent.role === '1'" class="label">School</span>
+                    <input v-if="this.$parent.role === '1'" v-model="user.school" class="classic" type="text" placeholder="School">
+
+                    <span v-if="this.$parent.role === '2'" class="label">Description</span>
+                    <input v-if="this.$parent.role === '2'" v-model="user.description" class="classic" type="text" placeholder="Description">
+
+                    <span class="label">Theme</span>
+                    <select class="classic margin-bottom" v-model="user.theme">
+                        <option value="1" selected="true">Light</option>
+                        <option value="2">Dark</option>
+                    </select>
+
+                    <button class="submit" v-on:click="edit">Edit profile</button>
+                </div>
+            </div>
+
+            <div  v-if="this.$parent.role === '1'" class="card">
+                <span class="title">Skill Management</span>
+                <div style="background: green; width: calc(100% - 40px);border-radius: 2px;padding: 15px 20px">
+                    <input class="classic" type="text" v-model="skill"> 
                     <template v-for="value in this.skills.list" class="skill">
                         <div v-bind:key="value.id" class="skill">
                             <button v-on:click="add_skill(value.id)">{{value.name}}</button>
                         </div>
                     </template>
                 </div>
-                <button class="submit" v-on:click="edit">Edit profile</button>
             </div>
-        </div>
-    </div>    
+
+            <div class="card">
+                <span class="title">Account Management</span>
+                <button class="classic danger">(not working)Permanently deactivate account</button>
+            </div>
+        </div>  
+    </div>  
 </template>
 
 <script>

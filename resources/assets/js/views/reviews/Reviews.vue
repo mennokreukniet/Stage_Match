@@ -1,7 +1,9 @@
 <template>
-    <div id="main">
-        <div class="card">
-            <span class="title">Reviews (Not added yet)</span>
+    <div class="container">
+        <div class="main">
+            <div class="card">
+                <span class="title">Reviews (Not added yet)</span>
+            </div>
         </div>
     </div>    
 </template>

@@ -419,13 +419,6 @@ button.register {
     background: $card4_bg;
 }
 
-@media only screen and (min-width: 600px) {
-    div.container {
-        width: 100%;
-        margin-left: 0px;        
-    }
-}
-
 %side_bar {
     display: flex;
     width: calc(50% - 40px);
@@ -675,7 +668,6 @@ nav {
     margin-top: 20px;
     background: white;
     border-radius: 3px;
-    max-width: 750px;
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
@@ -690,9 +682,47 @@ nav {
         white-space: 1.5px;
         display: block;
         margin-bottom: 25px;
+        font-size: 24px;
+    }
+}
+
+div.title {
+    position: relative;
+    max-width: 750px;
+    margin-top: 15px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    i.material-icons {
+        color: white;
+        background: $primary;
+        padding: 10px;
+        border-radius: 100%;
+        margin-right: 13px;
+        font-size: 22px;
+    }
+
+    span.title {
+        font-family: 'Ubuntu', sans-serif;
+        white-space: 1.5px;
+        margin-bottom: 25px;
         font-size: 27px;
     }
 }
+
+
+// .page-options {
+//     position: absolute;
+
+//     &.right {
+
+//     }
+
+//     &.left {
+//         left: 10%;
+//         //transform: translate(, 0)
+//     }
+// }
 
 %button {
     border: none;
@@ -732,6 +762,15 @@ button.classic.cancel {
 
 button.classic.cancel:hover {
     background: #bebebe;
+}
+
+button.classic.danger {
+    background: $red;
+    color: white;
+}
+
+button.classic.danger:hover {
+    background: $red;
 }
 
 .margin-top {
@@ -814,10 +853,63 @@ div.form {
     }
 }
 
-@media only screen and (min-width: 600px) {
-    div.container > div:not(.auth) {
-        width: calc(100% - 80px);
+div.page-options {
+    display: none;
+    padding-top: 18px;
+    &.left {
+        grid-column: 1;
+    }
+
+    &.right {
+        grid-column: 3;
+    }
+
+    button {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        i {
+            font-size: 25px;
+        }
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    div.container {
+        display: grid;
+        grid-template-columns: minmax(50px, 1fr) minmax(auto, 750px) minmax(50px, 1fr);
+        width: calc(100% - 80px) !important;
         margin-left: 80px;
+        div.main {
+            grid-column: 2;
+            grid-row: 1;
+        }
+    }
+
+    div.page-options {
+        display: unset;
+
+        &.left {
+        }
+    
+        &.right {
+        }
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    div.container {
+        width: calc(100% - 120px) !important;
+        margin-left: 100px;
+    }
+}
+
+div.container {
+    width: 100%;
+
+    &.auth {
+        width: 100% !important;
+        margin-left: 0;
     }
 }
 

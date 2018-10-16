@@ -1,11 +1,21 @@
 <template>
-    <div>
-        <router-link to="/internship" tag="button" class="back"><i class="material-icons">arrow_back_ios</i></router-link>
-        <router-link to="/internship/create" tag="button" class="create"><i class="material-icons">add</i></router-link>
+    <div class="container">
+        <div class="page-options left">
+            <router-link to="/internship" tag="button" class="back"><i class="material-icons">arrow_back_ios</i></router-link>
+        </div>
         
-        
-        <router-view></router-view>   
-        
+        <div class="page-options right">
+            <router-link to="/internship/create" tag="button" class="page-options right create"><i class="material-icons">add</i></router-link>
+        </div>
+
+        <div class="main">
+            <div class="title">
+                <i class="material-icons">assignment_ind</i>
+                <span class="title">Internships</span>
+            </div>
+
+            <router-view></router-view>   
+        </div>
     </div>
 </template>
 

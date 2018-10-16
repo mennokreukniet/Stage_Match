@@ -35,7 +35,6 @@
                 </select>
 
                 <div  style="background: green; width: calc(100% - 40px);border-radius: 2px;padding: 15px 20px" v-if="user.role === '1'">
-                    <input class="classic" type="text" v-model="skill">
                     <template v-for="value in this.skills.list" class="skill">
                         <div v-bind:key="value.id" class="skill">
                             <button v-on:click="add_skill(value.id)">{{value.name}}</button>
@@ -148,15 +147,14 @@ export default {
             });
         },
         add_skill(id) {
-            new Http().post("user/skill", { id: id }).then(res => {
-                console.log(res);
-            }).catch(err => {
-                console.log(err);
-                // this.error = {  
-                //     show: true,
-                //     message: "Adding skills is not implemented :(!"
-                // }
-            });
+            this.error = {
+                show: true,
+                message: "Adding skills is not implemented :(!"
+            }
+            // new Http().post("user").then(res => {
+            //     this.name = res.data.name;
+            //     this.email = res.data.email;
+            // })
         }
     }
 }

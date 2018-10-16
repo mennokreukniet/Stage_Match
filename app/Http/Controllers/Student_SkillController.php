@@ -26,7 +26,7 @@ class Student_SkillController extends Controller
         $added = $student->skills()->save($skill);
 
         if ($added) {
-            return response(['status' => 'success', 'result' => $skill], 200);
+            return response(['status' => 'success', 'result' => [$skill]], 200);
         } else {
             return response(['status' => 'error'], 400);
         }

@@ -24,7 +24,7 @@ Route::post('/auth/register', 'AuthController@register');
 Route::post('auth/login', 'AuthController@login');
 
 Route::group(['middleware' => 'auth'], function(){
-  Route::post('student/skill', 'Student_SkillController@addSkill');
+  Route::post('user/skill', 'Student_SkillController@addSkill');
   Route::post('auth/logout', 'AuthController@logout');
   Route::post('user/edit', 'UserController@editUser');
   Route::get('user', 'UserController@getUser');

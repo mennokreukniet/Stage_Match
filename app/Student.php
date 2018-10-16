@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     public function user() {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany('App\Skill', 'student_skill');
     }
 
     public function getJWTIdentifier() {
@@ -26,6 +31,8 @@ class Student extends Model
             'gender' => $this->gender,
         ];
     }
+
+
 
     public $timestamps = false;
 }

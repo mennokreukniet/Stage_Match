@@ -724,6 +724,16 @@ button.classic {
     font-family: "Ubuntu"
 }
 
+button.classic.cancel {
+    background: white;
+    border: solid 2px #eee;
+    color: black;
+}
+
+button.classic.cancel:hover {
+    background: #bebebe;
+}
+
 .margin-top {
     margin-top: 20px;
 }

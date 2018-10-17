@@ -1,20 +1,22 @@
 <template>
-    <div id="login" class="auth">
-        <div class="card">
-            <div class="form">
-                <span class="title">Login</span>
+    <div class="container auth">
+        <div id="login" class="main">
+            <div class="card">
+                <div class="form">
+                    <span class="title">Login</span>
 
-                <div class="error" v-if="error.show">{{error.message}}</div>
+                    <div class="error" v-if="error.show">{{error.message}}</div>
 
-                <span class="label">Email</span>
-                <input @keyup.enter="login" v-model="credentials.email" id="email" class="classic" type="text" placeholder="Email">
-                
-                <span class="label">Password</span>
-                <input @keyup.enter="login" v-model="credentials.password"  class="classic" type="password" placeholder="Password">
-                
-                <button class="submit margin-bottom" v-on:click="login">Login</button>
+                    <span class="label">Email</span>
+                    <input @keyup.enter="login" v-model="credentials.email" id="email" class="classic" type="text" placeholder="Email">
+                    
+                    <span class="label">Password</span>
+                    <input @keyup.enter="login" v-model="credentials.password"  class="classic" type="password" placeholder="Password">
+                    
+                    <button class="submit margin-bottom" v-on:click="login">Login</button>
 
-                <button style="background: #207c7e; display: block;" class="margin-top submit" v-on:click="register">Register</button>
+                    <button style="background: #207c7e; display: block;" class="margin-top submit" v-on:click="register">Register</button>
+                </div>
             </div>
         </div>
     </div>
@@ -51,7 +53,7 @@ export default {
             new Http().post(`auth/login`, this.credentials)
                 .then(res => {
                     localStorage.setItem("accessToken", res.data.token);
-                    this.$parent.set_role();
+                    this.$parent.read_token();
                     this.$router.push({ name: "main" });
                 })
                 .catch(err => {

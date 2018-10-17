@@ -15,6 +15,10 @@ class Student extends Model
         return $this->belongsToMany('App\Skill', 'student_skill');
     }
 
+    /*public function levels(){
+        return $this->belongsToMany('App\Level', 'student_skill');
+    }*/
+
     public function getJWTIdentifier() {
         return $this->getKey(); // Eloquent Model method
     }

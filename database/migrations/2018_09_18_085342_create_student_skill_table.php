@@ -14,6 +14,7 @@ class CreateStudentSkillTable extends Migration
     public function up()
     {
         Schema::create('student_skill', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->unsignedInteger('skill_id');

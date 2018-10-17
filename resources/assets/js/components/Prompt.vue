@@ -22,10 +22,12 @@
     },
     methods: {
       close() {
+        this.value = "";
         this.$emit('close');
       },
       send() {
         this.$emit('value', { value: this.value, properties: this.prompt.properties });
+        this.value = "";
         this.$emit('close');
       }
     },

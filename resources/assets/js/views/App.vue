@@ -1,9 +1,8 @@
 
 <template>
-    <div>
-        <div class="container">
-            <router-view></router-view>
-        </div>
+    <div>  
+        <router-view></router-view>
+        
         <nav v-if="!['login', 'register', 'index'].includes($route.name)">
             <div class="left">
                 <button class="primary">
@@ -20,7 +19,7 @@
                 </router-link>
             </div>
             <div class="right">
-                <router-link v-if="role === '2'" tag="button" to="/internship">
+                <router-link v-if="auth.role === '2'" tag="button" to="/internship">
                     <i class="material-icons">assignment_ind</i>
                     <span>Internship</span>
                 </router-link>
@@ -34,7 +33,7 @@
                     <span>Settings</span>
                 </router-link>
 
-                <router-link v-if="role === '3'" tag="button" to="/admin">
+                <router-link v-if="auth.role === '3'" tag="button" to="/admin">
                     <i class="material-icons">security</i>
                     <span>Admin</span>
                 </router-link>
@@ -53,16 +52,16 @@
         name: 'main-app',
         data() {
             return {
-                role: ""
+                auth: {}
             }
         },
         created() {
-            this.set_role();
+            this.read_token();
         },
         methods: {
-            set_role() {
+            read_token() {
                 const token = localStorage.getItem("accessToken");
-                if (token !== null) this.role = JSON.parse(atob(token.split(".")[1])).role;
+                if (token !== null) this.auth = JSON.parse(atob(token.split(".")[1]));
             }
         }
      }

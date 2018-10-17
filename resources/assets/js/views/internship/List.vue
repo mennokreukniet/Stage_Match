@@ -1,7 +1,7 @@
 <template>
-    <div id="main">
+    <div>
         <div class="card">
-            <span class="title">Internship</span>
+            <span class="title">Internships</span>
         </div>
     </div>    
 </template>

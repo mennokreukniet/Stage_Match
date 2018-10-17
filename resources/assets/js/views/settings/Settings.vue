@@ -25,7 +25,7 @@
                     <input v-model="user.city" class="classic" type="text" placeholder="City">
 
                     <span class="label">House number</span>
-                    <input v-model="user.house_number" class="classic" type="text" placeholder="House number">
+                    <input v-model="user.house_number" class="classic" type="number" placeholder="House number">
 
                     <span class="label">Street</span>
                     <input v-model="user.street" class="classic" type="text" placeholder="Street">

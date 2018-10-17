@@ -99,6 +99,7 @@ export default {
     created() {
         new Http().get("user").then(res => {
             this.user = res.data.user;
+            this.skills_ = res.data.user.skills;
         })
     },
     data() {
@@ -154,7 +155,7 @@ export default {
                     show: true,
                     list: res.data.result
                 }
-                console.log(this.skills)
+                
             });
         }
     },

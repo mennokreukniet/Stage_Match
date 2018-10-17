@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Skill;
-use App\User;
 use App\Student;
 
 
 class Student_SkillController extends Controller
 {
     /**
+     * Add a skill to an user.
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -18,17 +19,21 @@ class Student_SkillController extends Controller
         if ($request->auth['role'] != "1") {
             return response(['status' => 'error', "message" => "Incorrect role"], 403);
         }
+
         $user_id = $request->auth['id'];
         $student = Student::where('user_id', $user_id)->first();
 
         $skill = Skill::find($request->id);
 
-        $added = $student->skills()->save($skill);
+        if ($skill === NULL) {
+            return response(['status' => 'error', "message" => "Skill does not exist"], 404);
+        }
 
-        if ($added) {
+        try {
+            $student->skills()->attach($skill->id);
             return response(['status' => 'success', 'result' => $skill], 200);
-        } else {
-            return response(['status' => 'error'], 400);
+        } catch(\Illuminate\Database\QueryException $e) {
+            return response(['status' => 'error', "message" => "Skill is already added"], 400);
         }
     }
 }

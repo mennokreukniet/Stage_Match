@@ -636,34 +636,6 @@ nav {
     // }
 }
 
-%out_nav_button {
-    @extend %button;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    i {
-        color: $secondary !important;
-    }
-}
-
-%out_nav_button:hover {
-    background: #bebebe !important;
-}
-
-.back, .create {
-    @extend %out_nav_button;
-    i {
-        position: relative;
-    top: 2px;
-        font-size: 20px;
-    }
-}
-
-.back > i {
-    
-    left: 4px;
-}
-
 %card {
     margin-top: 20px;
     background: white;
@@ -683,6 +655,14 @@ nav {
         display: block;
         margin-bottom: 25px;
         font-size: 24px;
+    }
+
+    span.title2 {
+        font-family: 'Ubuntu', sans-serif;
+        white-space: 1.5px;
+        display: block;
+        margin-bottom: 25px;
+        font-size: 20px;
     }
 }
 
@@ -726,6 +706,7 @@ div.title {
 
 %button {
     border: none;
+    letter-spacing: 1.5px;
     cursor: pointer;
     background: none;
 }
@@ -867,9 +848,19 @@ div.page-options {
     button {
         position: relative;
         left: 50%;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        @extend %button;
         transform: translate(-50%, 0);
         i {
             font-size: 25px;
+            position: relative;
+            top: 2px;
+        }
+
+        &:hover {
+            background: #bebebe;
         }
     }
 }
@@ -915,13 +906,44 @@ div.container {
 
 div.skills {
     width: 100%;
-
+    max-height: 350px;
+    overflow: auto;
     div.skill {
+        
         display: grid;
-        grid-template-columns: auto 50px 35px;
         padding-bottom: 5px;
         margin-top: 5px;
         border-bottom: solid 1px #eee;
+        
+        &.admin {
+            grid-template-columns: auto 50px 35px;
+
+            button {
+                grid-column-start: 2;
+                @extend %button;
+                height: 35px;
+                width: 35px;
+                border-radius: 40px;
+                background: $primary;
+                color: white;
+    
+                i {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        &.settings {
+            grid-template-columns: 4fr 1fr 3px 1fr 3px 1fr;
+
+            button.selected {
+                background: #38c172;
+            }
+
+            button.selected:hover {
+                background: #32ad66;
+            }
+        }
 
         span {
             grid-column-start: 1;
@@ -929,19 +951,7 @@ div.skills {
             font-family: "ubuntu";
         }
 
-        button {
-            grid-column-start: 2;
-            @extend %button;
-            height: 35px;
-            width: 35px;
-            border-radius: 40px;
-            background: $primary;
-            color: white;
-
-            i {
-                font-size: 20px;
-            }
-        }
+        
 
         button:hover {
             background: $secondary;
@@ -953,6 +963,18 @@ div.skills {
 
         button.remove {
             grid-column-start: 3;
+        }
+
+        button.good {
+            grid-column-start: 4;
+        }
+
+        button.moderate {
+            grid-column-start: 2;
+        }
+
+        button.expert {
+            grid-column-start: 6;
         }
 
     }

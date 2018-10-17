@@ -31,7 +31,7 @@
                     <div v-if="this.skills.length === 0" class="neutral margin-top">There are no skills, add one!</div>
                     
                     <template v-for="(value, index) in this.skills">
-                        <div v-bind:key="value.id" class="skill">
+                        <div v-bind:key="value.id" class="skill admin">
                             <span>{{value.name}}</span>
                             <button class="edit" v-on:click="prompt('edit', `New name for ${value.name}`, {id: value.id, name: value.name})">
                                 <i class="material-icons">edit</i>
@@ -187,9 +187,13 @@ export default {
         },
 
         create () {
-
+            this.status_list.create.render = false;
             if (this.new_skill === "") {
-                
+                this.status_list.create = {
+                    render: true,
+                    type: "error",
+                    message: "Skillname can't be empty"
+                }
 
                 return;
             } 
@@ -197,9 +201,17 @@ export default {
             new Http().post(`admin/skill`, { name: this.new_skill }).then(res => {
                 this.skills.push(res.data.result[0]);
                 this.new_skill = "";
-               
+                this.status_list.create = {
+                    render: true,
+                    type: "success",
+                    message: "Skill created"
+                }
             }).catch(err => {
-                
+                this.status_list.create = {
+                    render: true,
+                    type: "error",
+                    message: "Skill with this name already exists"
+                }
             })
         }
     }

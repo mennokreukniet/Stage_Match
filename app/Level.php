@@ -8,6 +8,6 @@ class Level extends Model
 {
     public function students()
     {
-        $this->belongsToMany('App\Student');
+        //$this->belongsToMany('App\Student');
     }
 }

@@ -26,8 +26,6 @@ class Student_SkillController extends Controller
 
         $skill = Skill::find($request->id);
 
-        $skill->level = 1;
-
         if ($skill === NULL) {
             return response(['status' => 'error', "message" => "Skill does not exist"], 404);
         }

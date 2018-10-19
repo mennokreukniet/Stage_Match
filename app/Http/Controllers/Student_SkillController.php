@@ -42,9 +42,14 @@ class Student_SkillController extends Controller
         if ($request->auth['role'] != "1") {
             return response(['status' => 'error', "message" => "Incorrect role"], 403);
         }
+        $user_id = $request->auth['id'];
+        $student = Student::where('user_id', $user_id)->first();
+//dd($student->id);
 
-        $student_skill = Student_Skill::find($request->id);
-
+        $student_skill = Student_Skill::where('skill_id', $request->id)
+                                        ->where('student_id', $student->id)
+                                        ->first();
+        //dd($student_skill);
         $student_skill->level = $request->level;
 
         $added = $student_skill->save();

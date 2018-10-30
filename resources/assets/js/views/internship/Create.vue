@@ -7,13 +7,13 @@
             <div class="success" v-if="success.show">{{success.message}}</div>
 
             <div class="form">
-                <span class="label">Company</span>
-                <input v-model="internship.company" class="classic" type="text">
                 <span class="label">Mentor</span>
                 <input v-model="internship.mentor" class="classic" type="text">
-                <span class="label">Period</span>
-                <input v-model="internship.period" class="classic" type="text">
-                
+                <span class="label">Start datum</span>
+                <input v-model="internship.start" class="classic" type="date">
+                <span class="label">Eind datum</span>
+                <input v-model="internship.end" class="classic" type="date">
+
                 <button class="submit" v-on:click="create">Create</button>
             </div>
         </div>
@@ -48,6 +48,12 @@ export default {
                 this.success = {
                     show: true,
                     message: "Internship created"
+                }
+            }).catch(error =>{
+                //console.log(error.response.data.errors);
+                this.error = {
+                    show: true,
+                    message: error.response.data.errors
                 }
             })
         }

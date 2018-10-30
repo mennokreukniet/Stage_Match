@@ -8,9 +8,12 @@ class Internship extends Model
 {
     public function company()
     {
-        return $this->hasOne('App\Company');
+        return $this->belongsTo('App\Company');
     }
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'mentor', 'body', 'start', 'end'
+    ];
 }

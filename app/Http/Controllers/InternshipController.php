@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InternshipFormRequest;
 use App\Internship;
+use App\User;
 use Illuminate\Http\Request;
 
 class InternshipController extends Controller
@@ -14,30 +16,7 @@ class InternshipController extends Controller
      */
     public function index()
     {
-        return json_encode(Internship::paginate(25));
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     * POST /api/internship
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $internship = new Internship();
-        #$internship->fill($request);
-        $internship->company = $request->company;
-        $internship->mentor = $request->mentor;
-        $internship->period = $request->period;
-
-        $created = $internship->save();
-
-        if ($created) {
-            return response(['status' => 'success', 'result' => $internship], 200);
-        }
-        return response(['status' => 'error'], 400);
+        return response(Internship::paginate(25));
     }
 
     /**
@@ -48,20 +27,42 @@ class InternshipController extends Controller
      */
     public function show(Internship $internship)
     {
-        return json_encode($internship);
+        return response($internship);
     }
+
+
+    /**
+     * Store a newly created resource in storage.
+     * POST /api/internship
+     * @param InternshipFormRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(InternshipFormRequest $request)
+    {
+        $internship = new Internship($request->all());
+        #$company = auth()->user()->company;
+        $company = User::find($request['auth']['id'])->first()->company;
+        $internship->company()->associate($company);
+        $created = $internship->save();
+        if ($created) {
+            return response(['status' => 'success', 'result' => $internship], 200);
+        }
+        return response(['status' => 'error'], 400);
+    }
+
 
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param InternshipFormRequest $request
      * @param  \App\Internship  $internship
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Internship $internship)
+    public function update(InternshipFormRequest $request, Internship $internship)
     {
-        //
+        $internship->fill($request->all())->save();
+        return response($internship);
     }
 
     /**

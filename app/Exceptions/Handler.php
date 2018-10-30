@@ -47,13 +47,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-
         $exception  = $this->prepareException($exception);
         $statusCode = 500;
-        if(method_exists($exception->getStatusCode)){
-            $statusCode = $exception->getStatusCode;
+
+        if(method_exists($exception, 'getStatusCode')){
+            $statusCode = $exception->getStatusCode();
+            var_dump($statusCode);
         }
-var_dump('je oedet');
+
+        return response()->json(Response::$statusTexts[$statusCode]);
        // var_dump($);
        //     return parent::render($request, $exception);
 

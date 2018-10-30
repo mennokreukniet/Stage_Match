@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpFoundation\Response;
 
 class Handler extends ExceptionHandler
 {
@@ -46,16 +47,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (env("APP_ENV") === "local") {
-            return parent::render($request, $exception);
-        } else {
-            return response([
-                "status" => 500,
-                "error" => [
-                    "readable_error" => "Internal Server Error",
-                    "error_code" => "ISE",
-                    "description" => "Something went wrong on our side! Please try again, if this error stays occurring, contact the administrator."
-            ]], 500);
+
+        $exception  = $this->prepareException($exception);
+        $statusCode = 500;
+        if(method_exists($exception->getStatusCode)){
+            $statusCode = $exception->getStatusCode;
         }
+var_dump('je oedet');
+       // var_dump($);
+       //     return parent::render($request, $exception);
+
     }
 }

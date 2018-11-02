@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash as Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -14,46 +13,74 @@ class UsersTableSeeder extends Seeder
     {
         $defaultUsers = [
             [
-                'email' => 'student@student.student',
+                'email' => 's@s.s',
                 'name' => 'student',
                 'city' => 'Dordrecht',
                 'street' => 'Dordrecht',
                 'house_number' => 12,
-                'role' => '1',
-                'password' => Hash::make('123456')
+                'role' => 1,
+                'password' => '$2y$10$XssWkV9qLq/tceJESzggHe8urDnDkqwqukcUJ44m7lnNNGuukYAFW' # password: 123456
             ],
             [
-                'email' => 'company@company.company',
+                'email' => 'c@c.c',
                 'name' => 'company',
                 'city' => 'Dordrecht',
                 'street' => 'Dordrecht',
                 'house_number' => 12,
-                'role' => '2',
-                'password' => Hash::make('123456')
+                'role' => 2,
+                'password' => '$2y$10$XssWkV9qLq/tceJESzggHe8urDnDkqwqukcUJ44m7lnNNGuukYAFW' # password: 123456
             ],
             [
-                'email' => 'admin@admin.admin',
+                'email' => 'a@a.a',
                 'name' => 'admin',
                 'city' => 'Dordrecht',
                 'street' => 'Dordrecht',
                 'house_number' => 12,
-                'role' => '3',
-                'password' => Hash::make('123456')
+                'role' => 3,
+                'password' => '$2y$10$XssWkV9qLq/tceJESzggHe8urDnDkqwqukcUJ44m7lnNNGuukYAFW' # password: 123456
             ]
         ];
-        #where(['email' => $user['email']])){
-        foreach ($defaultUsers as $user) {
-            if (App\User::find(4) == null) {
-                App\User::create($user); // ::createOrFirst should insert only if it isn't already in db. doesn't work:(
+        if (DB::table('users')->count() <= count($defaultUsers)) {
+            foreach ($defaultUsers as $user) {
+
+                $user = App\User::create($user);
+
+                if ($user->role == USER_ROLES['student']) {
+
+                    $user->student()->save(
+                        factory(App\Student::class)->make()
+                    );
+
+                } else if ($user->role == USER_ROLES['company']) {
+
+                    $user->company()->save(
+                        factory(App\Company::class)->make()
+                    );
+
+                }
             }
         };
 
-//        factory(App\User::class, 20)->create()->each(function ($user) {
-//            $user->company()->save(factory(App\Company::class)->make());
-//        });
-//        factory(App\User::class, 40)->create()->each(function ($user) {
-//            $user->student()->save(factory(App\Student::class)->make());
-//        });
+        factory(App\User::class, 100)->make()->each(function ($user, $i) {
+            if ($i < 50) {
+                $user->role = USER_ROLES['student'];
+                $user->save();
+
+                $user->student()->save(
+                    factory(App\Student::class)->make()
+                );
+            } else {
+                $user->role = USER_ROLES['company'];
+                $user->save();
+
+                $user->company()->save(
+                    factory(App\Company::class)->make()
+                );
+
+            }
+
+        });
+
 
     }
 }

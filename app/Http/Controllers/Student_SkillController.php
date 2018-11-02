@@ -6,10 +6,19 @@ use Illuminate\Http\Request;
 use App\Skill;
 use App\Student;
 use App\Student_Skill;
+use App\User;
 
 
 class Student_SkillController extends Controller
 {
+
+    function __construct(Request $request)
+    {
+        if ($request->auth['role'] != "1") {
+            return response(['status' => 'error', "message" => "Incorrect role"], 403);
+        }
+    }
+
     /**
      * Add a skill to an user.
      *
@@ -17,10 +26,6 @@ class Student_SkillController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function addSkill(Request $request){
-        if ($request->auth['role'] != "1") {
-            return response(['status' => 'error', "message" => "Incorrect role"], 403);
-        }
-
         $user_id = $request->auth['id'];
         $student = Student::where('user_id', $user_id)->first();
 
@@ -45,24 +50,13 @@ class Student_SkillController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function skillLevel(Request $request){
-        if ($request->auth['role'] != "1") {
-            return response(['status' => 'error', "message" => "Incorrect role"], 403);
-        }
         $user_id = $request->auth['id'];
         $student = Student::where('user_id', $user_id)->first();
 
-        $student_skill = Student_Skill::where('skill_id', $request->id)
-                                        ->where('student_id', $student->id)
-                                        ->first();
+        $sync = $student->skills()->updateExistingPivot($request->id, ['level' => $request->level ]);
 
-        $student_skill->level = $request->level;
-
-        $added = $student_skill->save();
-
-        if($added){
-            return response(['status' => 'success', 'result' => $student_skill], 200);
-        }else{
-            return response(['status' => 'error', "message" => "error"], 400);
+        if ($sync) {
+            return response(['status' => 'success', 'result' => $sync], 200);
         }
     }
 
@@ -77,16 +71,10 @@ class Student_SkillController extends Controller
         $user_id = $request->auth['id'];
         $student = Student::where('user_id', $user_id)->first();
 
-        $student_skill = Student_Skill::where('skill_id', $request->id)
-            ->where('student_id', $student->id)
-            ->first();
+        $detach = $student->skills()->detach($request->id);
 
-        $destroyed = Student_Skill::destroy($student_skill->id);
-
-        if ($destroyed == true){
+        if ($detach){
             return response(['status' => 'success'], 200);
-        } else {
-            return response(['status' => 'error'], 404);
         }
     }
 }

@@ -19,6 +19,9 @@ class CheckRole
         if (auth()->check() && $request->user()->role == USER_ROLES[$role]) {
             return $next($request);
         };
-        return redirect(route('spa'));
+        return response([
+            'status' => 'error',
+            'error' => ['msg' => 'token invalid']
+        ]);
     }
 }

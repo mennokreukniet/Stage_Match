@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function editUser(Request $request){
-        $id = $request->auth["id"];
-        $role = $request->auth["role"];
+        $id = $request->user()->id;
+        $role = $request->user()->role;
 
         User::where('id', $id)
             ->update(['email' => $request->email,
@@ -46,8 +46,8 @@ class UserController extends Controller
 
     public function getUser(Request $request){
 
-        $id = $request->auth["id"];
-        $role = $request->auth["role"];
+        $id = $request->user()->id;
+        $role = $request->user()->role;
 
         if ($role == '1'){
             $user = Student::where('user_id', $id)
@@ -80,4 +80,38 @@ class UserController extends Controller
             'user' => $user[0],
         ], 200);
     }
+    /*
+    public function editUser(Request $request)
+    {
+        $user = $request->user();
+        $user->fill($request->all())->save();
+
+        if ($user->role == USER_ROLES['student']) {
+            $user->student->fill($request->all())->save();
+        } else {
+            $user->company->fill($request->all())->save();
+        }
+
+        $token = auth()->refresh();
+
+        return response([
+            'status' => 'success',
+            'token' => $token
+        ]);
+    }
+    
+    public function getUser(Request $request)
+    {
+        $user = $request->user();
+
+        ($user->role == USER_ROLES['student'])
+            ? $user->student->skills->toArray()
+            : $user->company->toArray();
+
+        return response([
+            'status' => 'success',
+            'user' => $user,
+        ], 200);
+    }
+    */
 }

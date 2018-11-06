@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function editUser(Request $request){
-        $id = $request->user()->id;
-        $role = $request->user()->role;
+        $id = auth()->payload()->get('id');
+        $role = auth()->payload()->get('role');
 
         User::where('id', $id)
             ->update(['email' => $request->email,
@@ -46,8 +46,8 @@ class UserController extends Controller
 
     public function getUser(Request $request){
 
-        $id = $request->user()->id;
-        $role = $request->user()->role;
+        $id = auth()->payload()->get('id');
+        $role = auth()->payload()->get('role');
 
         if ($role == '1'){
             $user = Student::where('user_id', $id)

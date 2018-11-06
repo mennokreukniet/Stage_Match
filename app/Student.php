@@ -12,7 +12,7 @@ class Student extends Model
 
     public function skills()
     {
-        return $this->belongsToMany('App\Skill', 'student_skill');
+        return $this->belongsToMany('App\Skill', 'student_skill')->withPivot('level');
     }
 
     /*public function levels(){

@@ -25,6 +25,7 @@ Route::post('auth/login', 'AuthController@login');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::post('user/skill/level', 'Student_SkillController@skillLevel');
+    Route::delete('user/skill/{id}', 'Student_SkillController@deleteSkill');
   Route::post('user/skill', 'Student_SkillController@addSkill');
   Route::post('auth/logout', 'AuthController@logout');
   Route::post('user/edit', 'UserController@editUser');

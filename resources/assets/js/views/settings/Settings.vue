@@ -73,7 +73,10 @@
                             </button>   
                             <button v-bind:class="{ selected: value.level == '3' }" class="classic expert" v-on:click="set_level(index, value.id, 3)">
                                 Expert
-                            </button> 
+                            </button>
+                            <button v-on:click="delete_skill(value.id, index)">
+                                Delete
+                            </button>
                         </div>
                     </template>
                 </div>
@@ -218,6 +221,19 @@ export default {
                 }
 
                 this.skills_.push(res.data.result);
+            })
+        },
+        delete_skill(id, index) {
+            new Http().delete(`user/skill/${id}`).then(res => {
+                this.skills.show = false;
+                this.skill = "";
+                this.status_list.skills = {
+                    render: true,
+                    type: "success",
+                    message: `skill removed!`
+                }
+
+                this.skills_.splice(index, 1);
             })
         }
     }

@@ -6,6 +6,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+define('USER_ROLES', [
+    'student' => 1,
+    'company' => 2,
+    'admin' => 3
+]);
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -32,15 +37,12 @@ class User extends Authenticatable implements JWTSubject
      * @return array
      */
     public function getJWTCustomClaims() {
-        return ['id' => $this->id,
-                'name' => $this->name,
-                'email' => $this->email,
-                'role' => $this->role,
-                'theme' => $this->theme,
-                'city' => $this->city,
-                'street' => $this->street,
-                'house_number' => $this->house_number,
-                ];
+        return [
+            'name' => $this->name,
+            'email' => $this->email,
+            'role' => $this->role,
+            'theme' => $this->theme,
+        ];
     }
 
 

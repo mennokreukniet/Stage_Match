@@ -25,6 +25,7 @@ Route::post('auth/login', 'AuthController@login');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::post('user/skill/level', 'Student_SkillController@skillLevel');
+    Route::delete('user/skill/{id}', 'Student_SkillController@deleteSkill');
   Route::post('user/skill', 'Student_SkillController@addSkill');
   Route::post('auth/logout', 'AuthController@logout');
   Route::post('user/edit', 'UserController@editUser');
@@ -35,7 +36,7 @@ Route::group(['middleware' => 'auth'], function(){
   Route::apiResource('internship', 'InternshipController');
 });
 
-Route::group(['middleware' => 'admin'], function(){
+Route::group(['middleware' => 'role:admin'], function(){
 	Route::post('/admin/skill', 'SkillsController@createSkill');
 	Route::delete('/admin/skill/{id}', 'SkillsController@deleteSkill');
 	Route::get('/admin/skill/{id}', 'SkillsController@getSkill');

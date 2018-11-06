@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Skill;
 use App\Student;
 use App\Student_Skill;
+use App\User;
 
 
 class Student_SkillController extends Controller
 {
+
     /**
      * Add a skill to an user.
      *
@@ -17,10 +19,6 @@ class Student_SkillController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function addSkill(Request $request){
-        if ($request->auth['role'] != "1") {
-            return response(['status' => 'error', "message" => "Incorrect role"], 403);
-        }
-
         $user_id = $request->auth['id'];
         $student = Student::where('user_id', $user_id)->first();
 
@@ -38,26 +36,38 @@ class Student_SkillController extends Controller
         }
     }
 
+    /**
+     * Select the skill level for a skill that has been added to an user.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function skillLevel(Request $request){
-        if ($request->auth['role'] != "1") {
-            return response(['status' => 'error', "message" => "Incorrect role"], 403);
-        }
         $user_id = $request->auth['id'];
         $student = Student::where('user_id', $user_id)->first();
-//dd($student->id);
 
-        $student_skill = Student_Skill::where('skill_id', $request->id)
-                                        ->where('student_id', $student->id)
-                                        ->first();
-        //dd($student_skill);
-        $student_skill->level = $request->level;
+        $sync = $student->skills()->updateExistingPivot($request->id, ['level' => $request->level ]);
 
-        $added = $student_skill->save();
+        if ($sync) {
+            return response(['status' => 'success', 'result' => $sync], 200);
+        }
+    }
 
-        if($added){
-            return response(['status' => 'success', 'result' => $student_skill], 200);
-        }else{
-            return response(['status' => 'error', "message" => "error"], 400);
+    /**
+     * Delete a skill from an user.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function deleteSkill(Request $request) {
+
+        $user_id = $request->auth['id'];
+        $student = Student::where('user_id', $user_id)->first();
+
+        $detach = $student->skills()->detach($request->id);
+
+        if ($detach){
+            return response(['status' => 'success'], 200);
         }
     }
 }

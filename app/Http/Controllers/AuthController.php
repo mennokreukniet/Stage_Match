@@ -61,7 +61,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->get();
 
-	    $token = Token::create($user[0]);
+	    #$token = Token::create($user[0]);
 
 	    return response([
 	            'status' => 'success',
@@ -78,3 +78,44 @@ class AuthController extends Controller
 	        ], 200);
 	}
 }
+	/*
+    public function register(RegisterFormRequest $request)
+    {
+        $user = new User($request->all());
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        if($user->role == USER_ROLES['student']){
+            $user->student()->save(new Student($request->all()));
+        } elseif($user->role == USER_ROLES['company']){
+            $user->company()->save(new Company($request->all()));
+        }
+
+        return $this->login($request);
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if (! $token = auth()->attempt($credentials)) {
+            return response([
+                'status' => 'error',
+                'error' => 'invalid.credentials',
+                'msg' => 'Invalid Credentials.'
+            ], 400);
+        }
+        return response([
+            'status' => 'success',
+            'token' => $token
+        ]);
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return response([
+            'status' => 'success',
+            'msg' => 'Logged out Successfully.'
+        ], 200);
+    }
+	*/

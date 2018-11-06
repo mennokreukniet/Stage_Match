@@ -25,9 +25,10 @@ class InternshipFormRequest extends FormRequest
     {
         return [
             'mentor' => 'required|string',
-            #'body' => 'required|string',
-            'start' => 'required|date',
-            'end' => 'required|date'
+            'title' => 'required|string',
+            'body' => 'required|string',
+            'start_date' => 'date',
+            'end_date' => 'date'
         ];
     }
 }

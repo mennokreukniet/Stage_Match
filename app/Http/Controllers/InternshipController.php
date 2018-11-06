@@ -16,7 +16,7 @@ class InternshipController extends Controller
      */
     public function index()
     {
-        return response(Internship::paginate(25));
+        return response(auth()->user()->company->internships()->paginate(10));
     }
 
     /**
@@ -40,11 +40,9 @@ class InternshipController extends Controller
     public function store(InternshipFormRequest $request)
     {
         $internship = new Internship($request->all());
-        #$company = auth()->user()->company;
-        $company = User::find($request['auth']['id'])->first()->company;
+        $company = auth()->user()->company;
         $internship->company()->associate($company);
-        $created = $internship->save();
-        if ($created) {
+        if ($internship->save()) {
             return response(['status' => 'success', 'result' => $internship], 200);
         }
         return response(['status' => 'error'], 400);

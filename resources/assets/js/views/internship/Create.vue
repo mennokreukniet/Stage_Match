@@ -9,10 +9,14 @@
             <div class="form">
                 <span class="label">Mentor</span>
                 <input v-model="internship.mentor" class="classic" type="text">
+                <span class="label">Title</span>
+                <input v-model="internship.title" class="classic" type="text">
+                <span class="label">Body</span>
+                <textarea v-model="internship.body" class="classic" type="text"></textarea>
                 <span class="label">Start datum</span>
-                <input v-model="internship.start" class="classic" type="date">
+                <input v-model="internship.start_date" class="classic" type="date">
                 <span class="label">Eind datum</span>
-                <input v-model="internship.end" class="classic" type="date">
+                <input v-model="internship.end_date" class="classic" type="date">
 
                 <button class="submit" v-on:click="create">Create</button>
             </div>
@@ -28,9 +32,11 @@ export default {
     data() {
         return {
             internship: {
-                company: "",
+                title: "",
+                body: "",
                 mentor: "",
-                period: ""
+                start_date: "",
+                end_date: ""
             },
             error: {
                 show: false,

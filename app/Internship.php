@@ -14,6 +14,6 @@ class Internship extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'mentor', 'body', 'start', 'end'
+        'title', 'body', 'mentor', 'start_date', 'end_date',
     ];
 }

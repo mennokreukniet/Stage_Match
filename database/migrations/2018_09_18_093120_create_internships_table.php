@@ -19,9 +19,11 @@ class CreateInternshipsTable extends Migration
             $table->foreign('company_id')
                 ->references('id')->on('companies')
                 ->onDelete('cascade');
+            $table->string('title');
             $table->string('mentor');
-            $table->date('start');
-            $table->date('end');
+            $table->text('body');
+            $table->date('start_date');
+            $table->date('end_date');
         });
     }
 

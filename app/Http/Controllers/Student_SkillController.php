@@ -12,13 +12,6 @@ use App\User;
 class Student_SkillController extends Controller
 {
 
-    function __construct(Request $request)
-    {
-        if ($request->auth['role'] != "1") {
-            return response(['status' => 'error', "message" => "Incorrect role"], 403);
-        }
-    }
-
     /**
      * Add a skill to an user.
      *

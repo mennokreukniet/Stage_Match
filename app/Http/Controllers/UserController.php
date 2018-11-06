@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function editUser(Request $request){
-        $id = auth()->payload()->get('id');
+        $id = auth()->payload()->get('sub');
         $role = auth()->payload()->get('role');
 
         User::where('id', $id)
@@ -46,7 +46,7 @@ class UserController extends Controller
 
     public function getUser(Request $request){
 
-        $id = auth()->payload()->get('id');
+        $id = auth()->payload()->get('sub');
         $role = auth()->payload()->get('role');
 
         if ($role == '1'){

@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function(){
   Route::apiResource('internship', 'InternshipController');
 });
 
-Route::group(['middleware' => 'admin'], function(){
+Route::group(['middleware' => 'role:admin'], function(){
 	Route::post('/admin/skill', 'SkillsController@createSkill');
 	Route::delete('/admin/skill/{id}', 'SkillsController@deleteSkill');
 	Route::get('/admin/skill/{id}', 'SkillsController@getSkill');

@@ -11,13 +11,16 @@ class SkillsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('skills')->insert([
-            'id' => '1',
-            'name' => 'JavaScript',
-        ]);
-        DB::table('skills')->insert([
-            'id' => '2',
-            'name' => 'PHP',
-        ]);
+        $skills = [
+            'PHP', 'Laravel', 'JavaScript', 'Vue.js', 'SQL',
+            'Python', 'Ruby', 'C', 'C++', 'C#', 'Objective-C', 'Java',
+            'Brainfuck', 'Chicken', 'LOLCODE'
+        ];
+
+        if (DB::table('skills')->count() < count($skills)) {
+            foreach ($skills as $skill) {
+                DB::table('skills')->insert(['name' => $skill]);
+            }
+        }
     }
 }

@@ -16,9 +16,9 @@ use Faker\Generator as Faker;
 $factory->define(App\Student::class, function (Faker $faker) {
     $schools = [ 'ROC Da Vinci College', 'Zadkine', 'Albeda' ];
     return [
-        'first_name' => $faker->firstName,
-        'last_name' => $faker->lastName,
-        'school' => $schools[array_rand($schools)]#ucfirst($faker->domainWord) . " University",
+        'date_of_birth' => $faker->date(),
+        'gender' => rand(0,1) ? "male" : "female",
+        'school' => $schools[array_rand($schools)]
     ];
 });
 

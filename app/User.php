@@ -6,6 +6,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+define('USER_ROLES', [
+    'student' => 1,
+    'company' => 2,
+    'admin' => 3
+]);
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;

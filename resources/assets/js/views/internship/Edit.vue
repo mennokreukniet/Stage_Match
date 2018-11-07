@@ -1,9 +1,16 @@
 <template>
     <div>
+        <prompt
+            v-if="showDeletePrompt"
+            @confirm="destroy()"
+            @close="showDeletePrompt = false"
+            :title="'Confirm Deletion'"
+            :body="'Delete the internship \'' + internship.title + '\'?'"
+        />
         <div class="card">
-            <span class="title">Create internship</span>
-
+            <span class="title">Edit internship</span>
             <div class="error" v-if="error.show">{{error.message}}</div>
+            <div class="success" v-if="success.show">{{success.message}}</div>
 
             <div class="form">
                 <span class="label">Mentor</span>
@@ -17,7 +24,8 @@
                 <span class="label">Eind datum</span>
                 <input v-model="internship.end_date" class="classic" type="date">
 
-                <button class="submit" v-on:click="create">Create</button>
+                <button class="w3-button w3-blue" @click="update">Edit</button>
+                <button class="w3-button w3-red w3-right" @click="showDeletePrompt = true">Delete</button>
             </div>
         </div>
     </div>    
@@ -25,18 +33,16 @@
 
 <script>
 import Http from '../../core/http';
+import Prompt from '../../components/MyPrompt'
 
 export default {
-    name: "create_internship",
+    components: {
+        Prompt
+    },
     data() {
         return {
-            internship: {
-                title: "",
-                body: "",
-                mentor: "",
-                start_date: "",
-                end_date: ""
-            },
+            showDeletePrompt: false,
+            internship: {},
             error: {
                 show: false,
                 message: ""
@@ -47,13 +53,29 @@ export default {
             } 
         }
     },
+    beforeCreate() {
+        console.log(this.$root);
+        new Http().get(this.$route.path.replace('/', '')).then(res => {
+            this.internship = res.data;
+        })
+    },
     methods: {
-        create() {
-            new Http().post("internship", this.internship).then(data => {
+        destroy() {
+            new Http().delete(this.$route.path.replace('/', '')).then(() => {
+                this.$router.push('/internship');
+                this.$notify({
+                    type: 'error',
+                    text: `Internship '${this.internship.title}' successfully deleted`
+                });
+            });
+
+        },
+        update() {
+            new Http().put(this.$route.path.replace('/', ''), this.internship).then(data => {
                 this.$router.push('/internship');
                 this.$notify({
                     type: 'success',
-                    text: `Internship '${this.internship.title}' successfully created`
+                    text: `Internship '${this.internship.title}' successfully updated`
                 });
             }).catch(error =>{
                 //console.log(error.response.data.errors);

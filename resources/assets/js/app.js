@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueI18n from 'vue-i18n'
+import Notifications from 'vue-notification/dist/ssr.js'
 
+Vue.use(Notifications);
 Vue.use(VueI18n);
 Vue.use(VueRouter);
 
@@ -16,6 +18,7 @@ import Reviews from './views/reviews/Reviews.vue';
 import Internship from './views/internship/Internship.vue';
 import Internship_create from './views/internship/Create.vue';
 import Internship_show from './views/internship/List.vue';
+import Internship_edit from './views/internship/Edit.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -63,7 +66,6 @@ const router = new VueRouter({
         {
             path: '/internship',
             component: Internship,
-            name: "internship",
             children: [
                 {
                     path: '',
@@ -75,6 +77,10 @@ const router = new VueRouter({
                   component: Internship_create,
                   name: "internship_create"
                 },
+                {
+                    path: ':id',
+                    component: Internship_edit,
+                }
             ]
         },
         {

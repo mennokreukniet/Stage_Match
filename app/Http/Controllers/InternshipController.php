@@ -71,12 +71,7 @@ class InternshipController extends Controller
      */
     public function destroy(Internship $internship)
     {
-        $destroyed = Internship::destroy($internship);
-
-        if ($destroyed == true){
-            return response(['status' => 'success'], 200);
-        }
-        return response(['status' => 'error'], 404);
-
+        $internship->delete();
+        return response(['status' => 'success'], 200);
     }
 }

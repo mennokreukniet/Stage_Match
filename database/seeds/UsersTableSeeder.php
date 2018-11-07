@@ -56,6 +56,7 @@ class UsersTableSeeder extends Seeder
                     $user->company()->save(
                         factory(App\Company::class)->make()
                     );
+                    factory(App\Internship::class, rand(50,100))->create();
 
                 }
             }

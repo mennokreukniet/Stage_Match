@@ -1,16 +1,17 @@
 <template>
     <div>
+
         <div class="w3-center">
             <paginate
                     v-model="page"
-                    :click-handler="myHandler"
-                    :page-count="data.last_page"
+                    :click-handler="paginateHandler"
+                    :page-count="internships.last_page || 1"
                     :page-range="5"
 
                     :no-li-surround="true"
                     :hide-prev-next="true"
 
-                    :container-class="w3-bar"
+                    :container-class="'w3-bar'"
                     :page-link-class="'w3-button'"
                     :active-class="'w3-purple'"
 
@@ -21,13 +22,15 @@
             />
         </div>
 
+        <div class="card w3-hover-blue"
+             style="cursor:pointer"
+             v-for="internship in internships.data"
+             @click="clickHandler(internship.id)">
 
-        <div class="card" v-for="internship in internships">
-            <h4 class="w3-title">{{ internship.title }}</h4>
+            <h4>{{ internship.title }}</h4>
             <p>{{ internship.mentor}}</p>
             <p>{{ internship.body }}</p>
             <p>{{ internship.start_date }} - {{ internship.end_date }}</p>
-            <br>
         </div>
 
     </div>
@@ -45,18 +48,20 @@ export default {
     data() {
         return {
             page: 1,
-            internships: [],
-            data: []
+            internships: {},
         }
     },
     methods: {
-        myHandler: function (e) {
+        clickHandler: function (id) {
+            this.$router.push('/internship/' + id);
+        },
+        paginateHandler: function (e) {
             this.load(e);
         },
         load: function(page = 1) {
             new Http().get("internship?page=" + page).then(response => {
-                this.data = response.data;
-                this.internships = this.data.data;
+                this.internships = response.data;
+
             })
         }
     },

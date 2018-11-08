@@ -10,6 +10,7 @@ import Internship from './views/internship/Internship.vue';
 import Internship_create from './views/internship/Create.vue';
 import Internship_show from './views/internship/List.vue';
 import Demo from './views/demo/Demo.vue';
+import About from './views/settings/About.vue';
 
 import {roles} from './config';
 
@@ -64,6 +65,11 @@ export const routes = {
             path: '/settings',
             component: Settings,
             name: "settings"
+        },
+        {
+            path: '/about',
+            component: About,
+            name: "about"
         },
         {
             path: '/internship',

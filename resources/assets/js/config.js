@@ -9,3 +9,7 @@ export const levels = {
     "good": "2",
     "expert": "3"
 }
+
+export const environment = "dev"; // dev, prod & testing
+
+export const version = "0.0.3";

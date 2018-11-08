@@ -6,8 +6,8 @@ Vue.use(VueI18n);
 Vue.use(VueRouter);
 
 import MainApp from './views/App';
-import { routes } from './routes';
 
+import { routes } from './routes';
 const router = new VueRouter(routes);
 
 /**
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
     if (token === null && to.meta.auth_not_allowed !== true) {
         return next({ name: "index" });
     }
-    
+
     next();
 })
 

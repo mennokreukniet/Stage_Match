@@ -19,7 +19,7 @@ class Student_SkillController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function addSkill(Request $request){
-        $user_id = $request->auth['id'];
+        $user_id = auth()->id();
         $student = Student::where('user_id', $user_id)->first();
 
         $skill = Skill::find($request->id);
@@ -43,7 +43,7 @@ class Student_SkillController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function skillLevel(Request $request){
-        $user_id = $request->auth['id'];
+        $user_id = auth()->id();
         $student = Student::where('user_id', $user_id)->first();
 
         $sync = $student->skills()->updateExistingPivot($request->id, ['level' => $request->level ]);
@@ -61,7 +61,7 @@ class Student_SkillController extends Controller
      */
     public function deleteSkill(Request $request) {
 
-        $user_id = $request->auth['id'];
+        $user_id = auth()->id();
         $student = Student::where('user_id', $user_id)->first();
 
         $detach = $student->skills()->detach($request->id);

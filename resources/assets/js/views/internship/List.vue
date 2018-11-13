@@ -1,9 +1,9 @@
 <template>
-    <div class="container">
-        <div class="center">
-            li
+    <div>
+        <div class="card">
+            <span class="title">Internships</span>
         </div>
-    </div>  
+    </div>    
 </template>
 
 <script>

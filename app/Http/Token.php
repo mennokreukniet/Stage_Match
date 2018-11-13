@@ -20,7 +20,7 @@ class Token
         $signer = new Sha256();
 
         $token = (new Builder())->setExpiration(time() + 3600)
-        ->set('sub', $user->id)
+        ->set('id', $user->id)
             ->set('name', $user->name)
             ->set('role', $user->role)
             ->set('theme', $user->theme)

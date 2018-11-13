@@ -54,8 +54,6 @@
             if ('scrollRestoration' in history) {
                 history.scrollRestoration = 'manual';
             }
-
-            this.$parent.read_token();
         }
     }
 </script>

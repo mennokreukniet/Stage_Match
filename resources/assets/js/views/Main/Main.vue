@@ -1,23 +1,22 @@
 <template>
     <div class="container">
-        <div class="center">
-            <input type="hidden" v-model="token">
-            <strong>Version: </strong><span>V0.0.3 (LESS ALPHA-ISH)</span><br>
-            <strong>Role: </strong><span>{{this.role}}</span><br><br>
-            <button v-if="copy_token" class="button text" v-on:click="get_token">Copy token</button>
+        <div class="main">
+            <div class="card">
+                <input type="hidden" v-model="token">
+                <strong>Version: </strong><span>V0.0.3 (LESS ALPHA-ISH)</span><br>
+                <strong>Role: </strong><span>{{this.role}}</span><br><br>
+                <button class="classic" v-on:click="get_token">Copy token</button>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { environment } from "../../config";
-
     export default { 
         name: 'main_index', 
         data() {
             return {
-                token: "",
-                copy_token: environment === "dev" ? true : false
+                token: ""
             }
         },
         created() {

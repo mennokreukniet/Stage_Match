@@ -422,6 +422,18 @@ nav {
     }
 }
 
+.list {
+    .item {
+        display:block;
+        width: 100%;
+        padding: 14.5px 16px;
+        @include font("body1", "high");
+        &:hover {
+            @include state("hover", #000);
+        }
+    }
+}
+
 .chip {
 
     display: inline-block;

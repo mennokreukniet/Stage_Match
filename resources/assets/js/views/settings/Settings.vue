@@ -1,108 +1,147 @@
 <template>
-    <div class="container">
-        <div class="main">
-            <div class="title">
-                <i class="material-icons">settings</i>
-                <span class="title">Account Settings</span>
-            </div>
+    <div>
+        <modal v-show="settings.render" v-bind:modal="settings" @close="settings.render = false">
+            <div slot="title">Personal Information</div>
+            <div slot="content">
+                <div class="form-group">
+                    <div class="input outlined half">
+                        <input v-bind:value="user.name" required/>
+                        <label>Firstname</label>
+                        <span>Helper!</span>
+                    </div>
 
-            
-            <!-- <status v-show="status_list.create.render" v-bind:status="status_list.create"/> -->
+                    <div class="input outlined half">
+                        <input v-bind:value="user.lastname" required/>
+                        <label>Lastname</label>
+                        <span>Helper!</span>
+                    </div>
+                </div>
 
-            <div class="card">
-                <span class="title">General Settings</span>
+                <div class="form-group">
+                    <div class="input outlined">
+                        <input v-bind:value="user.email" required/>
+                        <label>E-Mail</label>
+                        <span>Helper!</span>
+                    </div>
+                </div>
 
-                <status v-show="status_list.settings.render" v-bind:status="status_list.settings"/> 
+                <div class="form-group">
+                    <div class="input outlined" style="flex: 3;">
+                        <input v-bind:value="user.street" required/>
+                        <label>Street</label>
+                        <span>Helper!</span>
+                    </div>
 
-                <div class="form">
-                    <span class="label">Name</span>
-                    <input v-model="user.name" class="classic" type="text" placeholder="Name">
+                    <div class="input outlined">
+                        <input v-bind:value="user.house_number" required/>
+                        <label>House Number</label>
+                        <span>Helper!</span>
+                    </div>
+                </div>
 
-                    <span class="label">Email</span>
-                    <input id="email" v-model="user.email" class="classic" type="text" placeholder="E-Mail">
-
-                    <span class="label">City</span>
-                    <input v-model="user.city" class="classic" type="text" placeholder="City">
-
-                    <span class="label">House number</span>
-                    <input v-model="user.house_number" class="classic" type="number" placeholder="House number">
-
-                    <span class="label">Street</span>
-                    <input v-model="user.street" class="classic" type="text" placeholder="Street">
-
-                    <span v-if="this.$parent.auth.role === '1'" class="label">School</span>
-                    <input v-if="this.$parent.auth.role === '1'" v-model="user.school" class="classic" type="text" placeholder="School">
-
-                    <span v-if="this.$parent.auth.role === '2'" class="label">Description</span>
-                    <input v-if="this.$parent.auth.role === '2'" v-model="user.description" class="classic" type="text" placeholder="Description">
-
-                    <span class="label">Theme</span>
-                    <select class="classic margin-bottom" v-model="user.theme">
-                        <option value="1" selected="true">Light</option>
-                        <option value="2">Dark</option>
-                    </select>
-
-                    <button class="submit" v-on:click="edit">Edit profile</button>
+                <div class="form-group">
+                    <div class="input outlined">
+                        <input v-bind:value="user.city" required/>
+                        <label>City</label>
+                        <span>Helper!</span>
+                    </div>
                 </div>
             </div>
+            <div slot="actions" slot-scope="{ close }">
+                <button v-on:click="close" class="button text">Cancel</button>
+                <button class="button text">Save</button>
+            </div>
+        </modal>
 
-            <div  v-if="this.$parent.auth.role === '1'" class="card">
-                <span class="title">Skill Management</span>
-                <status v-show="status_list.skills.render" v-bind:status="status_list.skills"/> 
-                <span class="title2">Add Skill</span>
-                <input class="classic" type="text" placeholder="Search for skills" v-model="skill"> 
-                <div v-if="skills.show" style="max-height: 200px;overflow: auto;background: #eee; width: calc(100% - 40px);margin-top:-2px;border-bottom-right-radius: 2px;border-bottom-left-radius:2px;padding: 15px 20px">
-                    <template v-for="value in this.skills.list" class="skill">
-                        <div v-bind:key="value.id" class="skill">
-                            <button class="classic" style="display:block;margin-bottom: 5px;" v-on:click="add_skill(value.id)">{{value.name}}</button>
+        <modal v-show="skills.render" v-bind:modal="skills" @close="skills.render = false">
+            <div slot="title">Manage skills</div>
+            <div slot="content">
+                <input type="text">
+                <template v-for="(key, value) in user.skills">
+                    <div v-bind:key = "value">
+                        {{key.name}}
+                        <div class="selection-group inline right">
+                            <span class="chip choice active">Medium</span>
+                            <span class="chip choice">Good</span>
+                            <span class="chip choice">Expert</span>
                         </div>
-                    </template>
-                </div>
+                    </div>
+                    
+                </template>
+            </div>
+            <div slot="actions" slot-scope="{ close }">
+                <button v-on:click="close" class="button text">Close</button>
+            </div>
+        </modal>
+        <div class="container">
 
-                <span class="title2 margin-top">My Skills</span>
-                <div class="skills">  
-                    <div v-if="this.skills_.length === 0" class="neutral">There are no skills, add one!</div>
-                    <template v-for="(value, index) in this.skills_">
-                        <div v-bind:key="value.id" class="skill settings">
-                            <span>{{value.name}}</span>
-                            <button v-bind:class="{ selected: value.level == '1' }" class="classic moderate" v-on:click="set_level(index, value.id, 1)">
-                                Moderate
-                            </button>   
-                            <button v-bind:class="{ selected: value.level == '2' }" class="classic good" v-on:click="set_level(index, value.id, 2)">
-                                Good
-                            </button>   
-                            <button v-bind:class="{ selected: value.level == '3' }" class="classic expert" v-on:click="set_level(index, value.id, 3)">
-                                Expert
-                            </button>
-                            <button v-on:click="delete_skill(value.id, index)">
-                                Delete
-                            </button>
+        
+                
+                <!-- <status v-show="status_list.create.render" v-bind:status="status_list.create"/> -->
+        <div class="center">
+            <!-- <template v-for="(key, value) in user">
+                <div v-bind:key = "value">
+                    <div class="font high subtitle1">{{value}}</div>
+                    <div class="font body1">{{key}}</div>
+                    <div class="divider"></div>
+                </div> 
+            </template> -->
+
+        </div>
+
+        <div class="content-group">
+            <div class="card elevated">
+                <div class="font high h6 ">Personal Information</div>
+
+                <template v-for="(key, value) in user">
+                    <div v-if="ignore.indexOf(value) === -1" v-bind:key = "value">
+                        <div class="font body2">{{value}}</div>
+                        <div class="font high body1">{{key}}</div>
+                        <br>
+                    </div> 
+                </template>
+
+                <button class="button outlined" v-on:click="settings.render = true;">Edit Settings</button>
+                
+            </div>
+
+            <div class="card elevated">
+                <div class="font high h6 ">Skills</div>
+                <template v-for="(key, value) in user.skills">
+                    <div v-bind:key = "value">
+                        {{key.name}}
+                        <div class="selection-group inline right">
+                            <span class="chip choice active">Medium</span>
+                            <span class="chip choice">Good</span>
+                            <span class="chip choice">Expert</span>
+                            
                         </div>
-                    </template>
-                </div>
+                    </div>
+                </template>
+                <button class="button outlined" v-on:click="skills.render = true;">Manage skills</button>
             </div>
 
-            <div class="card">
-                <span class="title">Account Management</span>
-                <button class="classic danger">(not working)Permanently deactivate account</button>
-            </div>
+        </div>
+        
         </div>  
-    </div>  
+    </div>
 </template>
 
 <script>
 import Http from '../../core/http';
-import Status from '../../components/Status';
+
+import Modal from '../../components/Modal.vue';
 
 export default {
     name: "settings",
     components: {
-        Status
+        Modal
     },
     created() {
         new Http().get("user").then(res => {
+            const temp = this.user.skills
             this.user = res.data.user;
-            this.skills_ = res.data.user.skills;
+            this.user.skills = temp;
         })
     },
     data() {
@@ -114,26 +153,55 @@ export default {
                 house_number: "",
                 street: "",
                 theme: "1",
-                skills: []
+                skills: [
+                    {
+                        id: 1,
+                        name: "JavaScript",
+                        level: 2
+                    },
+                    {
+                        id: 2,
+                        name: "C++",
+                        level: 3
+                    }
+                ]
             },
-            skills_: [],
-            skill: "",
+
+            ignore: [
+                "id",
+                "theme",
+                "student_id",
+                "skills",
+                "role"
+            ],
+
+            settings: {
+                render: false,
+                size: "huge",
+                safe_exit: true
+            },
             skills: {
-                show: false,
-                list: []
-            },
-            status_list: {
-                settings: {
-                    render: false,
-                    message: "",
-                    type: ""
-                },
-                skills: {
-                    render: false,
-                    message: "",
-                    type: ""
-                }
+                render: true,
+                size: "huge"
             }
+            // skills_: [],
+            // skill: "",
+            // skills: {
+            //     show: false,
+            //     list: []
+            // },
+            // status_list: {
+            //     settings: {
+            //         render: false,
+            //         message: "",
+            //         type: ""
+            //     },
+            //     skills: {
+            //         render: false,
+            //         message: "",
+            //         type: ""
+            //     }
+            // }
         }
     },
     watch: {
@@ -170,45 +238,46 @@ export default {
         },
 
         edit() {
-            this.status_list.settings.render = false;
             
-            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (this.user.name === "" || this.user.email === "") { 
-                this.status_list.settings = {
-                    render: true,
-                    type: "error",
-                    message: `Inputs can't be empty`
-                }
+            // this.status_list.settings.render = false;
+            
+            // var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            // if (this.user.name === "" || this.user.email === "") { 
+            //     this.status_list.settings = {
+            //         render: true,
+            //         type: "error",
+            //         message: `Inputs can't be empty`
+            //     }
 
-                return;
-            }
+            //     return;
+            // }
 
-            if (!re.test(this.user.email.toLowerCase())) {
-                this.status_list.settings = {
-                    render: true,
-                    type: "error",
-                    message: `Invalid Email`
-                }
+            // if (!re.test(this.user.email.toLowerCase())) {
+            //     this.status_list.settings = {
+            //         render: true,
+            //         type: "error",
+            //         message: `Invalid Email`
+            //     }
 
-                return;
-            }
+            //     return;
+            // }
 
 
-            new Http().post(`user/edit`, this.user)
-            .then(res => {
-                localStorage.setItem("accessToken", res.data.token);
-                this.status_list.settings = {
-                    render: true,
-                    type: "success",
-                    message: `Settings saved!`
-                }
-            }).catch(err => {
-                this.status_list.settings = {
-                    render: true,
-                    type: "error",
-                    message: `Something went wrong`
-                }
-            });
+            // new Http().post(`user/edit`, this.user)
+            // .then(res => {
+            //     localStorage.setItem("accessToken", res.data.token);
+            //     this.status_list.settings = {
+            //         render: true,
+            //         type: "success",
+            //         message: `Settings saved!`
+            //     }
+            // }).catch(err => {
+            //     this.status_list.settings = {
+            //         render: true,
+            //         type: "error",
+            //         message: `Something went wrong`
+            //     }
+            // });
         },
         add_skill(id) {
             new Http().post("user/skill", {id: id}).then(res => {

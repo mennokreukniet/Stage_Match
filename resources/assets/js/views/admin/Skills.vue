@@ -3,21 +3,20 @@
         <div class="center">
 
             <div class="">
-                <span class="title">Skills ({{this.skills.length}})</span>
 
-                <div class="skills margin-top">
+                <div class="list">
                     <!-- <status v-show="status_list.skills.render" v-bind:status="status_list.skills"/> -->
 
-                    <input class="classic" v-model="search" type="text" placeholder="Zoeken naar vaardigheden">
+                    <!-- <input class="classic" v-model="search" type="text" placeholder="Zoeken naar vaardigheden">
                     
-                    <div v-if="this.skills.length === 0" class="neutral margin-top">There are no skills, add one!</div>
+                    <div v-if="this.skills.length === 0" class="neutral margin-top">There are no skills, add one!</div> -->
                     
                     <template v-for="(value, index) in this.skills">
-                        <div v-bind:key="value.id" class="skill admin">
+                        <div v-bind:key="value.id" class="item">
                             <span>{{value.name}}</span>
-                            <button class="edit" v-on:click="prompt('edit', `New name for ${value.name}`, {id: value.id, name: value.name})">
+                            <!-- <button class="edit" v-on:click="prompt('edit', `New name for ${value.name}`, {id: value.id, name: value.name})">
                                 <i class="material-icons">edit</i>
-                            </button>    
+                            </button>     -->
                             <!-- <button class="remove" v-on:click="confirm_box('remove', 'This action deletes all skill entries which might exist on a user', { id: value.id, index: index })">
                                 <i class="material-icons">delete</i>
                             </button>     -->

@@ -16,19 +16,20 @@ class Student_SkillController extends Controller
     /**
      * Add a skill to an user.
      *
-     * @param Skill $skill
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function addSkill(Skill $skill, Request $request){
+    public function addSkill(Request $request){
         $student = auth()->user()->student;
 
-        if ($skill === NULL) {
+        $skill = Skill::find($request->id);
+
+        if ($skill->id === NULL) {
             return response(['status' => 'error', "message" => "Skill does not exist"], 404);
         }
 
         try {
-            $student->skills()->attach($skill);
+            $student->skills()->attach($request->id);
             return response(['status' => 'success', 'result' => $skill], 200);
         } catch(\Illuminate\Database\QueryException $e) {
             return response(['status' => 'error', "message" => "Skill is already added"], 400);

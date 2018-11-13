@@ -43,9 +43,9 @@ Route::group(['middleware' => 'role:admin'], function(){
 	Route::put('/admin/skill/{id}', 'SkillsController@editSkill');
 });
 
-Route::apiResource('internship', 'InternshipController')->only(['index','show']);
+Route::apiResource('internship', 'InternshipController')->only(['show']);
 
 Route::group(['middleware' => 'role:company'], function () {
     Route::post('/internship/{internship}/image', 'InternshipCompanyController@uploadImage');
-    Route::apiResource('/internship', 'InternshipCompanyController')->only(['store', 'update', 'destroy']);
+    Route::apiResource('/internship', 'InternshipCompanyController')->only(['index', 'store', 'update', 'destroy']);
 });

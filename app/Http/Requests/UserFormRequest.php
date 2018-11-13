@@ -16,7 +16,7 @@ class UserFormRequest extends FormRequest
         $role = auth()->payload()->get('role');
         if ($role == '1') {
             return [
-                'name' => 'required|integer',
+                'name' => 'required|string',
                 'email' => 'required|email|unique:users,email,'.$id,
                 'theme' => 'required|integer',
                 'city' => 'required|string',

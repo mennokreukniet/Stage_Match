@@ -455,6 +455,21 @@ nav {
     }
 }
 
+.vertical-menu {
+    width: 112px;
+    border-radius: 4px;
+    padding: 8px 0;
+    @include elevation(8);
+    .item {
+        height: 48px;
+        padding: 16px 16px;
+        cursor: pointer;
+        &:hover {
+            @include state("hover", #000);
+        }
+    }
+}
+
 .button {
     border: none;
     background: none;
@@ -742,6 +757,10 @@ nav {
 
 .center {
     grid-column: 1/-1;
+
+    &.small {
+        @extend %centered_content;
+    }
 }
 
 .divider {
@@ -988,9 +1007,9 @@ nav {
 // @import 'general';
 // @import 'variables';
 
-// html {
-//     overflow-x: auto;
-// }
+html {
+    overflow: auto;
+}
 
 div.product-card {
     div.overlay {

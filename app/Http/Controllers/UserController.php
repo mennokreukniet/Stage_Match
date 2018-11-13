@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function editUser(Request $request){
+    public function editUser(UserFormRequest $request){
         $id = auth()->payload()->get('sub');
         $role = auth()->payload()->get('role');
 
@@ -26,9 +26,7 @@ class UserController extends Controller
 
         if ($role == '1'){
             Student::where('user_id', $id)
-                ->update(['school' => $request->school,
-                    'date_of_birth' => $request->date_of_birth,
-                    'gender' => $request->gender]);
+                ->update(['school' => $request->school]);
         } elseif ($role === "2"){
             Company::where('user_id', $id)
                 ->update(['description' => $request->description]);

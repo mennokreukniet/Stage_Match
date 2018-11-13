@@ -1,6 +1,6 @@
 <template>
     <div class="container"> 
-        <div class="center">
+        <div class="center small">
 
             <div class="">
 
@@ -14,6 +14,7 @@
                     <template v-for="(value, index) in this.skills">
                         <div v-bind:key="value.id" class="item">
                             <span>{{value.name}}</span>
+                            <button class="button icon small absolute options"><i class="material-icons">more_vert</i></button>
                             <!-- <button class="edit" v-on:click="prompt('edit', `New name for ${value.name}`, {id: value.id, name: value.name})">
                                 <i class="material-icons">edit</i>
                             </button>     -->

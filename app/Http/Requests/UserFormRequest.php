@@ -26,7 +26,7 @@ class UserFormRequest extends FormRequest
             ];
          } else if ($role == '2') {
              return [
-                 'name' => 'required|integer',
+                 'name' => 'required|string',
                  'email' => 'required|email|unique:users',
                  'theme' => 'required|integer',
                  'city' => 'required|string',
@@ -36,7 +36,7 @@ class UserFormRequest extends FormRequest
              ];
          } else if ($role == '3') {
              return [
-                 'name' => 'required|integer',
+                 'name' => 'required|string',
                  'email' => 'required|email|unique:users',
                  'theme' => 'required|integer',
                  'city' => 'required|string',

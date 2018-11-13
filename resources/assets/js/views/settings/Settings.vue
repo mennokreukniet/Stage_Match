@@ -89,39 +89,42 @@
 
         </div>
 
-        <div class="content-group">
-            <div class="card elevated">
-                <div class="font high h6 ">Personal Information</div>
 
-                <template v-for="(key, value) in user">
-                    <div v-if="ignore.indexOf(value) === -1" v-bind:key = "value">
-                        <div class="font body2">{{value}}</div>
-                        <div class="font high body1">{{key}}</div>
-                        <br>
-                    </div> 
-                </template>
-
-                <button class="button outlined" v-on:click="settings.render = true;">Edit Settings</button>
-                
+            <div class="center small spacing bottom top2">
+                <span class="font high subtitle1 ">Personal Information</span>
             </div>
+                <div class="card elevated">
 
+
+                    <template v-for="(key, value) in user">
+                        <div v-if="ignore.indexOf(value) === -1" v-bind:key = "value">
+                            <div class="font body2">{{value}}</div>
+                            <div class="font high body1">{{key}}</div>
+                            <br>
+                        </div>
+                    </template>
+
+                    <button class="button outlined" v-on:click="settings.render = true;">Edit Settings</button>
+
+                </div>
+            <div class="center small spacing bottom top2">
+                <span class="font high subtitle1 ">Skills</span>
+            </div>
             <div class="card elevated">
-                <div class="font high h6 ">Skills</div>
+                <div class="list">
                 <template v-for="(key, value) in user.skills">
                     <div v-bind:key = "value">
-                        {{key.name}}
-                        <div class="selection-group inline right">
-                            <span class="chip choice active">Medium</span>
-                            <span class="chip choice">Good</span>
-                            <span class="chip choice">Expert</span>
-                            
-                        </div>
+
+                        <div class="item">{{key.name}}</div>
+
+
                     </div>
                 </template>
+                </div>
                 <button class="button outlined" v-on:click="skills.render = true;">Manage skills</button>
             </div>
 
-        </div>
+
         
         </div>  
     </div>

@@ -12,24 +12,23 @@ use App\User;
 class Student_SkillController extends Controller
 {
 
+
     /**
      * Add a skill to an user.
      *
+     * @param Skill $skill
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function addSkill(Request $request){
-        $user_id = auth()->id();
-        $student = Student::where('user_id', $user_id)->first();
-
-        $skill = Skill::find($request->id);
+    public function addSkill(Skill $skill, Request $request){
+        $student = auth()->user()->student;
 
         if ($skill === NULL) {
             return response(['status' => 'error', "message" => "Skill does not exist"], 404);
         }
 
         try {
-            $student->skills()->attach($skill->id);
+            $student->skills()->attach($skill);
             return response(['status' => 'success', 'result' => $skill], 200);
         } catch(\Illuminate\Database\QueryException $e) {
             return response(['status' => 'error', "message" => "Skill is already added"], 400);
@@ -43,8 +42,7 @@ class Student_SkillController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function skillLevel(Request $request){
-        $user_id = auth()->id();
-        $student = Student::where('user_id', $user_id)->first();
+        $student = auth()->user()->student;
 
         $sync = $student->skills()->updateExistingPivot($request->id, ['level' => $request->level ]);
 
@@ -60,9 +58,7 @@ class Student_SkillController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function deleteSkill(Request $request) {
-
-        $user_id = auth()->id();
-        $student = Student::where('user_id', $user_id)->first();
+        $student = auth()->user()->student;
 
         $detach = $student->skills()->detach($request->id);
 

@@ -20,8 +20,7 @@ class CheckRole
             return $next($request);
         };
         return response([
-            'status' => 'error',
-            'error' => ['msg' => 'token invalid']
-        ]);
+            'message' => 'auth check or role check failed'
+        ], 400);
     }
 }

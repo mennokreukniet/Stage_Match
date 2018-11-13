@@ -1,11 +1,17 @@
 <template>
     <div class="container">
+        <notifications position="bottom right"/>
+
         <div class="page-options left">
-            <router-link v-if="$route.name !== 'internship_show'" to="/internship" tag="button" class="back"><i class="material-icons">arrow_back</i></router-link>
+            <router-link v-if="$route.name !== 'internship_show'" to="/internship" tag="button" class="back">
+                <i class="material-icons">arrow_back</i>
+            </router-link>
         </div>
 
         <div class="page-options right">
-            <router-link to="/internship/create" tag="button" class="page-options right create"><i class="material-icons">add</i></router-link>
+            <router-link to="/internship/create" tag="button" class="page-options right create">
+                <i class="material-icons">add</i>
+            </router-link>
         </div>
 
         <div class="main">
@@ -22,8 +28,5 @@
 <script>
 export default {
     name: "internship",
-    created() {
-        console.log(this.$route)
-    }
 }
 </script>

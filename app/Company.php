@@ -21,6 +21,10 @@ class Company extends Model
         return $this->hasMany('App\Internship');
     }
 
+    public function hasInternship($internship) {
+        return ($this->internships->find($internship)) ? true : false;
+    }
+
     public $timestamps = false;
 
 }

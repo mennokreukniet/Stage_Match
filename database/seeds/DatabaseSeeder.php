@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             SkillsTableSeeder::class,
+            InternshipTableSeeder::class,
             //LevelsTableSeeder::class,
             /*
-             * InternshipTableSeeder::class
             SkillsTableSeeder::class,
             CategoryTableSeeder::class,
             Skill_CategoryTableSeeder::class,

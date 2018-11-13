@@ -5,6 +5,7 @@ import Index from './views/index/Index.vue';
 import Main from './views/main/Main.vue';
 import Settings from './views/settings/Settings.vue';
 import Admin from './views/admin/Admin.vue';
+import Admin_skills from './views/admin/Skills.vue';
 import Reviews from './views/reviews/Reviews.vue';
 import Internship from './views/internship/Internship.vue';
 import Internship_create from './views/internship/Create.vue';
@@ -97,7 +98,14 @@ export const routes = {
             name: "admin",
             meta: {
                 role: roles.admin
-            }
+            },
+            children: [
+                {
+                    path: 'skills',
+                    component: Admin_skills,
+                    name: "admin_skills"
+                },
+            ]
         },
         {
             path: '/demo',

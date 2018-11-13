@@ -37,7 +37,7 @@ import Paginate from './Paginate';
 
 export default {
     components: {
-        paginate: Paginate,
+        Paginate,
     },
     name: "list_internship",
     data() {

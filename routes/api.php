@@ -44,7 +44,6 @@ Route::group(['middleware' => 'role:admin'], function(){
 });
 
 Route::apiResource('internship', 'InternshipController')->only(['index','show']);
-Route::get('/images/{image}', 'ImageController@show');
 
 Route::group(['middleware' => 'role:company'], function () {
     Route::post('/internship/{internship}/image', 'InternshipCompanyController@uploadImage');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImageFormRequest;
 use App\Http\Requests\InternshipFormRequest;
 use App\Image;
 use App\Internship;
@@ -41,28 +42,23 @@ class InternshipCompanyController extends Controller
     }
 
 
-    public function uploadImage(Internship $internship, Request $request) //TODO: ImageFormRequest validation image
+    public function uploadImage(Internship $internship, ImageFormRequest $request)
     {
-        if ($request->hasFile('image')) {
-            $file = $request->image->store('public/images');
-            $image = [
-                'name' => $request->image->getClientOriginalName(),
-                'url' => Storage::url($file),
-                'file' => $file
-            ];
-            if ($internship->image()->exists()) {
-                Storage::delete($internship->image->file);
-                if ($internship->image->fill($image)->save())
-                    return $this->response("image updated");
-            } else {
-                if ($internship->image()->save(new Image($image)))
-                    return $this->response("image uploaded");
-            }
-            return $this->response("image upload failed", 400);
-
+        $file = $request->image->store('public/images');
+        $image = [
+            'name' => $request->image->getClientOriginalName(),
+            'url' => Storage::url($file),
+            'file' => $file
+        ];
+        if ($internship->image()->exists()) {
+            Storage::delete($internship->image->file);
+            if ($internship->image->update($image))
+                return $this->response('Image for "'.$internship->title.'" updated');
+        } else {
+            if ($internship->image()->save(new Image($image)))
+                return $this->response('Image for "'.$internship->title.'" added');
         }
-        return $this->response("image file check failed", 400);
-
+        return $this->response("image upload failed", 400);
     }
 
     /**
@@ -75,9 +71,9 @@ class InternshipCompanyController extends Controller
     {
         $internship = new Internship($request->all());
 
-        if ($this->company->internships->save($internship)) {
-            return response(['status' => 'success', 'result' => $internship], 200);
-        }
+        if ($this->company->internships()->save($internship))
+            return response(['message' => 'Internship "'.$internship->title.'" created', 'id' => $internship->id]);
+
         return $this->response('store new internship failed',400);
     }
 
@@ -91,8 +87,9 @@ class InternshipCompanyController extends Controller
     public function update(InternshipFormRequest $request, Internship $internship)
     {
         if ($this->company->hasInternship($internship)) {
-            $internship->fill($request->all())->save();
-            return $this->response('update internship succeeded');
+            if ($internship->update($request->all()))
+                return response(['message' => 'Internship "'.$internship->title.'" updated', 'id' => $internship->id]);
+            return $this->response('internship update failed', 400);
         }
         return $this->response('user '.auth()->user()->email.' does not own this internship',400);
     }
@@ -107,10 +104,10 @@ class InternshipCompanyController extends Controller
     public function destroy(Internship $internship)
     {
         if ($this->company->hasInternship($internship)) {
-            $internship->delete();
-            return $this->response('success');
+            if ($internship->delete())
+                return $this->response('Internship successfully deleted');
         }
-        return $this->response('failed',400);
+        return $this->response('destroy internship failed',400);
     }
     public function response($message, $status = 200) {
         return response(['message' => $message], $status);

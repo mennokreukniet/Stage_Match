@@ -12,4 +12,5 @@ class Image extends Model
 
     public $timestamps = false;
     public $fillable = ['name', 'file', 'url'];
+    public $visible = ['name', 'url'];
 }

@@ -1,7 +1,7 @@
 <template>
 
-    <div class="w3-modal w3-animate-opacity" style="display:block">
-        <div class="w3-modal-content">
+    <div class="modal w3-animate-opacity" style="display:block">
+        <div class="modal-content">
 
             <header class="w3-container w3-blue-grey">
                 <h2>{{ title }}</h2>
@@ -23,7 +23,25 @@
     </div>
 
 </template>
-
+<style scoped>
+    .modal {
+        z-index: 3;
+        padding-top: 40%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+        margin: auto;
+        background-color: #fff;
+        position: relative;
+        width: 600px;
+    }
+</style>
 <script>
     export default {
         name: 'modal',

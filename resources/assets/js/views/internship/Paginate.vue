@@ -6,7 +6,7 @@
             <a @click="handleClick(index)" :class="['w3-button', index === meta.current_page ? 'w3-purple': '']">{{ index }}</a>
         </template>
 
-        <a v-if="meta.current_page !== this.meta.last_page" @click="nextPage()" class="w3-button">&raquo;</a>
+        <a v-if="meta.current_page !== meta.last_page" @click="nextPage()" class="w3-button">&raquo;</a>
 
     </div>
 </template>
@@ -16,7 +16,7 @@
      * laravel pagination handler
      */
     export default {
-        name: "Paginate",
+        name: "paginate",
         props: {
             meta: {
                 type: Object,

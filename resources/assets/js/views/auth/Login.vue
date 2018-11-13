@@ -15,6 +15,10 @@
                     
                     <button class="submit margin-bottom" v-on:click="login">Login</button>
 
+                    <button class="submit margin-bottom" v-on:click="credentials = {email: 's@s.s', password: '123456'};login()">Login as Student</button>
+                    <button class="submit margin-bottom" v-on:click="credentials = {email: 'c@c.c', password: '123456'};login()">Login as Company</button>
+                    <button class="submit margin-bottom" v-on:click="credentials = {email: 'a@a.a', password: '123456'};login()">Login as Admin</button>
+
                     <button style="background: #207c7e; display: block;" class="margin-top submit" v-on:click="register">Register</button>
                 </div>
             </div>

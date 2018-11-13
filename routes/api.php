@@ -26,13 +26,14 @@ Route::post('auth/login', 'AuthController@login');
 Route::group(['middleware' => 'auth'], function(){
     Route::post('user/skill/level', 'Student_SkillController@skillLevel');
     Route::delete('user/skill/{id}', 'Student_SkillController@deleteSkill');
-    Route::post('user/skill/{skill}', 'Student_SkillController@addSkill');
-    Route::post('auth/logout', 'AuthController@logout');
-    Route::post('user/edit', 'UserController@editUser');
-    Route::get('user', 'UserController@getUser');
-    Route::get('student', 'StudentController@getStudent');
-    Route::get('company', 'CompanyController@getCompany');
-    Route::get('user/skill/{keyword}', 'SkillsController@searchSkill');
+  Route::post('user/skill/add', 'Student_SkillController@addSkill');
+  Route::post('auth/logout', 'AuthController@logout');
+  Route::post('user/edit', 'UserController@editUser');
+  Route::get('user', 'UserController@getUser');
+  Route::get('student', 'StudentController@getStudent');
+  Route::get('company', 'CompanyController@getCompany');
+  Route::get('user/skill/{keyword}', 'SkillsController@searchSkill');
+  Route::apiResource('internship', 'InternshipController');
 });
 
 Route::group(['middleware' => 'role:admin'], function(){

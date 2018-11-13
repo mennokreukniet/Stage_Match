@@ -1,47 +1,91 @@
 <template>
     <div class="container auth">
-        <div id="register" class="main auth">
+        <div class="center small spacing bottom top2">
+            <span class="font high subtitle1 ">Register</span>
+        </div>
             <div class="card">
+
             <div class="form">
-                <span class="title">Register</span>
 
                 <div class="error" v-if="error.show">{{error.message}}</div>
 
-                <span class="label">Name</span>
-                <input @keyup.enter="register" class="classic" v-model="user.name" type="text" placeholder="Name">
+                <div class="form-group">
+                    <div class="input outlined">
+                        <input @keyup.enter="register" class="classic" v-model="user.name" type="text" placeholder="Name">
+                        <label>Name</label>
+                    </div>
+                </div>
 
-                <span class="label">Email</span>
-                <input @keyup.enter="register" class="classic" id="email" v-model="user.email" type="text" placeholder="Email">
+                <div class="form-group">
+                    <div class="input outlined">
+                        <input @keyup.enter="register" class="classic" id="email" v-model="user.email" type="text" placeholder="Email">
+                        <label>Email</label>
+                    </div>
+                </div>
 
-                <span class="label">Password</span>
-                <input @keyup.enter="register" class="classic" v-model="user.password" type="password" placeholder="Password">
+                <div class="form-group">
+                    <div class="input outlined">
+                        <input @keyup.enter="register" class="classic" v-model="user.password" type="password" placeholder="Password">
+                        <label>Password</label>
+                    </div>
+                </div>
 
-                <span class="label">Confirm Password</span>
-                <input @keyup.enter="register" class="classic" v-model="user.confirm_password" type="password" placeholder="Confirm Password">
+                <div class="form-group">
+                    <div class="input outlined">
+                        <input @keyup.enter="register" class="classic" v-model="user.confirm_password" type="password" placeholder="Confirm Password">
+                        <label>Confirm Password</label>
+                    </div>
+                </div>
 
-                <span class="label">City</span>
-                <input @keyup.enter="register" class="classic" v-model="user.city" type="text" placeholder="City">
+                <div class="form-group">
+                    <div class="input outlined">
+                        <input @keyup.enter="register" class="classic" v-model="user.city" type="text" placeholder="City">
+                        <label>City</label>
+                    </div>
+                </div>
 
-                <span class="label">Street</span>
-                <input @keyup.enter="register" class="classic" v-model="user.street" type="text" placeholder="Street">
+                <div class="form-group">
+                    <div class="input outlined">
+                        <input @keyup.enter="register" class="classic" v-model="user.street" type="text" placeholder="Street">
+                        <label>Street</label>
+                    </div>
+                </div>
 
-                <span class="label">House number</span>
-                <input @keyup.enter="register" class="classic" v-model="user.house_number" type="text" placeholder="House number">
+                <div class="form-group">
+                    <div class="input outlined">
+                        <input @keyup.enter="register" class="classic" v-model="user.house_number" type="text" placeholder="House number">
+                        <label>House number</label>
+                    </div>
+                </div>
 
-                <span v-if="user.role === '1'" class="label">School</span>
-                <input v-if="user.role === '1'" @keyup.enter="register" class="classic" v-model="user.school" type="text" placeholder="School">
+                <div v-if="user.role === '1'" class="form-group">
+                    <div class="input outlined">
+                        <input  @keyup.enter="register" class="classic" v-model="user.school" type="text" placeholder="School">
+                        <label >School</label>
+                    </div>
+                </div>
 
-                <span v-if="user.role === '1'" class="label">Date of birth</span>
-                <input v-if="user.role === '1'" @keyup.enter="register" class="classic" v-model="user.date_of_birth" type="text" placeholder="Date of birth">
+                <div v-if="user.role === '1'" class="form-group">
+                    <div class="input outlined">
+                        <input @keyup.enter="register" class="classic" v-model="user.date_of_birth" type="text" placeholder="Date of birth">
+                        <label >Date of birth</label>
+                    </div>
+                </div>
 
-                <span v-if="user.role === '1'" class="label">Gender</span>
-                <select v-if="user.role === '1'" class="classic margin-bottom" v-model="user.gender">
-                <option value="male" selected="true">Male</option>
-                <option value="female">Female</option>
-                </select>
+                    <span v-if="user.role === '1'" class="label">Gender</span>
+                    <select v-if="user.role === '1'" class="classic margin-bottom" v-model="user.gender">
+                        <option value="male" selected="true">Male</option>
+                        <option value="female">Female</option>
+                    </select>
 
-                <span v-if="user.role === '2'" class="label">Description</span>
-                <input v-if="user.role === '2'" @keyup.enter="register" class="classic" v-model="user.description" type="text" placeholder="Description">
+                <div v-if="user.role === '2'" class="form-group">
+                    <div class="input outlined">
+                        <input @keyup.enter="register" class="classic" v-model="user.description" type="text" placeholder="Description">
+                        <label >Description</label>
+                    </div>
+                </div>
+
+
 
                 <span class="label">Role</span>
                 <select class="classic" v-model="user.role">
@@ -49,9 +93,9 @@
                 <option value="2">Company</option>
                 <option value="3">Admin</option>
                 </select><br>
-                <button class="submit" v-on:click="register">Register</button>
+                <button class="button contained" v-on:click="register">Register</button>
                 <br><br>
-                <button style="background: #207c7e" class="submit" v-on:click="login">Login</button>
+                <button class="button text" v-on:click="login">Login</button>
             </div>
             </div>
         </div>

@@ -1,25 +1,33 @@
 <template>
-    <div class="container auth">
-        <div id="login" class="main">
-            <div class="card">
-                <div class="form">
-                    <span class="title">Login</span>
-
-                    <div class="error" v-if="error.show">{{error.message}}</div>
-
-                    <span class="label">Email</span>
+    <div class="container">
+        <div class="center small spacing bottom top2">
+            <span class="font high subtitle1 ">Login</span>
+        </div>
+        <div class="card">
+            <div class="form">
+                <div class="error" v-if="error.show">{{error.message}}</div>
+            <div class="form-group">
+                <div class="input outlined">
                     <input @keyup.enter="login" v-model="credentials.email" id="email" class="classic" type="text" placeholder="Email">
-                    
-                    <span class="label">Password</span>
+                    <label>Email</label>
+                </div>
+</div>
+                <div class="form-group">
+                <div class="input outlined">
                     <input @keyup.enter="login" v-model="credentials.password"  class="classic" type="password" placeholder="Password">
-                    
-                    <button class="submit margin-bottom" v-on:click="login">Login</button>
+                    <label>Password</label>
+                </div>
+                </div>
+                <div class="spacing bottom top2">
 
-                    <button class="submit margin-bottom" v-on:click="credentials = {email: 's@s.s', password: '123456'};login()">Login as Student</button>
-                    <button class="submit margin-bottom" v-on:click="credentials = {email: 'c@c.c', password: '123456'};login()">Login as Company</button>
-                    <button class="submit margin-bottom" v-on:click="credentials = {email: 'a@a.a', password: '123456'};login()">Login as Admin</button>
+                <button class="button contained" v-on:click="login">Login</button>
+                </div>
+                <button class="button outlined" v-on:click="credentials = {email: 's@s.s', password: '123456'};login()">Login as Student</button>
+                <button class="button outlined" v-on:click="credentials = {email: 'c@c.c', password: '123456'};login()">Login as Company</button>
+                <button class="button outlined" v-on:click="credentials = {email: 'a@a.a', password: '123456'};login()">Login as Admin</button>
 
-                    <button style="background: #207c7e; display: block;" class="margin-top submit" v-on:click="register">Register</button>
+                <div class="spacing bottom top2">
+                <button class="button text" v-on:click="register">Register</button>
                 </div>
             </div>
         </div>

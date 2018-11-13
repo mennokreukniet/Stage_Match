@@ -1,68 +1,60 @@
 <template>
     <div>
 
-        <div class="w3-center">
-            <paginate
-                    v-model="page"
-                    :click-handler="paginateHandler"
-                    :page-count="internships.last_page || 1"
-                    :page-range="5"
+        <paginate :meta="pagination" @input="load"/>
 
-                    :no-li-surround="true"
-                    :hide-prev-next="true"
-
-                    :container-class="'w3-bar'"
-                    :page-link-class="'w3-button'"
-                    :active-class="'w3-purple'"
-
-                    :prev-text="'&laquo;'"
-                    :prev-link-class="'w3-button'"
-                    :next-text="'&raquo;'"
-                    :next-link-class="'w3-button'"
-            />
-        </div>
-
-        <div class="card w3-hover-blue"
-             style="cursor:pointer"
-             v-for="internship in internships.data"
-             @click="clickHandler(internship.id)">
-
+        <router-link :to="'/internship/' + internship.id" v-for="internship in internships" :key="internship.id"
+             tag="div" class="card"
+        >
+            <img v-if="internship.image" :src="internship.image.url" class="right"/>
             <h4>{{ internship.title }}</h4>
             <p>{{ internship.mentor}}</p>
             <p>{{ internship.body }}</p>
             <p>{{ internship.start_date }} - {{ internship.end_date }}</p>
-        </div>
+        </router-link>
+
+        <paginate :meta="pagination" @input="load"/>
 
     </div>
 </template>
+<style scoped>
+    .card:hover {
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+        cursor: pointer;
+    }
+    .card {
+        overflow: auto;
+        }
+    .right {
+        float: right;
+        width: 50%;
+    }
+</style scoped>
 
 <script>
 import Http from '../../core/http';
-import Paginate from 'vuejs-paginate';
+import Paginate from './Paginate';
 
 export default {
     components: {
-        Paginate
+        paginate: Paginate,
     },
     name: "list_internship",
     data() {
         return {
-            page: 1,
-            internships: {},
+            pagination: {},
+            internships: []
         }
     },
     methods: {
-        clickHandler: function (id) {
-            this.$router.push('/internship/' + id);
-        },
-        paginateHandler: function (e) {
-            this.load(e);
-        },
-        load: function(page = 1) {
-            new Http().get("internship?page=" + page).then(response => {
-                this.internships = response.data;
-
-            })
+        load: function (page) {
+            page = page || this.$parent.page;
+            new Http().get("internship?page=" + (page || 1)).then(response => {
+                this.internships = response.data.data;
+                delete response.data.data;
+                this.pagination = response.data;
+                this.$parent.page = this.pagination.current_page;
+            });
         }
     },
     created() {

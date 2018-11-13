@@ -1,6 +1,6 @@
 <template>
 
-    <div class="w3-modal" style="display:block">
+    <div class="w3-modal w3-animate-opacity" style="display:block">
         <div class="w3-modal-content">
 
             <header class="w3-container w3-blue-grey">
@@ -26,7 +26,7 @@
 
 <script>
     export default {
-        name: 'prompt',
+        name: 'modal',
         props: {
             title: {
                 type: String,

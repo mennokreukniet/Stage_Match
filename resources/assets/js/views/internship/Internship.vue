@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <notifications position="top right" style="position: absolute; z-index: 9999;"/>
+        <notifications position="bottom right"/>
 
         <div class="page-options left">
             <router-link v-if="$route.name !== 'internship_show'" to="/internship" tag="button" class="back">
@@ -28,7 +28,5 @@
 <script>
 export default {
     name: "internship",
-    created() {
-    }
 }
 </script>

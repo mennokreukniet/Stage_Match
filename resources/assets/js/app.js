@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueI18n from 'vue-i18n'
-import Notifications from 'vue-notification/dist/ssr.js'
+import VueI18n from 'vue-i18n';
+import Notifications from 'vue-notification';
 
 Vue.use(Notifications);
 Vue.use(VueI18n);

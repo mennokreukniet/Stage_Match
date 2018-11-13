@@ -75,6 +75,16 @@
                     </div>
                 </div>
                 <div class="divider"></div>
+
+                <div style="padding: 16px 32px;">
+                    <div class="font h5">Vertical Menu</div>
+
+                    <div class="vertical-menu">
+                        <div class="item">item 1</div>
+                        <div class="item">item 2</div>
+                    </div>
+                </div>
+                <div class="divider"></div>
             </div>
         </div>
     </div>

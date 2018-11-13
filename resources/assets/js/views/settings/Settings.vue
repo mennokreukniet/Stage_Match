@@ -65,17 +65,17 @@
                     <template v-for="(value, index) in this.skills_">
                         <div v-bind:key="value.id" class="skill settings">
                             <span>{{value.name}}</span>
-                            <button v-bind:class="{ selected: value.level == '1' }" class="classic moderate" v-on:click="set_level(index, value.id, 1)">
+                            <button v-bind:class="{ selected: value.level == '1' }" class="classic skill moderate" v-on:click="set_level(index, value.id, 1)">
                                 Moderate
                             </button>   
-                            <button v-bind:class="{ selected: value.level == '2' }" class="classic good" v-on:click="set_level(index, value.id, 2)">
+                            <button v-bind:class="{ selected: value.level == '2' }" class="classic skill good" v-on:click="set_level(index, value.id, 2)">
                                 Good
                             </button>   
-                            <button v-bind:class="{ selected: value.level == '3' }" class="classic expert" v-on:click="set_level(index, value.id, 3)">
+                            <button v-bind:class="{ selected: value.level == '3' }" class="classic skill expert" v-on:click="set_level(index, value.id, 3)">
                                 Expert
                             </button>
-                            <button v-on:click="delete_skill(value.id, index)">
-                                Delete
+                            <button style="width: 40px; height: 40px; background: none; border: none;" v-on:click="delete_skill(value.id, index)">
+                                <i class="material-icons">delete</i>
                             </button>
                         </div>
                     </template>
@@ -219,8 +219,9 @@ export default {
                     type: "success",
                     message: `${res.data.result.name} added!`
                 }
-
-                this.skills_.push(res.data.result);
+                const result = res.data.result;
+                result.level = 1;
+                this.skills_.push(result);
             }, reject => {
                 this.status_list.skills = {
                     render: true,

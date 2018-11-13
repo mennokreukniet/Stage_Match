@@ -734,7 +734,18 @@ button.classic {
     border-radius: 50px;
     font-weight: bold;
     letter-spacing: 1.5px;
-    font-family: "Ubuntu"
+    font-family: "Ubuntu";
+    &.skill {
+        background: #e0e0e0;
+        &:hover {
+            background: gray;
+        }
+    }
+
+    &:hover {
+        background: rgba($primary, 0.87);
+    }
+    
 }
 
 button.classic.cancel {
@@ -762,10 +773,6 @@ button.classic.danger:hover {
 
 .margin-bottom {
     margin-bottom: 20px;
-}
-
-button.classic:hover {
-    background: $secondary;
 }
 
 input.classic:focus, select.classic:focus {
@@ -926,17 +933,21 @@ div.skills {
                 height: 35px;
                 width: 35px;
                 border-radius: 40px;
-                background: $primary;
+                // background: $primary;
                 color: white;
     
                 i {
                     font-size: 20px;
                 }
+
+                &:hover {
+                    background: rgba(#eee, 0.87)
+                }
             }
         }
 
         &.settings {
-            grid-template-columns: 4fr 1fr 3px 1fr 3px 1fr;
+            grid-template-columns: 4fr 1fr 3px 1fr 3px 1fr 3px 1fr;
 
             button.selected {
                 background: #38c172;
@@ -953,17 +964,12 @@ div.skills {
             font-family: "ubuntu";
         }
 
-        
-
-        button:hover {
-            background: $secondary;
-        }
-
+    
         button.edit {
             grid-column-start: 2;
         }
 
-        button.remove {
+        button.delete {
             grid-column-start: 3;
         }
 

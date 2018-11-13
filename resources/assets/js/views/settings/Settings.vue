@@ -222,7 +222,6 @@ export default {
 
                 this.skills_.push(res.data.result);
             }, reject => {
-                console.log(reject.response)
                 this.status_list.skills = {
                     render: true,
                     type: "error",

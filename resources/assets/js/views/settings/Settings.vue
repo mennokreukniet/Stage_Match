@@ -5,21 +5,15 @@
             <div slot="content">
                 <div class="form-group">
                     <div class="input outlined half">
-                        <input v-bind:value="user.name" required/>
-                        <label>Firstname</label>
-                        <span>Helper!</span>
-                    </div>
-
-                    <div class="input outlined half">
-                        <input v-bind:value="user.lastname" required/>
-                        <label>Lastname</label>
+                        <input v-bind:value="edited_user.name" required/>
+                        <label>Name</label>
                         <span>Helper!</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="input outlined">
-                        <input v-bind:value="user.email" required/>
+                        <input v-bind:value="edited_user.email" required/>
                         <label>E-Mail</label>
                         <span>Helper!</span>
                     </div>
@@ -27,13 +21,13 @@
 
                 <div class="form-group">
                     <div class="input outlined" style="flex: 3;">
-                        <input v-bind:value="user.street" required/>
+                        <input v-bind:value="edited_user.street" required/>
                         <label>Street</label>
                         <span>Helper!</span>
                     </div>
 
                     <div class="input outlined">
-                        <input v-bind:value="user.house_number" required/>
+                        <input v-bind:value="edited_user.house_number" required/>
                         <label>House Number</label>
                         <span>Helper!</span>
                     </div>
@@ -41,7 +35,7 @@
 
                 <div class="form-group">
                     <div class="input outlined">
-                        <input v-bind:value="user.city" required/>
+                        <input v-bind:value="edited_user.city" required/>
                         <label>City</label>
                         <span>Helper!</span>
                     </div>
@@ -49,47 +43,52 @@
             </div>
             <div slot="actions" slot-scope="{ close }">
                 <button v-on:click="close" class="button text">Cancel</button>
-                <button class="button text">Save</button>
+                <button v-on:click="edit" class="button text">Save</button>
             </div>
         </modal>
 
         <modal v-show="skills.render" v-bind:modal="skills" @close="skills.render = false">
             <div slot="title">Manage skills</div>
             <div slot="content">
-                <input type="text">
-                <template v-for="(key, value) in user.skills">
-                    <div v-bind:key = "value">
-                        {{key.name}}
-                        <div class="selection-group inline right">
-                            <span class="chip choice active">Medium</span>
-                            <span class="chip choice">Good</span>
-                            <span class="chip choice">Expert</span>
+                <div class="search">
+                    <input v-model="search_skills" type="text" placeholder="Search through your skills or add one">
+                    <div class="results">
+                        <div class="list">
+                            <template v-for="(key, value) in search_skills_result">
+                                <div v-if="key.owns" class="item hover">{{key.name}}</div>
+                                <div v-if="!key.owns" v-on:click="add_skill(key.id)" class="item hover">Add {{key.name}} to skills</div>
+                            </template>
                         </div>
                     </div>
-                    
-                </template>
+                </div>
+                
+                <div class="list">
+                    <template v-for="(key, value) in user.skills">
+                        <div class="item hover" v-bind:key = "value">
+                            <span>
+                            <span style="position: relative; top:7px"> {{key.name}}</span>
+                            <span style="float: right">
+                                <span v-on:click="set_level(value, key.id, 1)" :class="{active: key.level === 1}" class="chip choice">Medium</span>
+                                <span v-on:click="set_level(value, key.id, 2)" :class="{active: key.level === 2}" class="chip choice">Good</span>
+                                <span v-on:click="set_level(value, key.id, 3)" :class="{active: key.level === 3}" class="chip choice">Expert</span>
+                            </span>
+                            </span>
+                            <options class="options special" >
+                                <template slot-scope="{close}">
+                                    <div class="item" v-on:click="delete_skill(key.id, value);close();">Remove</div>
+                                </template>
+                            </options>
+                        </div>
+                        
+                    </template>
+                </div>
             </div>
             <div slot="actions" slot-scope="{ close }">
                 <button v-on:click="close" class="button text">Close</button>
             </div>
         </modal>
+
         <div class="container">
-
-        
-                
-                <!-- <status v-show="status_list.create.render" v-bind:status="status_list.create"/> -->
-        <div class="center">
-            <!-- <template v-for="(key, value) in user">
-                <div v-bind:key = "value">
-                    <div class="font high subtitle1">{{value}}</div>
-                    <div class="font body1">{{key}}</div>
-                    <div class="divider"></div>
-                </div> 
-            </template> -->
-
-        </div>
-
-
             <div class="center small spacing bottom top2">
                 <span class="font high subtitle1 ">Personal Information</span>
             </div>
@@ -107,23 +106,25 @@
                     <button class="button outlined" v-on:click="settings.render = true;">Edit Settings</button>
 
                 </div>
-            <div class="center small spacing bottom top2">
-                <span class="font high subtitle1 ">Skills</span>
-            </div>
-            <div class="card elevated">
-                <div class="list">
-                <template v-for="(key, value) in user.skills">
-                    <div v-bind:key = "value">
 
-                        <div class="item">{{key.name}}</div>
-
-
-                    </div>
-                </template>
+            <template v-if="user.role === '1'">
+                <div class="center small spacing bottom top2">
+                    <span class="font high subtitle1 ">Skills</span>
                 </div>
-                <button class="button outlined" v-on:click="skills.render = true;">Manage skills</button>
-            </div>
+                <div class="card elevated">
+                    <div class="list">
+                    <template v-for="(key, value) in user.skills">
+                        <div v-bind:key = "value">
 
+                            <div class="item">{{key.name}}</div>
+                            
+
+                        </div>
+                    </template>
+                    </div>
+                    <button class="button outlined" v-on:click="skills.render = true;">Manage skills</button>
+                </div>
+            </template>
 
         
         </div>  
@@ -134,17 +135,17 @@
 import Http from '../../core/http';
 
 import Modal from '../../components/Modal.vue';
-
+import Options from '../../components/Options';
 export default {
     name: "settings",
     components: {
-        Modal
+        Modal,
+        Options
     },
     created() {
         new Http().get("user").then(res => {
-            const temp = this.user.skills
             this.user = res.data.user;
-            this.user.skills = temp;
+            this.edited_user = this.user;
         })
     },
     data() {
@@ -156,20 +157,11 @@ export default {
                 house_number: "",
                 street: "",
                 theme: "1",
-                skills: [
-                    {
-                        id: 1,
-                        name: "JavaScript",
-                        level: 2
-                    },
-                    {
-                        id: 2,
-                        name: "C++",
-                        level: 3
-                    }
-                ]
+                role: 0,
+                skills: []
             },
 
+            edited_user: {},
             ignore: [
                 "id",
                 "theme",
@@ -177,6 +169,8 @@ export default {
                 "skills",
                 "role"
             ],
+            search_skills: "",
+            search_skills_result: [],
 
             settings: {
                 render: false,
@@ -184,7 +178,7 @@ export default {
                 safe_exit: true
             },
             skills: {
-                render: true,
+                render: false,
                 size: "huge"
             }
             // skills_: [],
@@ -218,17 +212,33 @@ export default {
                 document.getElementById("email").classList.add("valid");
             }
         },
-        skill: function (skillname) {
-            if (skillname === "") return this.skills.show = false;
+        search_skills: function (skillname) {
+            // if (skillname === "") return this.skills.show = false;
 
             new Http().get(`user/skill/${skillname}`).then(res => {
-                if (res.data.result.length < 1) {
-                    return this.skills.show = false;
+                
+                const result = res.data.result;
+                for (let result_i = 0; result_i < result.length; result_i++) {
+                    for (let skill_i = 0; skill_i < this.user.skills.length; skill_i++) {
+                        // console.log(this.user.skills[skill_i].id)
+                        if (result[result_i].id == this.user.skills[skill_i].id) {
+                            console.log(result[result_i].id, this.user.skills[skill_i].id)
+                            result[result_i]["owns"] = true;
+                            break;
+                        } else {
+                            result[result_i]["owns"] = false;
+                        }
+                    }
                 }
-                this.skills = {
-                    show: true,
-                    list: res.data.result
-                }
+                this.search_skills_result = result;
+                console.log(result);
+                // if (res.data.result.length < 1) {
+                //     // return this.skills.show = false;
+                // }
+                // this.skills = {
+                //     show: true,
+                //     list: res.data.result
+                // }
                 
             });
         }
@@ -236,7 +246,7 @@ export default {
     methods: {
         set_level(index, id, level) {
             new Http().post("user/skill/level", { id: id, level: level}).then(res => {
-                this.skills_[index].level = level;
+                this.user.skills[index].level = level;
             })
         },
 
@@ -266,52 +276,44 @@ export default {
             // }
 
 
-            // new Http().post(`user/edit`, this.user)
-            // .then(res => {
-            //     localStorage.setItem("accessToken", res.data.token);
-            //     this.status_list.settings = {
-            //         render: true,
-            //         type: "success",
-            //         message: `Settings saved!`
-            //     }
-            // }).catch(err => {
-            //     this.status_list.settings = {
-            //         render: true,
-            //         type: "error",
-            //         message: `Something went wrong`
-            //     }
-            // });
-        },
-        add_skill(id) {
-            new Http().post(`user/skill/add`, {id:id} ).then(res => {
-                this.skills.show = false;
-                this.skill = "";
-                this.status_list.skills = {
+            new Http().post(`user/edit`, this.edited_user)
+            .then(res => {
+                localStorage.setItem("accessToken", res.data.token);
+                this.status_list.settings = {
                     render: true,
                     type: "success",
-                    message: `${res.data.result.name} added!`
+                    message: `Settings saved!`
                 }
-
-                this.skills_.push(res.data.result);
-            }, reject => {
-                this.status_list.skills = {
+            }).catch(err => {
+                this.status_list.settings = {
                     render: true,
                     type: "error",
-                    message: reject.response.data.message
+                    message: `Something went wrong`
                 }
+            });
+        },
+
+        add_skill(id) {
+            this.search_skills_result = [];
+            new Http().post("user/skill", {id: id}).then(res => {
+                const result = res.data.result;
+                result.level = 1;
+                this.user.skills.push(result);
+                this.search_skills = "";
             })
         },
+
         delete_skill(id, index) {
             new Http().delete(`user/skill/${id}`).then(res => {
-                this.skills.show = false;
-                this.skill = "";
-                this.status_list.skills = {
-                    render: true,
-                    type: "success",
-                    message: `skill removed!`
-                }
+                // this.skills.show = false;
+                // this.skill = "";
+                // this.status_list.skills = {
+                //     render: true,
+                //     type: "success",
+                //     message: `skill removed!`
+                // }
 
-                this.skills_.splice(index, 1);
+                this.user.skills.splice(index, 1);
             })
         }
     }

@@ -1,6 +1,7 @@
 
 <template>
     <div>
+        <div id="scrim" class="scrim transparent hidden"></div>
         <nav id="nav" v-if="show_menu">
             <div class="fab float"></div>
             <div id="navContainer">

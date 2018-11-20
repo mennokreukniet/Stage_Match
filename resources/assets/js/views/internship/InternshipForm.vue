@@ -1,27 +1,28 @@
 <template>
     <div class="card">
-        <modal v-if="showDeleteModal" @confirm="destroyInternship" @close="showDeleteModal = false"
-               title="Confirm Deletion" :body="`Delete the internship '${internship.title}'?`"/>
-        <slot></slot>
-        <div class="error" v-if="error">{{ error }}</div>
+        <modal v-if="showDeleteModal"
+            @confirm="destroyInternship" @close="showDeleteModal = false"
+            title="Confirm Deletion" :body="`Delete the internship '${internship.title}'?`"/>
+
+        <div v-if="errors.message" class="error">{{ errors.message }}</div>
+
         <div class="form">
-            <!--stage-match-input type="text" v-model="internship.mentor"/-->
-            <span class="label">Mentor</span>
-            <input v-model="internship.mentor" class="classic" type="text">
-            <span class="label">Title</span>
-            <input v-model="internship.title" class="classic" type="text">
-            <span class="label">Body</span>
-            <textarea v-model="internship.body" class="w3-input w3-border" type="text" rows="8"></textarea>
-            <span class="label">Start datum</span>
-            <input v-model="internship.start_date" class="classic" type="date">
-            <span class="label">Eind datum</span>
-            <input v-model="internship.end_date" class="classic" type="date">
+            <custom-input v-model="internship.title" :errors="errors.title" label="Titel *" required/>
+            <custom-input type="textarea" v-model="internship.body" :errors="errors.body" label="Body"/><!--type=wysiwyg or markdown-->
+            <custom-input v-model="internship.mentor" :errors="errors.mentor" label="Mentor"/>
+            <custom-input type="date" v-model="internship.start_date" :errors="errors.start_date" label="Start datum" />
+            <custom-input type="date" v-model="internship.end_date" :errors="errors.end_date" label="Eind datum"/>
+
+            <!--custom-input v-model="internship.image"        :errors="errors.image"      label="Afbeelding"  type="imagepicker" /-->
+
             <span class="label">Image</span>
 
             <input @change="imageHandler" id="image" class="w3-hide" type="file" accept="image/*">
             <template v-if="uploadedFile">
                 <label for="image" class="w3-button w3-border">{{ uploadedFile.name }}</label>
-                <img v-if="imageDataURL" :src="imageDataURL"/>
+                <div class="w3-card-2">
+                    <img v-if="imageDataURL" :src="imageDataURL"/>
+                </div>
             </template>
             <template v-else-if="internship.image && !uploadedFile">
                 <label for="image" class="w3-button w3-border">{{ internship.image.name }}</label>
@@ -29,9 +30,9 @@
             </template>
             <label v-else for="image" class="w3-button w3-border">Select Image</label>
 
-            <div class="w3-panel">
+            <div class="w3-margin-top">
                 <button class="w3-button w3-blue" @click="submit">Submit</button>
-                <button v-if="internship.id" class="w3-button w3-red w3-right" @click="showDeleteModal = true">Delete</button>
+                <button v-if="this.id" class="w3-button w3-red w3-right" @click="showDeleteModal = true" :disabled="disabled">Delete</button>
             </div>
         </div>
     </div>
@@ -39,35 +40,52 @@
 
 <script>
     import axios from 'axios';
-    import Http from '../../core/http';
+
+    const http = axios.create({
+        baseURL: window.location.origin + '/api/',
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        }
+    });
     import Modal from './Modal';
+    import MyInput from './MyInput';
 
     export default {
         name: 'internship-form',
         components: {
-            Modal
+            Modal,
+            customInput: MyInput
         },
         props: {
-            internship: {
-                type: Object,
-                default: () => ({})
-            },
-            httpMethod: {
-                type: String,
-                required: true
-            },
-            httpUrl: {
-                type: String,
-                required: true
+            id: String
+        },
+        data () {
+            return {
+                internship: {
+
+                    image: null
+                },
+                disabled: false,
+                errors: {},
+                showDeleteModal: false,
+
+                httpMethod: "post",
+                httpUrl: "internship",
+
+                //--------------------------------------------------------------------------------------------/>
+                uploadedFile: null, //TODO remove this and put in Imagepicker.vue <my-input type="imagepicker"/>
+                imageDataURL: null, //this too
             }
         },
-        data() {
-            return {
-                uploadedFile: null,
-                imageDataURL: null,
-                error: null,
-
-                showDeleteModal: false,
+        created () {
+            if (this.id) {
+                this.httpMethod = "put";
+                this.httpUrl += "/" + this.id;
+                http.get(this.httpUrl).then(response => {
+                    this.internship = response.data;
+                }, reject => {
+                    this.errors = reject.response.data;
+                });
             }
         },
         methods: {
@@ -87,27 +105,21 @@
                     promise.then(() => {
                         this.$notify(resolve.data.message);
                         this.$router.push('/internship');
-                    }, reject => this.error = reject.response.data.message)
-                }, reject => this.error = reject.response.data.message);
+                    }, reject => this.errors = reject.response.data.errors)
+                }, reject => this.errors = reject.response.data.errors);
             },
 
             submitInternship: function () {
-                return new Http()[this.httpMethod](this.httpUrl, this.internship);
+                return http[this.httpMethod](this.httpUrl, this.internship);
             },
-
             submitImage: function (id) {
-                let formData = new FormData();
-                formData.append('image', this.uploadedFile);
+                let formdata = new FormData();
+                formdata.append('image', this.uploadedFile);
 
-                return axios.post(`/api/internship/${id}/image`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
-                    }
-                });
+                return http.post(`internship/${id}/image`, formdata);
             },
             destroyInternship: function () {
-                new Http().delete(this.httpUrl).then(resolve => {
+                http.delete(this.httpUrl).then(resolve => {
                     this.$notify({text: resolve.data.message, type: 'warn'});
                     this.$router.back();
                 });

@@ -72,7 +72,7 @@ class InternshipCompanyController extends Controller
         $internship = new Internship($request->all());
 
         if ($this->company->internships()->save($internship))
-            return response(['message' => 'Internship "'.$internship->title.'" created', 'id' => $internship->id]);
+            return $this->response('Internship "'.$internship->title.'" created', 200, ['id' => $internship->id]);
 
         return $this->response('store new internship failed',400);
     }
@@ -88,7 +88,7 @@ class InternshipCompanyController extends Controller
     {
         if ($this->company->hasInternship($internship)) {
             if ($internship->update($request->all()))
-                return response(['message' => 'Internship "'.$internship->title.'" updated', 'id' => $internship->id]);
+                return $this->response('Internship "'.$internship->title.'" updated', 200, ['id' => $internship->id]);
             return $this->response('internship update failed', 400);
         }
         return $this->response('user '.auth()->user()->email.' does not own this internship',400);
@@ -109,7 +109,7 @@ class InternshipCompanyController extends Controller
         }
         return $this->response('destroy internship failed',400);
     }
-    public function response($message, $status = 200) {
-        return response(['message' => $message], $status);
+    public function response($message, $status = 200, $extra = []) {
+        return response(array_merge(['message' => $message], $extra), $status);
     }
 }

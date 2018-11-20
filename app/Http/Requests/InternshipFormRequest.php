@@ -24,11 +24,11 @@ class InternshipFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'mentor' => 'required|string',
+            'mentor' => 'string',
             'title' => 'required|string',
             'body' => 'required|string',
-            'start_date' => 'date',
-            'end_date' => 'date'
+            'start_date' => 'required|date',
+            'end_date' => 'date|after:start_date'
         ];
     }
 }

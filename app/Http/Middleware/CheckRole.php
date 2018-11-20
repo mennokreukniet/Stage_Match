@@ -16,11 +16,11 @@ class CheckRole
      */
     public function handle($request, Closure $next, $role)
     {
-        if (auth()->check() && $request->user()->role == USER_ROLES[$role]) {
+        if (auth()->check() && auth()->user()->role == USER_ROLES[$role]) {
             return $next($request);
         };
         return response([
             'message' => 'auth check or role check failed'
-        ], 400);
+        ], 401);
     }
 }

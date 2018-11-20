@@ -20,10 +20,10 @@ class CreateInternshipsTable extends Migration
                 ->references('id')->on('companies')
                 ->onDelete('cascade');
             $table->string('title');
-            $table->string('mentor');
+            $table->string('mentor')->nullable();
             $table->text('body');
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
         });
     }
 

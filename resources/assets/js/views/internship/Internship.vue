@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <notifications position="bottom right"/>
+        <notifications position="top right"/>
 
         <div class="page-options left">
             <router-link v-if="$route.name !== 'internship_show'" to="/internship" tag="button" class="back">
@@ -20,7 +20,7 @@
                 <span class="title">Internships</span>
             </div>
 
-            <router-view></router-view>   
+            <router-view :key="$route.fullPath"></router-view>
         </div>
     </div>
 </template>

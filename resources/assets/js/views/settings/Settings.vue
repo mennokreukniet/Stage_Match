@@ -211,7 +211,7 @@ export default {
             });
         },
         add_skill(id) {
-            new Http().post("user/skill", {id: id}).then(res => {
+            new Http().post(`user/skill`, {id:id} ).then(res => {
                 this.skills.show = false;
                 this.skill = "";
                 this.status_list.skills = {
@@ -221,6 +221,12 @@ export default {
                 }
 
                 this.skills_.push(res.data.result);
+            }, reject => {
+                this.status_list.skills = {
+                    render: true,
+                    type: "error",
+                    message: reject.response.data.message
+                }
             })
         },
         delete_skill(id, index) {

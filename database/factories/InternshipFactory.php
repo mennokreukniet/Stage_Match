@@ -18,7 +18,9 @@ $factory->define(App\Internship::class, function (Faker $faker) {
     return [
         'company_id' => App\Company::inRandomOrder()->first()->id,
         'mentor' => $faker->name,
-        'start' => $start = $faker->date(),
-        'end' => date('Y-m-d', strtotime("+$offset months", strtotime($start)))
+        'title' => $faker->jobTitle,
+        'body' => $faker->realText(256),
+        'start_date' => $start = $faker->date(),
+        'end_date' => date('Y-m-d', strtotime("+$offset months", strtotime($start)))
     ];
 });

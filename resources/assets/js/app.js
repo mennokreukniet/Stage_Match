@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueI18n from 'vue-i18n'
+import VueI18n from 'vue-i18n';
+import Notifications from 'vue-notification';
 
+Vue.use(Notifications);
 Vue.use(VueI18n);
 Vue.use(VueRouter);
 
@@ -14,8 +16,8 @@ import Settings from './views/settings/Settings.vue';
 import Admin from './views/admin/Admin.vue';
 import Reviews from './views/reviews/Reviews.vue';
 import Internship from './views/internship/Internship.vue';
-import Internship_create from './views/internship/Create.vue';
 import Internship_show from './views/internship/List.vue';
+import InternshipForm from './views/internship/InternshipForm.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -63,7 +65,6 @@ const router = new VueRouter({
         {
             path: '/internship',
             component: Internship,
-            name: "internship",
             children: [
                 {
                     path: '',
@@ -72,9 +73,15 @@ const router = new VueRouter({
                   },
                 {
                   path: 'create',
-                  component: Internship_create,
+                  component: InternshipForm,
                   name: "internship_create"
                 },
+                {
+                    path: ':id',
+                    props: true,
+                    component: InternshipForm,
+                    name: "internship_edit"
+                }
             ]
         },
         {

@@ -12,6 +12,10 @@
             <custom-input v-model="internship.mentor" :errors="errors.mentor" label="Mentor"/>
             <custom-input type="date" v-model="internship.start_date" :errors="errors.start_date" label="Start datum" />
             <custom-input type="date" v-model="internship.end_date" :errors="errors.end_date" label="Eind datum"/>
+            <custom-input v-model="skill" />
+            <div v-for="skill in skills" :key="skill.id" class="skill">
+                <button class="classic" style="display:block;margin-bottom: 5px;" @click="add_skill(skill.id)">{{skill.name}}</button>
+            </div>
 
             <!--custom-input v-model="internship.image"        :errors="errors.image"      label="Afbeelding"  type="imagepicker" /-->
 
@@ -71,6 +75,8 @@
 
                 httpMethod: "post",
                 httpUrl: "internship",
+                skill: "",
+                skills: [],
 
                 //--------------------------------------------------------------------------------------------/>
                 uploadedFile: null, //TODO remove this and put in Imagepicker.vue <my-input type="imagepicker"/>
@@ -122,6 +128,14 @@
                 http.delete(this.httpUrl).then(resolve => {
                     this.$notify({text: resolve.data.message, type: 'warn'});
                     this.$router.back();
+                });
+            }
+        },
+        watch: {
+            skill: function (value) {
+                http.get(`user/skill/${value}`).then(res => {
+                    this.skills = res.data.result;
+
                 });
             }
         }

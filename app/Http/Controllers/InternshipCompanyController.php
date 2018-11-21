@@ -6,6 +6,7 @@ use App\Http\Requests\ImageFormRequest;
 use App\Http\Requests\InternshipFormRequest;
 use App\Image;
 use App\Internship;
+use App\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -111,5 +112,22 @@ class InternshipCompanyController extends Controller
     }
     public function response($message, $status = 200, $extra = []) {
         return response(array_merge(['message' => $message], $extra), $status);
+    }
+
+    public function addSkill(Request $request)
+    {
+        $internship = Internship::find($request->id);
+        $skill = Skill::find($request->skill_id);
+
+        if ($skill->id === NULL) {
+            return response(['status' => 'error', "message" => "Skill does not exist"], 404);
+        }
+
+        try {
+            $internship->skills()->attach($request->skill_id);
+            return response(['status' => 'success', 'result' => $skill], 200);
+        } catch(\Illuminate\Database\QueryException $e) {
+            return response(['status' => 'error', "message" => "Skill is already added"], 400);
+        }
     }
 }

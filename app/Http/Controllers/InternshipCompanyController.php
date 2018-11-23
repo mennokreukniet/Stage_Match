@@ -130,4 +130,15 @@ class InternshipCompanyController extends Controller
             return response(['status' => 'error', "message" => "Skill is already added"], 400);
         }
     }
+
+    public function skillLevel(Request $request) {
+        $internship = Internship::find($request->internship_id);
+
+        $sync = $internship->skills()->updateExistingPivot($request->skill_id, ['level' => $request->level ]);
+
+        if ($sync) {
+            return response(['status' => 'success', 'result' => $sync], 200);
+        }
+        return response($sync,400);
+    }
 }

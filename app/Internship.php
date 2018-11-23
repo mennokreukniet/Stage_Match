@@ -27,5 +27,5 @@ class Internship extends Model
         'title', 'body', 'mentor', 'start_date', 'end_date',
     ];
 
-    public $with = ['image'];
+    public $with = ['image', 'skills'];
 }

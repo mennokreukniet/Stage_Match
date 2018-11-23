@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('user', 'UserController@getUser');
     Route::get('student', 'StudentController@getStudent');
     Route::get('company', 'CompanyController@getCompany');
-    Route::get('user/skill/{keyword}', 'SkillsController@searchSkill');
+    Route::get('skill/{keyword}', 'SkillsController@searchSkill');
 });
 
 Route::group(['middleware' => 'role:admin'], function(){
@@ -48,5 +48,6 @@ Route::apiResource('internship', 'InternshipController')->only(['show']);
 Route::group(['middleware' => 'role:company'], function () {
     Route::post('/internship/skill', 'InternshipCompanyController@addSkill');
     Route::post('/internship/{internship}/image', 'InternshipCompanyController@uploadImage');
+    Route::post('/internship/skill/level', 'InternshipCompanyController@skillLevel');
     Route::apiResource('/internship', 'InternshipCompanyController')->only(['index', 'store', 'update', 'destroy']);
 });

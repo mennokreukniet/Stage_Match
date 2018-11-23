@@ -20,6 +20,7 @@ class CreateInternshipSkillTable extends Migration
             $table->unsignedInteger('skill_id');
             $table->foreign('skill_id')->references('id')->on('skills');
             $table->unsignedInteger('level')->default(1);
+            $table->boolean('mandatory')->default(false);
             $table->unique(['internship_id', 'skill_id']);
         });
     }

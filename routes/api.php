@@ -23,6 +23,8 @@ Route::post('/auth/register', 'AuthController@register');
 
 Route::post('auth/login', 'AuthController@login');
 
+Route::get('location', 'LocationController@index');
+
 Route::group(['middleware' => 'auth'], function(){
     Route::post('user/skill/level', 'Student_SkillController@skillLevel');
     Route::delete('user/skill/{id}', 'Student_SkillController@deleteSkill');

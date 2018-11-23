@@ -23,7 +23,7 @@ Route::post('/auth/register', 'AuthController@register');
 
 Route::post('auth/login', 'AuthController@login');
 
-Route::get('location', 'LocationController@index');
+Route::get('location/{id?}', 'LocationController@index');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::post('user/skill/level', 'Student_SkillController@skillLevel');

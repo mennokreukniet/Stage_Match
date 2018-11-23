@@ -8,9 +8,13 @@ use App\Http\Controllers\Controller;
 class LocationController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return json_decode(file_get_contents('http://overpass-api.de/api/interpreter?data=[out:json];node["place"~"city|town|village"]["is_in:country_code"="NL"];out;'), true);
+        $base_url = 'http://overpass-api.de/api/interpreter?data=[out:json];relation["admin_level"="2"];out tags;';
+        if ($request->id === null) {
+            $base_url = 'http://overpass-api.de/api/interpreter?data=[out:json];node["place"~"city|town|village"]["is_in:country_code"="'.$request->id.'"];out;';
+        }
+        return json_decode(file_get_contents($base_url), true);
 
     }
 }

@@ -13,7 +13,7 @@
             <p>{{ internship.start_date }} - {{ internship.end_date }}</p>
         </router-link>
 
-        <paginate :meta="pagination" @input="load"/>
+        <paginate :current-page="pagination.current_page" :last-page="pagination.last_page" @input="load"/>
 
     </div>
 </template>

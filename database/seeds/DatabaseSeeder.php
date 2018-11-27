@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             SkillsTableSeeder::class,
             InternshipTableSeeder::class,
+            LocationRecordSeeder::class,
             //LevelsTableSeeder::class,
             /*
             SkillsTableSeeder::class,

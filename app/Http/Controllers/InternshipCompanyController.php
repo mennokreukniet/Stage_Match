@@ -27,7 +27,7 @@ class InternshipCompanyController extends Controller
      */
     public function index()
     {
-        return response($this->company->internships()->paginate(10));
+        return response($this->company->internships()->latest()->paginate(10));
     }
 
     /**
@@ -38,18 +38,32 @@ class InternshipCompanyController extends Controller
      */
     public function show(Internship $internship)
     {
-        return response($internship->image->toArray());
+        return response($internship);
     }
 
+    public function storeImage($file)
+    {
+        $filename = "internship-image-{ time() }.{ $file->getClientOriginalExtension() }";
+
+        $path = $file->storeAs('public/images', $filename);
+
+        return new Image([
+            'name' => $request->image->getClientOriginalName(),
+            'url' => Storage::url($path),
+            'file' => $path
+        ]);
+    }
 
     public function uploadImage(Internship $internship, ImageFormRequest $request)
     {
-        $file = $request->image->store('public/images');
+        $path = $request->image->store('public/images');
+
         $image = [
             'name' => $request->image->getClientOriginalName(),
-            'url' => Storage::url($file),
-            'file' => $file
+            'url' => Storage::url($path),
+            'file' => $path
         ];
+
         if ($internship->image()->exists()) {
             Storage::delete($internship->image->file);
             if ($internship->image->update($image))
@@ -87,11 +101,19 @@ class InternshipCompanyController extends Controller
     public function update(InternshipFormRequest $request, Internship $internship)
     {
         if ($this->company->hasInternship($internship)) {
-            if ($internship->update($request->all()))
-                return $this->response('Internship "'.$internship->title.'" updated', 200, ['id' => $internship->id]);
-            return $this->response('internship update failed', 400);
+            $internship->update($request->all());
+
+            if ($request->hasFile('image')) {
+                $image = $this->storeImage($request->image);
+
+                if ($internship->image()->exists()) Storage::delete($internship->image->file);
+
+                $internship->image->update($image);
+            }
+
+            return $this->response('Internship "'.$internship->title.'" updated', 200, ['id' => $internship->id]);
         }
-        return $this->response('user '.auth()->user()->email.' does not own this internship',400);
+        return $this->unauthorized();
     }
 
     /**
@@ -106,10 +128,16 @@ class InternshipCompanyController extends Controller
         if ($this->company->hasInternship($internship)) {
             if ($internship->delete())
                 return $this->response('Internship successfully deleted');
+            return $this->response('destroy internship failed',400);
         }
-        return $this->response('destroy internship failed',400);
+        return $this->unauthorized();
     }
-    public function response($message, $status = 200, $extra = []) {
+    public function unauthorized()
+    {
+        return $this->response('user '.auth()->user()->email.' does not own this internship',401);
+    }
+    public function response($message, $status = 200, $extra = [])
+    {
         return response(array_merge(['message' => $message], $extra), $status);
     }
 }

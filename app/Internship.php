@@ -16,8 +16,6 @@ class Internship extends Model
         return $this->morphOne('App\Image', 'imageable');
     }
 
-    public $timestamps = false;
-
     protected $fillable = [
         'title', 'body', 'mentor', 'start_date', 'end_date',
     ];

@@ -27,7 +27,7 @@
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`
         }
     });
-    import Paginate from './Paginate';
+    import Paginate from './components/Paginate';
 
 export default {
     components: {

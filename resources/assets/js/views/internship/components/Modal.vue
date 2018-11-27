@@ -1,6 +1,6 @@
 <template>
 
-    <div class="modal w3-animate-opacity" style="display:block">
+    <div class="modal w3-animate-opacity">
         <div class="modal-content">
 
             <header class="w3-container w3-blue-grey">
@@ -8,8 +8,8 @@
                 <span @click="$emit('close')" class="w3-button w3-display-topright">&times;</span>
             </header>
 
-            <div class="w3-container">
-                <p v-if="body" style="padding-bottom: 16px; padding-top: 16px;">{{ body }}</p>
+            <div class="w3-container w3-section">
+                <p v-if="body">{{ body }}</p>
                 <input v-if="inputModel" v-model="inputModel" type="text"/>
             </div>
 
@@ -25,21 +25,18 @@
 </template>
 <style scoped>
     .modal {
-        z-index: 3;
-        padding-top: 40%;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
         background-color: rgba(0, 0, 0, 0.4);
     }
     .modal-content {
-        margin: auto;
         background-color: #fff;
-        position: relative;
         width: 600px;
+
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 </style>
 <script>

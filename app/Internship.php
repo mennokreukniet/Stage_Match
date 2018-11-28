@@ -24,8 +24,6 @@ class Internship extends Model
         return $this->belongsToMany('App\Skill')->withPivot('level');
     }
 
-    public $timestamps = false;
-
     protected $fillable = [
         'title', 'body', 'mentor', 'start_date', 'end_date',
     ];

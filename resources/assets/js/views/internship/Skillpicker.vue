@@ -18,7 +18,7 @@
                         Expert
                     </a>
                     <input type="checkbox" name="Mandatory" v-bind:disabled="skill.pivot.mandatory == ''" v-bind:class="{ selected: skill.pivot.level == '3' }" v-on:click="set_level(index, skill.id, 2)">
-                    <a v-on:click="delete_skill(skill.id, index)">
+                    <a v-on:click="$emit('delete', skill.id, index)">
                         Delete
                     </a>
                 </div>
@@ -51,7 +51,7 @@
                 new Http().post("internship/skill/level", { skill_id: id, internship_id: this.internship.id, level: level}).then(res => {
                     this.skills[index].pivot.level = level;
                 })
-            },
+            }
         }
     }
 </script>

@@ -171,4 +171,14 @@ class InternshipCompanyController extends Controller
         }
         return response($sync,400);
     }
+
+    public function deleteSkill(Request $request, $skill_id) {
+        $internship = Internship::find($request->id);
+//dd($request->id);
+        $detach = $internship->skills()->detach($skill_id);
+
+        if ($detach){
+            return response(['status' => 'success'], 200);
+        }
+    }
 }

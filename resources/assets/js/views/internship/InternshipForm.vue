@@ -18,7 +18,7 @@
                       v-model="internship[input.name]" :errors="errors[input.name]"
                       v-bind="input"/>
 
-            <skillpicker :skills="internship.skills" @skillAdded="add_skill" @setLevel="set_level"/>
+            <skillpicker :skills="internship.skills" @skillAdded="add_skill" @setLevel="set_level" @delete="delete_skill"/>
 
             <div class="w3-section">
                 <button class="w3-button w3-blue" type="submit">Submit</button>
@@ -130,7 +130,12 @@ export default {
             }).then(res => {
                 this.internship.skills[index].pivot.level = level;
             })
+        },
+        delete_skill: function (id, index) {
+            http.delete(`internship/skill/${id}`, {data:{id: this.id}});
+            this.internship.skills.splice(index, 1);
         }
+
     },
     watch: {
         skill: function (value) {

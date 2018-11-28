@@ -16,9 +16,7 @@ class CreateLocationRecordTable extends Migration
         Schema::create('location_record', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('type');
             $table->point('coordinates');
-            $table->string('country_name');
             $table->string('country_code');
         });
     }

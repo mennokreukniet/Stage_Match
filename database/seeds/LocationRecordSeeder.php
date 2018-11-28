@@ -14,13 +14,11 @@ class LocationRecordSeeder extends Seeder
     public function run()
     {
        
-        $NL_locations = json_decode(File::get("country_records/NL.json"));
-        foreach($NL_locations as $_location) {
+        $locations = json_decode(File::get("locations/country-nl.json"));
+        foreach($locations as $_location) {
             $location = new Location();
-            $location->name = $_location->name;
-            $location->type = $_location->type;
-            $location->country_name = $_location->country->name;
-            $location->country_code = $_location->country->code;
+            $location->name = $_location->city;
+            $location->country_code = strtoupper($_location->country);
             $location->coordinates = new Point($_location->coordinates->lat, $_location->coordinates->long);	// (lat, lng)
             
             $location->save();

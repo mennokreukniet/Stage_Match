@@ -38,6 +38,7 @@ baseURL: window.location.origin + '/api/', headers: {
         Authorization: 'Bearer ' + localStorage.getItem("accessToken")
     }
 });
+import Skillpicker from '@/views/internship/Skillpicker';
 import Modal from '@/views/internship/components/Modal';
 import MyInput from '@/views/internship/components/MyInput';
 import Imagepicker from "@/views/internship/components/Imagepicker";
@@ -45,6 +46,7 @@ import Imagepicker from "@/views/internship/components/Imagepicker";
 export default {
     name: 'internship-form',
     components: {
+        Skillpicker,
         Imagepicker,
         Modal,
         MyInput

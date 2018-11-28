@@ -11,7 +11,7 @@ import MainApp from './views/App';
 import Auth_login from './views/auth/Login.vue';
 import Auth_register from './views/auth/Register.vue';
 import Index from './views/index/Index.vue';
-import Main from './views/main/Main.vue';
+import Main from './views/Main/Main.vue';
 import Settings from './views/settings/Settings.vue';
 import Admin from './views/admin/Admin.vue';
 import Reviews from './views/reviews/Reviews.vue';

@@ -13,6 +13,10 @@
             <custom-input type="date" v-model="internship.start_date" :errors="errors.start_date" label="Start datum" />
             <custom-input type="date" v-model="internship.end_date" :errors="errors.end_date" label="Eind datum"/>
 
+            <skillpicker :skills="internship.skills" @skillAdded="add_skill" @setLevel="set_level"/>
+
+
+
             <!--custom-input v-model="internship.image"        :errors="errors.image"      label="Afbeelding"  type="imagepicker" /-->
 
             <span class="label">Image</span>
@@ -49,10 +53,12 @@
     });
     import Modal from './Modal';
     import MyInput from './MyInput';
+    import Skillpicker from "./Skillpicker";
 
     export default {
         name: 'internship-form',
         components: {
+            Skillpicker,
             Modal,
             customInput: MyInput
         },
@@ -71,6 +77,8 @@
 
                 httpMethod: "post",
                 httpUrl: "internship",
+                skill: "",
+                skills: [],
 
                 //--------------------------------------------------------------------------------------------/>
                 uploadedFile: null, //TODO remove this and put in Imagepicker.vue <my-input type="imagepicker"/>
@@ -83,6 +91,7 @@
                 this.httpUrl += "/" + this.id;
                 http.get(this.httpUrl).then(response => {
                     this.internship = response.data;
+                    console.log(this.internship);
                 }, reject => {
                     this.errors = reject.response.data;
                 });
@@ -122,6 +131,27 @@
                 http.delete(this.httpUrl).then(resolve => {
                     this.$notify({text: resolve.data.message, type: 'warn'});
                     this.$router.back();
+                });
+            },
+            add_skill:function(id) {
+                 http.post(`internship/skill`, {skill_id:id, id: this.id} ).then(res => {
+                    this.internship.skills = res.data.result;
+                    console.log(res);
+                })
+            },
+            set_level(skill_id, level) {
+
+                console.log(index, id);
+                http.post("internship/skill/level", { skill_id: id, internship_id: this.internship.id, level: level}).then(res => {
+                    this.internship.skills[index].pivot.level = level;
+                })
+            },
+        },
+        watch: {
+            skill: function (value) {
+                http.get(`skill/${value}`).then(res => {
+                    this.skills = res.data.result;
+
                 });
             }
         }

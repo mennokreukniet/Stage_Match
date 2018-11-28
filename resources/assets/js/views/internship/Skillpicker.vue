@@ -2,7 +2,7 @@
     <div>
         <input v-model="searchSkill" />
         <div v-for="skill in searchedSkills" :key="skill.id" class="skill">
-            <button class="classic" style="display:block;margin-bottom: 5px;" @click="$emit('skillAdded', skill.id)">{{skill.name}}</button>
+            <a class="classic" style="display:block;margin-bottom: 5px;" @click="$emit('skillAdded', skill.id)">{{skill.name}}</a>
         </div>
 
         <span class="title2 margin-top">My Skills</span>
@@ -11,16 +11,16 @@
             <template v-for="(skill, index) in skills">
                 <div v-bind:key="skill.id" class="skill settings">
                     <span>{{skill.name}}</span>
-                    <button @click="$emit('setLevel', skill.id, 2)" v-bind:disabled="skill.pivot.level == '2'" v-bind:class="{ selected: skill.pivot.level == '2' }" class="classic good">
+                    <a @click="$emit('setLevel', skill.id, 2)" v-bind:disabled="skill.pivot.level == '2'" v-bind:class="{ selected: skill.pivot.level == '2' }" class="classic good">
                         Good
-                    </button>
-                    <button @click="$emit('setLevel', skill.id, 3)" v-bind:disabled="skill.pivot.level == '3'" v-bind:class="{ selected: skill.pivot.level == '3' }" class="classic expert">
+                    </a>
+                    <a @click="$emit('setLevel', skill.id, 3)" v-bind:disabled="skill.pivot.level == '3'" v-bind:class="{ selected: skill.pivot.level == '3' }" class="classic expert">
                         Expert
-                    </button>
+                    </a>
                     <input type="checkbox" name="Mandatory" v-bind:disabled="skill.pivot.mandatory == ''" v-bind:class="{ selected: skill.pivot.level == '3' }" v-on:click="set_level(index, skill.id, 2)">
-                    <button v-on:click="delete_skill(skill.id, index)">
+                    <a v-on:click="delete_skill(skill.id, index)">
                         Delete
-                    </button>
+                    </a>
                 </div>
             </template>
         </div>

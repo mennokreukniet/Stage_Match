@@ -19,9 +19,14 @@ class Internship extends Model
         return $this->morphOne('App\Image', 'imageable');
     }
 
+    public function skills()
+    {
+        return $this->belongsToMany('App\Skill')->withPivot('level');
+    }
+
     protected $fillable = [
         'title', 'body', 'mentor', 'start_date', 'end_date',
     ];
 
-    public $with = ['image'];
+    public $with = ['image', 'skills'];
 }

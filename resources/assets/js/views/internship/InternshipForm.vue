@@ -135,7 +135,7 @@
             },
             add_skill:function(id) {
                  http.post(`internship/skill`, {skill_id:id, id: this.id} ).then(res => {
-                    //this.skill = "";
+                    this.internship.skills = res.data.result;
                     console.log(res);
                 })
             },

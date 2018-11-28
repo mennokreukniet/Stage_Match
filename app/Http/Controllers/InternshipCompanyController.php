@@ -124,8 +124,10 @@ class InternshipCompanyController extends Controller
         }
 
         try {
-            $internship->skills()->attach($request->skill_id);
-            return response(['status' => 'success', 'result' => $skill], 200);
+            if($internship->skills()->save($skill)) {
+                $internship = Internship::find($request->id);
+                return response(['status' => 'success', 'result' => $internship->skills], 200);
+            }
         } catch(\Illuminate\Database\QueryException $e) {
             return response(['status' => 'error', "message" => "Skill is already added"], 400);
         }

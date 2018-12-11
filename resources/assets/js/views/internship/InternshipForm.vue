@@ -13,7 +13,7 @@
             <custom-input type="date" v-model="internship.start_date" :errors="errors.start_date" label="Start datum" />
             <custom-input type="date" v-model="internship.end_date" :errors="errors.end_date" label="Eind datum"/>
 
-            <skillpicker :skills="internship.skills" @skillAdded="add_skill" @setLevel="set_level"/>
+            <skillpicker v-model="internship.skills"/>
 
 
 
@@ -90,8 +90,7 @@
                 this.httpMethod = "put";
                 this.httpUrl += "/" + this.id;
                 http.get(this.httpUrl).then(response => {
-                    this.internship = response.data;
-                    console.log(this.internship);
+                    this.internship = response.data.data;
                 }, reject => {
                     this.errors = reject.response.data;
                 });
@@ -113,7 +112,7 @@
                         : Promise.resolve();//{response: {data: {message:'no image added'}}});
                     promise.then(() => {
                         this.$notify(resolve.data.message);
-                        this.$router.push('/internship');
+                        //this.$router.push('/internship');
                     }, reject => this.errors = reject.response.data.errors)
                 }, reject => this.errors = reject.response.data.errors);
             },
@@ -139,12 +138,18 @@
                     console.log(res);
                 })
             },
-            set_level(skill_id, level) {
-
-                console.log(index, id);
-                http.post("internship/skill/level", { skill_id: id, internship_id: this.internship.id, level: level}).then(res => {
+            set_level(skill_id, level, index) {
+                http.post("internship/skill/level", {
+                    skill_id: skill_id,
+                    internship_id: this.internship.id,
+                    level: level
+                }).then(res => {
                     this.internship.skills[index].pivot.level = level;
                 })
+            },
+            delete_skill: function (id, index) {
+                http.delete(`internship/skill/${id}`, {data:{id: this.id}});
+                this.internship.skills.splice(index, 1);
             },
         },
         watch: {

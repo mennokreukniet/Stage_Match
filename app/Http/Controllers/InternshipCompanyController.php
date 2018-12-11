@@ -9,6 +9,7 @@ use App\Internship;
 use App\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\Internship as InternshipResource;
 
 class InternshipCompanyController extends Controller
 {
@@ -39,7 +40,7 @@ class InternshipCompanyController extends Controller
      */
     public function show(Internship $internship)
     {
-        return response($internship->image->toArray());
+        return new InternshipResource($internship);
     }
 
 
@@ -72,8 +73,13 @@ class InternshipCompanyController extends Controller
     {
         $internship = new Internship($request->all());
 
-        if ($this->company->internships()->save($internship))
-            return $this->response('Internship "'.$internship->title.'" created', 200, ['id' => $internship->id]);
+        if ($this->company->internships()->save($internship)) {
+            foreach ($request->input('skills') as $skill) {
+                $skill = Skill::find($skill['id']);
+                $internship->skills()->save($skill);
+            }
+            return $this->response('Internship "' . $internship->title . '" created', 200, ['id' => $internship->id]);
+        }
 
         return $this->response('store new internship failed',400);
     }
@@ -137,6 +143,17 @@ class InternshipCompanyController extends Controller
         $internship = Internship::find($request->internship_id);
 
         $sync = $internship->skills()->updateExistingPivot($request->skill_id, ['level' => $request->level ]);
+
+        if ($sync) {
+            return response(['status' => 'success', 'result' => $sync], 200);
+        }
+        return response($sync,400);
+    }
+
+    public function isSkillMandatory(Request $request) {
+        $internship = Internship::find($request->internship_id);
+
+        $sync = $internship->skills()->updateExistingPivot($request->skill_id, ['mandatory' => $request->mandatory ]);
 
         if ($sync) {
             return response(['status' => 'success', 'result' => $sync], 200);

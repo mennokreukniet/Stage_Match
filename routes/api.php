@@ -43,6 +43,7 @@ Route::group(['middleware' => 'role:admin'], function(){
 	Route::get('/admin/skill/{id}', 'SkillsController@getSkill');
 	Route::get('/admin/skill', 'SkillsController@getAll');
 	Route::put('/admin/skill/{id}', 'SkillsController@editSkill');
+    Route::get('/admin/location', 'LocationController@getAll');
 });
 
 Route::apiResource('internship', 'InternshipController')->only(['show']);
@@ -53,4 +54,8 @@ Route::group(['middleware' => 'role:company'], function () {
     Route::post('/internship/{internship}/image', 'InternshipCompanyController@uploadImage');
     Route::post('/internship/skill/level', 'InternshipCompanyController@skillLevel');
     Route::apiResource('/internship', 'InternshipCompanyController')->only(['index', 'store', 'update', 'destroy']);
+});
+
+Route::group(['middleware' => 'role:student'], function(){
+    Route::get('match', 'MatchController@calculateInternshipScores');
 });

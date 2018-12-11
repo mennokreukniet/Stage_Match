@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class LocationController extends Controller
 {
@@ -17,4 +18,19 @@ class LocationController extends Controller
         return json_decode(file_get_contents($base_url), true);
 
     }
+
+    public function getAll()
+    {
+        $string = Storage::disk('locations')->get('country_list.json');
+
+        $json = json_decode($string, true);
+
+        dd($json);
+
+        $existingCountries = DB::table('users')->distinct()->get();
+    }
 }
+
+
+
+

@@ -496,6 +496,9 @@ nav {
         }
 
         .options {
+            &>button {
+                top: 10px;
+            }
             display: none;
             grid-column: 2;
             .special > button {

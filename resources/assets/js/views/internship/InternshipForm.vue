@@ -61,7 +61,7 @@ export default {
         MyInput
     },
     props: {
-        id: String // === $routes.params.id
+        id: "" // === $routes.params.id
     },
     created() {
         http.interceptors.response.use(undefined, error => {

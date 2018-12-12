@@ -1,10 +1,16 @@
 <template>
-    <div class="card">
-        <modal v-if="showDeleteModal"
-            @confirm="destroyInternship" @close="showDeleteModal = false"
-            title="Confirm Deletion" :body="`Delete the internship '${internship.title}'?`"/>
+    <div class="w3-card w3-white w3-panel">
 
+        <modal v-if="showDeleteModal"
+               @confirm="destroyInternship" @close="showDeleteModal = false"
+               title="Confirm Deletion" :body="`Delete the internship '${internship.title}'?`"/>
+
+        <!--------------------------------------------------------------------->
         <div v-if="errors.message" class="error">{{ errors.message }}</div>
+        <div v-if="errors.exception" class="error">{{ errors.exception }}</div>
+        <h3>{{ id ? "Edit: " + internship.title : "Create new internship"}}</h3>
+        <!--------------------------------------------------------------------->
+
 
         <div class="form">
             <custom-input v-model="internship.title" :errors="errors.title" label="Titel *" required/>
@@ -15,76 +21,105 @@
 
             <skillpicker v-model="internship.skills"/>
 
+        <form @submit.prevent="submit">
 
+            <my-input v-for="input in form" :key="input.name"
+                      v-model="internship[input.name]" :errors="errors[input.name]"
+                      v-bind="input"/>
 
-            <!--custom-input v-model="internship.image"        :errors="errors.image"      label="Afbeelding"  type="imagepicker" /-->
+            <skillpicker :skills="internship.skills" @skillAdded="add_skill" @setLevel="set_level" @delete="delete_skill"/>
 
-            <span class="label">Image</span>
-
-            <input @change="imageHandler" id="image" class="w3-hide" type="file" accept="image/*">
-            <template v-if="uploadedFile">
-                <label for="image" class="w3-button w3-border">{{ uploadedFile.name }}</label>
-                <div class="w3-card-2">
-                    <img v-if="imageDataURL" :src="imageDataURL"/>
-                </div>
-            </template>
-            <template v-else-if="internship.image && !uploadedFile">
-                <label for="image" class="w3-button w3-border">{{ internship.image.name }}</label>
-                <img :src="internship.image.url">
-            </template>
-            <label v-else for="image" class="w3-button w3-border">Select Image</label>
-
-            <div class="w3-margin-top">
-                <button class="w3-button w3-blue" @click="submit">Submit</button>
-                <button v-if="this.id" class="w3-button w3-red w3-right" @click="showDeleteModal = true" :disabled="disabled">Delete</button>
+            <div class="w3-section">
+                <button class="w3-button w3-blue" type="submit">Submit</button>
+                <a v-if="id" class="w3-button w3-red w3-right" @click="showDeleteModal = true">Delete</a>
             </div>
-        </div>
+
+        </form>
+
     </div>
 </template>
 
 <script>
-    import axios from 'axios';
+import axios from 'axios';
 
-    const http = axios.create({
-        baseURL: window.location.origin + '/api/',
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+const http = axios.create({
+baseURL: window.location.origin + '/api/', headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("accessToken")
+    }
+});
+import Skillpicker from '@/views/internship/Skillpicker';
+import Modal from '@/views/internship/components/Modal';
+import MyInput from '@/views/internship/components/MyInput';
+import Imagepicker from "@/views/internship/components/Imagepicker";
+
+export default {
+    name: 'internship-form',
+    components: {
+        Skillpicker,
+        Imagepicker,
+        Modal,
+        MyInput
+    },
+    props: {
+        id: String // === $routes.params.id
+    },
+    created() {
+        http.interceptors.response.use(undefined, error => {
+            this.errorHandler(error.response);
+            throw error;
+        });
+        if (this.id) { //if form is showing an existing internship
+            this.httpUrl += "/" + this.id;
+            this.httpMethod = "put";
+            http.get(this.httpUrl).then(response => {
+                this.internship = response.data;
+            });
         }
-    });
-    import Modal from './Modal';
-    import MyInput from './MyInput';
-    import Skillpicker from "./Skillpicker";
+    },
+    data() {
+        return {
+            internship: {},
+            form: [ //input objects
+                {name: "title", label: "Titel", required: true},
+                {name: "body", label: "Body", type: "textarea", required: true},
+                {name: "mentor", label: "Mentor", required: true},
+                {name: "start_date", label: "Start datum", type: "date", required: true,},
+                {name: "end_date", label: "Eind datum", type: "date", required: true},
+                {name: "image", label: "Afbeelding", type: "imagepicker", required: true},
+            ],
 
-    export default {
-        name: 'internship-form',
-        components: {
-            Skillpicker,
-            Modal,
-            customInput: MyInput
+            errors: {}, //objects with arrays of errors : {mentor: ["The mentor field is required.", "The mentor must be a string."]}
+            showDeleteModal: false,
+
+            httpUrl: "internship",
+            httpMethod: "post",
+            skill: "",
+            skills: [],
+        }
+    },
+    methods: {
+        submit: function () {
+            // post or put internship data
+            http[this.httpMethod](this.httpUrl, this.internship).then(response => {
+                // if post/put succeeds then post image if uploaded
+                (this.internship.image instanceof File
+                    ? this.postImage(`internship/${response.data.id}/image`)
+                    : Promise.resolve())
+                    .then(() => {
+                        this.$notify(response.data.message);
+                        this.$router.push('/internship');
+                    })
+            });
         },
-        props: {
-            id: String
+        postImage: function (url) {
+            let formData = new FormData();
+            formData.append('image', this.internship.image);
+            return http.post(url, formData)
         },
-        data () {
-            return {
-                internship: {
-
-                    image: null
-                },
-                disabled: false,
-                errors: {},
-                showDeleteModal: false,
-
-                httpMethod: "post",
-                httpUrl: "internship",
-                skill: "",
-                skills: [],
-
-                //--------------------------------------------------------------------------------------------/>
-                uploadedFile: null, //TODO remove this and put in Imagepicker.vue <my-input type="imagepicker"/>
-                imageDataURL: null, //this too
-            }
+        errorHandler: function (errorResponse) {
+            this.errors = errorResponse.data.errors || errorResponse.data || errorResponse;
         },
+
         created () {
             if (this.id) {
                 this.httpMethod = "put";
@@ -151,14 +186,29 @@
                 http.delete(`internship/skill/${id}`, {data:{id: this.id}});
                 this.internship.skills.splice(index, 1);
             },
-        },
-        watch: {
-            skill: function (value) {
-                http.get(`skill/${value}`).then(res => {
-                    this.skills = res.data.result;
 
-                });
-            }
+        },
+        set_level(skill_id, level) {
+            http.post("internship/skill/level", {
+                skill_id: id,
+                internship_id: this.internship.id,
+                level: level
+            }).then(res => {
+                this.internship.skills[index].pivot.level = level;
+            })
+        },
+        delete_skill: function (id, index) {
+            http.delete(`internship/skill/${id}`, {data:{id: this.id}});
+            this.internship.skills.splice(index, 1);
         }
-    };
+
+    },
+    watch: {
+        skill: function (value) {
+            http.get(`skill/${value}`).then(res => {
+                this.skills = res.data.result;
+            });
+        }
+    }
+}
 </script>

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Internship extends Model
 {
+    use SoftDeletes;
+
     public function company()
     {
         return $this->belongsTo('App\Company');
@@ -20,8 +23,6 @@ class Internship extends Model
     {
         return $this->belongsToMany('App\Skill')->withPivot('level', 'mandatory');
     }
-
-    public $timestamps = false;
 
     protected $fillable = [
         'title', 'body', 'mentor', 'start_date', 'end_date',

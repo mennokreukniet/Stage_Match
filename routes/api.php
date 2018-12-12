@@ -47,6 +47,7 @@ Route::apiResource('internship', 'InternshipController')->only(['show']);
 
 Route::group(['middleware' => 'role:company'], function () {
     Route::post('/internship/skill', 'InternshipCompanyController@addSkill');
+    Route::delete('/internship/skill/{skill_id}', 'InternshipCompanyController@deleteSkill');
     Route::post('/internship/{internship}/image', 'InternshipCompanyController@uploadImage');
     Route::post('/internship/skill/level', 'InternshipCompanyController@skillLevel');
     Route::post('/internship/skill/mandatory', 'InternshipCompanyController@isSkillMandatory');

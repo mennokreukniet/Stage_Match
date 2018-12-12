@@ -2,7 +2,9 @@
     <div>
         <input v-model="searchSkill" />
         <div v-for="skill in searchedSkills" :key="skill.id" class="skill">
+
             <button class="classic" style="display:block;margin-bottom: 5px;" @click="addSkill(skill)">{{skill.name}}</button>
+
         </div>
 
         <span class="title2 margin-top">My Skills</span>
@@ -13,6 +15,7 @@
             <template v-for="(skill, index) in value">
                 <div v-bind:key="skill.id" class="skill settings">
                     <span>{{skill.name}}</span>
+
                     <button type="button" @click="updateLevel(index, 1)" v-bind:class="{ selected: skill.level == '1' }" class="classic good">
                         Good
                     </button>
@@ -21,8 +24,9 @@
                     </button>
                     <input type="checkbox" name="Mandatory" v-model="skill.mandatory">
                     <button type="button" v-on:click="deleteSkill">
+
                         Delete
-                    </button>
+                    </a>
                 </div>
             </template>
         </div>
@@ -55,6 +59,7 @@
             }
         },
         methods: {
+
             update() {
                 this.$emit('input', this.value);
             },
@@ -70,6 +75,7 @@
             addSkill(skill){
                 this.value.push(skill);
                 this.update();
+
             }
         }
     }

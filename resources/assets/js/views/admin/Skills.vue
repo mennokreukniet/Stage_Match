@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import Http from '../../core/http';
+import http from '../../core/http';
 import Options from '../../components/Options';
 import Modal from '../../components/Modal.vue';
 
@@ -92,14 +92,14 @@ export default {
                 this.get_all_skills();
             }
 
-            new Http().get(`user/skill/${value}`).then(res => {
+            http.get(`user/skill/${value}`).then(res => {
                 this.skills = res.data.result;
             });
         }
     },
     methods: {
         get_all_skills () {
-            new Http().get(`admin/skill`).then(res => {this.skills = res.data.result})
+            http.get(`admin/skill`).then(res => {this.skills = res.data.result})
         },
 
         remove (remove)  {
@@ -172,7 +172,7 @@ export default {
                 return;
             } 
 
-            new Http().post(`admin/skill`, { name: this.new_skill }).then(res => {
+            http.post(`admin/skill`, { name: this.new_skill }).then(res => {
                 this.skills.push(res.data.result[0]);
                 this.new_skill = "";
                 // this.status_list.create = {

@@ -1,29 +1,34 @@
 <template>
     <div class="container">
-        <div class="center">
-            <input type="hidden" v-model="token">
-            <strong>Version: </strong><span>V0.0.3 (LESS ALPHA-ISH)</span><br>
-            <strong>Role: </strong><span>{{this.role}}</span><br><br>
-            <button v-if="copy_token" class="button text" v-on:click="get_token">Copy token</button>
+
+        <div class="card elevated">
+            <img style="margin: -16px;margin-bottom: 16px;width:calc(100% + 32px);border-top-right-radius: 3px; border-top-left-radius: 3px; " src="https://assets.entrepreneur.com/content/3x2/2000/20150805204041-google-company-building-corporate.jpeg?width=700&crop=2:1">
+            
+            <div>
+                <div class="font h6 high">Company name</div>
+                <div class="font subtitle2 low">16 kilometers away</div>
+                <br>
+                <div class="font body1">This is our desc...</div>
+            </div>
+            
+            <!-- <strong>Version: </strong><span>V0.0.3 (LESS ALPHA-ISH)</span><br>
+            <strong>Role: </strong><span>{{this.role}}</span><br><br> -->
         </div>
     </div>
 </template>
 
 <script>
-    import { environment } from "../../config";
-
+    import { runtime } from "../../core/runtime";
+    
     export default { 
         name: 'main_index', 
         data() {
             return {
-                token: "",
-                copy_token: environment === "dev" ? true : false
+                role: ""
             }
         },
         created() {
-            this.token = localStorage.getItem("accessToken");
-
-            switch(this.$parent.auth.role) {
+            switch(runtime.token.role) {
                 case "1":
                     this.role = "Student";
                     break;
@@ -33,18 +38,7 @@
                 case "3": 
                     this.role = "Admin";
                     break;
-            }
-
-        },
-        methods: {
-            get_token() {
-                navigator.permissions.query({name: "clipboard-write"}).then(result => {
-                    if (result.state == "granted" || result.state == "prompt") {
-                    navigator.clipboard.writeText(this.token).then(clipText =>
-                        console.log(clipText));
-                    }
-                });
-            }
+             }
         }
     }
 </script>

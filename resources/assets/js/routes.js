@@ -8,12 +8,13 @@ import Admin from './views/admin/Admin.vue';
 import Admin_skills from './views/admin/Skills.vue';
 import Reviews from './views/reviews/Reviews.vue';
 import Internship from './views/internship/Internship.vue';
-import Internship_create from './views/internship/Create.vue';
 import Internship_show from './views/internship/List.vue';
 import Demo from './views/demo/Demo.vue';
 import About from './views/settings/About.vue';
 
-import {roles} from './config';
+import { roles } from './config';
+import { runtime } from './core/runtime';
+import Auth from './controllers/auth';
 
 export const routes = {
     mode: 'history',
@@ -29,7 +30,8 @@ export const routes = {
         {
             path: '/login',
             component: Auth_login,
-            name: "login",meta: {
+            name: "login",
+            meta: {
                 auth_not_allowed: true
             }
             
@@ -45,7 +47,7 @@ export const routes = {
         {
             path: '/logout',
             beforeEnter: (to, from, next) => {
-                localStorage.removeItem("accessToken");
+                Auth.logout(false);
                 next({ name: "index" });
             },
         },
@@ -85,11 +87,6 @@ export const routes = {
                     component: Internship_show,
                     name: "internship_show"
                   },
-                {
-                  path: 'create',
-                  component: Internship_create,
-                  name: "internship_create"
-                },
             ]
         },
         {

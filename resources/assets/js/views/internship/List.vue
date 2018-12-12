@@ -1,37 +1,43 @@
 <template>
-    <div>
+    <div class="container">
 
-        <paginate :current-page="pagination.current_page" :last-page="pagination.last_page" @input="load"/>
+        <!-- <paginate :current-page="pagination.current_page" :last-page="pagination.last_page" @input="load"/> -->
 
-        <router-link :to="'/internship/' + internship.id" v-for="internship in internships" :key="internship.id"
+        <!-- <router-link :to="'/internship/' + internship.id" v-for="internship in internships" :key="internship.id"
              tag="div" class="card"
-        >
+        > -->
+        <div class="card elevated" style="position: relative" v-for="internship in internships" :key="internship.id"> 
             <img v-if="internship.image" :src="internship.image.url" class="right"/>
-            <h4>{{ internship.title }}</h4>
-            <p>{{ internship.mentor }}</p>
-            <p>{{ internship.body }}</p>
-            <p>{{ internship.start_date }} - {{ internship.end_date }}</p>
-        </router-link>
+            <options class="options right">
+                <template slot-scope="{close}">
+                    <router-link :to="'/internship/' + internship.id" tag="div" class="item">Edit</router-link>
+                  
+                </template>
+            </options>
+            <div class="font h6 high">{{ internship.title }}</div>
+            <div class="font body2 spacing bottom2">{{ internship.mentor }} ({{ internship.start_date | formatDate }} - {{ internship.end_date | formatDate }})</div>
+            <div class="font body1">{{ internship.body }}</div>
+            <p></p>
+            
+        </div>
+            
+        <!-- </router-link> -->
 
-        <paginate :current-page="pagination.current_page" :last-page="pagination.last_page" @input="load"/>
-
+        <div class="center small">
+            <pagination :meta="pagination" :current-index="currentIndex" @pageChange="load" @fillerClick="currentIndex = $event"/>
+        </div>
     </div>
 </template>
 
 <script>
-    import axios from 'axios';
-
-    const HTTP = axios.create({
-        baseURL: window.location.origin + '/api/',
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-        }
-    });
-    import Paginate from './components/Paginate';
+    import http from '@/core/http';
+    import Options from '../../components/Options';
+    import Pagination from '../../components/Pagination';
 
 export default {
     components: {
-        Paginate,
+        Pagination,
+        Options
     },
     name: "list_internship",
     data() {
@@ -43,7 +49,7 @@ export default {
     methods: {
         load: function (page) {
             page = page || this.$parent.page;
-            HTTP.get("internship?page=" + (page || 1)).then(response => {
+            http.get("internship?page=" + (page || 1)).then(response => {
                 this.internships = response.data.data;
                 delete response.data.data;
                 this.pagination = response.data;
@@ -60,17 +66,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-    .card:hover {
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-        cursor: pointer;
-    }
-    .card {
-        overflow: auto;
-    }
-    .right {
-        float: right;
-        width: 50%;
-    }
-</style scoped>

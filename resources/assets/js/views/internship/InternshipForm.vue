@@ -5,11 +5,11 @@
                @confirm="destroyInternship" @close="showDeleteModal = false"
                title="Confirm Deletion" :body="`Delete the internship '${internship.title}'?`"/>
 
-        <!--------------------------------------------------------------------->
+       
         <div v-if="errors.message" class="error">{{ errors.message }}</div>
         <div v-if="errors.exception" class="error">{{ errors.exception }}</div>
         <h3>{{ id ? "Edit: " + internship.title : "Create new internship"}}</h3>
-        <!--------------------------------------------------------------------->
+        
 
 
         <form @submit.prevent="submit">

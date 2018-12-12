@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Http from '../../core/http';
+import http from '@/core/http';
 
 // import Prompt from '../../components/Prompt.vue';
 import Status from '../../components/Status.vue';
@@ -58,7 +58,7 @@ export default {
                 this.get_all_skills();
             }
 
-            new Http().get(`user/skill/${value}`).then(res => {
+            http.get(`user/skill/${value}`).then(res => {
                 this.skills = res.data.result;
             });
         }
@@ -80,13 +80,13 @@ export default {
         },
 
         get_all_skills () {
-            new Http().get(`admin/skill`).then(res => {this.skills = res.data.result})
+            http.get(`admin/skill`).then(res => {this.skills = res.data.result})
         },
 
         remove (remove)  {
             this.status_list.skills.render = false;
             const name = this.skills[remove.properties.index].name;
-            new Http().delete(`admin/skill/${remove.properties.id}`).then(res => {
+            http.delete(`admin/skill/${remove.properties.id}`).then(res => {
                 this.skills.splice(remove.properties.index, 1);
                 this.status_list.skills = {
                             render: true,
@@ -118,7 +118,7 @@ export default {
                 }
             }
 
-            new Http().put(`admin/skill/${id}`, { name: name }).then(res => {
+            http.put(`admin/skill/${id}`, { name: name }).then(res => {
                 for (let i = 0; i < this.skills.length; i++) {
                     if(this.skills[i].id === id) {
                         this.status_list.skills = {
@@ -152,7 +152,7 @@ export default {
                 return;
             } 
 
-            new Http().post(`admin/skill`, { name: this.new_skill }).then(res => {
+            http.post(`admin/skill`, { name: this.new_skill }).then(res => {
                 this.skills.push(res.data.result[0]);
                 this.new_skill = "";
                 this.status_list.create = {
@@ -171,4 +171,3 @@ export default {
     }
 }
 </script>
-template

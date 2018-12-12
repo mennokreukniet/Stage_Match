@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import Http from '../../core/http';
+import http from '../../core/http';
 
 import Modal from '../../components/Modal.vue';
 import Options from '../../components/Options';
@@ -143,7 +143,8 @@ export default {
         Options
     },
     created() {
-        new Http().get("user").then(res => {
+        // console.log(request.get);
+        http.get("user").then(res => {
             this.user = res.data.user;
             this.edited_user = this.user;
         })
@@ -215,8 +216,7 @@ export default {
         search_skills: function (skillname) {
             // if (skillname === "") return this.skills.show = false;
 
-            new Http().get(`user/skill/${skillname}`).then(res => {
-                
+            http.get(`user/skill/${skillname}`).then(res => {
                 const result = res.data.result;
                 for (let result_i = 0; result_i < result.length; result_i++) {
                     for (let skill_i = 0; skill_i < this.user.skills.length; skill_i++) {
@@ -231,7 +231,6 @@ export default {
                     }
                 }
                 this.search_skills_result = result;
-                console.log(result);
                 // if (res.data.result.length < 1) {
                 //     // return this.skills.show = false;
                 // }
@@ -245,7 +244,7 @@ export default {
     },
     methods: {
         set_level(index, id, level) {
-            new Http().post("user/skill/level", { id: id, level: level}).then(res => {
+            http.post("user/skill/level", { id: id, level: level}).then(res => {
                 this.user.skills[index].level = level;
             })
         },
@@ -276,7 +275,7 @@ export default {
             // }
 
 
-            new Http().post(`user/edit`, this.edited_user)
+            http.post(`user/edit`, this.edited_user)
             .then(res => {
                 localStorage.setItem("accessToken", res.data.token);
                 this.status_list.settings = {
@@ -295,7 +294,7 @@ export default {
 
         add_skill(id) {
             this.search_skills_result = [];
-            new Http().post("user/skill", {id: id}).then(res => {
+            http.post("user/skill", {id: id}).then(res => {
                 const result = res.data.result;
                 result.level = 1;
                 this.user.skills.push(result);
@@ -304,7 +303,7 @@ export default {
         },
 
         delete_skill(id, index) {
-            new Http().delete(`user/skill/${id}`).then(res => {
+            http.delete(`user/skill/${id}`).then(res => {
                 // this.skills.show = false;
                 // this.skill = "";
                 // this.status_list.skills = {

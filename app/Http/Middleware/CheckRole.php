@@ -20,7 +20,7 @@ class CheckRole
             return $next($request);
         };
         return response([
-            'message' => 'auth check or role check failed'
+            'message' => 'Unauthorized'
         ], 401);
     }
 }

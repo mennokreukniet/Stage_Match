@@ -34,8 +34,9 @@
 </template>
 
 <script>
-import Http from '../../core/http';
-import { environment } from '../../config';
+import http from '@/core/http';
+import Auth from '@/controllers/auth';
+import { environment } from '@/config';
 export default {
     name: "login",
     data () {
@@ -53,27 +54,7 @@ export default {
     },
     methods: {
         login() {
-            if (this.credentials.email === "" || this.credentials.password === "") {
-                return this.error = {
-                    show: true,
-                    message: "Fields can not be empty"
-                }
-            }
-
-            this.error.show = false;
-
-            new Http().post(`auth/login`, this.credentials)
-                .then(res => {
-                    localStorage.setItem("accessToken", res.data.token);
-                    this.$parent.read_token();
-                    this.$router.push({ name: "main" });
-                })
-                .catch(err => {
-                    this.error = {
-                    show: true,
-                    message: "Invalid credentials"
-                }
-            })
+            Auth.login(this.credentials);
         },
 
         register() {

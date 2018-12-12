@@ -2,7 +2,7 @@
     <div class="w3-center">
         <a v-if="currentPage !== 1" @click="prevPage()" class="w3-button">&laquo;</a>
 
-        <template v-for="index in lastPage">
+        <template v-for="index in lastPage" :key="index">
             <a @click="handleClick(index)" :class="['w3-button', index === currentPage ? 'w3-purple': '']">{{ index }}</a>
         </template>
 

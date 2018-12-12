@@ -2,7 +2,7 @@
 <template>
     <div>
         <div id="scrim" class="scrim transparent hidden"></div>
-        <nav id="nav" v-if="show_menu">
+        <nav id="nav" v-if="token() !== null">
             <div class="fab float"></div>
             <div id="navContainer">
                 <div class="navBar">
@@ -27,10 +27,10 @@
 
         <div v-on:click="toggle_menu" v-if="navigation_drawer && show_menu" id="scrim"></div>
 
-        <div v-if="show_menu" id="navigation-drawer" >
+        <div v-if="token() !== null" id="navigation-drawer" >
             <button class="fab"> <i class="material-icons">home</i> hey</button>
             <template v-for="item in this.menu_items">
-                <router-link v-if="item.location !== undefined && item.role === undefined ? true : auth.role == item.role" v-bind:key="item.name" tag="button" class="button navigation" v-bind:to="item.location">
+                <router-link v-if="item.location !== undefined && item.role === undefined ? true : token().role == item.role" v-bind:key="item.name" tag="button" class="button navigation" v-bind:to="item.location">
                     <i class="material-icons">{{item.icon}}</i>
                     <span>{{item.name}}</span>
                 </router-link>
@@ -56,12 +56,13 @@
 </template>
 
 <script>
+import { runtime } from '../core/runtime';
 import { roles, environment } from '../config';
+
     export default { 
         name: 'main-app',
         data() {
             return {
-                auth: {},
                 show_menu: true,
                 menu_items: [
                     {
@@ -118,21 +119,13 @@ import { roles, environment } from '../config';
                     }
                 );
             }
-            this.read_token();
         },
         methods: {
+            token() {
+                return runtime.token
+            },
             toggle_menu() {
                 this.navigation_drawer = !this.navigation_drawer;
-            },
-            read_token() {
-                
-                const token = localStorage.getItem("accessToken");
-                if (token !== null) {
-                    this.auth = JSON.parse(atob(token.split(".")[1]));
-                    this.show_menu = true;
-                    return;
-                }
-                this.show_menu = false;
             }
         }
      }

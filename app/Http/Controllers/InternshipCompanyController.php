@@ -9,6 +9,7 @@ use App\Internship;
 use App\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\Internship as InternshipResource;
 
 class InternshipCompanyController extends Controller
 {
@@ -39,7 +40,7 @@ class InternshipCompanyController extends Controller
      */
     public function show(Internship $internship)
     {
-        return response($internship);
+        return new InternshipResource($internship);
     }
 
     public function storeImage($file)
@@ -86,8 +87,13 @@ class InternshipCompanyController extends Controller
     {
         $internship = new Internship($request->all());
 
-        if ($this->company->internships()->save($internship))
-            return $this->response('Internship "'.$internship->title.'" created', 200, ['id' => $internship->id]);
+        if ($this->company->internships()->save($internship)) {
+            foreach ($request->input('skills') as $skill) {
+                $skill = Skill::find($skill['id']);
+                $internship->skills()->save($skill);
+            }
+            return $this->response('Internship "' . $internship->title . '" created', 200, ['id' => $internship->id]);
+        }
 
         return $this->response('store new internship failed',400);
     }
@@ -172,13 +178,15 @@ class InternshipCompanyController extends Controller
         return response($sync,400);
     }
 
-    public function deleteSkill(Request $request, $skill_id) {
-        $internship = Internship::find($request->id);
-//dd($request->id);
-        $detach = $internship->skills()->detach($skill_id);
+    public function isSkillMandatory(Request $request) {
+        $internship = Internship::find($request->internship_id);
 
-        if ($detach){
-            return response(['status' => 'success'], 200);
+        $sync = $internship->skills()->updateExistingPivot($request->skill_id, ['mandatory' => $request->mandatory ]);
+
+        if ($sync) {
+            return response(['status' => 'success', 'result' => $sync], 200);
         }
+        return response($sync,400);
+
     }
 }

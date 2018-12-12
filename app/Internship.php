@@ -21,7 +21,7 @@ class Internship extends Model
 
     public function skills()
     {
-        return $this->belongsToMany('App\Skill')->withPivot('level');
+        return $this->belongsToMany('App\Skill')->withPivot('level', 'mandatory');
     }
 
     protected $fillable = [

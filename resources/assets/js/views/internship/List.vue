@@ -9,7 +9,7 @@
         </div>
     </modal>
 
-    <modal v-show="modal_edit.render" v-bind:modal="modal_edit" @close="modal_edit.render = false">
+    <modal v-show="modal_internship.render" v-bind:modal="modal_internship" @close="modal_internship.render = false">
         <div slot="title">You are about to remove an internship</div>
         <div slot="content">Are you sure you want to remove the internship titled "{{remove.title}}"</div>
         <div slot="actions" slot-scope="{ close }">

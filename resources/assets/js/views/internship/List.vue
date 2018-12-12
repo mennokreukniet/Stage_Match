@@ -10,11 +10,56 @@
     </modal>
 
     <modal v-show="modal_internship.render" v-bind:modal="modal_internship" @close="modal_internship.render = false">
-        <div slot="title">You are about to remove an internship</div>
-        <div slot="content">Are you sure you want to remove the internship titled "{{remove.title}}"</div>
+        <div slot="title"></div>
+        <div slot="content">
+            <div class="form-group">
+                <div class="input outlined">
+                    <input  v-model="edit.title" required/>
+                    <label>Title</label>
+                    <span>Helper!</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input outlined">
+                    <input v-model="edit.body" required/>
+                    <label>Body</label>
+                    <span>Helper!</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input outlined">
+                    <input  v-model="edit.mentor" required/>
+                    <label>Mentor</label>
+                    <span>Helper!</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input outlined">
+                    <input type="date" v-model="edit.start_date" required/>
+                    <label>Start Date</label>
+                    <span>Helper!</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input outlined">
+                    <input type="date" v-model="edit.end_date" required/>
+                    <label>End Date</label>
+                    <span>Helper!</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <skillpicker :skills="edit.skills" @skillAdded="add_skill" @setLevel="set_level" @delete="delete_skill"/>
+            </div>
+        </div>
         <div slot="actions" slot-scope="{ close }">
             <button v-on:click="close" class="button text">Close</button>
-            <button v-on:click="remove_internship" class="button text">Remove</button>
+            <!-- <button v-if="edit !== {}" v-on:click="submit_internship" class="button text">Edit</button> -->
+            <button v-on:click="submit_internship" class="button text">Apply</button>
         </div>
     </modal>
 
@@ -26,7 +71,12 @@
         </div>
     </modal>
         
-    <div class="container">
+    <div class="container"> 
+
+        <div class="center small spacing top2">
+            <button v-on:click="open_edit({} , 1)" class="button contained">Create Internship</button>
+
+        </div>
         
         <!-- <paginate :current-page="pagination.current_page" :last-page="pagination.last_page" @input="load"/> -->
 
@@ -37,7 +87,7 @@
             <img v-if="internship.image" :src="internship.image.url" class="right"/>
             <options class="options right">
                 <template slot-scope="{close}">
-                    <router-link :to="'/internship/' + internship.id" tag="div" class="item">Edit</router-link>
+                    <div class="item" v-on:click="close();open_edit(internship, 2)">Edit</div>
                     <div class="item" v-on:click="close();open_remove(internship)">Delete</div>
                 </template>
             </options>
@@ -63,12 +113,14 @@
     import Modal from '../../components/Modal';
     import Options from '../../components/Options';
     import Pagination from '../../components/Pagination';
+    import Skillpicker from '@/views/internship/Skillpicker';
 
 export default {
     components: {
         Pagination,
         Options,
-        Modal
+        Modal,
+        Skillpicker
     },
     name: "list_internship",
     data() {
@@ -77,12 +129,16 @@ export default {
             internships: [],
             currentIndex: 1,
             remove: {},
+            edit: {},
             status: {},
+            type: 1,
             modal_remove: {
                 render: false
             },
             modal_internship: {
-                render: false
+                render: false,
+                safe_exit: true,
+                size: "huge"
             },
             modal_status: {
                 render: false
@@ -93,6 +149,43 @@ export default {
         open_remove(remove) {
             this.remove = remove;
             this.modal_remove.render = true;
+        },
+
+        open_edit(edit, type) {
+            this.edit = edit;
+            this.type = type;
+            this.modal_internship.render = true;
+        },
+
+        submit_internship() {
+            if (this.type === 1) {
+                http.post(`internship`, this.edit).then(response => {
+                    // this.$notify({text: response.data.ed, type: 'warn'});
+                    // this.$router.back();
+                    this.internships.unshift(response)
+                    this.modal_internship.render = false;
+                    this.modal_status.render = true;
+                    this.status = {
+                        title: `Internship removed`,
+                        content: `Internship with title "${this.remove.title}" has been removed`
+                    }
+                    
+                });
+            } else {
+                const index = this.internships.indexOf(this.edit);
+                http.put(`internship/${this.edit.id}`, this.edit).then(response => {
+                    // this.$notify({text: response.data.ed, type: 'warn'});
+                    // this.$router.back();
+                    this.internships[index] = response;
+                    this.modal_internship.render = false;
+                    this.modal_status.render = true;
+                    this.status = {
+                        title: `Internship removed`,
+                        content: `Internship with title "${this.remove.title}" has been removed`
+                    }
+                    
+                });
+            }
         },
 
         remove_internship() {

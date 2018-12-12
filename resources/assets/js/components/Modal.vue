@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="scrim" @click="safe_close"></div>
+        
         <div v-bind:class="`modal ${modal.size}`">         
             <div class="title">
                 <slot name="title"></slot>

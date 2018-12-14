@@ -77,6 +77,7 @@ export const routes = {
         {
             path: '/internship',
             component: Internship,
+            name: "internship",
             meta: {
                 role: roles.company
             },

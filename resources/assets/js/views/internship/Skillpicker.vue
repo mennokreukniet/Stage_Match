@@ -39,7 +39,7 @@
         name: "Skillpicker",
         props: {
             value: {
-                type: Array,
+                type: [],
                 default: () => []
             },
         }, //skills

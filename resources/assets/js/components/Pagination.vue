@@ -4,9 +4,9 @@
        <button :disabled="currentPage === 1" class="button text lock left" @click="$emit('pageChange', currentPage - 1)">Vorige</button>
 
        <ul class="pagination list">
-           <span v-for="page in pages">
+           <span v-for="page in pages" :key="page">
 
-               <button v-if="page.isFiller" class="button text" disabled @click="$emit('input', page.index)">...</button>
+               <button :key="index" v-if="page.isFiller" class="button text" disabled @click="$emit('fillerClick', page.index)">...</button>
 
                <button v-else :class="['button text', {'active': page.isCurrent}]" @click="$emit('pageChange', page.index)">{{ page.index }}</button>
 
@@ -25,7 +25,12 @@
        name: "paginate",
        props: {
            meta: Object,
-           value: Number
+           currentIndex: Number
+       },
+       methods: {
+           handlePageClick(index) {
+
+           }
        },
        computed: {
            currentPage: function () {
@@ -35,7 +40,7 @@
                return this.meta.last_page;
            },
            pages: function () {// [1,'..',4,5,6,'..',12]
-               let index = this.value || this.currentPage,
+               let index = this.currentIndex || this.currentPage,
                    offset = 1,
                    total = this.lastPage,
 

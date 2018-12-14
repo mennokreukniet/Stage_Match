@@ -784,7 +784,7 @@ nav {
     }
     height: 140%;
     width: 100%;
-    position: absolute;
+    position: fixed;
     z-index: 12;
     top:0;
 
@@ -794,8 +794,7 @@ nav {
 }
 
 .modal {
-
-    position: absolute;
+    position: fixed;
     z-index: 13;
     left: 50%;
     top: 50%;

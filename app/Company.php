@@ -11,7 +11,7 @@ class Company extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
     /**
      * Get the internships for the company.

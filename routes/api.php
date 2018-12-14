@@ -58,4 +58,5 @@ Route::group(['middleware' => 'role:company'], function () {
 
 Route::group(['middleware' => 'role:student'], function(){
     Route::get('match', 'MatchController@calculateInternshipScores');
+    Route::get('test', 'MatchController@test');
 });

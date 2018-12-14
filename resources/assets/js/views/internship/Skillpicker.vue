@@ -26,7 +26,7 @@
                     <button type="button" v-on:click="deleteSkill">
 
                         Delete
-                    </a>
+                    </button>
                 </div>
             </template>
         </div>

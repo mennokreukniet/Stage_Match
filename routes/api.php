@@ -43,13 +43,11 @@ Route::group(['middleware' => 'role:admin'], function(){
 	Route::put('/admin/skill/{id}', 'SkillsController@editSkill');
 });
 
-Route::apiResource('internship', 'InternshipController')->only(['show']);
-
 Route::group(['middleware' => 'role:company'], function () {
     Route::post('/internship/skill', 'InternshipCompanyController@addSkill');
     Route::delete('/internship/skill/{skill_id}', 'InternshipCompanyController@deleteSkill');
     Route::post('/internship/{internship}/image', 'InternshipCompanyController@uploadImage');
     Route::post('/internship/skill/level', 'InternshipCompanyController@skillLevel');
     Route::post('/internship/skill/mandatory', 'InternshipCompanyController@isSkillMandatory');
-    Route::apiResource('/internship', 'InternshipCompanyController')->only(['index', 'store', 'update', 'destroy']);
+    Route::apiResource('/internship', 'InternshipCompanyController');
 });

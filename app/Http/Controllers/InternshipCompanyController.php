@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Internship as InternshipResource;
 
+/**
+ * Class InternshipCompanyController
+ * @package App\Http\Controllers
+ */
 class InternshipCompanyController extends Controller
 {
     private $company;
@@ -25,61 +29,31 @@ class InternshipCompanyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @returns \App\Http\Resources\Internship
      */
     public function index()
     {
-        return response($this->company->internships()->latest()->paginate(10));
+        return InternshipResource::collection(
+            $this->company
+                 ->internships()
+                 ->latest()
+                 ->paginate(10));
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Internship  $internship
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\Internship
      */
     public function show(Internship $internship)
     {
         return new InternshipResource($internship);
     }
 
-    public function storeImage($file)
-    {
-        $filename = "internship-image-{ time() }.{ $file->getClientOriginalExtension() }";
-
-        $path = $file->storeAs('public/images', $filename);
-
-        return new Image([
-            'name' => $request->image->getClientOriginalName(),
-            'url' => Storage::url($path),
-            'file' => $path
-        ]);
-    }
-
-    public function uploadImage(Internship $internship, ImageFormRequest $request)
-    {
-        $path = $request->image->store('public/images');
-
-        $image = [
-            'name' => $request->image->getClientOriginalName(),
-            'url' => Storage::url($path),
-            'file' => $path
-        ];
-
-        if ($internship->image()->exists()) {
-            Storage::delete($internship->image->file);
-            if ($internship->image->update($image))
-                return $this->response('Image for "'.$internship->title.'" updated');
-        } else {
-            if ($internship->image()->save(new Image($image)))
-                return $this->response('Image for "'.$internship->title.'" added');
-        }
-        return $this->response("image upload failed", 400);
-    }
-
     /**
      * Store a newly created resource in storage.
-     * POST /api/internship
+     *
      * @param InternshipFormRequest $request
      * @return \Illuminate\Http\Response
      */
@@ -88,9 +62,11 @@ class InternshipCompanyController extends Controller
         $internship = new Internship($request->all());
 
         if ($this->company->internships()->save($internship)) {
-            foreach ($request->input('skills') as $skill) {
-                $skill = Skill::find($skill['id']);
-                $internship->skills()->save($skill);
+            if ($request->input('skills')) {
+                foreach ($request->input('skills') as $skill) {
+                    $skill = Skill::find($skill['id']);
+                    $internship->skills()->save($skill);
+                }
             }
             return $this->response('Internship "' . $internship->title . '" created', 200, ['id' => $internship->id]);
         }
@@ -133,60 +109,54 @@ class InternshipCompanyController extends Controller
     public function destroy(Internship $internship)
     {
         if ($this->company->hasInternship($internship)) {
+            $name = $internship->name;
             if ($internship->delete())
-                return $this->response('Internship successfully deleted');
+                return $this->response("Internship {$name} successfully deleted");
             return $this->response('destroy internship failed',400);
         }
         return $this->unauthorized();
     }
-    public function unauthorized()
+
+    /**
+     * updates or stores internship image
+     *
+     * @param Internship $internship
+     * @param ImageFormRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadImage(Internship $internship, ImageFormRequest $request)
     {
-        return $this->response('user '.auth()->user()->email.' does not own this internship',401);
+        $path = $request->image->store('public/images');
+
+        $image = [
+            'name' => $request->image->getClientOriginalName(),
+            'url' => Storage::url($path),
+            'file' => $path
+        ];
+
+        if ($internship->image()->exists()) {
+            Storage::delete($internship->image->path);
+
+            if ($internship->image->update($image))
+                return $this->response('Image for "'.$internship->title.'" updated');
+
+        } else {
+
+            if ($internship->image()->save(new Image($image)))
+                return $this->response('Image for "'.$internship->title.'" added');
+
+        }
+        return $this->response("image upload failed", 400);
     }
-    public function response($message, $status = 200, $extra = [])
+
+
+
+    protected function unauthorized()
+    {
+        return $this->response('user '.auth()->user()->email.' does not own this internship',403);
+    }
+    protected function response($message, $status = 200, $extra = [])
     {
         return response(array_merge(['message' => $message], $extra), $status);
-    }
-
-    public function addSkill(Request $request)
-    {
-        $internship = Internship::find($request->id);
-        $skill = Skill::find($request->skill_id);
-
-        if ($skill->id === NULL) {
-            return response(['status' => 'error', "message" => "Skill does not exist"], 404);
-        }
-
-        try {
-            if($internship->skills()->save($skill)) {
-                $internship = Internship::find($request->id);
-                return response(['status' => 'success', 'result' => $internship->skills], 200);
-            }
-        } catch(\Illuminate\Database\QueryException $e) {
-            return response(['status' => 'error', "message" => "Skill is already added"], 400);
-        }
-    }
-
-    public function skillLevel(Request $request) {
-        $internship = Internship::find($request->internship_id);
-
-        $sync = $internship->skills()->updateExistingPivot($request->skill_id, ['level' => $request->level ]);
-
-        if ($sync) {
-            return response(['status' => 'success', 'result' => $sync], 200);
-        }
-        return response($sync,400);
-    }
-
-    public function isSkillMandatory(Request $request) {
-        $internship = Internship::find($request->internship_id);
-
-        $sync = $internship->skills()->updateExistingPivot($request->skill_id, ['mandatory' => $request->mandatory ]);
-
-        if ($sync) {
-            return response(['status' => 'success', 'result' => $sync], 200);
-        }
-        return response($sync,400);
-
     }
 }

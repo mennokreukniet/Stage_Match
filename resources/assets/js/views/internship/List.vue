@@ -1,6 +1,7 @@
 <template>
 <div>
-    <modal v-show="modal_remove.render" v-bind:modal="modal_remove" @close="modal_remove.render = false">
+
+    <modal v-show="modal_remove.render" :modal="modal_remove" @close="modal_remove.render = false">
         <div slot="title">You are about to remove an internship</div>
         <div slot="content">Are you sure you want to remove the internship titled "{{remove.title}}"</div>
         <div slot="actions" slot-scope="{ close }">
@@ -9,57 +10,13 @@
         </div>
     </modal>
 
-    <modal v-show="modal_internship.render" v-bind:modal="modal_internship" @close="modal_internship.render = false">
+    <modal v-if="modal_internship.render" :modal="modal_internship" @close="modal_internship.render = false">
         <div slot="title"></div>
         <div slot="content">
-            <div class="form-group">
-                <div class="input outlined">
-                    <input  v-model="edit.title" required/>
-                    <label>Title</label>
-                    <span>Helper!</span>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <div class="input outlined">
-                    <input v-model="edit.body" required/>
-                    <label>Body</label>
-                    <span>Helper!</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="input outlined">
-                    <input  v-model="edit.mentor" required/>
-                    <label>Mentor</label>
-                    <span>Helper!</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="input outlined">
-                    <input type="date" v-model="edit.start_date" required/>
-                    <label>Start Date</label>
-                    <span>Helper!</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="input outlined">
-                    <input type="date" v-model="edit.end_date" required/>
-                    <label>End Date</label>
-                    <span>Helper!</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <skillpicker :skills="edit.skills" @skillAdded="add_skill" @setLevel="set_level" @delete="delete_skill"/>
-            </div>
+            <internship-form :id="internship_id" @submit="show_status"/>
         </div>
         <div slot="actions" slot-scope="{ close }">
             <button v-on:click="close" class="button text">Close</button>
-            <!-- <button v-if="edit !== {}" v-on:click="submit_internship" class="button text">Edit</button> -->
-            <button v-on:click="submit_internship" class="button text">Apply</button>
         </div>
     </modal>
 
@@ -70,38 +27,31 @@
             <button v-on:click="close" class="button text">Close</button>
         </div>
     </modal>
-        
+
     <div class="container"> 
 
         <div class="center small spacing top2">
-            <button v-on:click="open_edit({} , 1)" class="button contained">Create Internship</button>
+            <button @click="render_internship_modal()" class="button contained">Create Internship</button>
 
         </div>
-        
-        <!-- <paginate :current-page="pagination.current_page" :last-page="pagination.last_page" @input="load"/> -->
 
-        <!-- <router-link :to="'/internship/' + internship.id" v-for="internship in internships" :key="internship.id"
-             tag="div" class="card"
-        > -->
         <div class="card elevated" style="position: relative" v-for="internship in internships" :key="internship.id"> 
-            <img v-if="internship.image" :src="internship.image.url" class="right"/>
+            <img v-if="internship.image" :src="internship.image.url" class="right" style="max-width: calc(100% - 32px);"/>
             <options class="options right">
                 <template slot-scope="{close}">
-                    <div class="item" v-on:click="close();open_edit(internship, 2)">Edit</div>
-                    <div class="item" v-on:click="close();open_remove(internship)">Delete</div>
+                        <div class="item" @click="close();render_internship_modal(internship.id)">Edit</div>
+                    <div class="item" @click="close();open_remove(internship)">Delete</div>
                 </template>
             </options>
             <div class="font h6 high">{{ internship.title }}</div>
             <div class="font body2 spacing bottom2">{{ internship.mentor }} ({{ internship.start_date | formatDate }} - {{ internship.end_date | formatDate }})</div>
             <div class="font body1">{{ internship.body }}</div>
             <p></p>
-            
+
         </div>
-            
-        <!-- </router-link> -->
 
         <div class="center small">
-            <pagination :meta="pagination" :current-index="currentIndex" @pageChange="load" @fillerClick="currentIndex = $event"/>
+            <pagination :meta="pagination" @pageChange="load" v-model="currentIndex"/>
         </div>
     </div>
 </div>
@@ -110,9 +60,10 @@
 
 <script>
     import http from '@/core/http';
-    import Modal from '../../components/Modal';
-    import Options from '../../components/Options';
-    import Pagination from '../../components/Pagination';
+    import Modal from '@/components/Modal';
+    import Options from '@/components/Options';
+    import Pagination from '@/components/Pagination';
+    import InternshipForm from '@/views/internship/InternshipForm';
     import Skillpicker from '@/views/internship/Skillpicker';
 
 export default {
@@ -120,6 +71,7 @@ export default {
         Pagination,
         Options,
         Modal,
+        InternshipForm,
         Skillpicker
     },
     name: "list_internship",
@@ -128,8 +80,9 @@ export default {
             pagination: {},
             internships: [],
             currentIndex: 1,
+            internship_id: null,
+
             remove: {},
-            edit: {},
             status: {},
             type: 1,
             modal_remove: {
@@ -146,6 +99,19 @@ export default {
         }
     },
     methods: {
+        render_internship_modal(id) {
+            this.internship_id = id;
+            this.modal_internship.render = true;
+        },
+        show_status(message) {
+            this.load();
+            this.modal_internship.render = false;
+            this.modal_status.render = true;
+            this.status = {
+                title: `Internship successfully submitted`,
+                content: message
+            }
+        },
         open_remove(remove) {
             this.remove = remove;
             this.modal_remove.render = true;
@@ -155,37 +121,6 @@ export default {
             this.edit = edit;
             this.type = type;
             this.modal_internship.render = true;
-        },
-
-        submit_internship() {
-            if (this.type === 1) {
-                http.post(`internship`, this.edit).then(response => {
-                    // this.$notify({text: response.data.ed, type: 'warn'});
-                    // this.$router.back();
-                    this.internships.unshift(response)
-                    this.modal_internship.render = false;
-                    this.modal_status.render = true;
-                    this.status = {
-                        title: `Internship removed`,
-                        content: `Internship with title "${this.remove.title}" has been removed`
-                    }
-                    
-                });
-            } else {
-                const index = this.internships.indexOf(this.edit);
-                http.put(`internship/${this.edit.id}`, this.edit).then(response => {
-                    // this.$notify({text: response.data.ed, type: 'warn'});
-                    // this.$router.back();
-                    this.internships[index] = response;
-                    this.modal_internship.render = false;
-                    this.modal_status.render = true;
-                    this.status = {
-                        title: `Internship removed`,
-                        content: `Internship with title "${this.remove.title}" has been removed`
-                    }
-                    
-                });
-            }
         },
 
         remove_internship() {
@@ -199,18 +134,19 @@ export default {
                 this.modal_status.render = true;
                 this.status = {
                     title: `Internship removed`,
-                    content: `Internship with title "${this.remove.title}" has been removed`
+                    content: response.data.message
                 }
             });
         },
 
         load: function (page) {
-            page = page || this.$parent.page;
-            http.get("internship?page=" + (page || 1)).then(response => {
+            page = page || this.$parent.page || this.currentIndex;
+
+            http.get("internship?page=" + page).then(response => {
                 this.internships = response.data.data;
-                delete response.data.data;
-                this.pagination = response.data;
-                this.$parent.page = this.pagination.current_page;
+                this.pagination = response.data.meta;
+
+                this.currentIndex = this.pagination.current_page;
             });
         }
     },

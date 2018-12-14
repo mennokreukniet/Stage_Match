@@ -17,10 +17,12 @@ class Internship extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'body' => $this->mentor,
+            'body' => $this->body,
+            'mentor' => $this->mentor,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
-            'skills' => Skill::collection($this->whenLoaded('skills'))
+            'skills' => Skill::collection($this->whenLoaded('skills')),
+            'image' => new Image($this->whenLoaded('image'))
             ];
     }
 }

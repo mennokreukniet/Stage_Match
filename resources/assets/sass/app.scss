@@ -968,6 +968,27 @@ nav {
         /* create a new stacking context */
         position: absolute;
     }
+
+    &.image {
+        padding: 0;
+
+        &>div.header {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            max-width: 100%;
+
+            &>img {
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                width: 100%;
+            }
+        }
+
+        &>div.content {
+            position: relative;
+            padding: 16px;
+        }
+    }
 }
 
 

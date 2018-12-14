@@ -35,19 +35,22 @@
 
         </div>
 
-        <div class="card elevated" style="position: relative" v-for="internship in internships" :key="internship.id"> 
-            <img v-if="internship.image" :src="internship.image.url" class="right" style="max-width: calc(100% - 32px);"/>
-            <options class="options right">
-                <template slot-scope="{close}">
-                        <div class="item" @click="close();render_internship_modal(internship.id)">Edit</div>
-                    <div class="item" @click="close();open_remove(internship)">Delete</div>
-                </template>
-            </options>
-            <div class="font h6 high">{{ internship.title }}</div>
-            <div class="font body2 spacing bottom2">{{ internship.mentor }} ({{ internship.start_date | formatDate }} - {{ internship.end_date | formatDate }})</div>
-            <div class="font body1">{{ internship.body }}</div>
-            <p></p>
+        <div class="card image elevated" style="position: relative" v-for="internship in internships" :key="internship.id"> 
+            <div class="header">
+                <img v-if="internship.image" :src="internship.image.url" class="header"/>
+            </div>
 
+            <div class="content">
+                <options class="options right">
+                    <template slot-scope="{close}">
+                            <div class="item" @click="close();render_internship_modal(internship.id)">Edit</div>
+                        <div class="item" @click="close();open_remove(internship)">Delete</div>
+                    </template>
+                </options>
+                <div class="font h6 high">{{ internship.title }}</div>
+                <div class="font body2 spacing bottom2">{{ internship.mentor }} ({{ internship.start_date | formatDate }} - {{ internship.end_date | formatDate }})</div>
+                <div class="font body1">{{ internship.body }}</div>
+            </div>
         </div>
 
         <div class="center small">

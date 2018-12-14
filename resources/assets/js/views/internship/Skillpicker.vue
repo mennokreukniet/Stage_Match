@@ -26,7 +26,7 @@
                     <button type="button" v-on:click="deleteSkill">
 
                         Delete
-                    </a>
+                    </button>
                 </div>
             </template>
         </div>
@@ -39,7 +39,7 @@
         name: "Skillpicker",
         props: {
             value: {
-                type: Array,
+                type: [],
                 default: () => []
             },
         }, //skills

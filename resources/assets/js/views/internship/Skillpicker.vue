@@ -2,25 +2,31 @@
     <div>
         <input v-model="searchSkill" />
         <div v-for="skill in searchedSkills" :key="skill.id" class="skill">
-            <a class="classic" style="display:block;margin-bottom: 5px;" @click="$emit('skillAdded', skill.id)">{{skill.name}}</a>
+
+            <button class="classic" style="display:block;margin-bottom: 5px;" @click="addSkill(skill)">{{skill.name}}</button>
+
         </div>
 
         <span class="title2 margin-top">My Skills</span>
         <div class="skills">
-            <div v-if="skills" class="neutral">There are no skills, add one!</div>
-            <template v-for="(skill, index) in skills">
+
+            <div v-if="value" class="neutral">There are no skills, add one!</div>
+
+            <template v-for="(skill, index) in value">
                 <div v-bind:key="skill.id" class="skill settings">
                     <span>{{skill.name}}</span>
-                    <a @click="$emit('setLevel', skill.id, 2)" v-bind:disabled="skill.pivot.level == '2'" v-bind:class="{ selected: skill.pivot.level == '2' }" class="classic good">
+
+                    <button type="button" @click="updateLevel(index, 1)" v-bind:class="{ selected: skill.level == '1' }" class="classic good">
                         Good
-                    </a>
-                    <a @click="$emit('setLevel', skill.id, 3)" v-bind:disabled="skill.pivot.level == '3'" v-bind:class="{ selected: skill.pivot.level == '3' }" class="classic expert">
+                    </button>
+                    <button type="button" @click="updateLevel(index, 2)" v-bind:class="{ selected: skill.level == '2' }" class="classic expert">
                         Expert
-                    </a>
-                    <input type="checkbox" name="Mandatory" v-bind:disabled="skill.pivot.mandatory == ''" v-bind:class="{ selected: skill.pivot.level == '3' }" v-on:click="set_level(index, skill.id, 2)">
-                    <a v-on:click="$emit('delete', skill.id, index)">
+                    </button>
+                    <input type="checkbox" name="Mandatory" v-model="skill.mandatory">
+                    <button type="button" v-on:click="deleteSkill">
+
                         Delete
-                    </a>
+                    </button>
                 </div>
             </template>
         </div>
@@ -31,11 +37,17 @@
     import Http from '../../core/http';
     export default {
         name: "Skillpicker",
-        props: ['skills'],
+        props: {
+            value: {
+                type: [],
+                default: () => []
+            },
+        }, //skills
         data(){
             return {
                 searchSkill: "",
-                searchedSkills: []
+                searchedSkills: [],
+                checked: false,
             }
         },
         watch: {
@@ -47,15 +59,24 @@
             }
         },
         methods: {
-            set_level(index, id, level) {
-                new Http().post("internship/skill/level", { skill_id: id, internship_id: this.internship.id, level: level}).then(res => {
-                    this.skills[index].pivot.level = level;
-                })
+
+            update() {
+                this.$emit('input', this.value);
+            },
+            updateLevel(index, i) {
+                this.value[index].level = i;
+
+            },
+            deleteSkill(index){
+
+                this.value.splice(index, 1);
+                this.update();
+            },
+            addSkill(skill){
+                this.value.push(skill);
+                this.update();
+
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>

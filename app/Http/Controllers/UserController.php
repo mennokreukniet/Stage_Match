@@ -22,7 +22,8 @@ class UserController extends Controller
                 'theme' => $request->theme,
                 'city' => $request->city,
                 'street' => $request->street,
-                'house_number' => $request->house_number]);
+                'house_number' => $request->house_number,
+                'language' => $request->language]);
 
         if ($role == '1'){
             Student::where('user_id', $id)

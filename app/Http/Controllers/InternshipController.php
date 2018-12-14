@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\InternshipFormRequest;
 use App\Internship;
 use Illuminate\Http\Request;
+use App\Http\Resources\Internship as InternshipResource;
 
 class InternshipController extends Controller
 {
@@ -26,6 +27,6 @@ class InternshipController extends Controller
      */
     public function show(Internship $internship)
     {
-        return response($internship);
+        return new InternshipResource($internship);
     }
 }

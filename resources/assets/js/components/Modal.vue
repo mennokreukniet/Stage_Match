@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="scrim" @click="safe_close"></div>
+        <div v-bind:style="{ top: `${position.top}px`}" class="scrim" @click="safe_close"></div>
         
-        <div v-bind:class="`modal ${modal.size}`">         
+        <div v-bind:style="{ top: `calc(50% + ${position.top}px )`}" v-bind:class="`modal ${modal.size}`">         
             <div class="title">
                 <slot name="title"></slot>
             </div>
@@ -16,8 +16,8 @@
             </div>
         </div>
 
-        <div v-if="safe_exit" class="scrim high"></div>
-        <div v-if="safe_exit" v-bind:class="`modal high small`">         
+        <div v-bind:style="{ top: `${position.top}px`}" v-if="safe_exit" class="scrim high"></div>
+        <div v-bind:style="{ top: `calc(50% + ${position.top}px )`}" v-if="safe_exit" v-bind:class="`modal high small`">         
             <div class="title">
                 There are unsaved changes, are you sure you want to exit?
             </div>
@@ -35,12 +35,27 @@ export default {
     props: ['modal'],
     data() {
         return {
+            position: {
+                top: 0
+            },
             safe_exit: false
+        }
+    },
+    watch: {
+        modal: {
+            handler: function(modal) {
+                if (modal.render) {
+                    this.position.top = window.scrollY;
+                    document.documentElement.style.overflow = 'hidden'
+                }
+            },
+            deep: true
         }
     },
     methods: {
         close() {
             this.safe_exit = false;
+            document.documentElement.style.overflow = 'auto';
             this.$emit('close');
         },
         safe_close() {

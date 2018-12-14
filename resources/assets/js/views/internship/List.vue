@@ -13,10 +13,11 @@
     <modal v-if="modal_internship.render" :modal="modal_internship" @close="modal_internship.render = false">
         <div slot="title"></div>
         <div slot="content">
-            <internship-form :id="internship_id" @submit="show_status"/>
+            <internship-form :lol="is_submitted" :id="internship_id" @submit="show_status"/>
         </div>
         <div slot="actions" slot-scope="{ close }">
             <button v-on:click="close" class="button text">Close</button>
+            <button v-on:click="is_submitted = true" class="button text">Apply</button>
         </div>
     </modal>
 
@@ -84,7 +85,7 @@ export default {
             internships: [],
             currentIndex: 1,
             internship_id: null,
-
+            is_submitted: false,
             remove: {},
             status: {},
             type: 1,

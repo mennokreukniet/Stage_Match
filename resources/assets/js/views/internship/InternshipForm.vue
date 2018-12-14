@@ -13,7 +13,6 @@
                   v-model="internship[input.name]"/>
 
             <!--skillpicker v-model="internship.skills"/-->
-            <button class="button text" type="submit">Apply</button>
 
         </form>
 
@@ -31,8 +30,9 @@ export default {
         Skillpicker,
         MyInput
     },
-    props: ['id'],
+    props: ['id', "lol"],
     created() {
+        console.log(this.lol)
         http.interceptors.response.use(undefined, error => {
             this.errorHandler(error.response);
             throw error;
@@ -43,6 +43,11 @@ export default {
             http.get(this.httpUrl).then(response => {
                 this.internship = response.data.data;
             });
+        }
+    },
+    watch: {
+        lol: function(newVal, oldVal) { // watch it
+          console.log('Prop changed: ', newVal, ' | was: ', oldVal)
         }
     },
     data() {

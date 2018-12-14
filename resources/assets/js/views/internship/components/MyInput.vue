@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <div class="input outlined">
-
+            
             <textarea v-if="type === 'textarea'"
                       :name="name" @input="$emit('input', $event.target.value)"
                       :required="required"

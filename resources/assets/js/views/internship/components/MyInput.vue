@@ -13,15 +13,17 @@
 
             <label>{{ label + (required ? " *  ": "  ") }}</label>
 
+            <ul class="spacing bottom2" v-if="errors">
+                <li v-for="error in errors" :key="error">{{ error }}<br></li>
+            </ul>
         </div>
 
         <div v-else="" class="imagepicker">
             <imagepicker @change="$emit('input', $event)" :name="name" :image="value"/>
+            <ul class="spacing bottom2" v-if="errors">
+                <li v-for="error in errors" :key="error">{{ error }}<br></li>
+            </ul>
         </div>
-
-        <ul class="spacing bottom2" v-if="errors">
-            <li v-for="error in errors" :key="error">{{ error }}<br></li>
-        </ul>
     </div>
 </template>
 

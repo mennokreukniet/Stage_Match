@@ -4,7 +4,7 @@
             
             <textarea v-if="type === 'textarea'"
                       :name="name" @input="$emit('input', $event.target.value)"
-                      v-model="value"
+                      v-bind:value="value"
                       :required="required"></textarea>
 
             <input v-else

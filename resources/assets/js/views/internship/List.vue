@@ -16,7 +16,7 @@
             <internship-form :submitForm="is_submitted" :id="internship_id" @submit="show_status"/>
         </div>
         <div slot="actions" slot-scope="{ close }">
-            <button v-on:click="close" class="button text">Close</button>
+            <button v-on:click="close();submit" class="button text">Close</button>
             <button v-on:click="submit" class="button text">Apply</button>
         </div>
     </modal>
@@ -104,7 +104,7 @@ export default {
     },
     methods: {
         submit () {
-            this.is_submitted = true;
+            this.is_submitted = !this.is_submitted;
         },
         render_internship_modal(id) {
             this.internship_id = id;

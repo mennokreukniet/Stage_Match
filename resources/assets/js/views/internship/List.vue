@@ -55,7 +55,7 @@
         </div>
 
         <div class="center small">
-            <pagination :meta="pagination" @pageChange="load" v-model="currentIndex"/>
+            <pagination :meta="pagination" @pageChange="load"/>
         </div>
     </div>
 </div>
@@ -83,7 +83,6 @@ export default {
         return {
             pagination: {},
             internships: [],
-            currentIndex: 1,
             internship_id: null,
             is_submitted: false,
             remove: {},
@@ -146,23 +145,15 @@ export default {
             });
         },
 
-        load: function (page) {
-            page = page || this.$parent.page || this.currentIndex;
-
+        load: function (page = 1) {
             http.get("internship?page=" + page).then(response => {
                 this.internships = response.data.data;
                 this.pagination = response.data.meta;
-
-                this.currentIndex = this.pagination.current_page;
             });
         }
     },
     created () {
         this.load();
-    },
-    updated () {
-        if (this.pagination.current_page > this.pagination.last_page)
-            this.load(this.pagination.last_page);
     }
 }
 </script>

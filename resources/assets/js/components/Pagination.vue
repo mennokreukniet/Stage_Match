@@ -3,15 +3,15 @@
 
        <button :disabled="currentPage === 1" class="button text lock left" @click="$emit('pageChange', currentPage - 1)">Vorige</button>
 
-       <ul class="pagination list">
-           <span v-for="page in pages" :key="page">
+       <div class="pagination list">
+           <template v-for="page in pages">
 
-               <button :key="index" v-if="page.isFiller" class="button text" disabled @click="$emit('fillerClick', page.index)">...</button>
+               <button v-if="page.isFiller" class="button text" @click="currentIndex = page.index">...</button>
 
                <button v-else :class="['button text', {'active': page.isCurrent}]" @click="$emit('pageChange', page.index)">{{ page.index }}</button>
 
-           </span>
-       </ul>
+           </template>
+       </div>
 
        <button :disabled="currentPage === lastPage" class="button text" @click="$emit('pageChange', currentPage + 1)">Volgende</button>
    </div>
@@ -24,44 +24,54 @@
    export default {
        name: "paginate",
        props: {
-           meta: Object,
-           currentIndex: Number
+           meta: Object
        },
-       methods: {
-           handlePageClick(index) {
-
+       data() {
+           return {
+               currentIndex: null
            }
        },
-       computed: {
-           currentPage: function () {
-               return this.meta.current_page < this.lastPage ? this.meta.current_page : this.lastPage;
+       watch: {
+           currentPage: function(index) {
+               this.currentIndex = index;
            },
+       },
+       computed: {
            lastPage: function () {
                return this.meta.last_page;
            },
-           pages: function () {// [1,'..',4,5,6,'..',12]
-               let index = this.currentIndex || this.currentPage,
-                   offset = 1,
-                   total = this.lastPage,
+           currentPage: function () {
+               return this.lastPage < this.meta.current_page
+                   ? this.lastPage
+                   : this.meta.current_page;
+           },
+           pages: function () {
+               let total = this.lastPage,
 
-                   start = index - offset > 0
-                   ? index - offset
-                   : 1,
+                   offset = 2,
+                   length = offset * 2,
 
-                   end = index + offset < total
-                   ? index + offset
-                   : total,
+                   start = this.currentIndex - offset,
+                   end = this.currentIndex + offset;
 
-                   pages = [];
+               if (start < 1) {
+                   start = 1;
+                   end = 1 + length;
+               } else if (end > total) {
+                   start = total - length;
+                   end = total;
+               }
+
+               let pages = [];
 
                if (start > 1) pages.push({index: 1, isCurrent: 1 === this.currentPage});
 
-               if (start > 2) pages.push({isFiller: true, index: start - 2});
+               if (start > 2) pages.push({isFiller: true, index: start - (1 + offset)});
 
                for (let i = start; i <= end; i++)
                    pages.push({index: i, isCurrent: i === this.currentPage});
 
-               if (end < total - 1) pages.push({isFiller: true, index: end + 2});
+               if (end < total - 1) pages.push({isFiller: true, index: end + 1 + offset});
 
                if (end < total) pages.push({index: total, isCurrent: total === this.currentPage});
 

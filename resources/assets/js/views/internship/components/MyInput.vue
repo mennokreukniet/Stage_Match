@@ -11,10 +11,6 @@
                    :name="name" :value="value" @input="$emit('input', $event.target.value)"
                    :required="required" :type="type"/>
 
-            <ul class="spacing bottom2" v-if="errors">
-                <li v-for="error in errors" :key="error">{{ error }}<br></li>
-            </ul>
-
             <label>{{ label + (required ? " *  ": "  ") }}</label>
 
         </div>
@@ -22,6 +18,10 @@
         <div v-else="" class="imagepicker">
             <imagepicker @change="$emit('input', $event)" :name="name" :image="value"/>
         </div>
+
+        <ul class="spacing bottom2" v-if="errors">
+            <li v-for="error in errors" :key="error">{{ error }}<br></li>
+        </ul>
     </div>
 </template>
 

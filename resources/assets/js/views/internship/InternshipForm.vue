@@ -4,16 +4,13 @@
         <div v-if="errors.message" class="error">{{ errors.message }}</div>
         <div v-if="errors.exception" class="error">{{ errors.exception }}</div>
 
-        <h3>{{ id ? "Edit: " + internship.title : "Create new internship"}}</h3>
-
         <form @submit.prevent="submit">
 
-        <my-input v-for="input in form" :key="input.name"
-                  v-bind="input"        :errors="errors[input.name]"
-                  v-model="internship[input.name]"/>
+            <my-input v-for="input in form" :key="input.name"
+                    v-bind="input"        :errors="errors[input.name]"
+                    v-model="internship[input.name]"/>
 
             <!--skillpicker v-model="internship.skills"/-->
-
         </form>
 
     </div>
@@ -30,9 +27,12 @@ export default {
         Skillpicker,
         MyInput
     },
-    props: ['id', "lol"],
+    data: {
+        
+    },
+    props: ['id', "submitForm"],
     created() {
-        console.log(this.lol)
+        console.log(this.submitForm)
         http.interceptors.response.use(undefined, error => {
             this.errorHandler(error.response);
             throw error;
@@ -45,25 +45,18 @@ export default {
             });
         }
     },
-    watch: {
-        lol: function(newVal, oldVal) { // watch it
-          console.log('Prop changed: ', newVal, ' | was: ', oldVal)
-        }
-    },
     data() {
         return {
-errors: {}, //objects with arrays of errors : {mentor: ["The mentor field is required."], title: ["The title field is required"]}
-internship: {}, // i
-form: [ //input objects
-    {name: "title", label: "Titel", required: true},
-    {name: "body", label: "Body", type: "textarea", required: true},
-    {name: "mentor", label: "Mentor", required: true},
-    {name: "start_date", label: "Start datum", type: "date", required: true,},
-    {name: "end_date", label: "Eind datum", type: "date", required: true},
-    {name: "image", label: "Afbeelding", type: "imagepicker", required: true},
-],
-
-
+            errors: {}, //objects with arrays of errors : {mentor: ["The mentor field is required."], title: ["The title field is required"]}
+            internship: {}, // i
+            form: [ //input objects
+                {name: "title", label: "Titel", required: true},
+                {name: "body", label: "Body", type: "textarea", required: true},
+                {name: "mentor", label: "Mentor", required: true},
+                {name: "start_date", label: "Start datum", type: "date", required: true,},
+                {name: "end_date", label: "Eind datum", type: "date", required: true},
+                {name: "image", label: "Afbeelding", type: "imagepicker", required: true},
+            ],
             httpUrl: "internship",
             httpMethod: "post",
             skill: "",
@@ -96,6 +89,9 @@ form: [ //input objects
             http.get(`skill/${value}`).then(res => {
                 this.skills = res.data.result;
             });
+        },
+        submitForm() {
+            this.submit();
         }
     }
 }

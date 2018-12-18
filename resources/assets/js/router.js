@@ -1,6 +1,7 @@
 import { routes } from './routes';
 import VueRouter from 'vue-router';
 import Auth from '@/controllers/auth';
+
 const router = new VueRouter(routes);
 
 /**

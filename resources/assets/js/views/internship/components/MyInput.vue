@@ -1,25 +1,28 @@
 <template>
     <div class="form-group">
-        <div class="input outlined">
-
+        <div v-if="type !== 'imagepicker'" class="input outlined" v-bind:class="{ double: type === 'textarea' }">
+            
             <textarea v-if="type === 'textarea'"
                       :name="name" @input="$emit('input', $event.target.value)"
-                      :required="required"
-                      rows="8">{{ value }}</textarea>
-
-            <imagepicker v-else-if="type === 'imagepicker'"
-                         @change="$emit('input', $event)" :name="name" :image="value"/>
+                      v-bind:value="value"
+                      :required="required"></textarea>
 
             <input v-else
                    :name="name" :value="value" @input="$emit('input', $event.target.value)"
                    :required="required" :type="type"/>
 
-            <ul v-if="errors">
-                <li v-for="error in errors">{{ error }}</li>
+            <label>{{ label + (required ? " *  ": "  ") }}</label>
+
+            <ul class="spacing bottom2" v-if="errors">
+                <li v-for="error in errors" :key="error">{{ error }}<br></li>
             </ul>
+        </div>
 
-            <label>{{ label + (required ? " *": "") }}</label>
-
+        <div v-else="" class="imagepicker">
+            <imagepicker @change="$emit('input', $event)" :name="name" :image="value"/>
+            <ul class="spacing bottom2" v-if="errors">
+                <li v-for="error in errors" :key="error">{{ error }}<br></li>
+            </ul>
         </div>
     </div>
 </template>

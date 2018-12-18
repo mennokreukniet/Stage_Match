@@ -38,9 +38,21 @@ export default {
             safe_exit: false
         }
     },
+    watch: {
+        modal: {
+            immediate: true,
+            handler: function(modal) {
+                if (modal.render) {
+                    document.documentElement.style.overflow = 'hidden'
+                }
+            },
+            deep: true
+        }
+    },
     methods: {
         close() {
             this.safe_exit = false;
+            document.documentElement.style.overflow = 'auto';
             this.$emit('close');
         },
         safe_close() {

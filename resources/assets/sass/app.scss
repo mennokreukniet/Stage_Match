@@ -356,7 +356,17 @@ nav {
     margin-bottom: 32px;
 }
 
+.imagepicker {
+    input {
+        display: none;
+    }
+}
+
 .input {
+    &.double {
+        max-height: 108px;
+    }
+
     max-height: 54px;
     position: relative;
     box-sizing: content-box;
@@ -371,10 +381,11 @@ nav {
         border: solid 1px $divider_color;
         border-radius: 4px;
 
-        input {
+        input, textarea {
             padding: 17.5px 14px;
 
             &:focus {
+                outline: 0;
                 padding: 16.5px 14px;
             }
 
@@ -389,11 +400,20 @@ nav {
             }
         }
 
+        textarea {
+            width:100%;
+            height: 100%;
+            border-radius: 3px;
+            resize: none;
+            border:none;
+        }
+
         label {
             pointer-events: none;
             position: absolute;
             left: 8px;
-            top: 16px;
+            top: 50%;
+            transform: translate(0, -50%);
             background: white;
             padding: 0px 4px;
             @include font("subtitle1");
@@ -782,9 +802,9 @@ nav {
     &.hidden {
         display: none;
     }
-    height: 100%;
+    height: 140%;
     width: 100%;
-    position: absolute;
+    position: fixed;
     z-index: 12;
     top:0;
 
@@ -794,8 +814,7 @@ nav {
 }
 
 .modal {
-
-    position: absolute;
+    position: fixed;
     z-index: 13;
     left: 50%;
     top: 50%;
@@ -830,6 +849,7 @@ nav {
     .content {
         padding: 0 24px;
         @include font("body1");
+        overflow: auto;
     }
 
     .bottom {
@@ -940,6 +960,68 @@ nav {
     }
 }
 
+.stack {
+    margin-top: 8px;
+    transition: 300ms;
+    position: relative;
+    
+    grid-column: 2/9;
+
+    @media only screen and (min-width: 600px) {
+        grid-column: 3/16;
+    }
+
+    @media only screen and (min-width: 720px) {
+        grid-template-columns: 24px repeat(8, 1fr 24px);
+    }
+
+    @media only screen and (min-width: 840px) {
+        grid-template-columns: 24px repeat(12, 1fr 24px);
+        grid-column: 7/20;
+    }
+
+    // &>div.card {
+    //     position: absolute;
+    // }
+
+    &>div {
+        top: 0;
+    }
+
+    &>.position1 {
+        position: relative;
+        margin-top: 64px;
+    }
+
+    &>.position2 {
+        position: absolute;
+        margin-top: 48px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    &>.position3 {
+        position: absolute;
+        margin-top: 32px;
+        margin-left: 32px;
+        margin-right: 32px;
+    }
+
+    &>.position4 {
+        position: absolute;
+        margin-top: 16px;
+        margin-left: 48px;
+        margin-right: 48px;
+    }
+
+    &>.position5 {
+        position: absolute;
+        margin-top: 0;
+        margin-left: 64px;
+        margin-right: 64px;
+    }
+}
+
 .card {
     border: solid 1px $divider_color;
     border-radius: 4px;
@@ -967,6 +1049,27 @@ nav {
     
         /* create a new stacking context */
         position: absolute;
+    }
+
+    &.image {
+        padding: 0;
+
+        &>div.header {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            max-width: 100%;
+
+            &>img {
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                width: 100%;
+            }
+        }
+
+        &>div.content {
+            position: relative;
+            padding: 16px;
+        }
     }
 }
 

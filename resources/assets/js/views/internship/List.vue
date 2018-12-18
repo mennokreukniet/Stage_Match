@@ -11,12 +11,13 @@
     </modal>
 
     <modal v-if="modal_internship.render" :modal="modal_internship" @close="modal_internship.render = false">
-        <div slot="title"></div>
+        <div slot="title">Manage internship</div>
         <div slot="content">
-            <internship-form :id="internship_id" @submit="show_status"/>
+            <internship-form :submitForm="is_submitted" :id="internship_id" @submit="show_status"/>
         </div>
         <div slot="actions" slot-scope="{ close }">
-            <button v-on:click="close" class="button text">Close</button>
+            <button v-on:click="close();submit" class="button text">Close</button>
+            <button v-on:click="submit" class="button text">Apply</button>
         </div>
     </modal>
 
@@ -35,19 +36,22 @@
 
         </div>
 
-        <div class="card elevated" style="position: relative" v-for="internship in internships" :key="internship.id"> 
-            <img v-if="internship.image" :src="internship.image.url" class="right" style="max-width: calc(100% - 32px);"/>
-            <options class="options right">
-                <template slot-scope="{close}">
-                        <div class="item" @click="close();render_internship_modal(internship.id)">Edit</div>
-                    <div class="item" @click="close();open_remove(internship)">Delete</div>
-                </template>
-            </options>
-            <div class="font h6 high">{{ internship.title }}</div>
-            <div class="font body2 spacing bottom2">{{ internship.mentor }} ({{ internship.start_date | formatDate }} - {{ internship.end_date | formatDate }})</div>
-            <div class="font body1">{{ internship.body }}</div>
-            <p></p>
+        <div class="card image elevated" style="position: relative" v-for="internship in internships" :key="internship.id"> 
+            <div class="header">
+                <img v-if="internship.image" :src="internship.image.url" class="header"/>
+            </div>
 
+            <div class="content">
+                <options class="options right">
+                    <template slot-scope="{close}">
+                            <div class="item" @click="close();render_internship_modal(internship.id)">Edit</div>
+                        <div class="item" @click="close();open_remove(internship)">Delete</div>
+                    </template>
+                </options>
+                <div class="font h6 high">{{ internship.title }}</div>
+                <div class="font body2 spacing bottom2">{{ internship.mentor }} ({{ internship.start_date | formatDate }} - {{ internship.end_date | formatDate }})</div>
+                <div class="font body1">{{ internship.body }}</div>
+            </div>
         </div>
 
         <div class="center small">
@@ -81,7 +85,7 @@ export default {
             internships: [],
             currentIndex: 1,
             internship_id: null,
-
+            is_submitted: false,
             remove: {},
             status: {},
             type: 1,
@@ -99,6 +103,9 @@ export default {
         }
     },
     methods: {
+        submit () {
+            this.is_submitted = !this.is_submitted;
+        },
         render_internship_modal(id) {
             this.internship_id = id;
             this.modal_internship.render = true;

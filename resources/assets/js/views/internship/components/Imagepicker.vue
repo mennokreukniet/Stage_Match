@@ -1,12 +1,19 @@
 <template>
-    <div>
-        <input :name="name" :id="name" type="file" accept="image/*"
-               @change="handleFile">
+    <div class="spacing left2">
+        <div>
+            <button type="button" v-on:click="trigger" class="button contained">Upload an image</button>
+            <span>{{uploadedFileName}}</span>
+            <template v-if="image && !uploadedFile">
+                <span>{{ image.name }}</span>
+            </template>
+        </div>
+        
+        <input :name="name" :id="name" type="file" ref="fileInput" accept="image/*"
+               @change="handleFile"><br>
 
         <img v-if="uploadedFileDataURL" :src="uploadedFileDataURL" style="max-width: 100%;"/>
 
         <template v-else-if="image && !uploadedFile"> <!-- if image already exists in database -->
-            <p>{{ image.name }}</p>
             <img :src="image.url" style="max-width: 100%;">
         </template>
 
@@ -24,14 +31,19 @@
         },
         data () {
             return {
+                uploadedFileName: "",
                 uploadedFile: null,
                 uploadedFileDataURL: null,
             }
         },
         methods: {
             handleFile: function (event) {
+                this.uploadedFileName = event.srcElement.files[0].name;
                 this.uploadedFile = event.target.files[0];
                 this.$emit('change', this.uploadedFile);
+            },
+            trigger () {
+                this.$refs.fileInput.click();
             }
         },
         watch: {

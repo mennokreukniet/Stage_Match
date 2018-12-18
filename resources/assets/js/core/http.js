@@ -1,69 +1,42 @@
 import axios from 'axios';
+import router from '../router';
+import Auth from '../controllers/auth';
 
-const api_url = `${window.location.origin}/api/`;
-
-
-export default class Http {
-    constructor() {
-        this.config = {};
+const http = axios.create(
+    {
+        baseURL: `${window.location.origin}/api/`
     }
+);
 
-    /**
-     * Makes a get request to the API endpoint
-     * @param {string} endpoint - API endpoint
-     * @param {object} [config={}] - Request header config
-     */
-    get(endpoint, config) {
-        this.http_headers(config);
+http.interceptors.request.use(function (config) {
+    config.headers.Authorization = `bearer ${localStorage.getItem("accessToken")}`;
+    return config;
+});
 
-        return axios.get(api_url + endpoint, this.config);
+http.interceptors.response.use(
+    (response) => {
+        console.log("res:", response)
+        return response;
+    }, 
+    (error)  => {
+        if (error.response.status === 401) {
+            const token = localStorage.getItem("accessToken") ;
+
+            try {
+                if (token !== null && JSON.parse(atob(token.split(".")[1])).exp < Math.floor(Date.now()/1000)) {
+                    console.log(1)
+                    Auth.logout(true);
+                }
+                
+            } catch (e) {
+                console.log(2);
+                Auth.logout(true);
+            } 
+        }
+
+        return Promise.reject(error);
     }
+);
 
-    /**
-     * Makes a post request to the API endpoint
-     * @param {string} endpoint - API endpoint
-     * @param {object} data - Post data
-     * @param {object} [config={}] - Request header config
-     */
-    post(endpoint, data, config) {
-        this.http_headers(config);
+export default http;
 
-        return axios.post(api_url + endpoint, data, this.config);
-    }
-
-    /**
-     * Makes a put request to the API endpoint
-     * @param {string} endpoint - API endpoint
-     * @param {object} data - Put data
-     * @param {object} [config={}] - Request header config
-     */
-    put(endpoint, data, config) {
-        this.http_headers(config);
-
-        return axios.put(api_url + endpoint, data, this.config);
-    }
-
-    /**
-     * Makes a delete request to the API endpoint
-     * @param {string} endpoint
-     * @param {object} [config={}]
-     */
-    delete(endpoint, config) {
-        this.http_headers(config);
-
-        return axios.delete(api_url + endpoint, this.config);
-    }
-
-    // Set basic headers in case they aren't set
-    http_headers(config = {}) {
-        //Checking if header object is created, if not create it
-        //Note: Without this check, this script will fail if you try to access a property within the headers obj.
-        if (config.headers === undefined) config.headers = {};
-
-        //Authorization header check and placing if empty
-        //Note: Needed for user authentification on server side
-        if (config.headers.Authorization === undefined) config.headers.Authorization = `Bearer ${localStorage.getItem("accessToken")}`;
-
-        this.config = config;
-    }
-}

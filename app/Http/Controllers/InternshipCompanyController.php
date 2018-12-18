@@ -6,9 +6,15 @@ use App\Http\Requests\ImageFormRequest;
 use App\Http\Requests\InternshipFormRequest;
 use App\Image;
 use App\Internship;
+use App\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\Internship as InternshipResource;
 
+/**
+ * Class InternshipCompanyController
+ * @package App\Http\Controllers
+ */
 class InternshipCompanyController extends Controller
 {
     private $company;
@@ -23,47 +29,31 @@ class InternshipCompanyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @returns \App\Http\Resources\Internship
      */
     public function index()
     {
-        return response($this->company->internships()->paginate(10));
+        return InternshipResource::collection(
+            $this->company
+                 ->internships()
+                 ->latest()
+                 ->paginate(10));
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Internship  $internship
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\Internship
      */
     public function show(Internship $internship)
     {
-        return response($internship->image->toArray());
-    }
-
-
-    public function uploadImage(Internship $internship, ImageFormRequest $request)
-    {
-        $file = $request->image->store('public/images');
-        $image = [
-            'name' => $request->image->getClientOriginalName(),
-            'url' => Storage::url($file),
-            'file' => $file
-        ];
-        if ($internship->image()->exists()) {
-            Storage::delete($internship->image->file);
-            if ($internship->image->update($image))
-                return $this->response('Image for "'.$internship->title.'" updated');
-        } else {
-            if ($internship->image()->save(new Image($image)))
-                return $this->response('Image for "'.$internship->title.'" added');
-        }
-        return $this->response("image upload failed", 400);
+        return new InternshipResource($internship);
     }
 
     /**
      * Store a newly created resource in storage.
-     * POST /api/internship
+     *
      * @param InternshipFormRequest $request
      * @return \Illuminate\Http\Response
      */
@@ -71,8 +61,15 @@ class InternshipCompanyController extends Controller
     {
         $internship = new Internship($request->all());
 
-        if ($this->company->internships()->save($internship))
-            return $this->response('Internship "'.$internship->title.'" created', 200, ['id' => $internship->id]);
+        if ($this->company->internships()->save($internship)) {
+            if ($request->input('skills')) {
+                foreach ($request->input('skills') as $skill) {
+                    $skill = Skill::find($skill['id']);
+                    $internship->skills()->save($skill);
+                }
+            }
+            return $this->response('Internship "' . $internship->title . '" created', 200, ['id' => $internship->id]);
+        }
 
         return $this->response('store new internship failed',400);
     }
@@ -87,11 +84,19 @@ class InternshipCompanyController extends Controller
     public function update(InternshipFormRequest $request, Internship $internship)
     {
         if ($this->company->hasInternship($internship)) {
-            if ($internship->update($request->all()))
-                return $this->response('Internship "'.$internship->title.'" updated', 200, ['id' => $internship->id]);
-            return $this->response('internship update failed', 400);
+            $internship->update($request->all());
+
+            if ($request->hasFile('image')) {
+                $image = $this->storeImage($request->image);
+
+                if ($internship->image()->exists()) Storage::delete($internship->image->file);
+
+                $internship->image->update($image);
+            }
+
+            return $this->response('Internship "'.$internship->title.'" updated', 200, ['id' => $internship->id]);
         }
-        return $this->response('user '.auth()->user()->email.' does not own this internship',400);
+        return $this->unauthorized();
     }
 
     /**
@@ -104,12 +109,54 @@ class InternshipCompanyController extends Controller
     public function destroy(Internship $internship)
     {
         if ($this->company->hasInternship($internship)) {
+            $name = $internship->name;
             if ($internship->delete())
-                return $this->response('Internship successfully deleted');
+                return $this->response("Internship {$name} successfully deleted");
+            return $this->response('destroy internship failed',400);
         }
-        return $this->response('destroy internship failed',400);
+        return $this->unauthorized();
     }
-    public function response($message, $status = 200, $extra = []) {
+
+    /**
+     * updates or stores internship image
+     *
+     * @param Internship $internship
+     * @param ImageFormRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadImage(Internship $internship, ImageFormRequest $request)
+    {
+        $path = $request->image->store('public/images');
+
+        $image = [
+            'name' => $request->image->getClientOriginalName(),
+            'url' => Storage::url($path),
+            'file' => $path
+        ];
+
+        if ($internship->image()->exists()) {
+            Storage::delete($internship->image->path);
+
+            if ($internship->image->update($image))
+                return $this->response('Image for "'.$internship->title.'" updated');
+
+        } else {
+
+            if ($internship->image()->save(new Image($image)))
+                return $this->response('Image for "'.$internship->title.'" added');
+
+        }
+        return $this->response("image upload failed", 400);
+    }
+
+
+
+    protected function unauthorized()
+    {
+        return $this->response('user '.auth()->user()->email.' does not own this internship',403);
+    }
+    protected function response($message, $status = 200, $extra = [])
+    {
         return response(array_merge(['message' => $message], $extra), $status);
     }
 }

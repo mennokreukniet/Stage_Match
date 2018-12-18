@@ -12,4 +12,9 @@ class Skill extends Model
     {
         $this->belongsToMany('App\Student');
     }
+
+    public function internships()
+    {
+        $this->belongsToMany('App\Internship');
+    }
 }

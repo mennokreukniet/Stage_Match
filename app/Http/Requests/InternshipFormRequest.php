@@ -24,8 +24,8 @@ class InternshipFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'mentor' => 'string',
-            'title' => 'required|string',
+            'mentor' => 'string|max:191',
+            'title' => 'required|string|max:191',
             'body' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'date|after:start_date'

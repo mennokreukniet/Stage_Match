@@ -28,7 +28,7 @@
         <div v-on:click="toggle_menu" v-if="navigation_drawer && show_menu" id="scrim"></div>
 
         <div v-if="token() !== null" id="navigation-drawer" >
-            <button class="fab"> <i class="material-icons">home</i> hey</button>
+            <!-- <button class="fab"> <i class="material-icons">home</i> hey</button> -->
             <template v-for="item in this.menu_items">
                 <router-link v-if="item.location !== undefined && item.role === undefined ? true : token().role == item.role" v-bind:key="item.name" tag="button" class="button navigation" v-bind:to="item.location">
                     <i class="material-icons">{{item.icon}}</i>

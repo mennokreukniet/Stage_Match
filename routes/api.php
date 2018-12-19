@@ -23,6 +23,8 @@ Route::post('/auth/register', 'AuthController@register');
 
 Route::post('auth/login', 'AuthController@login');
 
+Route::get('location/{id?}', 'LocationController@index');
+
 Route::group(['middleware' => 'auth'], function(){
     Route::post('user/skill/level', 'Student_SkillController@skillLevel');
     Route::delete('user/skill/{id}', 'Student_SkillController@deleteSkill');
@@ -41,6 +43,7 @@ Route::group(['middleware' => 'role:admin'], function(){
 	Route::get('/admin/skill/{id}', 'SkillsController@getSkill');
 	Route::get('/admin/skill', 'SkillsController@getAll');
 	Route::put('/admin/skill/{id}', 'SkillsController@editSkill');
+    Route::get('/admin/location', 'LocationController@getAll');
 });
 
 Route::group(['middleware' => 'role:company'], function () {
@@ -50,4 +53,10 @@ Route::group(['middleware' => 'role:company'], function () {
     Route::post('/internship/skill/level', 'InternshipCompanyController@skillLevel');
     Route::post('/internship/skill/mandatory', 'InternshipCompanyController@isSkillMandatory');
     Route::apiResource('/internship', 'InternshipCompanyController');
+    Route::apiResource('/internship', 'InternshipCompanyController')->only(['index', 'store', 'update', 'destroy']);
+});
+
+Route::group(['middleware' => 'role:student'], function(){
+    Route::get('match', 'MatchController@calculateInternshipScores');
+    Route::get('test', 'MatchController@test');
 });

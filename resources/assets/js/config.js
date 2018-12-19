@@ -12,4 +12,4 @@ export const levels = {
 
 export const environment = "dev"; // dev, prod & testing
 
-export const version = "0.0.3";
+export const version = "2.0.2";

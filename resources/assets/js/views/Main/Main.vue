@@ -4,7 +4,7 @@
       <div v-if="this.role === 'Student'" class="stack">
           <div v-for="(internship, index) in this.internships" :key="index" :class="`position${internships.length - index}`" class="card image elevated">
                 <div class="header">
-                    <img src="/storage/images/17eRTI19sdojuBgnNv3WXvb3tgPg04emOR9A1iHE.jpeg">
+                    <img src="https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjJxeWp7avfAhWOalAKHb6bBBcQjRx6BAgBEAU&url=https%3A%2F%2Fwww.entrepreneur.com%2Farticle%2F249174&psig=AOvVaw0EhKHU4Tl0OjJ4g28rOLdJ&ust=1545307540245495">
                 </div>
                 <div class="content">
                     <div class="font h6 high">{{internship.title}}</div>
@@ -14,7 +14,7 @@
                 </div>
           </div>
       </div>
-    <!-- <div class="card elevated"> -->
+      <div v-else class="card elevated">
       <!-- <img
         style="margin: -16px;margin-bottom: 16px;width:calc(100% + 32px);border-top-right-radius: 3px; border-top-left-radius: 3px; "
         src="https://assets.entrepreneur.com/content/3x2/2000/20150805204041-google-company-building-corporate.jpeg?width=700&crop=2:1"
@@ -27,9 +27,9 @@
         <div class="font body1">This is our desc...</div>
       </div> -->
 
-      <!-- <strong>Version: </strong><span>V0.0.3 (LESS ALPHA-ISH)</span><br>
-      <strong>Role: </strong><span>{{this.role}}</span><br><br>-->
-    <!-- </div> -->
+      <strong>Version: </strong><span>V0.0.3 (LESS ALPHA-ISH)</span><br>
+      <strong>Role: </strong><span>{{this.role}}</span>
+    </div>
   </div>
 </template>
 
@@ -184,6 +184,7 @@ export default {
           updated_at: "2018-11-30 11:05:53",
           deleted_at: null,
           matchPoints: 450,
+          distance: "12",
           image: null,
           skills: [
             {
